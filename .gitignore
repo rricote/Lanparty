@@ -1,9 +1,8 @@
-<<<<<<< HEAD
 /vendor
 /node_modules
-=======
 /bootstrap/compiled.php
 .env.*.php
 .env.php
->>>>>>> 006035e220b024ef1062fc246c6cc3ecbaa8ef1c
 .env
+.idea
+.idea/*

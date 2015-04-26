@@ -1,4 +1,10 @@
 <?php namespace App;
+/**
+ * Created by PhpStorm.
+ * User: galandriel
+ * Date: 26/04/15
+ * Time: 19:04
+ */
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -6,7 +12,7 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
+class Usuaris extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
     use Authenticatable, CanResetPassword;
 
@@ -15,20 +21,21 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var string
      */
-    protected $table = 'users';
+    protected $table = 'usuaris';
 
+    protected $primaryKey = 'usu_id';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['usu_dni', 'usu_nom', 'usu_cognom1', 'usu_cognom2', 'usu_nick', 'usu_correu', 'usu_pwd', 'data_registre', 'est_id', 'rol_id'];
 
     /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array
      */
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = ['usu_pwd'];
 
 }
