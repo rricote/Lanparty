@@ -6,3 +6,5 @@
 .env
 .idea
 .idea/*
+.idea/LanpartyAPI.iml
+.idea/workspace.xml
