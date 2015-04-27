@@ -20,4 +20,8 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
-Route::resource('api/assistencies','AssistenciesController');
+Route::resource('api/control/assistencies','AssistenciesController');
+
+Route::get('control/assistencies/entrada', function(){
+    return view('control.assistencies.entrada');
+});

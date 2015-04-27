@@ -16,6 +16,6 @@ class Assistencies extends Model {
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['accio', 'usuaris_id'];
 
 }
