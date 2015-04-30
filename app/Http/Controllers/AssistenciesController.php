@@ -1,10 +1,8 @@
 <?php namespace App\Http\Controllers;
 
-use App\Assistencies;
-use App\User;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Assistencies;
+use App\Usuaris;
 use Request;
 
 class AssistenciesController extends Controller {
@@ -37,19 +35,36 @@ class AssistenciesController extends Controller {
 	 */
 	public function store()
 	{
-        //buscar l'usuari Request::input('id')
-        $usuari = new User();
-        $usuari::where('usu_id', '=', Request::input('id'))->get();
+        $id = Request::input('array');
+        $usuari = Usuaris::find($id);
+        $usuari->est_id = 2;
+        $usuari->save();
 
+        if(!Assistencies::where('usuaris_id', '=', $id)->count()){
+            $assistencies = new Assistencies;
+            $assistencies->accio = 'ENTRADA';
+            $assistencies->usuaris_id = $id;
+            $assistencies->save();
+        }else{
+            $assistencies = Assistencies::orderby('created_at', 'desc')->first();
+            if($assistencies->accio == 'ENTRADA'){
+                $assistencies = new Assistencies;
+                $assistencies->accio = 'SORTIDA';
+                $assistencies->usuaris_id = $id;
+                $assistencies->save();
+            }else{
+                $assistencies = new Assistencies;
+                $assistencies->accio = 'ENTRADA';
+                $assistencies->usuaris_id = $id;
+                $assistencies->save();
+            }
+        }
 
-        return $usuari;
-        $assistencies = Assistencies();
-        /*if($assistencies->accio )
-        $accio
-        $assistencies = Assistencies;//::create(Request::all());
-        $assistencies->accio =
-        $assistencies->save();
-        return $assistencies;*/
+        if($usuari->est_id == 2){
+            return $assistencies->accio;
+        }else{
+            return false;
+        }
 	}
 
 	/**
@@ -82,11 +97,7 @@ class AssistenciesController extends Controller {
 	 */
 	public function update($id)
 	{
-        $assistencies = Assistencies::find($id);
-        $assistencies->accio = Request::input('accio');
-        $assistencies->save();
-
-        return $assistencies;
+        //
 	}
 
 	/**
@@ -97,7 +108,7 @@ class AssistenciesController extends Controller {
 	 */
 	public function destroy($id)
 	{
-        Assistencies::destroy($id);
+        //
 	}
 
 }

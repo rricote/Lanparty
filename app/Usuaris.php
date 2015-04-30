@@ -1,20 +1,10 @@
 <?php namespace App;
-/**
- * Created by PhpStorm.
- * User: galandriel
- * Date: 26/04/15
- * Time: 19:04
- */
 
-use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class Usuaris extends Model implements AuthenticatableContract, CanResetPasswordContract {
+class Usuaris extends Model {
 
-    use Authenticatable, CanResetPassword;
+    public $timestamps = false;
 
     /**
      * The database table used by the model.
@@ -23,6 +13,10 @@ class Usuaris extends Model implements AuthenticatableContract, CanResetPassword
      */
     protected $table = 'usuaris';
 
+    /**
+     * Primary key of the table
+     * @var string
+     */
     protected $primaryKey = 'usu_id';
     /**
      * The attributes that are mass assignable.

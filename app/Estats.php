@@ -2,20 +2,27 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Assistencies extends Model {
+class Estats extends Model {
+
+    public $timestamps = false;
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'assistencies';
+    protected $table = 'estats';
 
+    /**
+     * Primary key of the table
+     * @var string
+     */
+    protected $primaryKey = 'est_id';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['accio', 'usuaris_id'];
+    protected $fillable = ['est_nom'];
 
 }

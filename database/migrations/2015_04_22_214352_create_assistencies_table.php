@@ -16,6 +16,7 @@ class CreateAssistenciesTable extends Migration {
 		{
             $table->increments('id');
             $table->string('accio');
+            $table->integer('accio');
             $table->timestamps();
 		});
 	}
