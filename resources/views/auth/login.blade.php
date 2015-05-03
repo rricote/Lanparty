@@ -5,8 +5,12 @@
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
-				<div class="panel-heading">Login</div>
 				<div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-md-8 col-md-offset-2">
+                            <h2>Login</h2>
+                        </div>
+                    </div>
 					@if (count($errors) > 0)
 						<div class="alert alert-danger">
 							<strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -48,8 +52,7 @@
 						<div class="form-group">
 							<div class="col-md-6 col-md-offset-4">
 								<button type="submit" class="btn btn-primary">Login</button>
-
-								<a class="btn btn-link" href="{{ url('/password/email') }}">Forgot Your Password?</a>
+                                <!--<a href="{{ url('/password/email') }}" id="reset-password-toggle" class="">Has oblidat la contrasenya?</a>-->
 							</div>
 						</div>
 					</form>

@@ -25,3 +25,7 @@ Route::resource('api/control/assistencies','AssistenciesController');
 Route::get('control/assistencies/entrada', function(){
     return view('control.assistencies.entrada');
 });
+
+Route::get('premis', 'HomeController@premis');
+
+Route::get('colaboradors', 'HomeController@colaboradors');

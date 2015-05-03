@@ -16,28 +16,28 @@ $(document).ready(function() {
 		$(this).removeClass('open');
 	});
 	
-	$('.countdown').countdown('2016/10/10', function(event) {
+	$('.countdown').countdown('2015/5/15 8:00:00', function(event) {
 	    var $this = $(this).html(event.strftime(''
-	      + '<div><span class="countdown-number">%w</span> <span class="countdown-title">weeks</span></div> '
-	      + '<div><span class="countdown-number">%d</span> <span class="countdown-title">days</span></div> '
-	      + '<div><span class="countdown-number">%H</span> <span class="countdown-title">hours</span></div> '
-	      + '<div><span class="countdown-number">%M</span> <span class="countdown-title">minutes</span></div> '
-	      + '<div><span class="countdown-number">%S</span> <span class="countdown-title">seconds</span></div>'));
+	      + '<div><span class="countdown-number">%w</span> <span class="countdown-title">Setmanes</span></div> '
+	      + '<div><span class="countdown-number">%d</span> <span class="countdown-title">dies</span></div> '
+	      + '<div><span class="countdown-number">%H</span> <span class="countdown-title">hores</span></div> '
+	      + '<div><span class="countdown-number">%M</span> <span class="countdown-title">minuts</span></div> '
+	      + '<div><span class="countdown-number">%S</span> <span class="countdown-title">segons</span></div>'));
 	});
 	
 	//VEGAS
-	//$.vegas({src:'assets/images/background-1.jpg'})('overlay', {src:'assets/images/overlay.png'});
+	//$.vegas({src:url + 'images/background-1.jpg'})('overlay', {src:url + 'images/overlay.png'});
 	
 	$.vegas('slideshow', {
-		delay:5000,
+		delay:50000,
 		backgrounds:[
-			{ src:'assets/images/background-1.jpg', fade:1500 },
-			{ src:'assets/images/background-2.jpg', fade:1500 },
-			{ src:'assets/images/background-3.jpg', fade:1500 },
-			{ src:'assets/images/background-4.jpg', fade:1500 },
-			{ src:'assets/images/background-5.jpg', fade:1500 },
+			{ src:url + 'images/background-1.jpg', fade:1500 },
+			{ src:url + 'images/background-2.jpg', fade:1500 },
+			{ src:url + 'images/background-3.jpg', fade:1500 },
+			{ src:url + 'images/background-4.jpg', fade:1500 },
+			{ src:url + 'images/background-5.jpg', fade:1500 },
 	  	]
-	})('overlay', {src:'assets/images/overlay.png'});
+	})('overlay', {src:url + 'images/overlay.png'});
 	
 	//SCROLLING
 	$("a.scroll[href^='#']").on('click', function(e) {

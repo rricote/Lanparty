@@ -13,8 +13,17 @@
     =========================== -->
     <title>Lanparty</title>
     <!-- ==========================
+    	Favicons
+    =========================== -->
+    <link rel="shortcut icon" href="{{ asset('/icons/favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('/icons/apple-touch-icon.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('/icons/apple-touch-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('/icons/apple-touch-icon-114x114.png') }}">
+
+    <!-- ==========================
     	CSS
     =========================== -->
+    <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('/css/animate.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('/css/owl.carousel.css') }}" rel="stylesheet" type="text/css">
@@ -73,7 +82,7 @@
                     <a style="margin:10px" href="{{ url('/auth/register') }}" class="btn btn-primary">Registar-se</a>
                     <a style="margin:10px" href="{{ url('/auth/login') }}" class="btn btn-inverse">Entrar</a>
                 @else
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
+                    <a style="margin:10px" href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
                     </ul>
@@ -93,7 +102,8 @@
         <div class="header-title">
             <div class="pull-left">
                 <h2><a href="#"><span class="text-primary">LAN</span> Party</a></h2>
-                <p>Institut de l'ebre 15-14 de maig de 2015</p>
+                <p class="countdown-info">Institut de l'ebre 15-16 de maig de 2015, queda:</p>
+                <div class="countdown"></div>
             </div>
         </div>
     </div>
@@ -101,13 +111,7 @@
     	TITLE - END
     =========================== -->
 
-    <!-- ==========================
-    	CONTENT - START
-    =========================== -->
 	@yield('content')
-    <!-- ==========================
-    	CONTENT - END
-    =========================== -->
 
     <!-- ==========================
          FOOTER - START
@@ -124,7 +128,7 @@
                     </ul>
                 </div>
                 <div class="col-md-6">
-                    <p class="copyright">© Lanparty 2014 - 2015 All rights reserved. Programed by <a href="#" target="_blank">Rafael Ricote.</a>, designed by Pixelized Studio.</p>
+                    <p class="copyright">© Lanparty 2014 - {{date('Y')}} All rights reserved. Created by <a href="#" target="_blank">Rafael Ricote.</a></p>
                 </div>
             </div>
         </footer>
@@ -136,6 +140,9 @@
     <!-- ==========================
          JS
      =========================== -->
+    <script>
+        var url = '{{asset('/')}}';
+    </script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('/js/owl.carousel.js') }}"></script>
