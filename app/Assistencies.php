@@ -5,6 +5,11 @@ use Illuminate\Database\Eloquent\Model;
 class Assistencies extends Model {
 
     /**
+     * @property string accio
+     * @property string usuaris_id
+     */
+
+    /**
      * The database table used by the model.
      *
      * @var string
