@@ -35,11 +35,23 @@ class AssistenciesController extends Controller {
 	 */
 	public function store()
 	{
+        $array = Request::input('array');
+        /*$array = explode(":", $array);
+        $id = $array[1];
+        if(is_int($id))
+            return true;
+        else
+            return false;
+*/
         $id = Request::input('array');
         $usuari = Usuaris::find($id);
-        $usuari->est_id = 2;
-        $usuari->save();
 
+        if($usuari->est_id != 2){
+            return false;
+        }
+        function isInteger($input){
+            return(ctype_digit(strval($input)));
+        }
         if(!Assistencies::where('usuaris_id', '=', $id)->count()){
             $assistencies = new Assistencies;
             $assistencies->accio = 'ENTRADA';
@@ -59,12 +71,7 @@ class AssistenciesController extends Controller {
                 $assistencies->save();
             }
         }
-
-        if($usuari->est_id == 2){
-            return $assistencies->accio;
-        }else{
-            return false;
-        }
+        return $assistencies->accio;
 	}
 
 	/**
