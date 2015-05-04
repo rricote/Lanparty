@@ -27,6 +27,7 @@
                             console.log(data);
                             $("#result").text(data);
                         }else{
+                            console.log(data);
                             $("#result").text(data);
                         }
                     }

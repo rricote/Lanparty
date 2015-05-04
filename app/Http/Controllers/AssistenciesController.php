@@ -28,6 +28,10 @@ class AssistenciesController extends Controller {
 		//
 	}
 
+    private function isInteger($input){
+        return(ctype_digit(strval($input)));
+    }
+
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -36,22 +40,26 @@ class AssistenciesController extends Controller {
 	public function store()
 	{
         $array = Request::input('array');
-        /*$array = explode(":", $array);
-        $id = $array[1];
-        if(is_int($id))
-            return true;
-        else
-            return false;
-*/
-        $id = Request::input('array');
+        $array2 = explode("|", $array);
+        if(count($array2) != 3)
+            return 'ERROR:1';
+
+        $id = $array2[1];
+
+        if(!$this->isInteger($id))
+            return 'ERROR:2';
+
+        if(!$usuari = Assistencies::where('id', '=', $id)->count())
+            return 'ERROR:3';
+
         $usuari = Usuaris::find($id);
 
-        if($usuari->est_id != 2){
-            return false;
-        }
-        function isInteger($input){
-            return(ctype_digit(strval($input)));
-        }
+        if($usuari->est_id != 2)
+            return 'ERROR:4';
+
+        if(substr(md5($usuari->data_registre), 0, 3) != substr($array2[0], 0, 3) || substr(md5($usuari->data_registre), -3) != substr($array2[2], -3))
+            return 'ERROR:5';
+
         if(!Assistencies::where('usuaris_id', '=', $id)->count()){
             $assistencies = new Assistencies;
             $assistencies->accio = 'ENTRADA';
