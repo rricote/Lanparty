@@ -1,4 +1,4 @@
-@extends('home_sidebar')
+@extends('web.home_sidebar')
 
 @section('homeContent')
 

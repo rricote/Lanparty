@@ -1,4 +1,4 @@
-@extends('sidebar')
+@extends('web.sidebar')
 
 @section('side')
     <!-- CONTENT BODY - START -->

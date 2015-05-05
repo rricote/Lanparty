@@ -39,6 +39,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $hidden = ['usu_pwd', 'remember_token'];
 
     public function getAuthPassword() {
-        return Hash::make($this->password);
+        return md5($this->password);
     }
 }

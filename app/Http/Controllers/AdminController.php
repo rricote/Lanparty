@@ -27,11 +27,26 @@ class AdminController extends Controller {
      */
     public function index()
     {
-        return view('web.home');
+        return view('admin.home');
     }
 
-    public function gestor()
+    public function usuaris()
     {
-        return view('web.gestor');
+        return view('admin.usuaris');
+    }
+
+    public function usuaris_afegir()
+    {
+        return view('admin.usuaris_afegir');
+    }
+
+    public function usuaris_editar()
+    {
+        return view('admin.usuaris_editar');
+    }
+
+    public function competicions()
+    {
+        return view('admin.competicions');
     }
 }

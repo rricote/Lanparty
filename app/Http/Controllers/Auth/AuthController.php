@@ -47,8 +47,10 @@ class AuthController extends Controller {
             'usu_correu' => 'required|email', 'usu_pwd' => 'required',
         ]);
 
-        $credentials = $request->only('usu_correu', 'usu_pwd');
-
+        //$credentials = $request->only('usu_correu', 'usu_pwd');
+        $usu_correu = $request->input('usu_correu');
+        $usu_pwd = $request->input('usu_pwd');
+        $credentials = array('usu_correu' => $usu_correu, 'usu_pwd' => md5($usu_pwd));
         if ($this->auth->attempt($credentials, $request->has('remember')))
         {
             return redirect()->intended($this->redirectPath());

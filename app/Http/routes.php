@@ -11,6 +11,10 @@
 |
 */
 
+/*
+ * Public
+ */
+
 Route::get('/', 'PublicController@index');
 
 Route::get('home', function(){
@@ -22,6 +26,38 @@ Route::get('premis', 'PublicController@premis');
 Route::get('colaboradors', 'PublicController@colaboradors');
 
 Route::get('cartell', 'PublicController@cartell');
+
+/*
+ * User
+ */
+
+
+
+/*
+ * Admin
+ */
+
+Route::get('admin/', 'AdminController@index');
+
+Route::get('admin/home', function(){
+    return Redirect::to('admin/');
+});
+
+Route::get('admin/usuaris', 'AdminController@usuaris');
+
+Route::get('admin/usuaris/afegir', 'AdminController@usuaris_afegir');
+
+Route::get('admin/usuaris/editar/{id}', 'AdminController@usuaris_editar');
+
+Route::get('admin/competicions', 'AdminController@competicions');
+
+Route::get('admin/competicions/afegir', 'AdminController@competicions_afegir');
+
+Route::get('admin/competicions/editar/{id}', 'AdminController@competicions_editar');
+
+/*
+ * Varis
+ */
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
