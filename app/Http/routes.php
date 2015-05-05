@@ -11,9 +11,17 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+Route::get('/', 'PublicController@index');
 
-Route::get('home', 'HomeController@index');
+Route::get('home', function(){
+    return Redirect::to('/');
+});
+
+Route::get('premis', 'PublicController@premis');
+
+Route::get('colaboradors', 'PublicController@colaboradors');
+
+Route::get('cartell', 'PublicController@cartell');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
@@ -25,7 +33,3 @@ Route::resource('api/control/assistencies','AssistenciesController');
 Route::get('control/assistencies/entrada', function(){
     return view('control.assistencies.entrada');
 });
-
-Route::get('premis', 'HomeController@premis');
-
-Route::get('colaboradors', 'HomeController@colaboradors');

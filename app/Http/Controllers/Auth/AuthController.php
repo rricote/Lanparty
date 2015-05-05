@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller {
 
@@ -34,5 +35,35 @@ class AuthController extends Controller {
 
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
+
+    public function getLogin()
+    {
+        return view('auth.login');
+    }
+
+    public function postLogin(Request $request)
+    {
+        $this->validate($request, [
+            'usu_correu' => 'required|email', 'usu_pwd' => 'required',
+        ]);
+
+        $credentials = $request->only('usu_correu', 'usu_pwd');
+
+        if ($this->auth->attempt($credentials, $request->has('remember')))
+        {
+            return redirect()->intended($this->redirectPath());
+        }
+
+        return redirect($this->loginPath())
+            ->withInput($request->only('usu_correu', 'remember'))
+            ->withErrors([
+                'usu_correu' => $this->getFailedLoginMessage(),
+            ]);
+    }
+
+    public function validate(Request $request, array $rules, array $messages = array())
+    {
+        return property_exists($this, 'loginPath') ? $this->loginPath : '/auth/login';
+    }
 
 }

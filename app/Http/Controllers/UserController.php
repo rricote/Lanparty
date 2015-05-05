@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-class HomeController extends Controller {
+class UserController extends Controller {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -20,7 +20,7 @@ class HomeController extends Controller {
 	 */
 	public function __construct()
 	{
-		//$this->middleware('auth');
+		$this->middleware('auth');
 	}
 
 	/**
@@ -33,14 +33,8 @@ class HomeController extends Controller {
         return view('web.home');
     }
 
-    public function premis()
+    public function perfil()
     {
-        return view('web.premis');
+        return view('web.perfil');
     }
-
-    public function colaboradors()
-    {
-        return view('web.colaboradors');
-    }
-
 }
