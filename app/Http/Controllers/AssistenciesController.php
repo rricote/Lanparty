@@ -49,7 +49,7 @@ class AssistenciesController extends Controller {
         if(!$this->isInteger($id))
             return 'ERROR:2';
 
-        if(!$usuari = Assistencies::where('id', '=', $id)->count())
+        if(!$usuari = Usuaris::where('usu_id', '=', $id)->count())
             return 'ERROR:3';
 
         $usuari = Usuaris::find($id);

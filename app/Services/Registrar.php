@@ -1,6 +1,7 @@
 <?php namespace App\Services;
 
 use App\User;
+use App\Usuaris;
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 
@@ -15,13 +16,13 @@ class Registrar implements RegistrarContract {
 	public function validator(array $data)
 	{
 		return Validator::make($data, [
-            'usu_dni' => 'max:10',
-            'usu_nom' => 'required|max:30',
-            'usu_cognom1' => 'required|max:30',
-            'usu_cognom2' => 'required|max:30',
-            'usu_nick' => 'required|max:30',
-			'usu_correu' => 'required|email|max:40|unique:usuaris',
-            'usu_pwd' => 'required|confirmed|min:6',
+            'dni' => 'max:10',
+            'nom' => 'required|max:30',
+            'cognom1' => 'required|max:30',
+            'cognom2' => 'required|max:30',
+            'username' => 'required|max:30',
+			'email' => 'required|email|max:40|unique:usuaris',
+            'password' => 'required|confirmed|min:6',
 		]);
 	}
 
@@ -33,14 +34,25 @@ class Registrar implements RegistrarContract {
 	 */
 	public function create(array $data)
 	{
-		return User::create([
-			'usu_dni' => $data['usu_dni'],
-            'usu_nom' => $data['usu_nom'],
-            'usu_cognom1' => $data['usu_cognom1'],
+        $user = Usuaris::create([
+            'usu_dni' => $data['dni'],
+            'usu_nom' => $data['nom'],
+            'usu_cognom1' => $data['cognom1'],
             'usu_cognom2' => $data['usu_cognom2'],
-            'usu_nick' => $data['usu_nick'],
-            'usu_correu' => $data['usu_correu'],
-			'usu_pwd' => md5($data['usu_pwd']),
+            'usu_nick' => $data['username'],
+            'usu_correu' => $data['email'],
+            'usu_pwd' => md5($data['password']),
+        ]);
+
+		return User::create([
+			'dni' => $data['dni'],
+            'name' => $data['nom'],
+            'cognom1' => $data['cognom1'],
+            'cognom2' => $data['cognom2'],
+            'username' => $data['nick'],
+            'email' => $data['email'],
+            'anticuser' => $user->usu_id,
+			'password' => bcrypt($data['password']),
 		]);
 	}
 

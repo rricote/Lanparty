@@ -28,56 +28,56 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label">DNI</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="usu_dni" value="{{ old('usu_dni') }}">
+                                <input type="text" class="form-control" name="dni" value="{{ old('dni') }}">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-md-4 control-label">Nom</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="usu_nom" value="{{ old('usu_nom') }}">
+                                <input type="text" class="form-control" name="nom" value="{{ old('nom') }}">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-md-4 control-label">Primer cognom</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="usu_cognom1" value="{{ old('usu_cognom1') }}">
+                                <input type="text" class="form-control" name="cognom1" value="{{ old('cognom1') }}">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-md-4 control-label">Segon cognom</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="usu_cognom2" value="{{ old('usu_cognom2') }}">
+                                <input type="text" class="form-control" name="cognom2" value="{{ old('cognom2') }}">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-md-4 control-label">Nick</label>
+                            <label class="col-md-4 control-label">Username</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="usu_nick" value="{{ old('usu_nick') }}">
+                                <input type="text" class="form-control" name="username" value="{{ old('username') }}">
                             </div>
                         </div>
 
 						<div class="form-group">
 							<label class="col-md-4 control-label">E-Mail</label>
 							<div class="col-md-6">
-								<input type="email" class="form-control" name="usu_correu" value="{{ old('usu_correu') }}">
+								<input type="email" class="form-control" name="email" value="{{ old('email') }}">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-md-4 control-label">Contrasenya</label>
 							<div class="col-md-6">
-								<input type="password" class="form-control" name="usu_pwd">
+								<input type="password" class="form-control" name="password">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-md-4 control-label">Confirmació de la contrasenya</label>
 							<div class="col-md-6">
-								<input type="password" class="form-control" name="usu_pwd_confirmation">
+								<input type="password" class="form-control" name="password_confirmation">
 							</div>
 						</div>
 

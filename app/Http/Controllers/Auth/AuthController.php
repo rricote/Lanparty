@@ -1,6 +1,8 @@
 <?php namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\User;
+use App\Usuaris;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -43,24 +45,43 @@ class AuthController extends Controller {
 
     public function postLogin(Request $request)
     {
+
         $this->validate($request, [
-            'usu_correu' => 'required|email', 'usu_pwd' => 'required',
+            'email' => 'required|email', 'password' => 'required',
         ]);
 
-        //$credentials = $request->only('usu_correu', 'usu_pwd');
-        $usu_correu = $request->input('usu_correu');
-        $usu_pwd = $request->input('usu_pwd');
-        $credentials = array('usu_correu' => $usu_correu, 'usu_pwd' => md5($usu_pwd));
+        $credentials = $request->only('email', 'password');
         if ($this->auth->attempt($credentials, $request->has('remember')))
         {
             return redirect()->intended($this->redirectPath());
         }
+        $user = Usuaris::where('usu_correu', '=', $request->input('email'))->first();
 
+        if(isset($user)) {
+            if($user->usu_pwd == md5($request->input('password'))) { // If their password is still MD5
+
+                User::create([
+                    'dni' => $user->usu_dni,
+                    'name' => $user->usu_nom,
+                    'cognom1' => $user->usu_cognom1,
+                    'cognom2' => $user->usu_cognom2,
+                    'username' => $user->usu_nick,
+                    'email' => $user->usu_correu,
+                    'anticuser' => $user->usu_id,
+                    'password' => bcrypt($request->input('password')),
+                ]);
+                if ($this->auth->attempt($credentials, $request->has('remember')))
+                {
+                    return redirect()->intended($this->redirectPath());
+                }
+            }
+        }
         return redirect($this->loginPath())
-            ->withInput($request->only('usu_correu', 'remember'))
+            ->withInput($request->only('email', 'remember'))
             ->withErrors([
-                'usu_correu' => $this->getFailedLoginMessage(),
+                'email' => $this->getFailedLoginMessage(),
             ]);
+
     }
 
     public function validate(Request $request, array $rules, array $messages = array())

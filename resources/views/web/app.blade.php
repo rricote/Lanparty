@@ -94,7 +94,7 @@
                     <a style="margin:10px" href="{{ url('/auth/register') }}" class="btn btn-primary">Registar-se</a>
                     <a style="margin:10px" href="{{ url('/auth/login') }}" class="btn btn-inverse">Entrar</a>
                 @else
-                    <a style="margin:10px" href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->usu_nom }}</a>
+                    <a style="margin:10px" href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
                     </ul>
