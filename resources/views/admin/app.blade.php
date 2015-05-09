@@ -45,6 +45,7 @@
     <link rel="stylesheet" href="{{ asset('css/ace.min.css')}}" />
     <link rel="stylesheet" href="{{ asset('css/ace-rtl.min.css')}}" />
     <link rel="stylesheet" href="{{ asset('css/ace-skins.min.css')}}" />
+    <link rel="stylesheet" href="{{ asset('css/jquery.gritter.css')}}" />
     <!-- ==========================
     	JS
     =========================== -->
@@ -143,6 +144,7 @@
 </script>
 <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/typeahead-bs2.min.js') }}"></script>
+<script src="{{ asset('js/jquery.gritter.min.js') }}"></script>
 
 <!-- page specific plugin scripts -->
 

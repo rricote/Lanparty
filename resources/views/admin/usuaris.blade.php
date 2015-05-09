@@ -60,9 +60,8 @@
                                 <div id="llusuaris" class="tab-pane in active">
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <h3 class="header smaller lighter blue">jQuery dataTables</h3>
                                             <div class="table-header">
-                                                Results for "Latest Registered Domains"
+                                                Llistat de tots els usuaris
                                             </div>
 
                                             <div class="table-responsive">
@@ -104,8 +103,15 @@
                                                             <td>
                                                                 <span class="span5">
                                                                     <label class="pull-right inline">
-                                                                        <input id="id-button-borders" checked="" type="checkbox" class="ace ace-switch ace-switch-5" />
+                                                                        @if($u->est_id == 1)
+                                                                        <input id="{{ $u->usu_id }}" type="checkbox" class="ace ace-switch ace-switch-5 canvi" />
                                                                         <span class="lbl"></span>
+                                                                        <div id="elec" style="display: none">{{ $u->est_id }}</div>
+                                                                        @else
+                                                                        <input id="{{ $u->usu_id }}" checked="" type="checkbox" class="ace ace-switch ace-switch-5 canvi" />
+                                                                        <span class="lbl"></span>
+                                                                        <div id="elec" style="display: none">{{ $u->est_id }}</div>
+                                                                        @endif
                                                                     </label>
                                                                 </span><!-- /span -->
                                                             </td>

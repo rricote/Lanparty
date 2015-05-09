@@ -35,4 +35,66 @@ jQuery(function($) {
 	    if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
 	    return 'left';
 	}
-})
+});
+
+$( ".canvi" ).change(function () {
+    console.log($(this).attr('id'));
+    var value;
+    console.log($(this).parent().find('#elec').text());
+    if($(this).parent().find('#elec').text() == 1){
+        $(this).parent().find('#elec').html(2);
+        value = 2;
+    } else {
+        $(this).parent().find('#elec').html(1);
+        value = 1;
+    }
+    var link = url;
+    var id = $(this).attr('id');
+    console.log(link);
+    $.ajax({
+        type: "put",
+        url: link + 'api/admin/validacio/' + id,
+        data: { estat:value },
+        success: function(data) {
+            if(data){
+                console.log(data);
+                console.log("dfsf");
+                var unique_id = $.gritter.add({
+                    // (string | mandatory) the heading of the notification
+                    title: 'Correcte',
+                    // (string | mandatory) the text inside the notification
+                    text: 'S\'ha actualitzat correctament',
+                    // (bool | optional) if you want it to fade out on its own or just sit there
+                    sticky: false,
+                    // (int | optional) the time you want it to be alive for before fading out
+                    time: '',
+                    // (string | optional) the class name you want to apply to that specific message
+                    class_name: 'gritter-light'
+                });
+            } else {
+                console.log(data);
+                console.log("dfsfdasdsad");
+                var unique_id = $.gritter.add({
+                    // (string | mandatory) the heading of the notification
+                    title: 'Error',
+                    // (string | mandatory) the text inside the notification
+                    text: 'Ha hagut algun error al actualitzar la casella',
+                    // (bool | optional) if you want it to fade out on its own or just sit there
+                    sticky: false,
+                    // (int | optional) the time you want it to be alive for before fading out
+                    time: '',
+                    // (string | optional) the class name you want to apply to that specific message
+                    class_name: 'gritter-light'
+                });
+                if(value==2){
+                    $(this).prop( "checked", false );
+                    $(this).parent().find('#elec').html(1);
+                }else{
+                    $(this).prop( "checked", true );
+                    $(this).parent().find('#elec').html(2);
+                }
+            }
+        }
+    });
+    console.log($(this).parent().find('#elec').text());
+});
