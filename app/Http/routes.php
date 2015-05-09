@@ -50,15 +50,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\AdminMid
 
     Route::get('/usuaris', 'AdminController@usuaris');
 
-    Route::get('/usuaris/afegir', 'AdminController@usuaris_afegir');
-
-    Route::get('/usuaris/editar/{id}', 'AdminController@usuaris_editar');
-
     Route::get('/competicions', 'AdminController@competicions');
-
-    Route::get('/competicions/afegir', 'AdminController@competicions_afegir');
-
-    Route::get('/competicions/editar/{id}', 'AdminController@competicions_editar');
 
     Route::get('control/assistencies/entrada', function(){
         return view('control.assistencies.entrada');
@@ -74,6 +66,11 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+Route::group(['prefix' => 'api'], function(){
 
-Route::resource('api/control/assistencies','AssistenciesController');
+    Route::resource('/control/assistencies','AssistenciesController');
+
+    Route::resource('/admin/users','UsersController');
+
+});
 

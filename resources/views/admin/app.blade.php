@@ -64,8 +64,8 @@
         <div class="navbar-header pull-left">
             <a href="#" class="navbar-brand">
                 <small>
-                    <i class="icon-leaf"></i>
-                    Ace Admin
+                    <img style="width: 23px;" alt="lanparty" src="{{ asset('/icons/favicon-96x96.png') }}"/>
+                    Lanparty Admin
                 </small>
             </a><!-- /.brand -->
         </div><!-- /.navbar-header -->
@@ -74,7 +74,7 @@
             <ul class="nav ace-nav">
                 <li class="light-blue">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<span class="user-info">
+								<span>
 									{{ Auth::user()->name }}
 								</span>
 
@@ -165,5 +165,11 @@
 
     })
 </script>
+<!-- Dynamic charge -->
+@if (isset($js))
+    @foreach($js as $j)
+        <script src="{{ asset('js/'. $j . '.js')}}"></script>
+    @endforeach
+@endif
 </body>
 </html>
