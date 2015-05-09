@@ -31,29 +31,40 @@ Route::get('cartell', 'PublicController@cartell');
  * User
  */
 
+Route::group(['middleware' => 'App\Http\Middleware\Authenticate'], function(){
 
+    Route::get('perfil', 'PublicController@perfil');
 
+});
 /*
  * Admin
  */
 
-Route::get('admin/', 'AdminController@index');
+Route::group(['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\AdminMiddleware'], function(){
 
-Route::get('admin/home', function(){
-    return Redirect::to('admin/');
+    Route::get('/', 'AdminController@index');
+
+    Route::get('/home', function(){
+        return Redirect::to('admin/');
+    });
+
+    Route::get('/usuaris', 'AdminController@usuaris');
+
+    Route::get('/usuaris/afegir', 'AdminController@usuaris_afegir');
+
+    Route::get('/usuaris/editar/{id}', 'AdminController@usuaris_editar');
+
+    Route::get('/competicions', 'AdminController@competicions');
+
+    Route::get('/competicions/afegir', 'AdminController@competicions_afegir');
+
+    Route::get('/competicions/editar/{id}', 'AdminController@competicions_editar');
+
+    Route::get('control/assistencies/entrada', function(){
+        return view('control.assistencies.entrada');
+    });
 });
 
-Route::get('admin/usuaris', 'AdminController@usuaris');
-
-Route::get('admin/usuaris/afegir', 'AdminController@usuaris_afegir');
-
-Route::get('admin/usuaris/editar/{id}', 'AdminController@usuaris_editar');
-
-Route::get('admin/competicions', 'AdminController@competicions');
-
-Route::get('admin/competicions/afegir', 'AdminController@competicions_afegir');
-
-Route::get('admin/competicions/editar/{id}', 'AdminController@competicions_editar');
 
 /*
  * Varis
@@ -66,6 +77,3 @@ Route::controllers([
 
 Route::resource('api/control/assistencies','AssistenciesController');
 
-Route::get('control/assistencies/entrada', function(){
-    return view('control.assistencies.entrada');
-});

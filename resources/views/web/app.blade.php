@@ -36,7 +36,7 @@
     	CSS
     =========================== -->
     <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="{{ asset('/css/animate.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('/css/owl.carousel.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('/css/owl.theme.css') }}" rel="stylesheet" type="text/css">
@@ -60,6 +60,16 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+    <!-- ==========================
+    	ANGULAR JS
+    =========================== -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js"></script>
+    <script>
+        var app = angular.module('todoApp', [], function($interpolateProvider) {
+            $interpolateProvider.startSymbol('<%');
+	$interpolateProvider.endSymbol('%>');
+        });
+    </script>
 </head>
 <body>
     <h1>Lanparty</h1>
@@ -96,6 +106,9 @@
                 @else
                     <a style="margin:10px" href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                     <ul class="dropdown-menu">
+                        @if (Auth::user()->rols_id==1)
+                            <li><a href="{{ url('/admin') }}">Gestor del administrador</a></li>
+                        @endif
                         <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
                     </ul>
                 @endif

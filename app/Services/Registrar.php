@@ -42,6 +42,8 @@ class Registrar implements RegistrarContract {
             'usu_nick' => $data['username'],
             'usu_correu' => $data['email'],
             'usu_pwd' => md5($data['password']),
+            'est_id' => 1,
+            'rol_id' => 2,
         ]);
 
 		return User::create([
@@ -53,6 +55,8 @@ class Registrar implements RegistrarContract {
             'email' => $data['email'],
             'anticuser' => $user->usu_id,
 			'password' => bcrypt($data['password']),
+            'estats_id' => 1,
+            'rols_id' => 2,
 		]);
 	}
 

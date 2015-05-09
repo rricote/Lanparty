@@ -34,119 +34,102 @@
     <!-- ==========================
     	CSS
     =========================== -->
-    <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('/css/animate.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('/css/owl.carousel.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('/css/owl.theme.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('/css/owl.transitions.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('/css/creative-brands.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('/css/jquery.vegas.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('/css/magnific-popup.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('/css/custom.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/admin/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{ asset('/css/font-awesome.min.css') }}">
 
-    <!-- ==========================
-        Fonts
-    =========================== -->
-    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-
+    <!-- page specific plugin styles -->
+    <link rel="stylesheet" href="{{ asset('css/prettify.css')}}" />
+    <!-- fonts -->
+    <link rel="stylesheet" href="{{ asset('css/ace-fonts.css')}}" />
+    <!-- ace styles -->
+    <link rel="stylesheet" href="{{ asset('css/ace.min.css')}}" />
+    <link rel="stylesheet" href="{{ asset('css/ace-rtl.min.css')}}" />
+    <link rel="stylesheet" href="{{ asset('css/ace-skins.min.css')}}" />
     <!-- ==========================
     	JS
     =========================== -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
+    <script src="{{ asset('js/ace-extra.min.js')}}"></script>
+
 </head>
-<body>
-<h1>Lanparty</h1>
+<body class="skin-1">
 <!-- ==========================
     HEADER - START
 =========================== -->
-<header class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <a href="#" class="navbar-brand visible-xs">Lanparty</a>
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><i class="fa fa-bars"></i></button>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="#">Pagina inicial</a></li>
-                <li><a href="#">Institut de l'ebre</a></li>
-                <li><a href="#">Streaming de la LAN Party</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Edició 2015</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#"><i class="fa fa-plus"></i>Programa</a></li>
-                        <li><a href="#"><i class="fa fa-plus"></i>Competicions</a></li>
-                        <li><a href="#"><i class="fa fa-plus"></i>Col·laboradors</a></li>
-                        <li><a href="#"><i class="fa fa-plus"></i>Premis</a></li>
-                        <li><a href="#"><i class="fa fa-plus"></i>Cartell</a></li>
+<div class="navbar navbar-default" id="navbar">
+    <script type="text/javascript">
+        try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+    </script>
+
+    <div class="navbar-container" id="navbar-container">
+        <div class="navbar-header pull-left">
+            <a href="#" class="navbar-brand">
+                <small>
+                    <i class="icon-leaf"></i>
+                    Ace Admin
+                </small>
+            </a><!-- /.brand -->
+        </div><!-- /.navbar-header -->
+
+        <div class="navbar-header pull-right" role="navigation">
+            <ul class="nav ace-nav">
+                <li class="light-blue">
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+								<span class="user-info">
+									{{ Auth::user()->name }}
+								</span>
+
+                        <i class="icon-caret-down"></i>
+                    </a>
+
+                    <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <li>
+                            <a href="#">
+                                <i class="icon-cog"></i>
+                                Configuració
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <i class="icon-user"></i>
+                                Perfil
+                            </a>
+                        </li>
+
+                        <li class="divider"></li>
+
+                        <li>
+                            <a href="{{ url('/auth/logout') }}">
+                                <i class="icon-off"></i>
+                                Logout
+                            </a>
+                        </li>
                     </ul>
                 </li>
-                <li><a href="#">Contacta</a></li>
-            </ul>
-            <div class="pull-right navbar-buttons hidden-xs">
-                @if (Auth::guest())
-                    <a style="margin:10px" href="{{ url('/auth/register') }}" class="btn btn-primary">Registar-se</a>
-                    <a style="margin:10px" href="{{ url('/auth/login') }}" class="btn btn-inverse">Entrar</a>
-                @else
-                    <a style="margin:10px" href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->usu_nom }}</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
-                    </ul>
-                @endif
-            </div>
-        </div>
-    </div>
-</header>
+            </ul><!-- /.ace-nav -->
+        </div><!-- /.navbar-header -->
+    </div><!-- /.container -->
+</div>
 <!-- ==========================
     HEADER - END
 =========================== -->
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+    </script>
 
-<!-- ==========================
-    TITLE - START
-=========================== -->
-<div class="container hidden-xs">
-    <div class="header-title">
-        <div class="pull-left">
-            <h2><a href="#"><span class="text-primary">LAN</span> Party</a></h2>
-            <p class="countdown-info">Institut de l'ebre 15-16 de maig de 2015, queda:</p>
-            <div class="countdown"></div>
-        </div>
-    </div>
-</div>
-<!-- ==========================
-    TITLE - END
-=========================== -->
-
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="#">
+            <span class="menu-text"></span>
+        </a>
 @yield('content')
 
-<!-- ==========================
-     FOOTER - START
- =========================== -->
-<div class="container">
-    <footer class="navbar navbar-default">
-        <div class="row">
-            <div class="col-md-6 hidden-xs hidden-sm">
-                <ul class="nav navbar-nav">
-                    <li><a href="#">Pagina inicial</a></li>
-                    <li><a href="#">Institut de l'ebre</a></li>
-                    <li><a href="#">Streaming de la LAN Party</a></li>
-                    <li><a href="#">Contacta</a></li>
-                </ul>
-            </div>
-            <div class="col-md-6">
-                <p class="copyright">© Lanparty 2014 - {{date('Y')}} All rights reserved. Created by <a href="#" target="_blank">Rafael Ricote.</a></p>
-            </div>
-        </div>
-    </footer>
-</div>
-<!-- ==========================
-    FOOTER - END
-=========================== -->
+    </div><!-- /.main-container-inner -->
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="icon-double-angle-up icon-only bigger-110"></i>
+    </a>
+</div><!-- /.main-container -->
 
 <!-- ==========================
      JS
@@ -155,13 +138,32 @@
     var url = '{{asset('/')}}';
 </script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+    if("ontouchend" in document) document.write("<script src='{{ asset('js/jquery.mobile.custom.min.js')}}'>"+"<"+"/script>");
+</script>
 <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('/js/owl.carousel.js') }}"></script>
-<script src="{{ asset('/js/jquery.magnific-popup.min.js') }}"></script>
-<script src="{{ asset('/js/creative-brands.js') }}"></script>
-<script src="{{ asset('/js/jquery.vegas.min.js') }}"></script>
-<script src="{{ asset('/js/twitterFetcher_min.js') }}"></script>
-<script src="{{ asset('/js/jquery.countdown.min.js') }}"></script>
-<script src="{{ asset('/js/custom.js') }}"></script>
+<script src="{{ asset('js/typeahead-bs2.min.js') }}"></script>
+
+<!-- page specific plugin scripts -->
+
+<script src="{{ asset('js/prettify.js') }}"></script>
+
+<!-- ace scripts -->
+
+<script src="{{ asset('js/ace-elements.min.js') }}"></script>
+<script src="{{ asset('js/ace.min.js') }}"></script>
+
+<!-- inline scripts related to this page -->
+
+<script type="text/javascript">
+    jQuery(function($) {
+
+        window.prettyPrint && prettyPrint();
+        $('#id-check-horizontal').removeAttr('checked').on('click', function(){
+            $('#dt-list-1').toggleClass('dl-horizontal').prev().html(this.checked ? '&lt;dl class="dl-horizontal"&gt;' : '&lt;dl&gt;');
+        });
+
+    })
+</script>
 </body>
 </html>

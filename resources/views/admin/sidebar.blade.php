@@ -4,164 +4,351 @@
 <!-- ==========================
     CONTENT - START
 =========================== -->
-<div class="container">
-    <section class="content-wrapper">
-        <div class="row">
+<div class="sidebar" id="sidebar">
+    <script type="text/javascript">
+        try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+    </script>
 
-            <!-- SIDEBAR - START -->
-            <div class="col-sm-4 hidden-xs">
+    <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+        <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+            <button class="btn btn-success">
+                <i class="icon-signal"></i>
+            </button>
 
-                <!-- SIDEBAR BOX - START -->
-                <div class="box sidebar-box widget-wrapper">
-                    <h3>Upcoming tournament</h3>
-                    <div class="tournament">
-                        <a href="tournament.html"><img src="{{ asset('/images/esl.png')}}" class="img-responsive" alt=""></a>
-                        <h4>ESL 2015</h4>
-                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam posuere magna a dapibus luctus.</p>
-                        <div class="date">21 - 29 June 2015</div>
-                        <div class="text-center"><a href="tournament.html" class="btn btn-primary">More info</a></div>
-                    </div>
-                </div>
-                <!-- SIDEBAR BOX - END -->
+            <button class="btn btn-info">
+                <i class="icon-pencil"></i>
+            </button>
 
-                <!-- SIDEBAR BOX - START -->
-                <div class="box sidebar-box widget-wrapper widget-matches">
-                    <h3>Upcoming matches <a href="matches-list.html" class="btn btn-primary pull-right btn-sm">All matches</a></h3>
+            <button class="btn btn-warning">
+                <i class="icon-group"></i>
+            </button>
 
-                    <a href="match-single.html">
-                        <table class="table match-wrapper">
-                            <tbody>
-                            <tr>
-                                <td class="game">
-                                    <img src="{{ asset('/icons/dota2.png')}}" alt="">
-                                    <span>Dota 2</span>
-                                </td>
-                                <td class="game-date">
-                                    <span>5/10/2015 - 19:30</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="team-name"><img src="{{ asset('/icons/cze.png')}}" alt="">Czech Republic</td>
-                                <td class="team-score">-</td>
-                            </tr>
-                            <tr>
-                                <td class="team-name"><img src="{{ asset('/icons/swe.png')}}" alt="">Sweden</td>
-                                <td class="team-score">-</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </a>
-
-                    <a href="match-single.html">
-                        <table class="table match-wrapper">
-                            <tbody>
-                            <tr>
-                                <td class="game">
-                                    <img src="{{ asset('/icons/csgo.jpg')}}" alt="">
-                                    <span>CS GO</span>
-                                </td>
-                                <td class="game-date">
-                                    <span>22/11/2015 - 22:00</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="team-name"><img src="{{ asset('/icons/den.png')}}" alt="">Fnatic</td>
-                                <td class="team-score">-</td>
-                            </tr>
-                            <tr>
-                                <td class="team-name"><img src="{{ asset('/icons/swe.png')}}" alt="">Ninjas in Pyjamas</td>
-                                <td class="team-score">-</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </a>
-                </div>
-                <!-- SIDEBAR BOX - END -->
-
-                <!-- SIDEBAR BOX - START -->
-                <div class="box sidebar-box widget-wrapper widget-matches">
-                    <h3>Latest matches <a href="matches-list.html" class="btn btn-primary pull-right btn-sm">All matches</a></h3>
-
-                    <a href="match-single.html">
-                        <table class="table match-wrapper">
-                            <tbody>
-                            <tr>
-                                <td class="game">
-                                    <img src="{{ asset('/icons/lol.png')}}" alt="">
-                                    <span>LoL</span>
-                                </td>
-                                <td class="game-date">
-                                    <span>18/02/2015 - 14:00</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="team-name"><img src="{{ asset('/icons/usa.png')}}" alt=""><b>Ninjas in Pyjamas</b></td>
-                                <td class="team-score win">9</td>
-                            </tr>
-                            <tr>
-                                <td class="team-name"><img src="{{ asset('/icons/den.png')}}" alt="">Natus Vincere</td>
-                                <td class="team-score lose">5</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </a>
-
-                    <a href="match-single.html">
-                        <table class="table match-wrapper">
-                            <tbody>
-                            <tr>
-                                <td class="game">
-                                    <img src="{{ asset('/icons/gta.png')}}" alt="">
-                                    <span>GTA</span>
-                                </td>
-                                <td class="game-date">
-                                    <span>8/6/2015 - 12:00</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="team-name"><img src="{{ asset('/icons/swe.png')}}" alt=""><b>Ninjas in Pyjamas</b></td>
-                                <td class="team-score win">9</td>
-                            </tr>
-                            <tr>
-                                <td class="team-name"><img src="{{ asset('/icons/usa.png')}}" alt="">Natus Vincere</td>
-                                <td class="team-score lose">5</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </a>
-                </div>
-                <!-- SIDEBAR BOX - END -->
-
-                <!-- SIDEBAR BOX - START -->
-                <div class="box sidebar-box widget-wrapper">
-                    <h3>Categories</h3>
-                    <ul class="nav nav-sidebar">
-                        <li><a href="#">Tournaments<span>45</span></a></li>
-                        <li><a href="#">Leagues<span>122</span></a></li>
-                        <li><a href="#">Counter Strike<span>684</span></a></li>
-                        <li><a href="#">Dota 2<span>1242</span></a></li>
-                        <li><a href="#">World of Warcraft<span>112</span></a></li>
-                        <li><a href="#">Minecraft<span>18</span></a></li>
-                    </ul>
-                </div>
-                <!-- SIDEBAR BOX - END -->
-
-                <!-- SIDEBAR BOX - START -->
-                <div class="box sidebar-box widget-wrapper">
-                    <h3>Latest Tweets</h3>
-                    <div id="twitter-wrapper">
-                    </div>
-                </div>
-                <!-- SIDEBAR BOX - END -->
-
-            </div>
-            <!-- SIDEBAR - END -->
-
-            @yield('side')
-
+            <button class="btn btn-danger">
+                <i class="icon-cogs"></i>
+            </button>
         </div>
-    </section>
+
+        <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+            <span class="btn btn-success"></span>
+
+            <span class="btn btn-info"></span>
+
+            <span class="btn btn-warning"></span>
+
+            <span class="btn btn-danger"></span>
+        </div>
+    </div><!-- #sidebar-shortcuts -->
+
+    <ul class="nav nav-list">
+        <li>
+            <a href="index.html">
+                <i class="icon-dashboard"></i>
+                <span class="menu-text"> Dashboard </span>
+            </a>
+        </li>
+
+        <li class="active">
+            <a href="typography.html">
+                <i class="icon-text-width"></i>
+                <span class="menu-text"> Typography </span>
+            </a>
+        </li>
+
+        <li>
+            <a href="#" class="dropdown-toggle">
+                <i class="icon-desktop"></i>
+                <span class="menu-text"> UI Elements </span>
+
+                <b class="arrow icon-angle-down"></b>
+            </a>
+
+            <ul class="submenu">
+                <li>
+                    <a href="elements.html">
+                        <i class="icon-double-angle-right"></i>
+                        Elements
+                    </a>
+                </li>
+
+                <li>
+                    <a href="buttons.html">
+                        <i class="icon-double-angle-right"></i>
+                        Buttons &amp; Icons
+                    </a>
+                </li>
+
+                <li>
+                    <a href="treeview.html">
+                        <i class="icon-double-angle-right"></i>
+                        Treeview
+                    </a>
+                </li>
+
+                <li>
+                    <a href="jquery-ui.html">
+                        <i class="icon-double-angle-right"></i>
+                        jQuery UI
+                    </a>
+                </li>
+
+                <li>
+                    <a href="nestable-list.html">
+                        <i class="icon-double-angle-right"></i>
+                        Nestable Lists
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="dropdown-toggle">
+                        <i class="icon-double-angle-right"></i>
+
+                        Three Level Menu
+                        <b class="arrow icon-angle-down"></b>
+                    </a>
+
+                    <ul class="submenu">
+                        <li>
+                            <a href="#">
+                                <i class="icon-leaf"></i>
+                                Item #1
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="dropdown-toggle">
+                                <i class="icon-pencil"></i>
+
+                                4th level
+                                <b class="arrow icon-angle-down"></b>
+                            </a>
+
+                            <ul class="submenu">
+                                <li>
+                                    <a href="#">
+                                        <i class="icon-plus"></i>
+                                        Add Product
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <i class="icon-eye-open"></i>
+                                        View Products
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="#" class="dropdown-toggle">
+                <i class="icon-list"></i>
+                <span class="menu-text"> Tables </span>
+
+                <b class="arrow icon-angle-down"></b>
+            </a>
+
+            <ul class="submenu">
+                <li>
+                    <a href="tables.html">
+                        <i class="icon-double-angle-right"></i>
+                        Simple &amp; Dynamic
+                    </a>
+                </li>
+
+                <li>
+                    <a href="jqgrid.html">
+                        <i class="icon-double-angle-right"></i>
+                        jqGrid plugin
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="#" class="dropdown-toggle">
+                <i class="icon-edit"></i>
+                <span class="menu-text"> Forms </span>
+
+                <b class="arrow icon-angle-down"></b>
+            </a>
+
+            <ul class="submenu">
+                <li>
+                    <a href="form-elements.html">
+                        <i class="icon-double-angle-right"></i>
+                        Form Elements
+                    </a>
+                </li>
+
+                <li>
+                    <a href="form-wizard.html">
+                        <i class="icon-double-angle-right"></i>
+                        Wizard &amp; Validation
+                    </a>
+                </li>
+
+                <li>
+                    <a href="wysiwyg.html">
+                        <i class="icon-double-angle-right"></i>
+                        Wysiwyg &amp; Markdown
+                    </a>
+                </li>
+
+                <li>
+                    <a href="dropzone.html">
+                        <i class="icon-double-angle-right"></i>
+                        Dropzone File Upload
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="widgets.html">
+                <i class="icon-list-alt"></i>
+                <span class="menu-text"> Widgets </span>
+            </a>
+        </li>
+
+        <li>
+            <a href="calendar.html">
+                <i class="icon-calendar"></i>
+
+								<span class="menu-text">
+									Calendar
+									<span class="badge badge-transparent tooltip-error" title="2&nbsp;Important&nbsp;Events">
+										<i class="icon-warning-sign red bigger-130"></i>
+									</span>
+								</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="gallery.html">
+                <i class="icon-picture"></i>
+                <span class="menu-text"> Gallery </span>
+            </a>
+        </li>
+
+        <li>
+            <a href="#" class="dropdown-toggle">
+                <i class="icon-tag"></i>
+                <span class="menu-text"> More Pages </span>
+
+                <b class="arrow icon-angle-down"></b>
+            </a>
+
+            <ul class="submenu">
+                <li>
+                    <a href="profile.html">
+                        <i class="icon-double-angle-right"></i>
+                        User Profile
+                    </a>
+                </li>
+
+                <li>
+                    <a href="inbox.html">
+                        <i class="icon-double-angle-right"></i>
+                        Inbox
+                    </a>
+                </li>
+
+                <li>
+                    <a href="pricing.html">
+                        <i class="icon-double-angle-right"></i>
+                        Pricing Tables
+                    </a>
+                </li>
+
+                <li>
+                    <a href="invoice.html">
+                        <i class="icon-double-angle-right"></i>
+                        Invoice
+                    </a>
+                </li>
+
+                <li>
+                    <a href="timeline.html">
+                        <i class="icon-double-angle-right"></i>
+                        Timeline
+                    </a>
+                </li>
+
+                <li>
+                    <a href="login.html">
+                        <i class="icon-double-angle-right"></i>
+                        Login &amp; Register
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="#" class="dropdown-toggle">
+                <i class="icon-file-alt"></i>
+
+								<span class="menu-text">
+									Other Pages
+									<span class="badge badge-primary ">5</span>
+								</span>
+
+                <b class="arrow icon-angle-down"></b>
+            </a>
+
+            <ul class="submenu">
+                <li>
+                    <a href="faq.html">
+                        <i class="icon-double-angle-right"></i>
+                        FAQ
+                    </a>
+                </li>
+
+                <li>
+                    <a href="error-404.html">
+                        <i class="icon-double-angle-right"></i>
+                        Error 404
+                    </a>
+                </li>
+
+                <li>
+                    <a href="error-500.html">
+                        <i class="icon-double-angle-right"></i>
+                        Error 500
+                    </a>
+                </li>
+
+                <li>
+                    <a href="grid.html">
+                        <i class="icon-double-angle-right"></i>
+                        Grid
+                    </a>
+                </li>
+
+                <li>
+                    <a href="blank.html">
+                        <i class="icon-double-angle-right"></i>
+                        Blank Page
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul><!-- /.nav-list -->
+
+    <div class="sidebar-collapse" id="sidebar-collapse">
+        <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+    </div>
+
+    <script type="text/javascript">
+        try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+    </script>
 </div>
+
+@yield('side')
+
 <!-- ==========================
     CONTENT - END
 =========================== -->

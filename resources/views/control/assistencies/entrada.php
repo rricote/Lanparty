@@ -35,10 +35,11 @@
             });
         }
         function doKeyDown(e){
-            /*console.log("Llegueix al clickar una tecla");
+            console.log("Llegueix al clickar una tecla");
              console.log(e);
              console.log(e.key);
-             console.log(e.keyCode);*/
+             console.log(e.keyCode);
+
             if(e.keyCode == "13"){
                 console.log("array definitivo");
                 console.log(array);
@@ -59,7 +60,6 @@
             array = '';
             window.addEventListener( "keypress", doKeyDown);
         }
-
         window.addEventListener( "DOMContentLoaded", onLoadPage);
     </script>
     </body>

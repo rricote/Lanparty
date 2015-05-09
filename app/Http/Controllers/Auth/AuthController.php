@@ -68,6 +68,8 @@ class AuthController extends Controller {
                     'username' => $user->usu_nick,
                     'email' => $user->usu_correu,
                     'anticuser' => $user->usu_id,
+                    'estats_id' => $user->est_id,
+                    'rols_id' => $user->rol_id,
                     'password' => bcrypt($request->input('password')),
                 ]);
                 if ($this->auth->attempt($credentials, $request->has('remember')))

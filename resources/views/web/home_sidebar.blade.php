@@ -2,6 +2,7 @@
 
 @section('content')
 
+    <script src="{{ asset('/js/inscripcio.js') }}"></script>
     <!-- ==========================
     	JUMBOTRON - START
     =========================== -->

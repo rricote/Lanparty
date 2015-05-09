@@ -79,4 +79,9 @@ class PublicController extends Controller {
     {
         return view('web.cartell');
     }
+
+    public function perfil()
+    {
+        return view('web.perfil');
+    }
 }

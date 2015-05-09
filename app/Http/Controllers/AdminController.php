@@ -18,7 +18,8 @@ class AdminController extends Controller {
      *
      * @return void
      */
-    public function __construct(){}
+    public function __construct(){
+    }
 
     /**
      * Show the application welcome screen to the user.
