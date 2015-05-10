@@ -184,32 +184,92 @@
                                 </div>
 
                                 <div id="afusuari" class="tab-pane in active">
+                                    <span id="helpBlock" class="help-block">En cas de no tenir dni: 12345678-Z</span>
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                            <div class="form-group">
+                                                <label class="control-label" for="dni">DNI:</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="icon-edit"></i></span>
+                                                    <input type="text" class="form-control input-mask-dni" id="afegirdni" name="afegirdni">
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                    <div class="form-group has-feedback">
-                                        <label class="control-label" for="email">Email:</label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">@</span>
-                                            <input type="text" class="form-control" id="afegirEmail" name="afegiremail">
-                                            <span class="input-group-addon"><i class="icon-unchecked"></i></span>
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                            <div class="form-group">
+                                                <label class="control-label" for="nom">Nom:</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="icon-user"></i></span>
+                                                    <input type="text" class="form-control" id="afegirnom" name="afegirenom">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                            <div class="form-group">
+                                                <label class="control-label" for="cognom1">Primer cognom:</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="icon-user"></i></span>
+                                                    <input type="text" class="form-control" id="afegircognom1" name="afegircognom1">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                            <div class="form-group">
+                                                <label class="control-label" for="cognom2">Segon cognom:</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="icon-user"></i></span>
+                                                    <input type="text" class="form-control" id="afegircognom2" name="afegircognom2">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                            <div class="form-group">
+                                                <label class="control-label" for="username">Nickname:</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="icon-desktop"></i></span>
+                                                    <input type="text" class="form-control" id="afegirusername" name="afegirusername">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                            <div class="form-group">
+                                                <label class="control-label" for="email">Email:</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">@</span>
+                                                    <input type="email" class="form-control" id="afegiremail" name="afegiremail">
+                                                    <span id="icono" class="input-group-addon"><i class="icon-unchecked"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                            <div class="form-group">
+                                                <label class="control-label" for="password">Contrasenya:</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="icon-edit"></i></span>
+                                                    <input type="password" class="form-control" id="afegirpassword" name="afegirpassword">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                            <div class="form-group">
+                                                <label class="control-label" for="password">Repeteix la contrasenya:</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="icon-edit"></i></span>
+                                                    <input type="password" class="form-control" id="afegirpassword2" name="afegirpassword2">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-
-                                    <div class="form-group has-success">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">@</span>
-                                            <input type="text" class="form-control">
-                                            <span class="input-group-addon"><i class="icon-check"></i></span>
-                                        </div>
+                                    <div>
+                                        <button id="afegirusuari" class="btn btn-info">Afegir</button>
                                     </div>
-
-                                    <div class="form-group has-error">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">@</span>
-                                            <input type="text" class="form-control">
-                                            <span class="input-group-addon"><i class="icon-remove"></i></span>
-                                        </div>
-                                    </div>
-
                                 </div>
                             </div>
                         </div>

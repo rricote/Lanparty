@@ -37,9 +37,12 @@ class AdminController extends Controller {
     public function usuaris()
     {
         $data['usuaris'] = Usuaris::all();
-        $data['js'] = array('jquery.dataTables.min', 'jquery.dataTables.bootstrap', 'usuaris');
-        //$data['js'] = array('http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables', 'jquery.dataTables.bootstrap', 'usuaris');
-
+        $data['js'] = array(
+            'jquery.dataTables.min',
+            'jquery.dataTables.bootstrap',
+            'jquery.maskedinput.min',
+            'usuaris'
+        );
         return view('admin.usuaris', $data);
     }
 

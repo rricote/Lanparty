@@ -29,7 +29,7 @@ class Usuaris extends Model implements AuthenticatableContract, CanResetPassword
      *
      * @var array
      */
-    protected $fillable = ['usu_dni', 'usu_nom', 'usu_cognom1', 'usu_cognom2', 'usu_nick', 'usu_correu', 'usu_pwd', 'data_registre', 'qr',  'est_id', 'rol_id'];
+    protected $fillable = ['usu_dni', 'usu_nom', 'usu_cognom1', 'usu_cognom2', 'usu_nick', 'usu_correu', 'usu_pwd', 'data_registre', 'token',  'est_id', 'rol_id'];
 
     /**
      * The attributes excluded from the model's JSON form.

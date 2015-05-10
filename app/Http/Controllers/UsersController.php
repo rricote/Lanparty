@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Usuaris;
 use App\User;
-use Illuminate\Http\Request;
+use Request;
 
 class UsersController extends Controller {
 
@@ -52,7 +52,7 @@ class UsersController extends Controller {
             'rol_id' => 2,
         ]);
 
-        return User::create([
+        User::create([
             'dni' => Request::input('dni'),
             'name' => Request::input('nom'),
             'cognom1' => Request::input('cognom1'),
@@ -65,6 +65,7 @@ class UsersController extends Controller {
             'estats_id' => 1,
             'rols_id' => 2,
         ]);
+        return 'CORRECTE';
 	}
 
 	/**

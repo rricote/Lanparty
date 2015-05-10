@@ -38,7 +38,6 @@ jQuery(function($) {
 });
 
 $( ".canvi" ).change(function () {
-    console.log($(this).attr('id'));
     var value;
     if($(this).parent().find('#elec').text() == 1){
         $(this).parent().find('#elec').html(2);
@@ -55,7 +54,6 @@ $( ".canvi" ).change(function () {
         data: { estat:value },
         success: function(data) {
             if(data == "guay"){
-                console.log(data);
                 var unique_id = $.gritter.add({
                     // (string | mandatory) the heading of the notification
                     title: 'Correcte',
@@ -69,7 +67,6 @@ $( ".canvi" ).change(function () {
                     class_name: 'gritter-light'
                 });
             } else {
-                console.log(data);
                 var unique_id = $.gritter.add({
                     // (string | mandatory) the heading of the notification
                     title: 'Error',
@@ -92,29 +89,86 @@ $( ".canvi" ).change(function () {
             }
         }
     });
-    console.log($(this).parent().find('#elec').text());
 });
-function comprovarEmail($tipus){
-    console.log($("#afegirEmail").val());
+
+$("#afegiremail").bind("change paste keyup", function (){
     var link = url;
-    var value = $("#afegirEmail").val();
-    var resultat;
+    var value = $("#afegiremail").val();
     $.ajax({
         type: "post",
         url: link + 'api/admin/users/validacio/email',
         data: { email:value },
         success: function(data) {
             if(data == 0){
-                console.log('bien');
+                $("#afegiremail").parent().parent().removeClass("has-error").addClass("has-success");
+                $("#afegiremail").parent().find('#icono').html('<i class="icon-check">');
             } else {
-                console.log('mal');
+                $("#afegiremail").parent().parent().removeClass("has-success").addClass("has-error");
+                $("#afegiremail").parent().find('#icono').html('<i class="icon-remove">');
+                if(false)
+                    var unique_id = $.gritter.add({
+                        // (string | mandatory) the heading of the notification
+                        title: 'Error',
+                        // (string | mandatory) the text inside the notification
+                        text: 'El camp email ja s\'esta usant',
+                        // (bool | optional) if you want it to fade out on its own or just sit there
+                        sticky: false,
+                        // (int | optional) the time you want it to be alive for before fading out
+                        time: '',
+                        // (string | optional) the class name you want to apply to that specific message
+                        class_name: 'gritter-light'
+                    });
             }
-            if($tipus == 1)
+        }
+    });
+});
+
+function letraDni(dni) {
+    var lockup = 'TRWAGMYFPDXBNJZSQVHLCKE';
+    return lockup.charAt(dni % 23);
+}
+
+$("#afegirusuari").click(function (){
+    var pas = true;
+    if(!$("#afegirdni").val())
+        pas = false;
+    if(!$("#afegiremail").val())
+        pas = false;
+    if(!$("#afegirpassword").val())
+        pas = false;
+    if(!$("#afegirpassword2").val())
+        pas = false;
+    if(!$("#afegirnom").val())
+        pas = false;
+    if(!$("#afegircognom1").val())
+        pas = false;
+    if(!$("#afegircognom2").val())
+        pas = false;
+    if(!$("#afegirusername").val())
+        pas = false;
+    if(pas) {
+        var dni = $("#afegirdni").val().split("-");
+        if (letraDni(dni[0]) != dni[1].toUpperCase())
+            var unique_id = $.gritter.add({
+                // (string | mandatory) the heading of the notification
+                title: 'Error',
+                // (string | mandatory) the text inside the notification
+                text: 'DNI incorrecte',
+                // (bool | optional) if you want it to fade out on its own or just sit there
+                sticky: false,
+                // (int | optional) the time you want it to be alive for before fading out
+                time: '',
+                // (string | optional) the class name you want to apply to that specific message
+                class_name: 'gritter-light'
+            });
+        else {
+            console.log("dni correcto")
+            if ($("#afegirpassword").val() != $("#afegirpassword2").val())
                 var unique_id = $.gritter.add({
                     // (string | mandatory) the heading of the notification
                     title: 'Error',
                     // (string | mandatory) the text inside the notification
-                    text: 'El camp email ja s\'esta usant',
+                    text: 'Les contrasenyes no coincideixen',
                     // (bool | optional) if you want it to fade out on its own or just sit there
                     sticky: false,
                     // (int | optional) the time you want it to be alive for before fading out
@@ -122,10 +176,106 @@ function comprovarEmail($tipus){
                     // (string | optional) the class name you want to apply to that specific message
                     class_name: 'gritter-light'
                 });
+            else {
+                expr = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+                if (!expr.test($("#afegiremail").val()))
+                    var unique_id = $.gritter.add({
+                        // (string | mandatory) the heading of the notification
+                        title: 'Error',
+                        // (string | mandatory) the text inside the notification
+                        text: 'El format del email és incorrecte',
+                        // (bool | optional) if you want it to fade out on its own or just sit there
+                        sticky: false,
+                        // (int | optional) the time you want it to be alive for before fading out
+                        time: '',
+                        // (string | optional) the class name you want to apply to that specific message
+                        class_name: 'gritter-light'
+                    });
+                else {
+                    var link = url;
+                    var value = $("#afegiremail").val();
+                    $.ajax({
+                        type: "post",
+                        url: link + 'api/admin/users/validacio/email',
+                        data: { email:value },
+                        success: function(data) {
+                            if(data == 0){
+                                introduirdadesafegir();
+                            } else {
+                                $("#afegiremail").parent().parent().removeClass("has-success").addClass("has-error");
+                                $("#afegiremail").parent().find('#icono').html('<i class="icon-remove">');
+                                    var unique_id = $.gritter.add({
+                                        // (string | mandatory) the heading of the notification
+                                        title: 'Error',
+                                        // (string | mandatory) the text inside the notification
+                                        text: 'El camp email ja s\'esta usant',
+                                        // (bool | optional) if you want it to fade out on its own or just sit there
+                                        sticky: false,
+                                        // (int | optional) the time you want it to be alive for before fading out
+                                        time: '',
+                                        // (string | optional) the class name you want to apply to that specific message
+                                        class_name: 'gritter-light'
+                                    });
+                            }
+                        }
+                    });
+                }
+            }
+        }
+    }
+});
+
+function introduirdadesafegir(){
+    var link = url;
+    var afegiremail = $("#afegiremail").val();
+    var afegirpassword = $("#afegirpassword").val();
+    var afegirnom = $("#afegirnom").val();
+    var afegircognom1 = $("#afegircognom1").val();
+    var afegircognom2 = $("#afegircognom2").val();
+    var afegirusername = $("#afegirusername").val();
+    var afegirdni = $("#afegirdni").val();
+    $.ajax({
+        type: "post",
+        url: link + 'api/admin/users',
+        data: { email:afegiremail, dni:afegirdni, username:afegirusername, nom:afegirnom, cognom1:afegircognom1, cognom2:afegircognom2,password:afegirpassword },
+        success: function(data) {
+            if(data == 'CORRECTE'){
+                var unique_id = $.gritter.add({
+                    // (string | mandatory) the heading of the notification
+                    title: 'Correcte',
+                    // (string | mandatory) the text inside the notification
+                    text: 'L\'usuari s\'ha creat correctament',
+                    // (bool | optional) if you want it to fade out on its own or just sit there
+                    sticky: false,
+                    // (int | optional) the time you want it to be alive for before fading out
+                    time: '',
+                    // (string | optional) the class name you want to apply to that specific message
+                    class_name: 'gritter-light'
+                });
+                $("#afegiremail").val("");
+                $("#afegirpassword").val("");
+                $("#afegirpassword2").val("");
+                $("#afegirnom").val("");
+                $("#afegircognom1").val("");
+                $("#afegircognom2").val("");
+                $("#afegirusername").val("");
+                $("#afegirdni").val("");
+            } else {
+                var unique_id = $.gritter.add({
+                    // (string | mandatory) the heading of the notification
+                    title: 'Error',
+                    // (string | mandatory) the text inside the notification
+                    text: 'Ha hagut algun problema al crear l\'usuari',
+                    // (bool | optional) if you want it to fade out on its own or just sit there
+                    sticky: false,
+                    // (int | optional) the time you want it to be alive for before fading out
+                    time: '',
+                    // (string | optional) the class name you want to apply to that specific message
+                    class_name: 'gritter-light'
+                });
+            }
         }
     });
 }
 
-$("#afegirEmail").bind("change paste keyup", function (){
-    comprovarEmail(0);
-});
+$('.input-mask-dni').mask('99999999-a');
