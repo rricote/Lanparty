@@ -72,7 +72,7 @@ Route::group(['prefix' => 'api'], function(){
 
     Route::resource('/admin/users','UsersController');
 
-    Route::resource('/admin/validacio','ValidacioController', ['only' => ['update']]);
+    Route::resource('/admin/validacio','ValidacioController', ['only' => 'update']);
 
 });
 

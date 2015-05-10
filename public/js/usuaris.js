@@ -50,15 +50,14 @@ $( ".canvi" ).change(function () {
     }
     var link = url;
     var id = $(this).attr('id');
-    console.log(link);
+    console.log(link + 'api/admin/validacio/' + id);
     $.ajax({
         type: "put",
         url: link + 'api/admin/validacio/' + id,
         data: { estat:value },
         success: function(data) {
-            if(data){
+            if(data == "guay"){
                 console.log(data);
-                console.log("dfsf");
                 var unique_id = $.gritter.add({
                     // (string | mandatory) the heading of the notification
                     title: 'Correcte',
@@ -73,7 +72,6 @@ $( ".canvi" ).change(function () {
                 });
             } else {
                 console.log(data);
-                console.log("dfsfdasdsad");
                 var unique_id = $.gritter.add({
                     // (string | mandatory) the heading of the notification
                     title: 'Error',

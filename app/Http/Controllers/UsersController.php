@@ -109,7 +109,7 @@ class UsersController extends Controller {
         $user->rol_id = 2;
         $user->save();
 
-        $usuaris = User::where('anticuser', '=', $id)->get();
+        $usuaris = User::where('anticuser', '=', $id)->first();
         $usuaris->dni = Request::input('dni');
         $usuaris->name = Request::input('name');
         $usuaris->cognom1 = Request::input('cognom1');
