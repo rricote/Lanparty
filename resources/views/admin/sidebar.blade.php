@@ -4,7 +4,7 @@
 <!-- ==========================
     CONTENT - START
 =========================== -->
-<div class="sidebar" id="sidebar">
+<div class="sidebar sidebar-fixed" id="sidebar">
     <script type="text/javascript">
         try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
     </script>

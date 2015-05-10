@@ -52,11 +52,11 @@
     <script src="{{ asset('js/ace-extra.min.js')}}"></script>
 
 </head>
-<body class="skin-1">
+<body class="navbar-fixed skin-1">
 <!-- ==========================
     HEADER - START
 =========================== -->
-<div class="navbar navbar-default" id="navbar">
+<div class="navbar navbar-default navbar-fixed-top" id="navbar">
     <script type="text/javascript">
         try{ace.settings.check('navbar' , 'fixed')}catch(e){}
     </script>

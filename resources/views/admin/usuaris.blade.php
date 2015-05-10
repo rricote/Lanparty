@@ -48,16 +48,16 @@
                     <div class="col-xs-12 col-lg-offset-2 col-lg-8">
                         <div class="tabbable">
                             <ul class="nav nav-tabs">
-                                <li class="active">
+                                <li>
                                     <a data-toggle="tab" href="#llusuaris">Usuaris</a>
                                 </li>
 
-                                <li>
+                                <li class="active">
                                     <a data-toggle="tab" href="#afusuari">Afegir Usuari</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
-                                <div id="llusuaris" class="tab-pane in active">
+                                <div id="llusuaris" class="tab-pane">
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <div class="table-header">
@@ -183,8 +183,33 @@
 
                                 </div>
 
-                                <div id="afusuari" class="tab-pane">
-                                    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.</p>
+                                <div id="afusuari" class="tab-pane in active">
+
+                                    <div class="form-group has-feedback">
+                                        <label class="control-label" for="email">Email:</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">@</span>
+                                            <input type="text" class="form-control" id="afegirEmail" name="afegiremail">
+                                            <span class="input-group-addon"><i class="icon-unchecked"></i></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group has-success">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">@</span>
+                                            <input type="text" class="form-control">
+                                            <span class="input-group-addon"><i class="icon-check"></i></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group has-error">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">@</span>
+                                            <input type="text" class="form-control">
+                                            <span class="input-group-addon"><i class="icon-remove"></i></span>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

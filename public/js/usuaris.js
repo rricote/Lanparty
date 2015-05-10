@@ -40,7 +40,6 @@ jQuery(function($) {
 $( ".canvi" ).change(function () {
     console.log($(this).attr('id'));
     var value;
-    console.log($(this).parent().find('#elec').text());
     if($(this).parent().find('#elec').text() == 1){
         $(this).parent().find('#elec').html(2);
         value = 2;
@@ -50,7 +49,6 @@ $( ".canvi" ).change(function () {
     }
     var link = url;
     var id = $(this).attr('id');
-    console.log(link + 'api/admin/validacio/' + id);
     $.ajax({
         type: "put",
         url: link + 'api/admin/validacio/' + id,
@@ -95,4 +93,39 @@ $( ".canvi" ).change(function () {
         }
     });
     console.log($(this).parent().find('#elec').text());
+});
+function comprovarEmail($tipus){
+    console.log($("#afegirEmail").val());
+    var link = url;
+    var value = $("#afegirEmail").val();
+    var resultat;
+    $.ajax({
+        type: "post",
+        url: link + 'api/admin/users/validacio/email',
+        data: { email:value },
+        success: function(data) {
+            if(data == 0){
+                console.log('bien');
+            } else {
+                console.log('mal');
+            }
+            if($tipus == 1)
+                var unique_id = $.gritter.add({
+                    // (string | mandatory) the heading of the notification
+                    title: 'Error',
+                    // (string | mandatory) the text inside the notification
+                    text: 'El camp email ja s\'esta usant',
+                    // (bool | optional) if you want it to fade out on its own or just sit there
+                    sticky: false,
+                    // (int | optional) the time you want it to be alive for before fading out
+                    time: '',
+                    // (string | optional) the class name you want to apply to that specific message
+                    class_name: 'gritter-light'
+                });
+        }
+    });
+}
+
+$("#afegirEmail").bind("change paste keyup", function (){
+    comprovarEmail(0);
 });

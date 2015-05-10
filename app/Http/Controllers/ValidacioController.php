@@ -25,23 +25,7 @@ class ValidacioController extends Controller {
             return 'no';
         }
         try {
-            if(User::where('anticuser', '=', $id)->count() == 0){
-                $token = $user->usu_token;
-                if(empty($token))
-                    $token = '';
-                User::create([
-                    'dni' => $user->usu_dni,
-                    'name' => $user->usu_nom,
-                    'cognom1' => $user->usu_cognom1,
-                    'cognom2' => $user->usu_cognom2,
-                    'username' => $user->usu_nick,
-                    'email' => $user->usu_correu,
-                    'ultratoken' => $token,
-                    'anticuser' => $user->usu_id,
-                    'estats_id' => Request::input('estat'),
-                    'rols_id' => $user->rol_id,
-                ]);
-            }else{
+            if(User::where('anticuser', '=', $id)->count() == 1){
                 $usuaris = User::where('anticuser', '=', $id)->first();
                 $usuaris->estats_id = Request::input('estat');
                 $usuaris->save();

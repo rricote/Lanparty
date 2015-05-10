@@ -74,5 +74,6 @@ Route::group(['prefix' => 'api'], function(){
 
     Route::resource('/admin/validacio','ValidacioController', ['only' => 'update']);
 
+    Route::post('admin/users/validacio/email', 'ValidatorGeneralController@email');
 });
 
