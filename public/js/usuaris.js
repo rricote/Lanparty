@@ -237,7 +237,7 @@ function introduirdadesafegir(){
     $.ajax({
         type: "post",
         url: link + 'api/admin/users',
-        data: { email:afegiremail, dni:afegirdni, username:afegirusername, nom:afegirnom, cognom1:afegircognom1, cognom2:afegircognom2,password:afegirpassword },
+        data: { email:afegiremail, dni:afegirdni, username:afegirusername, nom:afegirnom, cognom1:afegircognom1, cognom2:afegircognom2, password:afegirpassword },
         success: function(data) {
             if(data == 'CORRECTE'){
                 var unique_id = $.gritter.add({
