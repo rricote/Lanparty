@@ -48,16 +48,16 @@
                     <div class="col-xs-12 col-lg-offset-2 col-lg-8">
                         <div class="tabbable">
                             <ul class="nav nav-tabs">
-                                <li>
+                                <li class="active">
                                     <a data-toggle="tab" href="#llusuaris">Usuaris</a>
                                 </li>
 
-                                <li class="active">
+                                <li>
                                     <a data-toggle="tab" href="#afusuari">Afegir Usuari</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
-                                <div id="llusuaris" class="tab-pane">
+                                <div id="llusuaris" class="tab-pane in active">
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <div class="table-header">
@@ -79,7 +79,7 @@
                                                         <th>
                                                             Pagat
                                                         </th>
-                                                        <th class="hidden-480">Token</th>
+                                                        <th class="hidden-480">Username</th>
 
                                                         <th class="hidden-480">Correu</th>
 
@@ -117,11 +117,12 @@
                                                             </td>
 
                                                             <td class="hidden-480">
-                                                                {{ $u->token }}
+                                                                {{ $u->usu_nick }}
                                                             </td>
 
                                                             <td class="hidden-480">
                                                                 {{ $u->usu_correu }}
+                                                                <div style="display:none;">{{ $u->token }}</div>
                                                             </td>
 
                                                             <td>
@@ -183,8 +184,8 @@
 
                                 </div>
 
-                                <div id="afusuari" class="tab-pane in active">
-                                    <span id="helpBlock" class="help-block">En cas de no tenir dni: 12345678-Z</span>
+                                <div id="afusuari" class="tab-pane">
+                                    <span id="helpBlock" class="help-block">En cas de no tenir dni: Deixar la casella en blanc</span>
                                     <div class="col-xs-12">
                                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                             <div class="form-group">

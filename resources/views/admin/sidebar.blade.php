@@ -23,6 +23,24 @@
                 <span class="menu-text"> Usuaris </span>
             </a>
         </li>
+
+        <li>
+            <a href="#" class="dropdown-toggle">
+                <i class="icon-cog"></i>
+                <span class="menu-text"> Configuració </span>
+
+                <b class="arrow icon-angle-down"></b>
+            </a>
+
+            <ul class="submenu">
+                <li>
+                    <a href="#">
+                        <i class="icon-double-angle-right"></i>
+                        Inicialitzar tokens
+                    </a>
+                </li>
+            </ul>
+        </li>
     </ul><!-- /.nav-list -->
 
     <div class="sidebar-collapse" id="sidebar-collapse">

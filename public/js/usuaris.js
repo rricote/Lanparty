@@ -130,8 +130,6 @@ function letraDni(dni) {
 
 $("#afegirusuari").click(function (){
     var pas = true;
-    if(!$("#afegirdni").val())
-        pas = false;
     if(!$("#afegiremail").val())
         pas = false;
     if(!$("#afegirpassword").val())
@@ -147,8 +145,21 @@ $("#afegirusuari").click(function (){
     if(!$("#afegirusername").val())
         pas = false;
     if(pas) {
-        var dni = $("#afegirdni").val().split("-");
-        if (letraDni(dni[0]) != dni[1].toUpperCase())
+        var pasa = false;
+        if ($("#afegirdni").val()) {
+            var dni = $("#afegirdni").val().split("-");
+            if(dni[0].charAt(0).toUpperCase() == 'X')
+                dni[0] = dni[0].substr(0, 0) + '0' + dni[0].substr(0 + '0'.length)
+            if(dni[0].charAt(0).toUpperCase() == 'Y')
+                dni[0] = dni[0].substr(0, 0) + '1' + dni[0].substr(0 + '1'.length)
+            if(dni[0].charAt(0).toUpperCase() == 'X')
+                dni[0] = dni[0].substr(0, 0) + '2' + dni[0].substr(0 + '2'.length)
+            if(letraDni(dni[0]) == dni[1].toUpperCase())
+                pasa = true;
+        } else {
+            pasa = true;
+        }
+        if (!pasa){
             var unique_id = $.gritter.add({
                 // (string | mandatory) the heading of the notification
                 title: 'Error',
@@ -161,8 +172,7 @@ $("#afegirusuari").click(function (){
                 // (string | optional) the class name you want to apply to that specific message
                 class_name: 'gritter-light'
             });
-        else {
-            console.log("dni correcto")
+        } else {
             if ($("#afegirpassword").val() != $("#afegirpassword2").val())
                 var unique_id = $.gritter.add({
                     // (string | mandatory) the heading of the notification
@@ -204,24 +214,37 @@ $("#afegirusuari").click(function (){
                             } else {
                                 $("#afegiremail").parent().parent().removeClass("has-success").addClass("has-error");
                                 $("#afegiremail").parent().find('#icono').html('<i class="icon-remove">');
-                                    var unique_id = $.gritter.add({
-                                        // (string | mandatory) the heading of the notification
-                                        title: 'Error',
-                                        // (string | mandatory) the text inside the notification
-                                        text: 'El camp email ja s\'esta usant',
-                                        // (bool | optional) if you want it to fade out on its own or just sit there
-                                        sticky: false,
-                                        // (int | optional) the time you want it to be alive for before fading out
-                                        time: '',
-                                        // (string | optional) the class name you want to apply to that specific message
-                                        class_name: 'gritter-light'
-                                    });
+                                var unique_id = $.gritter.add({
+                                    // (string | mandatory) the heading of the notification
+                                    title: 'Error',
+                                    // (string | mandatory) the text inside the notification
+                                    text: 'El camp email ja s\'esta usant',
+                                    // (bool | optional) if you want it to fade out on its own or just sit there
+                                    sticky: false,
+                                    // (int | optional) the time you want it to be alive for before fading out
+                                    time: '',
+                                    // (string | optional) the class name you want to apply to that specific message
+                                    class_name: 'gritter-light'
+                                });
                             }
                         }
                     });
                 }
             }
         }
+    }else{
+        var unique_id = $.gritter.add({
+            // (string | mandatory) the heading of the notification
+            title: 'Error',
+            // (string | mandatory) the text inside the notification
+            text: 'Hi ha algun camp buit',
+            // (bool | optional) if you want it to fade out on its own or just sit there
+            sticky: false,
+            // (int | optional) the time you want it to be alive for before fading out
+            time: '',
+            // (string | optional) the class name you want to apply to that specific message
+            class_name: 'gritter-light'
+        });
     }
 });
 
@@ -233,7 +256,10 @@ function introduirdadesafegir(){
     var afegircognom1 = $("#afegircognom1").val();
     var afegircognom2 = $("#afegircognom2").val();
     var afegirusername = $("#afegirusername").val();
-    var afegirdni = $("#afegirdni").val();
+    if($("#afegirdni").val() == "")
+        var afegirdni = (new Date).getTime().toString().substring(5, 13);
+    else
+        var afegirdni = $("#afegirdni").val();
     $.ajax({
         type: "post",
         url: link + 'api/admin/users',
@@ -278,4 +304,4 @@ function introduirdadesafegir(){
     });
 }
 
-$('.input-mask-dni').mask('99999999-a');
+$('.input-mask-dni').mask('*9999999-a');
