@@ -50,4 +50,9 @@ class AdminController extends Controller {
     {
         return view('admin.competicions');
     }
+
+    public function tokens()
+    {
+        return view('admin.tokens');
+    }
 }

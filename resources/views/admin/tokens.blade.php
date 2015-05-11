@@ -16,27 +16,16 @@
                     <i class="icon-home home-icon"></i>
                     <a href="{{ url('/admin') }}">Home</a>
                 </li>
-                <li class="active">Home</li>
+                <li>Configuració</li>
+                <li class="active">Inicialitzar tokens</li>
             </ul>
             <!-- .breadcrumb -->
-            <!--
-            <div class="nav-search" id="nav-search">
-                <form class="form-search">
-                    <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="nav-search-input"
-                               id="nav-search-input" autocomplete="off"/>
-                        <i class="icon-search nav-search-icon"></i>
-                    </span>
-                </form>
-            </div>
-            -->
-            <!-- #nav-search -->
         </div>
 
         <div class="page-content">
             <div class="page-header">
                 <h1>
-                    Home
+                    Inicialitzador de tokens
                 </h1>
             </div>
             <!-- /.page-header -->

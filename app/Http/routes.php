@@ -52,8 +52,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\AdminMid
 
     Route::get('/competicions', 'AdminController@competicions');
 
-    Route::get('control/assistencies/entrada', function(){
+    Route::get('/tokens', 'AdminController@tokens');
+
+    Route::get('/app/assistencies/entrada', function(){
         return view('control.assistencies.entrada');
+    });
+
+    Route::get('/app/sorteig', function(){
+        return view('control.sorteig');
     });
 });
 

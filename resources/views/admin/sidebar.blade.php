@@ -34,9 +34,33 @@
 
             <ul class="submenu">
                 <li>
-                    <a href="#">
+                    <a href="{{ url('/admin/tokens') }}">
                         <i class="icon-double-angle-right"></i>
                         Inicialitzar tokens
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="#" class="dropdown-toggle">
+                <i class="icon-cog"></i>
+                <span class="menu-desktop"> Aplicatius </span>
+
+                <b class="arrow icon-angle-down"></b>
+            </a>
+
+            <ul class="submenu">
+                <li>
+                    <a href="{{ url('/admin/app/assistencies/entrada') }}">
+                        <i class="icon-double-angle-right"></i>
+                        Control entrada
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('/admin/app/sorteig') }}">
+                        <i class="icon-double-angle-right"></i>
+                        Sortejador
                     </a>
                 </li>
             </ul>
