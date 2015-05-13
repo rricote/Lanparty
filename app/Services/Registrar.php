@@ -53,7 +53,7 @@ class Registrar implements RegistrarContract {
             'name' => $data['nom'],
             'cognom1' => $data['cognom1'],
             'cognom2' => $data['cognom2'],
-            'username' => $data['nick'],
+            'username' => $data['username'],
             'email' => $data['email'],
             'anticuser' => $user->usu_id,
             'ultratoken' => $token,
