@@ -21,7 +21,7 @@ class Registrar implements RegistrarContract {
             'cognom1' => 'required|max:30',
             'cognom2' => 'required|max:30',
             'username' => 'required|max:30',
-			'email' => 'required|email|max:40|unique:usuaris',
+			'email' => 'required|email|max:40|unique:users',
             'password' => 'required|confirmed|min:6',
 		]);
 	}
@@ -39,7 +39,7 @@ class Registrar implements RegistrarContract {
             'usu_dni' => $data['dni'],
             'usu_nom' => $data['nom'],
             'usu_cognom1' => $data['cognom1'],
-            'usu_cognom2' => $data['usu_cognom2'],
+            'usu_cognom2' => $data['cognom2'],
             'usu_nick' => $data['username'],
             'usu_correu' => $data['email'],
             'token' => $token,
