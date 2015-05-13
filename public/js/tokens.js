@@ -7,7 +7,7 @@ $(".tokenizar").click(function (){
 $("#inicialitzartots").click(function (){
     var tots = $("#tots").children('tr');
     console.log(tots);
-    $.each(object, function(index, value) {
+    $.each(tots, function(index, value) {
         console.log(value);
         //var tr = tots[index];
         //var id = tr.find('#id');
