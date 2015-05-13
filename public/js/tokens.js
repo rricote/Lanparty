@@ -9,7 +9,7 @@ $("#inicialitzartots").click(function (){
     console.log(tots);
     $.each(tots, function(index, value) {
         console.log(value);
-        var id = tr.find('#id').text();
+        var id = value.find('#id').text();
         creartoken(id, value)
     });
 
