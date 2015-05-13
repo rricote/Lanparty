@@ -7,11 +7,12 @@ $(".tokenizar").click(function (){
 $("#inicialitzartots").click(function (){
     var tots = $("#tots").children('tr');
     console.log(tots);
-    for(var index in tots) {
-        var tr = object[index];
-        var id = tr.find('#id');
-        creartoken(id, tr);
-    }
+    $.each(object, function(index, value) {
+        console.log(value);
+        //var tr = tots[index];
+        //var id = tr.find('#id');
+        //creartoken(id, tr)
+    });
 
 });
 
