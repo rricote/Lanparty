@@ -1,6 +1,21 @@
 $(".tokenizar").click(function (){
     var id = $(this).parent().parent().find('#id').text();
     var tr = $(this).parent().parent();
+    creartoken(id, tr);
+});
+
+$("#inicialitzartots").click(function (){
+    var tots = $("#tots").children('tr');
+    console.log(tots);
+    for(var index in tots) {
+        var tr = object[index];
+        var id = tr.find('#id');
+        creartoken(id, tr);
+    }
+
+});
+
+function creartoken(id, tr){
     var link = url;
     $.ajax({
         type: "post",
@@ -37,10 +52,4 @@ $(".tokenizar").click(function (){
             }
         }
     });
-});
-
-$("#inicialitzartots").click(function (){
-    var tots = $("#tots").children('tr');
-    console.log(tots);
-
-});
+}
