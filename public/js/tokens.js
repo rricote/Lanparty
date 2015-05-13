@@ -9,9 +9,8 @@ $("#inicialitzartots").click(function (){
     console.log(tots);
     $.each(tots, function(index, value) {
         console.log(value);
-        //var tr = tots[index];
-        //var id = tr.find('#id');
-        //creartoken(id, tr)
+        var id = tr.find('#id').text();
+        creartoken(id, value)
     });
 
 });
