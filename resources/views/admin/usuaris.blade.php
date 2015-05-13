@@ -42,8 +42,6 @@
             <!-- /.page-header -->
             <div class="row">
                 <div class="col-xs-iv>
-
-
                     <!-- PAGE CONTENT BEGINS -->
                     <div class="col-xs-12 col-lg-offset-2 col-lg-8">
                         <div class="tabbable">

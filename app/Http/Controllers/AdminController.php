@@ -53,6 +53,11 @@ class AdminController extends Controller {
 
     public function tokens()
     {
-        return view('admin.tokens');
+        $data['usuaris'] = Usuaris::where('token', '=', '')->get();
+
+        $data['js'] = array(
+            'tokens'
+        );
+        return view('admin.tokens', $data);
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Usuaris;
 use App\User;
+use App\Assistencies;
 use Request;
 
 class ValidacioController extends Controller {
@@ -32,6 +33,32 @@ class ValidacioController extends Controller {
             }
         } catch (Exception $e) {
             return 'no';
+        }
+        if(Request::input('estat') == 2){
+            if(!Assistencies::where('usuaris_id', '=', $id)->count()){
+                $assistencies = new Assistencies;
+                $assistencies->accio = 'ENTRADA';
+                $assistencies->usuaris_id = $id;
+                $assistencies->save();
+            }else{
+                $assistencies = Assistencies::orderby('created_at', 'desc')->first();
+                if($assistencies->accio == 'SORTIDA'){
+                    $assistencies = new Assistencies;
+                    $assistencies->accio = 'ENTRADA';
+                    $assistencies->usuaris_id = $id;
+                    $assistencies->save();
+                }
+            }
+        } else {
+            if(Assistencies::where('usuaris_id', '=', $id)->count()){
+                $assistencies = Assistencies::orderby('created_at', 'desc')->first();
+                if($assistencies->accio == 'ENTRADA'){
+                    $assistencies = new Assistencies;
+                    $assistencies->accio = 'SORTIDA';
+                    $assistencies->usuaris_id = $id;
+                    $assistencies->save();
+                }
+            }
         }
 
         return 'guay';

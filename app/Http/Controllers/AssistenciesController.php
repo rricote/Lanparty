@@ -39,26 +39,15 @@ class AssistenciesController extends Controller {
 	 */
 	public function store()
 	{
-        $array = Request::input('array');
-        $array2 = explode("|", $array);
-        if(count($array2) != 3)
+        $id = Request::input('array');
+
+        if(!$usuari = Usuaris::where('token', '=', $id)->count())
             return 'ERROR:1';
-
-        $id = $array2[1];
-
-        if(!$this->isInteger($id))
-            return 'ERROR:2';
-
-        if(!$usuari = Usuaris::where('usu_id', '=', $id)->count())
-            return 'ERROR:3';
 
         $usuari = Usuaris::find($id);
 
         if($usuari->est_id != 2)
-            return 'ERROR:4';
-
-        if(substr(md5($usuari->data_registre), 0, 3) != substr($array2[0], 0, 3) || substr(md5($usuari->data_registre), -3) != substr($array2[2], -3))
-            return 'ERROR:5';
+            return 'ERROR:2';
 
         if(!Assistencies::where('usuaris_id', '=', $id)->count()){
             $assistencies = new Assistencies;
