@@ -41,6 +41,8 @@ class AdminController extends Controller {
             'jquery.dataTables.min',
             'jquery.dataTables.bootstrap',
             'jquery.maskedinput.min',
+            'dataTables.colVis.min',
+            'dataTables.colReorder.min',
             'usuaris'
         );
         return view('admin.usuaris', $data);

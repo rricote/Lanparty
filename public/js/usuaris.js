@@ -1,6 +1,7 @@
 jQuery(function($) {
 	var oTable1 = $('#taula-usuaris').dataTable( {
-	    "aoColumns": [
+        dom: 'Rlfrtip',
+        "aoColumns": [
 		{ "bSortable": false },
 		    null,
             null,
@@ -8,8 +9,9 @@ jQuery(function($) {
             null,
             null,
 		{ "bSortable": false }
-	    ] } );
-
+	    ]
+    } );
+//colvis, colorder
 
 	$('table th input:checkbox').on('click' , function(){
 	    var that = this;
@@ -87,6 +89,27 @@ $( ".canvi" ).change(function () {
                     $(this).parent().find('#elec').html(2);
                 }
             }
+        },
+        error: function(){
+            var unique_id = $.gritter.add({
+                // (string | mandatory) the heading of the notification
+                title: 'Error',
+                // (string | mandatory) the text inside the notification
+                text: 'Ha hagut algun error al actualitzar la casella',
+                // (bool | optional) if you want it to fade out on its own or just sit there
+                sticky: false,
+                // (int | optional) the time you want it to be alive for before fading out
+                time: '',
+                // (string | optional) the class name you want to apply to that specific message
+                class_name: 'gritter-light'
+            });
+            if(value==2){
+                $(this).prop( "checked", false );
+                $(this).parent().find('#elec').html(1);
+            }else{
+                $(this).prop( "checked", true );
+                $(this).parent().find('#elec').html(2);
+            }
         }
     });
 });
@@ -105,19 +128,6 @@ $("#afegiremail").bind("change paste keyup", function (){
             } else {
                 $("#afegiremail").parent().parent().removeClass("has-success").addClass("has-error");
                 $("#afegiremail").parent().find('#icono').html('<i class="icon-remove">');
-                if(false)
-                    var unique_id = $.gritter.add({
-                        // (string | mandatory) the heading of the notification
-                        title: 'Error',
-                        // (string | mandatory) the text inside the notification
-                        text: 'El camp email ja s\'esta usant',
-                        // (bool | optional) if you want it to fade out on its own or just sit there
-                        sticky: false,
-                        // (int | optional) the time you want it to be alive for before fading out
-                        time: '',
-                        // (string | optional) the class name you want to apply to that specific message
-                        class_name: 'gritter-light'
-                    });
             }
         }
     });
@@ -300,6 +310,20 @@ function introduirdadesafegir(){
                     class_name: 'gritter-light'
                 });
             }
+        },
+        error: function(){
+            var unique_id = $.gritter.add({
+                // (string | mandatory) the heading of the notification
+                title: 'Error',
+                // (string | mandatory) the text inside the notification
+                text: 'Ha hagut algun problema al crear l\'usuari',
+                // (bool | optional) if you want it to fade out on its own or just sit there
+                sticky: false,
+                // (int | optional) the time you want it to be alive for before fading out
+                time: '',
+                // (string | optional) the class name you want to apply to that specific message
+                class_name: 'gritter-light'
+            });
         }
     });
 }

@@ -46,6 +46,9 @@
     <link rel="stylesheet" href="{{ asset('css/ace-rtl.min.css')}}" />
     <link rel="stylesheet" href="{{ asset('css/ace-skins.min.css')}}" />
     <link rel="stylesheet" href="{{ asset('css/jquery.gritter.css')}}" />
+    <link rel="stylesheet" href="{{ asset('css/dataTables.colReorder.min.css')}}" />
+    <link rel="stylesheet" href="{{ asset('css/dataTables.colvis.jqueryui.css')}}" />
+    <link rel="stylesheet" href="{{ asset('css/dataTables.colVis.min.css')}}" />
     <!-- ==========================
     	JS
     =========================== -->
