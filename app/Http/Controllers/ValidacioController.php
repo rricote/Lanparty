@@ -3,7 +3,6 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Usuaris;
 use App\User;
 use App\Assistencies;
 use Request;
@@ -19,18 +18,9 @@ class ValidacioController extends Controller {
     public function update($id)
 	{
         try {
-            $user = Usuaris::find($id);
-            $user->est_id = Request::input('estat');
-            $user->save();
-        } catch (Exception $e) {
-            return 'no';
-        }
-        try {
-            if(User::where('anticuser', '=', $id)->count() == 1){
-                $usuaris = User::where('anticuser', '=', $id)->first();
-                $usuaris->estats_id = Request::input('estat');
-                $usuaris->save();
-            }
+            $usuaris = User::find($id);
+            $usuaris->estats_id = Request::input('estat');
+            $usuaris->save();
         } catch (Exception $e) {
             return 'no';
         }

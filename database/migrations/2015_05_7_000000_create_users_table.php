@@ -19,8 +19,7 @@ class CreateUsersTable extends Migration {
             $table->string('name');
             $table->string('cognom1');
             $table->string('cognom2');
-            $table->string('username');
-            $table->string('qr');
+            $table->string('username')->unique();
             $table->string('ultratoken');
             $table->string('anticuser');
 			$table->string('email')->unique();

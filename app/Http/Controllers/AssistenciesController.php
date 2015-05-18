@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use App\Assistencies;
-use App\Usuaris;
+use App\User;
 use Request;
 
 class AssistenciesController extends Controller {
@@ -41,10 +41,10 @@ class AssistenciesController extends Controller {
 	{
         $id = Request::input('array');
 
-        if(!$usuari = Usuaris::where('token', '=', $id)->count())
+        if(!$usuari = User::where('ultratoken', '=', $id)->count())
             return 'ERROR:1';
 
-        $usuari = Usuaris::find($id);
+        $usuari = User::find($id);
 
         if($usuari->est_id != 2)
             return 'ERROR:2';

@@ -1,6 +1,5 @@
 <?php namespace App\Http\Controllers;
 
-use App\Usuaris;
 use App\User;
 
 class AdminController extends Controller {
@@ -36,7 +35,7 @@ class AdminController extends Controller {
 
     public function usuaris()
     {
-        $data['usuaris'] = Usuaris::all();
+        $data['usuaris'] = User::all();
         $data['js'] = array(
             'jquery.dataTables.min',
             'jquery.dataTables.bootstrap',
@@ -55,7 +54,7 @@ class AdminController extends Controller {
 
     public function tokens()
     {
-        $data['usuaris'] = Usuaris::where('token', '=', '')->get();
+        $data['usuaris'] = User::where('ultratoken', '=', '')->get();
 
         $data['js'] = array(
             'tokens'
