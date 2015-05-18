@@ -34,20 +34,6 @@ class Registrar implements RegistrarContract {
 	 */
 	public function create(array $data)
 	{
-        $token = md5(uniqid(rand(), true));
-        $user = Usuaris::create([
-            'usu_dni' => $data['dni'],
-            'usu_nom' => $data['nom'],
-            'usu_cognom1' => $data['cognom1'],
-            'usu_cognom2' => $data['cognom2'],
-            'usu_nick' => $data['username'],
-            'usu_correu' => $data['email'],
-            'token' => $token,
-            'usu_pwd' => md5($data['password']),
-            'est_id' => 1,
-            'rol_id' => 2,
-        ]);
-
 		return User::create([
 			'dni' => $data['dni'],
             'name' => $data['nom'],
@@ -55,8 +41,7 @@ class Registrar implements RegistrarContract {
             'cognom2' => $data['cognom2'],
             'username' => $data['username'],
             'email' => $data['email'],
-            'anticuser' => $user->usu_id,
-            'ultratoken' => $token,
+            'ultratoken' => md5(uniqid(rand(), true)),
 			'password' => bcrypt($data['password']),
             'estats_id' => 1,
             'rols_id' => 2,

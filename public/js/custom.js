@@ -16,7 +16,7 @@ $(document).ready(function() {
 		$(this).removeClass('open');
 	});
 	
-	$('.countdown').countdown('2015/5/15 8:00:00', function(event) {
+	$('.countdown').countdown(countdowntime, function(event) {
 	    var $this = $(this).html(event.strftime(''
 	      + '<div><span class="countdown-number">%w</span> <span class="countdown-title">Setmanes</span></div> '
 	      + '<div><span class="countdown-number">%d</span> <span class="countdown-title">dies</span></div> '

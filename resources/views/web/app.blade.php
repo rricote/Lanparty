@@ -59,17 +59,6 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-    <!-- ==========================
-    	ANGULAR JS
-    =========================== -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js"></script>
-    <script>
-        var app = angular.module('todoApp', [], function($interpolateProvider) {
-            $interpolateProvider.startSymbol('<%');
-            $interpolateProvider.endSymbol('%>');
-        });
-    </script>
 </head>
 <body>
     <h1>Lanparty</h1>
@@ -167,6 +156,7 @@
      =========================== -->
     <script>
         var url = '{{asset('/')}}';
+        var countdowntime = '{{ env('COUNTDOWN') }}';
     </script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
