@@ -2,9 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Competicions extends Model {
-
-    public $timestamps = false;
+class Competicio extends Model {
 
     /**
      * The database table used by the model.
@@ -14,15 +12,14 @@ class Competicions extends Model {
     protected $table = 'competicions';
 
     /**
-     * Primary key of the table
-     * @var string
-     */
-    protected $primaryKey = '';
-    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['comp_id', 'usu_id', 'comp_grup_id', 'comp_grup_nom', 'comp_grup_validat'];
+    protected $fillable = ['name', 'logo'];
 
+    public function competicionsusersgrups()
+    {
+        return $this->hasMany('App\Competicionsusersgrups');
+    }
 }

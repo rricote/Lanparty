@@ -12,7 +12,14 @@ class CreatePatrocinadorsTable extends Migration {
 	 */
 	public function up()
 	{
-		//
+        Schema::create('patrocinadors', function(Blueprint $table)
+        {
+            $table->increments('id');
+            $table->string('name');
+            $table->integer('tipus');
+            $table->string('logo');
+            $table->timestamps();
+        });
 	}
 
 	/**
@@ -22,7 +29,7 @@ class CreatePatrocinadorsTable extends Migration {
 	 */
 	public function down()
 	{
-		//
+        Schema::drop('patrocinadors');
 	}
 
 }

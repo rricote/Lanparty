@@ -2,13 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Assistencies extends Model {
-
-    /**
-     * @property string accio
-     * @property string usuaris_id
-     */
-
+class Assistencia extends Model {
     /**
      * The database table used by the model.
      *
@@ -21,6 +15,6 @@ class Assistencies extends Model {
      *
      * @var array
      */
-    protected $fillable = ['accio', 'usuaris_id'];
+    protected $fillable = ['accio', 'user_id'];
 
 }

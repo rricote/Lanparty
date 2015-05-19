@@ -43,8 +43,8 @@ class Registrar implements RegistrarContract {
             'email' => $data['email'],
             'ultratoken' => md5(uniqid(rand(), true)),
 			'password' => bcrypt($data['password']),
-            'estats_id' => 1,
-            'rols_id' => 2,
+            'estat_id' => 1,
+            'rol_id' => 2,
 		]);
 	}
 

@@ -44,7 +44,7 @@ class AdminMiddleware {
             }
         }
 
-        if ($request->user()->rols_id != 1)
+        if ($request->user()->rol_id != 1)
         {
             return redirect('/');
         }

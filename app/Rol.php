@@ -2,27 +2,24 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Motius extends Model {
-
-    public $timestamps = false;
+class Rol extends Model {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'motius';
+    protected $table = 'rols';
 
-    /**
-     * Primary key of the table
-     * @var string
-     */
-    protected $primaryKey = 'mot_id';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['mot_nom'];
+    protected $fillable = ['name'];
 
+    public function users()
+    {
+        return $this->hasMany('App\User');
+    }
 }

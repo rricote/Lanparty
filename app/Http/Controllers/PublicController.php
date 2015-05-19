@@ -1,9 +1,9 @@
 <?php namespace App\Http\Controllers;
 
 use Auth;
-use App\Patrocinadors;
-use App\CompeticioNom;
-use App\Competicions;
+use App\Patrocinador;
+use App\Competicio;
+use App\Competicionsusersgrups;
 
 class PublicController extends Controller {
 
@@ -36,13 +36,13 @@ class PublicController extends Controller {
 	{
         $data = $competi = array();
 
-        $competicions = CompeticioNom::all();
+        $competicions = Competicio::all();
 
         if (Auth::guest()){
             foreach($competicions as $c){
                 $competi[] = array(
-                    'id' => $c->comp_id,
-                    'nom' => $c->comp_nom,
+                    'id' => $c->id,
+                    'nom' => $c->name,
                     'logo' => $c->logo,
                     'triat' => false
                 );
@@ -50,8 +50,8 @@ class PublicController extends Controller {
         }else{
             foreach($competicions as $c){
                 $competi[] = array(
-                    'id' => $c->comp_id,
-                    'nom' => $c->comp_nom,
+                    'id' => $c->id,
+                    'nom' => $c->name,
                     'logo' => $c->logo,
                     'triat' => false
                 );
@@ -69,9 +69,9 @@ class PublicController extends Controller {
 
     public function colaboradors()
     {
-        $data['patrocinadorsgold'] = Patrocinadors::where('tipus', '=', '3')->get();
-        $data['patrocinadorssilver'] = Patrocinadors::where('tipus', '=', '2')->get();
-        $data['patrocinadorsbronze'] = Patrocinadors::where('tipus', '=', '1')->get();
+        $data['patrocinadorsgold'] = Patrocinador::where('tipus', '=', '3')->get();
+        $data['patrocinadorssilver'] = Patrocinador::where('tipus', '=', '2')->get();
+        $data['patrocinadorsbronze'] = Patrocinador::where('tipus', '=', '1')->get();
         return view('web.colaboradors', $data);
     }
 

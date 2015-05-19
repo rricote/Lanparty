@@ -30,7 +30,7 @@
     <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('/icons/favicon-96x96.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('/icons/favicon-16x16.png') }}">
     <link rel="manifest" href="{{ asset('/icons/manifest.json') }}">
-    <link rel="shortcut icon" href="{{ asset('/icons/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('/icons/favicon-32x32.png') }}">
 
     <!-- ==========================
     	CSS
@@ -58,7 +58,7 @@
     =========================== -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>-->
 </head>
 <body>
     <h1>Lanparty</h1>
@@ -88,14 +88,14 @@
                     </li>
                     <li><a href="#">Contacta</a></li>
                 </ul>
-                <div class="pull-right navbar-buttons hidden-xs">
+                <div class="pull-right navbar-buttons">
                 @if (Auth::guest())
                     <a style="margin:10px" href="{{ url('/auth/register') }}" class="btn btn-primary">Registar-se</a>
                     <a style="margin:10px" href="{{ url('/auth/login') }}" class="btn btn-inverse">Entrar</a>
                 @else
                     <a style="margin:10px" href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                     <ul class="dropdown-menu">
-                        @if (Auth::user()->rols_id==1)
+                        @if (Auth::user()->rol_id == 1)
                             <li><a href="{{ url('/admin') }}">Gestor del administrador</a></li>
                         @endif
                         <li><a href="{{ url('/auth/logout') }}">Logout</a></li>

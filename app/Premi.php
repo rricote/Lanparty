@@ -2,27 +2,24 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Estats extends Model {
-
-    public $timestamps = false;
+class Premi extends Model {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'estats';
+    protected $table = 'premis';
 
-    /**
-     * Primary key of the table
-     * @var string
-     */
-    protected $primaryKey = 'est_id';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['est_nom'];
+    protected $fillable = ['name'];
 
+    public function patrocinador()
+    {
+        return $this->belongsTo('App\Patrocinador');
+    }
 }

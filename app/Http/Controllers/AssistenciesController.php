@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Assistencies;
+use App\Assistencia;
 use App\User;
 use Request;
 
@@ -14,7 +14,7 @@ class AssistenciesController extends Controller {
 	 */
 	public function index()
 	{
-        $assistencies = Assistencies::all();
+        $assistencies = Assistencia::all();
         return $assistencies;
 	}
 
@@ -41,34 +41,44 @@ class AssistenciesController extends Controller {
 	{
         $id = Request::input('array');
 
-        if(!$usuari = User::where('ultratoken', '=', $id)->count())
-            return 'ERROR:1';
+        if($usuari = User::where('ultratoken', '=', $id)->count()){
 
-        $usuari = User::find($id);
+            $usuari = User::find($id);
 
-        if($usuari->est_id != 2)
-            return 'ERROR:2';
+            if($usuari->estat_id == 2){
 
-        if(!Assistencies::where('usuaris_id', '=', $id)->count()){
-            $assistencies = new Assistencies;
-            $assistencies->accio = 'ENTRADA';
-            $assistencies->usuaris_id = $id;
-            $assistencies->save();
-        }else{
-            $assistencies = Assistencies::orderby('created_at', 'desc')->first();
-            if($assistencies->accio == 'ENTRADA'){
-                $assistencies = new Assistencies;
-                $assistencies->accio = 'SORTIDA';
-                $assistencies->usuaris_id = $id;
-                $assistencies->save();
-            }else{
-                $assistencies = new Assistencies;
-                $assistencies->accio = 'ENTRADA';
-                $assistencies->usuaris_id = $id;
-                $assistencies->save();
-            }
-        }
-        return $assistencies->accio;
+                if(!Assistencia::where('usuaris_id', '=', $id)->count()){
+
+                    $assistencia = new Assistencia;
+                    $assistencia->accio = 'ENTRADA';
+                    $assistencia->user_id = $id;
+                    $assistencia->save();
+
+                }else{
+
+                    $assistencia = Assistencia::orderby('created_at', 'desc')->first();
+
+                    if($assistencia->accio == 'ENTRADA'){
+                        $assistencia = new Assistencia;
+                        $assistencia->accio = 'SORTIDA';
+                        $assistencia->user_id = $id;
+                        $assistencia->save();
+                    }else{
+                        $assistencia = new Assistencia;
+                        $assistencia->accio = 'ENTRADA';
+                        $assistencia->user_id = $id;
+                        $assistencia->save();
+                    }
+                    $final = $assistencia->accio;
+                }
+
+            }else
+                $final = 'ERROR:2';
+
+        }else
+            $final = 'ERROR:1';
+
+        return $final;
 	}
 
 	/**

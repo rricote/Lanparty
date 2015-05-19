@@ -2,20 +2,24 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Patrocinadors extends Model {
+class Estat extends Model {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'patrocinadors';
+    protected $table = 'estats';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['nom', 'tipus', 'logo'];
+    protected $fillable = ['name'];
 
+    public function users()
+    {
+        return $this->hasMany('App\User');
+    }
 }

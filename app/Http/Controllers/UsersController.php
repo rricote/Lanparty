@@ -47,8 +47,8 @@ class UsersController extends Controller {
             'email' => Request::input('email'),
             'ultratoken' => $token,
             'password' => bcrypt(Request::input('password')),
-            'estats_id' => 1,
-            'rols_id' => 2,
+            'estat_id' => 1,
+            'rol_id' => 2,
         ]);
 
         return 'CORRECTE';
@@ -93,8 +93,8 @@ class UsersController extends Controller {
         $usuaris->username = Request::input('username');
         $usuaris->email = Request::input('email');
         $usuaris->password = bcrypt(Request::input('password'));
-        $usuaris->estats_id = 1;
-        $usuaris->rols_id = 2;
+        $usuaris->estat_id = 1;
+        $usuaris->rol_id = 2;
         $usuaris->save();
 
         return $usuaris;

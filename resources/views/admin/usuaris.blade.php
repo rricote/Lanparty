@@ -95,32 +95,32 @@
                                                             </td>
 
                                                             <td>
-                                                                {{ $u->usu_nom }}
+                                                                {{ $u->name }}
                                                             </td>
-                                                            <td>{{ $u->usu_cognom1 }} {{ $u->usu_cognom2 }}</td>
+                                                            <td>{{ $u->cognom1 }} {{ $u->cognom2 }}</td>
                                                             <td>
                                                                 <span class="span5">
                                                                     <label class="pull-right inline">
-                                                                        @if($u->est_id == 1)
-                                                                        <input id="{{ $u->usu_id }}" type="checkbox" class="ace ace-switch ace-switch-5 canvi" />
+                                                                        @if($u->estat_id == 1)
+                                                                        <input id="{{ $u->id }}" type="checkbox" class="ace ace-switch ace-switch-5 canvi" />
                                                                         <span class="lbl"></span>
-                                                                        <div id="elec" style="display: none">{{ $u->est_id }}</div>
+                                                                        <div id="elec" style="display: none">{{ $u->estat_id }}</div>
                                                                         @else
-                                                                        <input id="{{ $u->usu_id }}" checked="" type="checkbox" class="ace ace-switch ace-switch-5 canvi" />
+                                                                        <input id="{{ $u->id }}" checked="" type="checkbox" class="ace ace-switch ace-switch-5 canvi" />
                                                                         <span class="lbl"></span>
-                                                                        <div id="elec" style="display: none">{{ $u->est_id }}</div>
+                                                                        <div id="elec" style="display: none">{{  $u->estat_id }}</div>
                                                                         @endif
                                                                     </label>
                                                                 </span><!-- /span -->
                                                             </td>
 
                                                             <td class="hidden-480">
-                                                                {{ $u->usu_nick }}
+                                                                {{ $u->username }}
                                                             </td>
 
                                                             <td class="hidden-480">
-                                                                {{ $u->usu_correu }}
-                                                                <div style="display:none;">{{ $u->token }}</div>
+                                                                {{ $u->email }}
+                                                                <div style="display:none;">{{ url('user/' . $u->ultratoken) }}</div>
                                                             </td>
 
                                                             <td>

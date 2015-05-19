@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAssignacionsTable extends Migration {
+class CreateGrupsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,10 @@ class CreateAssignacionsTable extends Migration {
 	 */
 	public function up()
 	{
-        Schema::create('assignacions', function(Blueprint $table)
+        Schema::create('grups', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('motiu_id');
-            $table->integer('premi_id');
+            $table->string('name');
             $table->timestamps();
         });
 	}
@@ -29,7 +27,7 @@ class CreateAssignacionsTable extends Migration {
 	 */
 	public function down()
 	{
-        Schema::drop('assignacions');
+        Schema::drop('grups');
 	}
 
 }

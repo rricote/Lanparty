@@ -2,27 +2,24 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Rols extends Model {
-
-    public $timestamps = false;
+class Grup extends Model {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'rols';
+    protected $table = 'grups';
 
-    /**
-     * Primary key of the table
-     * @var string
-     */
-    protected $primaryKey = 'rol_id';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['rol_nom'];
+    protected $fillable = ['name'];
 
+    public function grupform()
+    {
+        return $this->hasMany('App\Grupform');
+    }
 }

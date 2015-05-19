@@ -29,7 +29,7 @@
     <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('/icons/favicon-96x96.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('/icons/favicon-16x16.png') }}">
     <link rel="manifest" href="{{ asset('/icons/manifest.json') }}">
-    <link rel="shortcut icon" href="{{ asset('/icons/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('/icons/favicon-32x32.png') }}">
 
     <!-- ==========================
     	CSS

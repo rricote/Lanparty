@@ -12,7 +12,13 @@ class CreatePremisTable extends Migration {
 	 */
 	public function up()
 	{
-		//
+        Schema::create('premis', function(Blueprint $table)
+        {
+            $table->increments('id');
+            $table->string('name');
+            $table->integer('patrocinador_id');
+            $table->timestamps();
+        });
 	}
 
 	/**
@@ -22,7 +28,7 @@ class CreatePremisTable extends Migration {
 	 */
 	public function down()
 	{
-		//
+        Schema::drop('premis');
 	}
 
 }
