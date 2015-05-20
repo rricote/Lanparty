@@ -25,7 +25,11 @@ Route::get('premis', 'PublicController@premis');
 
 Route::get('colaboradors', 'PublicController@colaboradors');
 
+Route::get('competicions', 'PublicController@competicions');
+
 Route::get('cartell', 'PublicController@cartell');
+
+Route::get('programa', 'PublicController@programa');
 
 /*
  * User

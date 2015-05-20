@@ -73,20 +73,20 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">Pagina inicial</a></li>
-                    <li><a href="#">Institut de l'ebre</a></li>
+                    <li><a href="{{ url() }}">Pagina inicial</a></li>
+                    <li><a href="http://www.iesebre.com/" target="_blank">Institut de l'ebre</a></li>
                     <li><a href="#">Streaming de la LAN Party</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Edició 2015</a>
                         <ul class="dropdown-menu">
-                            <li><a href="#"><i class="fa fa-plus"></i>Programa</a></li>
-                            <li><a href="#"><i class="fa fa-plus"></i>Competicions</a></li>
-                            <li><a href="#"><i class="fa fa-plus"></i>Col·laboradors</a></li>
-                            <li><a href="#"><i class="fa fa-plus"></i>Premis</a></li>
-                            <li><a href="#"><i class="fa fa-plus"></i>Cartell</a></li>
+                            <li><a href="{{ url('programa') }}"><i class="fa fa-plus"></i>Programa</a></li>
+                            <li><a href="{{ url('competicions') }}"><i class="fa fa-plus"></i>Competicions</a></li>
+                            <li><a href="{{ url('colaboradors') }}"><i class="fa fa-plus"></i>Col·laboradors</a></li>
+                            <li><a href="{{ url('premis') }}"><i class="fa fa-plus"></i>Premis</a></li>
+                            <li><a href="{{ url('cartell') }}"><i class="fa fa-plus"></i>Cartell</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">Contacta</a></li>
+                    <li><a href="{{ url() }}">Contacta</a></li>
                 </ul>
                 <div class="pull-right navbar-buttons">
                 @if (Auth::guest())

@@ -87,6 +87,12 @@
 
                     <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
                         <li>
+                            <a href="{{ url() }}">
+                                <i class="icon-desktop"></i>
+                                Pagina principal
+                            </a>
+                        </li>
+                        <li>
                             <a href="#">
                                 <i class="icon-cog"></i>
                                 Configuració
