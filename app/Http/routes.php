@@ -14,6 +14,12 @@
 /*
  * Public
  */
+use App\Config;
+
+View::composer(array('web.app', 'admin.app'), function($view)
+{
+    $view->with('config', Config::find(1));
+});
 
 Route::get('/', 'PublicController@index');
 
@@ -30,6 +36,10 @@ Route::get('competicions', 'PublicController@competicions');
 Route::get('cartell', 'PublicController@cartell');
 
 Route::get('programa', 'PublicController@programa');
+
+Route::get('contacta', 'PublicController@contacta');
+
+Route::get('perfil', 'PublicController@perfil');
 
 /*
  * User

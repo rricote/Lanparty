@@ -67,6 +67,16 @@ class PublicController extends Controller {
         return view('web.premis');
     }
 
+    public function competicions()
+    {
+        return view('web.competicions');
+    }
+
+    public function programa()
+    {
+        return view('web.programa');
+    }
+
     public function colaboradors()
     {
         $data['patrocinadorsgold'] = Patrocinador::where('tipus', '=', '3')->get();
@@ -83,5 +93,10 @@ class PublicController extends Controller {
     public function perfil()
     {
         return view('web.perfil');
+    }
+
+    public function contacta()
+    {
+        return view('web.contacta');
     }
 }

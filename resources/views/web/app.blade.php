@@ -77,7 +77,7 @@
                     <li><a href="http://www.iesebre.com/" target="_blank">Institut de l'ebre</a></li>
                     <li><a href="#">Streaming de la LAN Party</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Edició 2015</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $config->edicio->name }}</a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ url('programa') }}"><i class="fa fa-plus"></i>Programa</a></li>
                             <li><a href="{{ url('competicions') }}"><i class="fa fa-plus"></i>Competicions</a></li>
@@ -86,7 +86,7 @@
                             <li><a href="{{ url('cartell') }}"><i class="fa fa-plus"></i>Cartell</a></li>
                         </ul>
                     </li>
-                    <li><a href="{{ url() }}">Contacta</a></li>
+                    <li><a href="{{ url('contacta') }}">Contacta</a></li>
                 </ul>
                 <div class="pull-right navbar-buttons">
                 @if (Auth::guest())
@@ -156,7 +156,7 @@
      =========================== -->
     <script>
         var url = '{{asset('/')}}';
-        var countdowntime = '{{ env('COUNTDOWN') }}';
+        var countdowntime = '{{ $config->data_inici }}';
     </script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="{{ asset('/js/bootstrap.min.js') }}"></script>

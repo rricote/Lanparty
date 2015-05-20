@@ -36,7 +36,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsTo('App\Estat');
     }
 
-    public function post()
+    public function rol()
     {
         return $this->belongsTo('App\Rol');
     }
