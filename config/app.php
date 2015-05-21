@@ -125,7 +125,6 @@ return [
 		'Illuminate\Filesystem\FilesystemServiceProvider',
 		'Illuminate\Foundation\Providers\FoundationServiceProvider',
 		'Illuminate\Hashing\HashServiceProvider',
-        //'SHAHashServiceProvider',
 		'Illuminate\Mail\MailServiceProvider',
 		'Illuminate\Pagination\PaginationServiceProvider',
 		'Illuminate\Pipeline\PipelineServiceProvider',
@@ -145,6 +144,8 @@ return [
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
+
+        'Collective\Html\HtmlServiceProvider',
 
 	],
 
@@ -193,6 +194,8 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
+        'Form' => 'Collective\Html\FormFacade',
+        'Html' => 'Collective\Html\HtmlFacade',
 
 	],
 

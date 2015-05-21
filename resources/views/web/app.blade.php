@@ -156,7 +156,7 @@
      =========================== -->
     <script>
         var url = '{{asset('/')}}';
-        var countdowntime = '{{ $config->data_inici }}';
+        var countdowntime = '{{ str_replace("-", "/", $config->data_inici) }}';
     </script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="{{ asset('/js/bootstrap.min.js') }}"></script>

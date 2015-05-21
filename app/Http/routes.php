@@ -19,6 +19,7 @@ use App\Config;
 View::composer(array('web.app', 'admin.app'), function($view)
 {
     $view->with('config', Config::find(1));
+
 });
 
 Route::get('/', 'PublicController@index');
@@ -65,6 +66,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\AdminMid
     Route::get('/usuaris', 'AdminController@usuaris');
 
     Route::get('/competicions', 'AdminController@competicions');
+
+    Route::post('/competicions/afegir', 'AdminController@competicionsAfegir');
 
     Route::get('/tokens', 'AdminController@tokens');
 
