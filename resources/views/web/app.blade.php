@@ -155,7 +155,7 @@
          JS
      =========================== -->
     <script>
-        var url = '{{asset('/')}}';
+        var url = '{{ asset('/') }}';
         var countdowntime = '{{ str_replace("-", "/", $config->data_inici) }}';
     </script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -167,5 +167,6 @@
     <script src="{{ asset('/js/twitterFetcher_min.js') }}"></script>
     <script src="{{ asset('/js/jquery.countdown.min.js') }}"></script>
     <script src="{{ asset('/js/custom.js') }}"></script>
+    <script src="{{ asset('js/spin.js') }}"></script>
 </body>
 </html>

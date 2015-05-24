@@ -18,6 +18,7 @@ class CreatePatrocinadorsTable extends Migration {
             $table->string('name');
             $table->integer('tipus');
             $table->string('logo');
+            $table->integer('edicio_id');
             $table->timestamps();
         });
 	}

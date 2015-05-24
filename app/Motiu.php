@@ -16,6 +16,10 @@ class Motiu extends Model {
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name','edicio_id'];
 
+    public function edicio()
+    {
+        return $this->belongsTo('App\Edicio');
+    }
 }

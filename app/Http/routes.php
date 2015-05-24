@@ -69,6 +69,38 @@ Route::group(['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\AdminMid
 
     Route::post('/competicions/afegir', 'AdminController@competicionsAfegir');
 
+    Route::get('/edicions', 'AdminController@edicions');
+
+    Route::post('/edicions/afegir', 'AdminController@edicionsAfegir');
+
+    Route::get('/estats', 'AdminController@estats');
+
+    Route::post('/estats/afegir', 'AdminController@estatsAfegir');
+
+    Route::get('/grups', 'AdminController@grups');
+
+    Route::post('/grups/afegir', 'AdminController@grupsAfegir');
+
+    Route::get('/motius', 'AdminController@motius');
+
+    Route::post('/motius/afegir', 'AdminController@motiusAfegir');
+
+    Route::get('/patrocinadors', 'AdminController@patrocinadors');
+
+    Route::post('/patrocinadors/afegir', 'AdminController@patrocinadorsAfegir');
+
+    Route::get('/premis', 'AdminController@premis');
+
+    Route::post('/premis/afegir', 'AdminController@premisAfegir');
+
+    Route::get('/rols', 'AdminController@rols');
+
+    Route::post('/rols/afegir', 'AdminController@rolsAfegir');
+
+    Route::get('/config', 'AdminController@config');
+
+    Route::post('/config/editar', 'AdminController@configEditar');
+
     Route::get('/tokens', 'AdminController@tokens');
 
     Route::get('/app/assistencies/entrada', function(){
@@ -95,6 +127,24 @@ Route::group(['prefix' => 'api'], function(){
     Route::resource('/control/assistencies','AssistenciesController');
 
     Route::resource('/admin/users','UsersController');
+
+    Route::resource('/admin/competicions','CompeticionsController');
+
+    Route::resource('/admin/edicions','EdicionsController');
+
+    Route::resource('/admin/estats','EstatsController');
+
+    Route::resource('/admin/grups','GrupsController');
+
+    Route::resource('/admin/motius','MotiusController');
+
+    Route::resource('/admin/patrocinadors','PatrocinadorsController');
+
+    Route::resource('/admin/premis','PremisController');
+
+    Route::resource('/admin/rols','RolsController');
+
+    Route::resource('/admin/config','ConfigController', ['only' => 'update']);
 
     Route::resource('/admin/validacio','ValidacioController', ['only' => 'update']);
 

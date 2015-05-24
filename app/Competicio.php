@@ -16,10 +16,15 @@ class Competicio extends Model {
      *
      * @var array
      */
-    protected $fillable = ['name', 'logo'];
+    protected $fillable = ['name', 'logo', 'number', 'edicio_id'];
 
     public function competicionsusersgrups()
     {
         return $this->hasMany('App\Competicionsusersgrups');
+    }
+
+    public function edicio()
+    {
+        return $this->belongsTo('App\Edicio');
     }
 }

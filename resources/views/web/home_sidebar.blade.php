@@ -10,7 +10,7 @@
         <div class="jumbotron">
             <div class="jumbotron-panel">
                 <div class="panel panel-primary collapse-horizontal">
-                    <a data-toggle="collapse" class="btn btn-primary collapsed" data-target="#toggle-collapse">Inscriure's a un torneig <i class="fa fa-caret-down"></i></a>
+                    <a data-toggle="collapse" class="btn btn-primary collapsed" data-target="#toggle-collapse">@if (Auth::guest())Llista de tornejos @else Inscriure's a un torneig @endif<i class="fa fa-caret-down"></i></a>
                     <div class="jumbotron-brands">
                         <ul class="brands brands-sm brands-inline brands-circle">
                             <li><a target="_blank" href="https://www.facebook.com/LanPartyIesEbre"><i class="fa fa-facebook"></i></a></li>

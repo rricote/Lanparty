@@ -15,6 +15,11 @@ class Assistencia extends Model {
      *
      * @var array
      */
-    protected $fillable = ['accio', 'user_id'];
+    protected $fillable = ['accio', 'user_id', 'edicio_id'];
+
+    public function edicio()
+    {
+        return $this->belongsTo('App\Edicio');
+    }
 
 }

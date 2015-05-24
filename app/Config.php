@@ -16,7 +16,7 @@ class Config extends Model {
      *
      * @var array
      */
-    protected $fillable = ['edicio_id'];
+    protected $fillable = ['data_inici','email','edicio_id'];
 
     public function edicio()
     {

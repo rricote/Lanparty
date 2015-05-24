@@ -17,6 +17,7 @@ class CreateConfigsTable extends Migration {
             $table->increments('id');
             $table->integer('edicio_id');
             $table->timestamp('data_inici');
+            $table->text('email');
             $table->timestamps();
 		});
 	}

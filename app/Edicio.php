@@ -22,4 +22,39 @@ class Edicio extends Model {
     {
         return $this->hasOne('App\Config');
     }
+
+    public function assignacio()
+    {
+        return $this->hasOne('App\Assignacio');
+    }
+
+    public function assistencia()
+    {
+        return $this->hasOne('App\Assistencia');
+    }
+
+    public function competicio()
+    {
+        return $this->hasOne('App\Competicio');
+    }
+
+    public function grup()
+    {
+        return $this->hasOne('App\Grup');
+    }
+
+    public function motiu()
+    {
+        return $this->hasOne('App\Motiu');
+    }
+
+    public function patrocinador()
+    {
+        return $this->hasOne('App\Patrocinador');
+    }
+
+    public function premi()
+    {
+        return $this->hasOne('App\Premi');
+    }
 }

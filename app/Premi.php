@@ -16,10 +16,15 @@ class Premi extends Model {
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name','edicio_id'];
 
     public function patrocinador()
     {
         return $this->belongsTo('App\Patrocinador');
+    }
+
+    public function edicio()
+    {
+        return $this->belongsTo('App\Edicio');
     }
 }

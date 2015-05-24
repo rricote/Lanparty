@@ -17,6 +17,7 @@ class CreatePremisTable extends Migration {
             $table->increments('id');
             $table->string('name');
             $table->integer('patrocinador_id');
+            $table->integer('edicio_id');
             $table->timestamps();
         });
 	}

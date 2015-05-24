@@ -17,6 +17,8 @@ class CreateCompeticionsTable extends Migration {
             $table->increments('id');
             $table->string('name');
             $table->string('logo');
+            $table->string('number');
+            $table->integer('edicio_id');
             $table->timestamps();
         });
 	}

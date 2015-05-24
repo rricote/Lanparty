@@ -16,10 +16,15 @@ class Patrocinador extends Model {
      *
      * @var array
      */
-    protected $fillable = ['name', 'tipus', 'logo'];
+    protected $fillable = ['name', 'tipus', 'logo','edicio_id'];
 
     public function premis()
     {
         return $this->hasMany('App\Premi');
+    }
+
+    public function edicio()
+    {
+        return $this->belongsTo('App\Edicio');
     }
 }

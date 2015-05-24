@@ -10,17 +10,73 @@
     </script>
 
     <ul class="nav nav-list">
-        <li>
+        <li @if ($menu == 'index')class="active"@endif>
             <a href="{{ url('/admin') }}">
                 <i class="icon-dashboard"></i>
                 <span class="menu-text"> Dashboard </span>
             </a>
         </li>
 
-        <li class="active">
+        <li @if ($menu == 'usuaris')class="active"@endif>
             <a href="{{ url('/admin/usuaris') }}">
                 <i class="icon-group"></i>
                 <span class="menu-text"> Usuaris </span>
+            </a>
+        </li>
+
+        <li @if ($menu == 'competicions')class="active"@endif>
+            <a href="{{ url('/admin/competicions') }}">
+                <i class="icon-group"></i>
+                <span class="menu-text"> Competicions </span>
+            </a>
+        </li>
+
+        <li @if ($menu == 'edicions')class="active"@endif>
+            <a href="{{ url('/admin/edicions') }}">
+                <i class="icon-group"></i>
+                <span class="menu-text"> Edicions </span>
+            </a>
+        </li>
+
+        <li @if ($menu == 'estats')class="active"@endif>
+            <a href="{{ url('/admin/estats') }}">
+                <i class="icon-group"></i>
+                <span class="menu-text"> Estats </span>
+            </a>
+        </li>
+
+        <li @if ($menu == 'grups')class="active"@endif>
+            <a href="{{ url('/admin/grups') }}">
+                <i class="icon-group"></i>
+                <span class="menu-text"> Grups </span>
+            </a>
+        </li>
+
+        <li @if ($menu == 'motius')class="active"@endif>
+            <a href="{{ url('/admin/motius') }}">
+                <i class="icon-group"></i>
+                <span class="menu-text"> Motius </span>
+            </a>
+        </li>
+
+        <li @if ($menu == 'patrocinadors')class="active"@endif>
+            <a href="{{ url('/admin/patrocinadors') }}">
+                <i class="icon-group"></i>
+                <span class="menu-text"> Patrocinadors </span>
+            </a>
+        </li>
+
+        <li @if ($menu == 'premis')class="active"@endif>
+            <a href="{{ url('/admin/premis') }}">
+                <i class="icon-group"></i>
+                <span class="menu-text"> Premis </span>
+            </a>
+        </li>
+
+        <li @if ($menu == 'rols')class="active"@endif>
+            <a href="{{ url('/admin/rols') }}">
+                <i class="icon-group"></i>
+                <span class="menu-text"> Rols </span>
             </a>
         </li>
 
@@ -32,8 +88,8 @@
                 <b class="arrow icon-angle-down"></b>
             </a>
 
-            <ul class="submenu">
-                <li>
+            <ul class="submenu" @if ($menu == 'tokens')style="display: block;"@endif>
+                <li @if ($menu == 'tokens')class="active"@endif>
                     <a href="{{ url('/admin/tokens') }}">
                         <i class="icon-double-angle-right"></i>
                         Inicialitzar tokens
@@ -50,14 +106,14 @@
                 <b class="arrow icon-angle-down"></b>
             </a>
 
-            <ul class="submenu">
-                <li>
+            <ul class="submenu" @if ($menu == 'sorteig')style="display: block;"@endif>
+                <li @if ($menu == 'entrada')class="active"@endif>
                     <a href="{{ url('/admin/app/assistencies/entrada') }}">
                         <i class="icon-double-angle-right"></i>
                         Control entrada
                     </a>
                 </li>
-                <li>
+                <li @if ($menu == 'sorteig')class="active"@endif>
                     <a href="{{ url('/admin/app/sorteig') }}">
                         <i class="icon-double-angle-right"></i>
                         Sortejador

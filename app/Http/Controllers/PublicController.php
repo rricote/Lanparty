@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Config;
 use Auth;
 use App\Patrocinador;
 use App\Competicio;
@@ -54,21 +55,25 @@ class PublicController extends Controller {
 
     public function premis()
     {
-        return view('web.premis');
+        $data = array();
+        return view('web.premis', $data);
     }
 
     public function competicions()
     {
-        return view('web.competicions');
+        $data = array();
+        return view('web.competicions', $data);
     }
 
     public function programa()
     {
-        return view('web.programa');
+        $data = array();
+        return view('web.programa', $data);
     }
 
     public function colaboradors()
     {
+        $data = array();
         $data['patrocinadorsgold'] = Patrocinador::where('tipus', '=', '3')->get();
         $data['patrocinadorssilver'] = Patrocinador::where('tipus', '=', '2')->get();
         $data['patrocinadorsbronze'] = Patrocinador::where('tipus', '=', '1')->get();
@@ -77,16 +82,21 @@ class PublicController extends Controller {
 
     public function cartell()
     {
-        return view('web.cartell');
+        $data = array();
+        $data['cartell'] = Config::find(1)->edicio->cartell;
+        return view('web.cartell', $data);
     }
 
     public function perfil()
     {
-        return view('web.perfil');
+        $data = array();
+        return view('web.perfil', $data);
     }
 
     public function contacta()
     {
-        return view('web.contacta');
+        $data = array();
+        $data['config'] = Config::find(1);
+        return view('web.contacta', $data);
     }
 }

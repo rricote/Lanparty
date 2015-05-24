@@ -16,6 +16,10 @@ class Assignacio extends Model {
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'motiu_id', 'premi_id'];
+    protected $fillable = ['user_id', 'motiu_id', 'premi_id', 'edicio_id'];
 
+    public function edicio()
+    {
+        return $this->belongsTo('App\Edicio');
+    }
 }

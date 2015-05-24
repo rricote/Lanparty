@@ -56,6 +56,7 @@
 
 </head>
 <body class="navbar-fixed skin-1">
+<div id="spinner"></div>
 <!-- ==========================
     HEADER - START
 =========================== -->
@@ -151,9 +152,11 @@
 <script type="text/javascript">
     if("ontouchend" in document) document.write("<script src='{{ asset('js/jquery.mobile.custom.min.js')}}'>"+"<"+"/script>");
 </script>
-<script src="{{ asset('/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/jquery-ui-1.10.3.custom.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/typeahead-bs2.min.js') }}"></script>
 <script src="{{ asset('js/jquery.gritter.min.js') }}"></script>
+<script src="{{ asset('js/spin.js') }}"></script>
 
 <!-- page specific plugin scripts -->
 
@@ -167,6 +170,26 @@
 <!-- inline scripts related to this page -->
 
 <script type="text/javascript">
+    var opts = {
+        lines: 9, // The number of lines to draw
+        length: 14, // The length of each line
+        width: 10, // The line thickness
+        radius: 18, // The radius of the inner circle
+        corners: 1, // Corner roundness (0..1)
+        rotate: 0, // The rotation offset
+        direction: 1, // 1: clockwise, -1: counterclockwise
+        color: '#000', // #rgb or #rrggbb or array of colors
+        speed: 1, // Rounds per second
+        trail: 60, // Afterglow percentage
+        shadow: false, // Whether to render a shadow
+        hwaccel: false, // Whether to use hardware acceleration
+        className: 'spinner', // The CSS class to assign to the spinner
+        zIndex: 2e9, // The z-index (defaults to 2000000000)
+        top: '50%', // Top position relative to parent
+        left: '50%' // Left position relative to parent
+    };
+    var spinner = new Spinner(opts);
+    var spin = document.getElementById('spinner');
     jQuery(function($) {
 
         window.prettyPrint && prettyPrint();
