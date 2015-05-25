@@ -16,7 +16,7 @@ class Premi extends Model {
      *
      * @var array
      */
-    protected $fillable = ['name','edicio_id'];
+    protected $fillable = ['name','patrocinador_id','edicio_id'];
 
     public function patrocinador()
     {

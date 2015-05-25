@@ -368,6 +368,11 @@ class AdminController extends Controller {
         $data = array();
         $data['menu'] = 'premis';
         $data['premis'] = Premi::all();
+        $patrocinadors = array();
+        $patro = Patrocinador::all();
+        foreach($patro as $p)
+            $patrocinadors[$p->id] = $p->name;
+        $data['patrocinadors'] = $patrocinadors;
         $data['js'] = array(
             'jquery.dataTables.min',
             'jquery.dataTables.bootstrap',
@@ -393,7 +398,7 @@ class AdminController extends Controller {
 
             Premi::create([
                 'name' => Input::get('name'),
-                'patrocinador' => Input::get('patrocinador'),
+                'patrocinador_id' => Input::get('patrocinador'),
                 'edicio_id' => $config->edicio_id
             ]);
 

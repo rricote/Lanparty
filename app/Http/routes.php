@@ -34,6 +34,8 @@ Route::get('colaboradors', 'PublicController@colaboradors');
 
 Route::get('competicions', 'PublicController@competicions');
 
+Route::get('competicio/{id}', 'PublicController@competicio');
+
 Route::get('cartell', 'PublicController@cartell');
 
 Route::get('programa', 'PublicController@programa');

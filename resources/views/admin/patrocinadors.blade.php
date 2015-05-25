@@ -191,20 +191,18 @@
 
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                 <div class="form-group">
-                                    {!! Form::label('arxiu', 'Logo de la competició:', null, array('class' => 'control-label')) !!}
-                                    {!! Form::file('image', array('id' => 'input-image')) !!}
+                                    {!! Form::label('tipus', 'Tipus de patrocinador:', null, array('class' => 'control-label')) !!}
+                                    {!! Form::select('tipus', array('1' => 'Bronze', '2' => 'Silver', '3' => 'Bronze'), '1',array('class' => 'form-control')) !!}
                                 </div>
                             </div>
 
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                 <div class="form-group">
-                                    {!! Form::label('competicio', 'Integrants per grup: (En cas de ser individual deixar a 1)', null, array('class' => 'control-label')) !!}
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="icon-ellipsis-vertical"></i></span>
-                                        {!! Form::number('number', '1', array('class' => 'form-control', 'min' => '1', 'max' => '10', 'step' => '1')) !!}
-                                    </div>
+                                    {!! Form::label('arxiu', 'Logo del patrocinador:', null, array('class' => 'control-label')) !!}
+                                    {!! Form::file('image', array('id' => 'input-image')) !!}
                                 </div>
                             </div>
+
                         </div>
                         <div>
                             {!! Form::submit('Afegir', array( 'class' => 'btn btn-info')) !!}

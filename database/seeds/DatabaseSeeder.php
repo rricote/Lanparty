@@ -4,6 +4,7 @@ use App\Competicio;
 use App\Config;
 use App\Edicio;
 use App\Estat;
+use App\Patrocinador;
 use App\Rol;
 use App\User;
 use Illuminate\Database\Seeder;
@@ -132,6 +133,7 @@ class CompeticioTableSeeder extends Seeder {
         Competicio::create([
             'name' => 'League of Legends',
             'logo' => 'lol.png',
+            'imatge' => 'lol-grande.png',
             'number' => 5,
             'edicio_id' => 1
         ]);
@@ -139,6 +141,7 @@ class CompeticioTableSeeder extends Seeder {
         Competicio::create([
             'name' => 'Hearthstone',
             'logo' => 'hearthstone.ico',
+            'imatge' => 'hearthstone-grande.png',
             'number' => 1,
             'edicio_id' => 1
         ]);
@@ -146,6 +149,7 @@ class CompeticioTableSeeder extends Seeder {
         Competicio::create([
             'name' => 'Counter Strike - Global Offensive',
             'logo' => 'csgo.jpg',
+            'imatge' => 'hearthstone-grande.png',
             'number' => 1,
             'edicio_id' => 1
         ]);
@@ -153,6 +157,7 @@ class CompeticioTableSeeder extends Seeder {
         Competicio::create([
             'name' => 'FIFA 15',
             'logo' => 'fifa.ico',
+            'imatge' => 'hearthstone-grande.png',
             'number' => 1,
             'edicio_id' => 1
         ]);
@@ -160,6 +165,7 @@ class CompeticioTableSeeder extends Seeder {
         Competicio::create([
             'name' => 'Muntatge d\'ordinadors',
             'logo' => 'tools.png',
+            'imatge' => 'hearthstone-grande.png',
             'number' => 2,
             'edicio_id' => 1
         ]);
@@ -167,7 +173,36 @@ class CompeticioTableSeeder extends Seeder {
         Competicio::create([
             'name' => 'Programació',
             'logo' => 'java.png',
+            'imatge' => 'hearthstone-grande.png',
             'number' => 2,
+            'edicio_id' => 1
+        ]);
+    }
+
+}
+
+class PatrocinadorsTableSeeder extends Seeder {
+
+    public function run()
+    {
+        Patrocinador::create([
+            'name' => 'Intel',
+            'tipus' => 3,
+            'logo' => 'prova1.png',
+            'edicio_id' => 1
+        ]);
+
+        Patrocinador::create([
+            'name' => 'Twitch',
+            'tipus' => 1,
+            'logo' => 'prova2.png',
+            'edicio_id' => 1
+        ]);
+
+        Patrocinador::create([
+            'name' => 'Benq',
+            'tipus' => 2,
+            'logo' => 'prova3.png',
             'edicio_id' => 1
         ]);
     }

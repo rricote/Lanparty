@@ -9,7 +9,7 @@ class Competicionsusersgrups extends Model {
      *
      * @var string
      */
-    protected $table = 'grupsform';
+    protected $table = 'competicions_users_grups';
 
     /**
      * The attributes that are mass assignable.

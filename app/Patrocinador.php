@@ -18,7 +18,7 @@ class Patrocinador extends Model {
      */
     protected $fillable = ['name', 'tipus', 'logo','edicio_id'];
 
-    public function premis()
+    public function premi()
     {
         return $this->hasMany('App\Premi');
     }

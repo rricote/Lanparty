@@ -11,7 +11,7 @@
         <div class="box colored tournament-partner">
             <div class="row">
                 @foreach ($patrocinadorsgold as $p)
-                    <div class="col-xs-6"><a href=""><img src="{{ asset('images/patrocinadors/' . $p->logo)}}" class="img-responsive center-block" alt=""></a></div>
+                    <div class="col-xs-6"><a style="width: 200px;" href=""><img src="{{ asset('images/patrocinadors/' . $p->logo)}}" class="img-responsive center-block" alt=""></a></div>
                 @endforeach
             </div>
         </div>
@@ -23,7 +23,7 @@
         <div class="box colored tournament-partner">
             <div class="row">
                 @foreach ($patrocinadorssilver as $p)
-                    <div class="col-xs-6"><a href=""><img src="{{ asset('images/patrocinadors/' . $p->logo)}}" class="img-responsive center-block" alt=""></a></div>
+                    <div class="col-xs-6"><a href=""><img style="width: 200px;" src="{{ asset('images/patrocinadors/' . $p->logo)}}" class="img-responsive center-block" alt=""></a></div>
                 @endforeach
             </div>
         </div>
@@ -35,7 +35,7 @@
         <div class="box colored tournament-partner">
             <div class="row">
                 @foreach ($patrocinadorsbronze as $p)
-                    <div class="col-xs-6"><a href=""><img src="{{ asset('images/patrocinadors/' . $p->logo)}}" class="img-responsive center-block" alt=""></a></div>
+                    <div class="col-xs-6"><a href=""><img style="width: 200px;" src="{{ asset('images/patrocinadors/' . $p->logo)}}" class="img-responsive center-block" alt=""></a></div>
                 @endforeach
             </div>
         </div>

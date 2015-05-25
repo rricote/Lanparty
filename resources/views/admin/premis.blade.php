@@ -185,6 +185,13 @@
                                 </div>
                             </div>
 
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    {!! Form::label('patrocinador', 'Patrocinador:', null, array('class' => 'control-label')) !!}
+                                    {!! Form::select('patrocinador', $patrocinadors, null,array('class' => 'form-control')) !!}
+                                </div>
+                            </div>
+
                         </div>
                         <div>
                             {!! Form::submit('Afegir', array( 'class' => 'btn btn-info')) !!}

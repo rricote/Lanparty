@@ -16,7 +16,7 @@ class Competicio extends Model {
      *
      * @var array
      */
-    protected $fillable = ['name', 'logo', 'number', 'edicio_id'];
+    protected $fillable = ['name', 'logo', 'imatge', 'number', 'edicio_id'];
 
     public function competicionsusersgrups()
     {

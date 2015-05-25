@@ -62,6 +62,7 @@
                                     <th>Nom</th>
                                     <th>Integrants grup</th>
                                     <th>Logo</th>
+                                    <th>Imatge gran</th>
                                     <th class="hidden-480">Edició</th>
                                     <th>Accions</th>
                                 </tr>
@@ -87,6 +88,10 @@
 
                                         <td>
                                             <img style="max-width: 40px;" src="{{ url('icons/competicions/' . $c->logo) }}" alt="logo{{ $c->name }}">
+                                        </td>
+
+                                        <td>
+                                            <img style="max-width: 100px;" src="{{ url('images/competicions/' . $c->imatge) }}" alt="logo{{ $c->name }}">
                                         </td>
 
                                         <td class="hidden-480">

@@ -26,8 +26,8 @@ class PublicController extends Controller {
 	public function index()
 	{
         $data = $competi = array();
-
-        $competicions = Competicio::all();
+        $config = Config::find(1);
+        $competicions = Competicio::where('edicio_id', '=', $config->edicio_id)->get();
 
         if (Auth::guest()){
             foreach($competicions as $c){
@@ -61,8 +61,45 @@ class PublicController extends Controller {
 
     public function competicions()
     {
-        $data = array();
+        $data = $competicions = array();
+        $config = Config::find(1);
+        $compi = Competicio::where('edicio_id', '=', $config->edicio_id)->get();
+        $i = 0;
+        foreach($compi as $c){
+            $competicions[$i]['id'] = $c->id;
+            $competicions[$i]['name'] = $c->name;
+            $competicions[$i]['logo'] = $c->logo;
+            //$competicions[$i]['number'] = $c->number;
+            $competicions[$i++]['count'] = Competicionsusersgrups::where('competicio_id', '=', $c->id)->count();
+        }
+
+        $data['competicions'] = $competicions;
+
         return view('web.competicions', $data);
+    }
+
+    public function competicio($id)
+    {
+        $data = array();
+        $config = Config::find(1);
+        $data['competicio'] = Competicio::find($id);
+        /*
+        $config = Config::find(1);
+        $compi = Competicio::where('edicio_id', '=', $config->edicio_id)->get();
+        $i = 0;
+        foreach($compi as $c){
+            $competicions[$i]['id'] = $c->id;
+            $competicions[$i]['name'] = $c->name;
+            $competicions[$i]['logo'] = $c->logo;
+            //$competicions[$i]['number'] = $c->number;
+            $competicions[$i++]['count'] = Competicionsusersgrups::where('competicio_id', '=', $c->id)->count();
+        }
+
+        $data['competicions'] = $competicions;//*/
+
+        $data['patrocinadors'] = Patrocinador::where('tipus', '=', '3')->where('edicio_id', '=', $config->edicio_id)->get();
+
+        return view('web.competicio', $data);
     }
 
     public function programa()
