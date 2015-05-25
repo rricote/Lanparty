@@ -14,11 +14,29 @@
 /*
  * Public
  */
+use App\Competicio;
+use App\Competicionsusersgrups;
 use App\Config;
 
 View::composer(array('web.app', 'admin.app'), function($view)
 {
     $view->with('config', Config::find(1));
+
+});
+
+View::composer(array('web.sidebar'), function($view)
+{
+    $config = Config::find(1);
+    $compi = Competicio::where('edicio_id', '=', $config->edicio_id)->get();
+    $i = 0;
+    foreach($compi as $c){
+        $competicions[$i]['id'] = $c->id;
+        $competicions[$i]['name'] = $c->name;
+        $competicions[$i]['logo'] = $c->logo;
+        $competicions[$i++]['count'] = Competicionsusersgrups::where('competicio_id', '=', $c->id)->count();
+    }
+    $view->with('competicions', $competicions);
+    $view->with('competicio', Competicio::where('data_inici', '>', date('Y-m-d H:i:s'))->orderby('data_inici', 'asc')->first());
 
 });
 

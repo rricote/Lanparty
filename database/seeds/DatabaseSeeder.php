@@ -135,6 +135,8 @@ class CompeticioTableSeeder extends Seeder {
             'logo' => 'lol.png',
             'imatge' => 'lol-grande.png',
             'number' => 5,
+            'link' => '',
+            'data_inici' => date('Y-m-d H:i:s'),
             'edicio_id' => 1
         ]);
 
@@ -143,6 +145,8 @@ class CompeticioTableSeeder extends Seeder {
             'logo' => 'hearthstone.ico',
             'imatge' => 'hearthstone-grande.png',
             'number' => 1,
+            'link' => '',
+            'data_inici' => date('Y-m-d H:i:s'),
             'edicio_id' => 1
         ]);
 
@@ -151,6 +155,8 @@ class CompeticioTableSeeder extends Seeder {
             'logo' => 'csgo.jpg',
             'imatge' => 'hearthstone-grande.png',
             'number' => 1,
+            'link' => '',
+            'data_inici' => date('Y-m-d H:i:s'),
             'edicio_id' => 1
         ]);
 
@@ -159,6 +165,8 @@ class CompeticioTableSeeder extends Seeder {
             'logo' => 'fifa.ico',
             'imatge' => 'hearthstone-grande.png',
             'number' => 1,
+            'link' => '',
+            'data_inici' => date('Y-m-d H:i:s'),
             'edicio_id' => 1
         ]);
 
@@ -167,6 +175,8 @@ class CompeticioTableSeeder extends Seeder {
             'logo' => 'tools.png',
             'imatge' => 'hearthstone-grande.png',
             'number' => 2,
+            'link' => '',
+            'data_inici' => date('Y-m-d H:i:s'),
             'edicio_id' => 1
         ]);
 
@@ -175,6 +185,8 @@ class CompeticioTableSeeder extends Seeder {
             'logo' => 'java.png',
             'imatge' => 'hearthstone-grande.png',
             'number' => 2,
+            'link' => '',
+            'data_inici' => date('Y-m-d H:i:s'),
             'edicio_id' => 1
         ]);
     }

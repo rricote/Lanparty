@@ -13,16 +13,18 @@
                 <div class="col-xs-9">
                     <h2>{{ $competicio->name }}</h2>
                     <p class="date">March 12-15, 2015. Tortosa, Ebreland.</p>
+                    @if(!Auth::guest())
                     <a href="" class="btn btn-primary btn-lg" style="margin-right: 5px;">Inscriure's</a>
-                    <a href="" class="btn btn-inverse btn-lg">Lloc oficial</a>
+                    @endif
+                    <a href="{{ $competicio->link }}" class="btn btn-inverse btn-lg">Lloc oficial</a>
                 </div>
 
                 <div class="col-xs-3">
-                    <img style="width: 250px;" src="{{ url('images/competicions/' . $competicio->imatge) }}" class="img-responsive center-block" alt="Competicio{{ $competicio->id }}">
+                    <img style="width: 300px;" src="{{ url('images/competicions/' . $competicio->imatge) }}" class="img-responsive center-block" alt="Competicio{{ $competicio->id }}">
                 </div>
             </div>
             <p class="countdown-info">El torneig comença en:</p>
-            <div class="countdown"></div>
+            <div class="countdown countdowntorneig"></div>
         </div>
         <!-- MATCH DETAIL - END -->
 
@@ -264,4 +266,7 @@
 <!-- ==========================
     CONTENT - END
 =========================== -->
+<script>
+    var countdowntimetorneig = '{{ str_replace("-", "/", $competicio->data_inici) }}';
+</script>
 @endsection

@@ -117,7 +117,7 @@
             <div class="pull-left">
                 <h2><a href="#"><span class="text-primary">LAN</span> Party</a></h2>
                 <p class="countdown-info">Institut de l'ebre 15-16 de maig de 2015, queda:</p>
-                <div class="countdown"></div>
+                <div class="countdown countdowninici"></div>
             </div>
         </div>
     </div>
@@ -168,5 +168,12 @@
     <script src="{{ asset('/js/jquery.countdown.min.js') }}"></script>
     <script src="{{ asset('/js/custom.js') }}"></script>
     <script src="{{ asset('js/spin.js') }}"></script>
+
+    <!-- Dynamic charge -->
+    @if (isset($js))
+        @foreach($js as $j)
+            <script src="{{ asset('js/'. $j . '.js')}}"></script>
+        @endforeach
+    @endif
 </body>
 </html>
