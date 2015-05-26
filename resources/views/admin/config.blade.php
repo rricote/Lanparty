@@ -36,125 +36,15 @@
         <div class="page-content">
             <div class="page-header">
                 <h1>
-                    Competicions
+                    Configuració del sistema
                 </h1>
             </div>
             <!-- /.page-header -->
-
+            <pre><?php print_r($config);?></pre>
             <div class="row">
                 <div class="col-xs-12">
                     <!-- PAGE CONTENT BEGINS -->
                     <div class="col-xs-12">
-                        <div class="table-header">
-                            Llistat de totes les competicions
-                        </div>
-
-                        <div class="table-responsive">
-                            <table id="taula-competicions" class="table table-striped table-bordered table-hover">
-                                <thead>
-                                <tr>
-                                    <th class="center">
-                                        <label>
-                                            <input type="checkbox" class="ace" />
-                                            <span class="lbl"></span>
-                                        </label>
-                                    </th>
-                                    <th>Nom</th>
-                                    <th>Integrants grup</th>
-                                    <th>Logo</th>
-                                    <th class="hidden-480">Edició</th>
-                                    <th>Accions</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach ($competicions as $c)
-                                    <tr>
-                                        <td class="center">
-                                            <label>
-                                                <input type="checkbox" class="ace" />
-                                                <span class="lbl"></span>
-                                            </label>
-                                        </td>
-
-                                        <td>
-                                            {{ $c->name }}
-                                        </td>
-
-
-                                        <td>
-                                            {{ $c->number }}
-                                        </td>
-
-                                        <td>
-                                            <img style="max-width: 40px;" src="{{ url('icons/competicions/' . $c->logo) }}" alt="logo{{ $c->name }}">
-                                        </td>
-
-                                        <td class="hidden-480">
-                                            {{ $c->edicio->name }}
-                                        </td>
-
-                                        <td>
-                                            <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                <a class="blue" href="#veure" data-toggle="modal">
-                                                    <i class="icon-zoom-in bigger-130"></i>
-                                                </a>
-
-                                                <a class="green" href="#editar" data-toggle="modal">
-                                                    <i class="icon-pencil bigger-130"></i>
-                                                </a>
-
-                                                <a id="{{ $c->id }}" class="red borrar">
-                                                    <i class="icon-trash bigger-130"></i>
-                                                </a>
-                                            </div>
-
-                                            <div class="visible-xs visible-sm hidden-md hidden-lg">
-                                                <div class="inline position-relative">
-                                                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-                                                        <i class="icon-caret-down icon-only bigger-120"></i>
-                                                    </button>
-
-                                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                        <li>
-                                                            <a href="#veure" class="tooltip-info" data-rel="tooltip" title="View" data-toggle="modal">
-                                                                <span class="blue">
-                                                                    <i class="icon-zoom-in bigger-120"></i>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a href="#editar" class="tooltip-success" data-rel="tooltip" title="Edit" data-toggle="modal">
-                                                                <span class="green">
-                                                                    <i class="icon-edit bigger-120"></i>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a id="{{ $c->id }}" class="tooltip-error borrar" data-rel="tooltip" title="Delete">
-                                                                <span class="red">
-                                                                    <i class="icon-trash bigger-120"></i>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12">
-                        <h2 class="header blue">
-                            Afegir Competició
-                        </h2>
                         @if (count($errors) > 0)
                             <div class="col-xs-12">
                                 <div class="alert alert-danger">
@@ -176,39 +66,54 @@
                             </div>
                         @endif
 
-                        {!! Form::open(array('url' => 'admin/competicions/afegir', 'files'=>true)) !!}
+                        {!! Form::open(array('url' => 'admin/config/editar')) !!}
 
                         <div class="col-xs-12">
 
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                 <div class="form-group">
-                                    {!! Form::label('competicio', 'Nom de la competició:', null, array('class' => 'control-label')) !!}
+                                    {!! Form::label('patrocinador', 'Patrocinador:', null, array('class' => 'control-label')) !!}
+                                    {!! Form::select('patrocinador', $edicions, $config['edicio'], array('class' => 'form-control')) !!}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    {!! Form::label('data', 'Data d\'inici de la edició', null, array('class' => 'control-label')) !!}
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="icon-edit"></i></span>
-                                        {!! Form::text('name', null, array('required', 'class' => 'form-control', 'placeholder' => 'Nom')) !!}
+                                        {!! Form::text('datepicker', $config['date'], array('id' => 'datepicker', 'type' => 'text', 'required', 'data-date-format' => 'dd-mm-yyyy', 'class' => 'form-control date-picker')) !!}
+                                        <span class="input-group-addon">
+                                            <i class="icon-calendar bigger-110"></i>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                 <div class="form-group">
-                                    {!! Form::label('arxiu', 'Nom de la competició:', null, array('class' => 'control-label')) !!}
-                                    {!! Form::file('image', array('id' => 'input-image')) !!}
+                                    {!! Form::label('hora', 'Hora d\'inici de la edició', null, array('class' => 'control-label')) !!}
+                                    <div class="input-group bootstrap-timepicker">
+                                        {!! Form::text('timepicker', $config['time'], array('id' => 'timepicker', 'type' => 'text', 'required',  'class' => 'form-control')) !!}
+                                        <span class="input-group-addon">
+                                            <i class="icon-time bigger-110"></i>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                 <div class="form-group">
-                                    {!! Form::label('competicio', 'Integrants per grup: (En cas de ser individual deixar a 1)', null, array('class' => 'control-label')) !!}
+                                    {!! Form::label('email', 'E-mail de contacte:', null, array('class' => 'control-label')) !!}
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="icon-ellipsis-vertical"></i></span>
-                                        {!! Form::number('number', '1', array('class' => 'form-control', 'min' => '1', 'max' => '10', 'step' => '1')) !!}
+                                        <span class="input-group-addon">@</span>
+                                        {!! Form::email('email', $config['email'], array('required', 'class' => 'form-control', 'placeholder' => 'E-mail')) !!}
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                         <div>
-                            {!! Form::submit('Afegir', array( 'class' => 'btn btn-info')) !!}
+                            {!! Form::submit('Modificar', array( 'class' => 'btn btn-info')) !!}
                         </div>
 
                         {!! Form::close() !!}

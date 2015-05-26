@@ -88,7 +88,13 @@
                 <b class="arrow icon-angle-down"></b>
             </a>
 
-            <ul class="submenu" @if ($menu == 'tokens')style="display: block;"@endif>
+            <ul class="submenu" @if ($menu == 'tokens' || $menu == 'config')style="display: block;"@endif>
+                <li @if ($menu == 'config')class="active"@endif>
+                    <a href="{{ url('/admin/config') }}">
+                        <i class="icon-double-angle-right"></i>
+                        Configuració del sistema
+                    </a>
+                </li>
                 <li @if ($menu == 'tokens')class="active"@endif>
                     <a href="{{ url('/admin/tokens') }}">
                         <i class="icon-double-angle-right"></i>

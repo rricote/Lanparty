@@ -16,7 +16,7 @@
                     @if(!Auth::guest())
                     <a href="" class="btn btn-primary btn-lg" style="margin-right: 5px;">Inscriure's</a>
                     @endif
-                    <a href="{{ $competicio->link }}" class="btn btn-inverse btn-lg">Lloc oficial</a>
+                    <a target="_blank" href="{{ $competicio->link }}" class="btn btn-inverse btn-lg">Lloc oficial</a>
                 </div>
 
                 <div class="col-xs-3">

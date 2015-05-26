@@ -119,7 +119,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\AdminMid
 
     Route::get('/config', 'AdminController@config');
 
-    Route::post('/config/editar', 'AdminController@configEditar');
+    Route::post('/config/editar', 'AdminController@configeditar');
+
+    Route::get('/assistencies', 'AdminController@assistencies');
 
     Route::get('/tokens', 'AdminController@tokens');
 

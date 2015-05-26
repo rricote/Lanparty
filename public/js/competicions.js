@@ -1,17 +1,5 @@
 jQuery(function($) {
     $('#taula-competicions').dataTable();
-    $('#input-image').ace_file_input({
-        no_file: 'Cap arxiu ...',
-        btn_choose: 'Elegeix',
-        btn_change: 'Canvia',
-        droppable: false,
-        onchange: null,
-        thumbnail: false //| true | large
-        //whitelist:'gif|png|jpg|jpeg'
-        //blacklist:'exe|php'
-        //onchange:''
-        //
-    });
     $('.borrar').click(function(){
         var tr = $(this).parent().parent().parent();
         var link = url;
@@ -67,4 +55,42 @@ jQuery(function($) {
             }
         });
     });
+});
+
+$('#datepicker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
+    $(this).prev().focus();
+});
+
+$('#timepicker').timepicker({
+    minuteStep: 1,
+    showSeconds: true,
+    showMeridian: false
+}).next().on(ace.click_event, function(){
+    $(this).prev().focus();
+});
+
+$('#input-image').ace_file_input({
+    no_file: 'Cap arxiu ...',
+    btn_choose: 'Elegeix',
+    btn_change: 'Canvia',
+    droppable: false,
+    onchange: null,
+    thumbnail: false //| true | large
+    //whitelist:'gif|png|jpg|jpeg'
+    //blacklist:'exe|php'
+    //onchange:''
+    //
+});
+
+$('#input-imatge').ace_file_input({
+    no_file: 'Cap arxiu ...',
+    btn_choose: 'Elegeix',
+    btn_change: 'Canvia',
+    droppable: false,
+    onchange: null,
+    thumbnail: false //| true | large
+    //whitelist:'gif|png|jpg|jpeg'
+    //blacklist:'exe|php'
+    //onchange:''
+    //
 });

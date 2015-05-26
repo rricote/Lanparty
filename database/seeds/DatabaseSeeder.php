@@ -153,7 +153,7 @@ class CompeticioTableSeeder extends Seeder {
         Competicio::create([
             'name' => 'Counter Strike - Global Offensive',
             'logo' => 'csgo.jpg',
-            'imatge' => 'hearthstone-grande.png',
+            'imatge' => 'Counter-Strike_Global_Offensive.jpg',
             'number' => 1,
             'link' => '',
             'data_inici' => date('Y-m-d H:i:s'),
@@ -163,7 +163,7 @@ class CompeticioTableSeeder extends Seeder {
         Competicio::create([
             'name' => 'FIFA 15',
             'logo' => 'fifa.ico',
-            'imatge' => 'hearthstone-grande.png',
+            'imatge' => 'fifa-grande.jpg',
             'number' => 1,
             'link' => '',
             'data_inici' => date('Y-m-d H:i:s'),
@@ -173,7 +173,7 @@ class CompeticioTableSeeder extends Seeder {
         Competicio::create([
             'name' => 'Muntatge d\'ordinadors',
             'logo' => 'tools.png',
-            'imatge' => 'hearthstone-grande.png',
+            'imatge' => 'montaje.png',
             'number' => 2,
             'link' => '',
             'data_inici' => date('Y-m-d H:i:s'),
@@ -183,7 +183,7 @@ class CompeticioTableSeeder extends Seeder {
         Competicio::create([
             'name' => 'Programació',
             'logo' => 'java.png',
-            'imatge' => 'hearthstone-grande.png',
+            'imatge' => 'coder.png',
             'number' => 2,
             'link' => '',
             'data_inici' => date('Y-m-d H:i:s'),

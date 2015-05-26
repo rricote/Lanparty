@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Assistencia;
 use App\Edicio;
 use App\Estat;
 use App\Grup;
@@ -74,6 +75,8 @@ class AdminController extends Controller {
         $data['js'] = array(
             'jquery.dataTables.min',
             'jquery.dataTables.bootstrap',
+            'bootstrap-datepicker.min',
+            'bootstrap-timepicker.min',
             'competicions'
         );
         return view('admin.competicions', $data);
@@ -92,8 +95,8 @@ class AdminController extends Controller {
             return Redirect::to('admin/competicions')
                 ->withErrors($validator);
         } else {
-            if(Input::hasFile('image')) {
-                if (Input::file('image')->isValid()) {
+            if(Input::hasFile('image') && Input::hasFile('imatge')) {
+                if (Input::file('image')->isValid() && Input::file('imatge')->isValid()) {
 
                     $destinationPath = 'icons/competicions';
 
@@ -103,18 +106,30 @@ class AdminController extends Controller {
 
                     Input::file('image')->move($destinationPath, $fileName);
 
+                    $destinationPath = 'images/competicions';
+
+                    $extension = Input::file('imatge')->getClientOriginalExtension();
+
+                    $fileName2 = rand(11111, 99999) . '.' . $extension;
+
+                    Input::file('imatge')->move($destinationPath, $fileName2);
+
                     $config = Config::find(1);
                     $number = Input::get('number');
                     if($number > 10)
                         $number = 10;
 
+                    list($dia,$mes,$any) = explode('-',Input::get('datepicker'));
+
                     Competicio::create([
                         'name' => Input::get('name'),
                         'logo' => $fileName,
+                        'imatge' => $fileName2,
                         'number' => $number,
+                        'link' => Input::get('link'),
+                        'data_inici' => $any . '-' . $mes . '-' . $dia . ' ' . Input::get('timepicker'),
                         'edicio_id' => $config->edicio_id
                     ]);
-
                     return Redirect::to('admin/competicions')
                         ->withFlashMessage('Competició creada correctament');
 
@@ -443,14 +458,41 @@ class AdminController extends Controller {
         }
     }
 
+    public function assistencies()
+    {
+        $data = array();
+        $data['menu'] = 'assistencies';
+        $data['js'] = array(
+            'jquery.dataTables.min',
+            'jquery.dataTables.bootstrap',
+            'assistencies'
+        );
+        return view('admin.assistencies', $data);
+    }
+
     public function config()
     {
         $data = array();
         $data['menu'] = 'config';
-        $data['config'] = Config::all();
+        $config = Config::first();
+
+        $edicions = Edicio::all();
+        foreach($edicions as $e)
+            $data['edicions'][$e->id] = $e->name;
+
+        list($date, $time) = explode(' ',$config->data_inici);
+        list($any, $mes, $dia) = explode('-', $date);
+
+        $data['config']['date'] = $dia . '-' . $mes . '-' . $any;
+        $data['config']['time'] = $time;
+        $data['config']['email'] = $config->email;
+        $data['config']['edicio'] = $config->edicio_id;
+
         $data['js'] = array(
             'jquery.dataTables.min',
             'jquery.dataTables.bootstrap',
+            'bootstrap-datepicker.min',
+            'bootstrap-timepicker.min',
             'config'
         );
         return view('admin.config', $data);
@@ -459,53 +501,26 @@ class AdminController extends Controller {
     public function configEditar()
     {
         $rules = array(
-            'name'    => 'required',
-            'number'    => 'required'
+            'patrocinador'    => 'required',
+            'email'    => 'required',
+            'datepicker'    => 'required',
+            'timepicker'    => 'required'
         );
-
         $validator = Validator::make(Input::all(), $rules);
-
         if ($validator->fails()) {
             return Redirect::to('admin/config')
                 ->withErrors($validator);
         } else {
-            if(Input::hasFile('image')) {
-                if (Input::file('image')->isValid()) {
+            list($dia,$mes,$any) = explode('-',Input::get('datepicker'));
+            Config::create([
+                'name' => Input::get('name'),
+                'email' => Input::get('email'),
+                'data_inici' => $any . '-' . $mes . '-' . $dia . ' ' . Input::get('timepicker'),
+                'edicio_id' => Input::get('patrocinador')
+            ]);
+            return Redirect::to('admin/config')
+                ->withFlashMessage('Competició creada correctament');
 
-                    $destinationPath = 'icons/config';
-
-                    $extension = Input::file('image')->getClientOriginalExtension();
-
-                    $fileName = rand(11111, 99999) . '.' . $extension;
-
-                    Input::file('image')->move($destinationPath, $fileName);
-
-                    $config = Config::find(1);
-                    $number = Input::get('number');
-                    if($number > 10)
-                        $number = 10;
-
-                    Config::create([
-                        'name' => Input::get('name'),
-                        'logo' => $fileName,
-                        'number' => $number,
-                        'edicio_id' => $config->edicio_id
-                    ]);
-
-                    return Redirect::to('admin/config')
-                        ->withFlashMessage('Competició creada correctament');
-
-                } else {
-
-                    return Redirect::to('admin/config')
-                        ->withInput()
-                        ->withFlashMessage('Error al pujar l\'arxiu');
-                }
-            } else {
-                return Redirect::to('admin/config')
-                    ->withInput()
-                    ->withFlashMessage('No has sel·leccionat cap arxiu');
-            }
         }
     }
 

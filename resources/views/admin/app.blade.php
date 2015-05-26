@@ -49,6 +49,8 @@
     <link rel="stylesheet" href="{{ asset('css/dataTables.colReorder.min.css')}}" />
     <link rel="stylesheet" href="{{ asset('css/dataTables.colvis.jqueryui.css')}}" />
     <link rel="stylesheet" href="{{ asset('css/dataTables.colVis.min.css')}}" />
+    <link rel="stylesheet" href="{{ asset('css/datepicker.css')}}" />
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-timepicker.css')}}" />
     <!-- ==========================
     	JS
     =========================== -->

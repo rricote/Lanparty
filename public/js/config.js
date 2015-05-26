@@ -1,15 +1,12 @@
-jQuery(function($) {
-    $('#taula-config').dataTable();
-    $('#input-image').ace_file_input({
-        no_file: 'Cap arxiu ...',
-        btn_choose: 'Elegeix',
-        btn_change: 'Canvia',
-        droppable: false,
-        onchange: null,
-        thumbnail: false //| true | large
-        //whitelist:'gif|png|jpg|jpeg'
-        //blacklist:'exe|php'
-        //onchange:''
-        //
-    });
+
+$('#datepicker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
+    $(this).prev().focus();
+});
+
+$('#timepicker').timepicker({
+    minuteStep: 1,
+    showSeconds: true,
+    showMeridian: false
+}).next().on(ace.click_event, function(){
+    $(this).prev().focus();
 });
