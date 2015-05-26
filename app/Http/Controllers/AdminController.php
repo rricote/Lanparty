@@ -512,7 +512,7 @@ class AdminController extends Controller {
                 ->withErrors($validator);
         } else {
             list($dia,$mes,$any) = explode('-',Input::get('datepicker'));
-            Config::create([
+            Config::find(1)->update([
                 'name' => Input::get('name'),
                 'email' => Input::get('email'),
                 'data_inici' => $any . '-' . $mes . '-' . $dia . ' ' . Input::get('timepicker'),

@@ -29,6 +29,7 @@ View::composer(array('web.sidebar'), function($view)
     $config = Config::find(1);
     $compi = Competicio::where('edicio_id', '=', $config->edicio_id)->get();
     $i = 0;
+    $competicions = array();
     foreach($compi as $c){
         $competicions[$i]['id'] = $c->id;
         $competicions[$i]['name'] = $c->name;
@@ -36,7 +37,7 @@ View::composer(array('web.sidebar'), function($view)
         $competicions[$i++]['count'] = Competicionsusersgrups::where('competicio_id', '=', $c->id)->count();
     }
     $view->with('competicions', $competicions);
-    $view->with('competicio', Competicio::where('data_inici', '>', date('Y-m-d H:i:s'))->orderby('data_inici', 'asc')->first());
+    $view->with('competicio', Competicio::where('edicio_id', '=', $config->edicio_id)->where('data_inici', '>', date('Y-m-d H:i:s'))->orderby('data_inici', 'asc')->first());
 
 });
 

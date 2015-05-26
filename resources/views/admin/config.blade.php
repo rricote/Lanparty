@@ -40,7 +40,6 @@
                 </h1>
             </div>
             <!-- /.page-header -->
-            <pre><?php print_r($config);?></pre>
             <div class="row">
                 <div class="col-xs-12">
                     <!-- PAGE CONTENT BEGINS -->

@@ -95,20 +95,21 @@
                                 Pagina principal
                             </a>
                         </li>
+
                         <li>
-                            <a href="#">
+                            <a href="{{ url('/admin/config') }}">
                                 <i class="icon-cog"></i>
                                 Configuració
                             </a>
                         </li>
-
+                        <!--
                         <li>
                             <a href="#">
                                 <i class="icon-user"></i>
                                 Perfil
                             </a>
                         </li>
-
+                        -->
                         <li class="divider"></li>
 
                         <li>
