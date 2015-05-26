@@ -106,7 +106,7 @@ class ConfigTableSeeder extends Seeder {
 
         Config::create([
             'data_inici' => date('Y-m-d H:i:s'),
-            'email' => 'lanparty@iesebre.com;email2@iesebre.com',
+            'email' => 'lanparty@iesebre.com',
             'edicio_id' => 1
         ]);
     }

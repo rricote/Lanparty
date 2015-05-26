@@ -67,19 +67,98 @@ class AdminController extends Controller {
         return view('admin.usuaris', $data);
     }
 
-    public function competicions()
+    public function competicions($id = null)
     {
         $data = array();
+        $data['id'] = $id;
         $data['menu'] = 'competicions';
-        $data['competicions'] = Competicio::all();
-        $data['js'] = array(
-            'jquery.dataTables.min',
-            'jquery.dataTables.bootstrap',
-            'bootstrap-datepicker.min',
-            'bootstrap-timepicker.min',
-            'competicions'
-        );
+        if(isset($id)){
+            $data['competicio'] = Competicio::find($id);
+            $data['js'] = array(
+                'bootstrap-datepicker.min',
+                'bootstrap-timepicker.min',
+                'competicions'
+            );
+        }else {
+            $data['competicions'] = Competicio::all();
+            $data['js'] = array(
+                'jquery.dataTables.min',
+                'jquery.dataTables.bootstrap',
+                'bootstrap-datepicker.min',
+                'bootstrap-timepicker.min',
+                'competicions'
+            );
+        }
         return view('admin.competicions', $data);
+    }
+
+    public function competicionsUpdate($id)
+    {
+        $rules = array(
+            'name'    => 'required',
+            'number'    => 'required'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('admin/competicions')
+                ->withErrors($validator);
+        } else {
+            if(Input::hasFile('image') && Input::hasFile('imatge')) {
+                if (Input::file('image')->isValid() && Input::file('imatge')->isValid()) {
+                    /*
+                    $competicio = Competicio::find($id);
+
+                    File::delete('icons/competicions/' . $competicio->logo);
+                    */
+                    $destinationPath = 'icons/competicions';
+
+                    $extension = Input::file('image')->getClientOriginalExtension();
+
+                    $fileName = rand(11111, 99999) . '.' . $extension;
+
+                    Input::file('image')->move($destinationPath, $fileName);
+
+                    $destinationPath = 'images/competicions';
+
+                    $extension = Input::file('imatge')->getClientOriginalExtension();
+
+                    $fileName2 = rand(11111, 99999) . '.' . $extension;
+
+                    Input::file('imatge')->move($destinationPath, $fileName2);
+
+                    $config = Config::find(1);
+                    $number = Input::get('number');
+                    if($number > 10)
+                        $number = 10;
+
+                    list($dia,$mes,$any) = explode('-',Input::get('datepicker'));
+
+                    Competicio::find($id)->update([
+                        'name' => Input::get('name'),
+                        'logo' => $fileName,
+                        'imatge' => $fileName2,
+                        'number' => $number,
+                        'link' => Input::get('link'),
+                        'data_inici' => $any . '-' . $mes . '-' . $dia . ' ' . Input::get('timepicker'),
+                        'edicio_id' => $config->edicio_id
+                    ]);
+                    return Redirect::to('admin/competicions')
+                        ->withFlashMessage('Competició creada correctament');
+
+                } else {
+
+                    return Redirect::to('admin/competicions')
+                        ->withInput()
+                        ->withFlashMessage('Error al pujar l\'arxiu');
+                }
+            } else {
+                return Redirect::to('admin/competicions')
+                    ->withInput()
+                    ->withFlashMessage('No has sel·leccionat cap arxiu');
+            }
+        }
     }
 
     public function competicionsAfegir()
