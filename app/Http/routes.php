@@ -55,6 +55,8 @@ Route::get('competicions', 'PublicController@competicions');
 
 Route::get('competicio/{id}', 'PublicController@competicio');
 
+Route::post('competicio/multiple/afegir/{id}', 'PublicController@competicioMultipleAfegir');
+
 Route::get('cartell', 'PublicController@cartell');
 
 Route::get('programa', 'PublicController@programa');

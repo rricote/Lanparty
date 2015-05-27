@@ -14,7 +14,43 @@
                     <h2>{{ $competicio->name }}</h2>
                     <p class="date">March 12-15, 2015. Tortosa, Ebreland.</p>
                     @if(!Auth::guest())
-                    <a href="" class="btn btn-primary btn-lg" style="margin-right: 5px;">Inscriure's</a>
+                        <a class="btn btn-primary btn-lg" data-toggle="modal" data-target="#inscriures" style="margin-right: 5px;">Inscriure's</a>
+                        <!-- Modal -->
+                        <div class="modal fade" id="inscriures" tabindex="-1" role="dialog" aria-labelledby="inscriures" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Inscripció a {{ $competicio->name }}</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                                            <ul id="myTab" class="nav nav-tabs" role="tablist">
+                                                <li role="presentation" class="active"><a href="#grup" id="home-tab" role="tab" data-toggle="tab" aria-controls="grup" aria-expanded="true">Crear un grup</a></li>
+                                                <li role="presentation" class=""><a href="#invitacion" role="tab" id="profile-tab" data-toggle="tab" aria-controls="invitacion" aria-expanded="true">Apuntar-se a un existent</a></li>
+                                            </ul>
+                                            <div id="myTabContent" class="tab-content">
+                                                <div role="tabpanel" class="tab-pane fade active in" id="grup" aria-labelledby="home-tab">
+                                                    {!! Form::open(array('url' => 'competicio/multiple/afegir/' . $competicio->id)) !!}
+                                                        <div class="form-group" style="max-width: 200px">
+                                                            <label style="margin-left: 25px;" for="nom">Nom del grup</label>
+                                                            <input style="margin-left: 50px;" type="text" class="form-control" id="nomgrup" name="nomgrup">
+                                                        </div>
+                                                        {!! Form::submit('Apuntar-se', array( 'class' => 'btn btn-primary')) !!}
+                                                    {!! Form::close() !!}
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane fade" id="invitacion" aria-labelledby="profile-tab">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Tancar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     @endif
                     <a target="_blank" href="{{ $competicio->link }}" class="btn btn-inverse btn-lg">Lloc oficial</a>
                 </div>
