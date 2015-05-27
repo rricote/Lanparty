@@ -56,6 +56,10 @@ class PublicController extends Controller {
     public function premis()
     {
         $data = array();
+        $config = Config::find(1);
+        $data['patrocinadorsgold'] = Patrocinador::where('edicio_id', '=', $config->edicio_id)->where('tipus', '=', '3')->get();
+        $data['patrocinadorssilver'] = Patrocinador::where('edicio_id', '=', $config->edicio_id)->where('tipus', '=', '2')->get();
+        $data['patrocinadorsbronze'] = Patrocinador::where('edicio_id', '=', $config->edicio_id)->where('tipus', '=', '1')->get();
         return view('web.premis', $data);
     }
 
@@ -109,9 +113,10 @@ class PublicController extends Controller {
     public function colaboradors()
     {
         $data = array();
-        $data['patrocinadorsgold'] = Patrocinador::where('tipus', '=', '3')->get();
-        $data['patrocinadorssilver'] = Patrocinador::where('tipus', '=', '2')->get();
-        $data['patrocinadorsbronze'] = Patrocinador::where('tipus', '=', '1')->get();
+        $config = Config::find(1);
+        $data['patrocinadorsgold'] = Patrocinador::where('edicio_id', '=', $config->edicio_id)->where('tipus', '=', '3')->get();
+        $data['patrocinadorssilver'] = Patrocinador::where('edicio_id', '=', $config->edicio_id)->where('tipus', '=', '2')->get();
+        $data['patrocinadorsbronze'] = Patrocinador::where('edicio_id', '=', $config->edicio_id)->where('tipus', '=', '1')->get();
         return view('web.colaboradors', $data);
     }
 

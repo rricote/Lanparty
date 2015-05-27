@@ -82,6 +82,7 @@ class CompeticionsController extends Controller {
         $competicio = Competicio::find($id);
 
         File::delete('icons/competicions/' . $competicio->logo);
+        File::delete('images/competicions/' . $competicio->imatge);
 
         Competicio::destroy($id);
 

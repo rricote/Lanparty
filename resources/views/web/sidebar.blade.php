@@ -23,7 +23,7 @@
                         list($any, $mes, $dia) = explode('-', $date);
                         list($hora, $minuts, $segons) = explode(':', $time);
                         ?>
-                        <div class="date">{{ $dia . ' - ' .  $mes . ' - ' . $any . ' a les ' . $hora . ':' . $minuts}}</div>
+                        <div class="date">{{ $dia . '-' .  $mes . '-' . $any . ' a les ' . $hora . ':' . $minuts}}</div>
                         <div class="text-center"><a href="{{ url('competicio/' . $competicio->id) }}" class="btn btn-primary">Més informació</a></div>
                     </div>
                     @else
@@ -42,7 +42,7 @@
 
                     <ul class="nav nav-sidebar">
                         @foreach($competicions as $c)
-                            <li><a href="{{ url('competicio/' . $c['id']) }}"><img style="max-width: 40px;" src="{{asset('/icons/competicions/' . $c['logo'])}}" alt="competicio{{ $c['id'] }}">    {{ $c['name'] }}<span>{{ $c['count'] }}</span></a></li>
+                            <li><a href="{{ url('competicio/' . $c['id']) }}"><img style="width: 35px;" src="{{asset('/icons/competicions/' . $c['logo'])}}" alt="competicio{{ $c['id'] }}">    {{ $c['name'] }}<span>{{ $c['count'] }}</span></a></li>
                         @endforeach
                     </ul>
                 </div>

@@ -6,3 +6,42 @@
 footer{
     margin-top: 100px !important;
 }
+
+.gold {
+    background-color: #F4C712 !important;
+}
+
+.silver {
+    background-color: #C0C0C0 !important;
+}
+
+.bronze {
+    background-color: #AB5C35 !important;
+}
+
+.gold-l {
+    color: #F4C712 !important;
+}
+
+.silver-l {
+    color: #C0C0C0 !important;
+}
+
+.bronze-l {
+    color: #AB5C35 !important;
+}
+
+.premis-gold {
+    background-image: linear-gradient(#F4C712,#dbb310) !important;
+    border: 1px solid #dbb310 !important;
+}
+
+.premis-silver {
+    background-image: linear-gradient(#C0C0C0,#acacac) !important;
+    border: 1px solid #acacac !important;
+}
+
+.premis-bronze {
+    background-image: linear-gradient(#AB5C35,#99522f) !important;
+    border: 1px solid #99522f !important;
+}
