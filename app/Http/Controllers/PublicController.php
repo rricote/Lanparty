@@ -1,10 +1,14 @@
 <?php namespace App\Http\Controllers;
 
 use App\Config;
+use App\Grup;
 use Auth;
 use App\Patrocinador;
 use App\Competicio;
 use App\Competicionsusersgrups;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Validator;
 
 class PublicController extends Controller {
 
@@ -86,13 +90,19 @@ class PublicController extends Controller {
         $data = array();
         $config = Config::find(1);
         $data['competicio'] = Competicio::find($id);
-
+        $data['competicionsgrups'] = Competicionsusersgrups::where('user_id', '=', Auth::user()->id)->where('competicio_id', '=', $id)->first();
+        $n = $data['competicio']->number;
+        $data['equips'] = array();
+        foreach($data['competicio']->grup as $c){
+            if(Competicionsusersgrups::where('grup_id', '=', $c->id)->where('competicio_id', '=', $id)->count() < $n)
+                $data['equips'][$c->id] = $c->name;
+        }
         $data['patrocinadors'] = Patrocinador::where('tipus', '=', '3')->where('edicio_id', '=', $config->edicio_id)->get();
         $data['js'] = array('competicio');
         return view('web.competicio', $data);
     }
 
-    public function competicioMultipleAfegir($id)
+    public function competicioAfegir($id)
     {
         $rules = array(
             'nomgrup'    => 'required'
@@ -105,13 +115,65 @@ class PublicController extends Controller {
                 ->withErrors($validator);
         } else {
 
-            /*Rol::create([
-                'name' => Input::get('name')
-            ]);*/
+            $config = Config::find(1);
+
+            $competicio = Competicio::find($id);
+
+            if($competicio->data_inici <= date('Y-m-d H:i:s'))
+                return Redirect::to('competicio/' . $id)
+                    ->withFlashMessage('Inscripció tancada.');
+
+            if(Grup::where('name', '=', Input::get('nomgrup'))->where('edicio_id', '=', $config->edicio_id)->count())
+                return Redirect::to('competicio/' . $id)
+                    ->withFlashMessage('Grup ja existent.');
+
+            if(Competicionsusersgrups::where('user_id', '=', Auth::user()->id)->where('competicio_id', '=', $id)->count())
+                return Redirect::to('competicio/' . $id)
+                    ->withFlashMessage('Ja estas inscrit.');
+
+            $grup = Grup::create([
+                'name' => Input::get('nomgrup'),
+                'edicio_id' => $config->edicio_id,
+                'competicio_id' => $id
+            ]);
+
+            Competicionsusersgrups::create([
+                'user_id' => Auth::user()->id,
+                'grup_id' => $grup->id,
+                'competicio_id' => $id
+            ]);
 
             return Redirect::to('competicio/' . $id)
-                ->withFlashMessage('Inscrit correctament');
+                ->withFlashMessage('Inscrit correctament.');
         }
+    }
+
+    public function competicioBorrar($id)
+    {
+
+        $config = Config::find(1);
+
+        $competicio = Competicio::find($id);
+
+        if($competicio->data_inici <= date('Y-m-d H:i:s'))
+            return Redirect::to('competicio/' . $id)
+                ->withFlashMessage('La competició ha començat o acabat.');
+
+        if(!Competicionsusersgrups::where('user_id', '=', Auth::user()->id)->where('competicio_id', '=', $id)->count())
+            return Redirect::to('competicio/' . $id)
+                ->withFlashMessage('Ja estas desinscrit.');
+
+        $competi = Competicionsusersgrups::where('user_id', '=', Auth::user()->id)->where('competicio_id', '=', $id)->first();
+
+        $grupId = $competi->grup_id;
+
+        $competi->delete();
+
+        if(!Competicionsusersgrups::where('competicio_id', '=', $id)->count())
+            Grup::destroy($grupId);
+
+        return Redirect::to('competicio/' . $id)
+            ->withFlashMessage('Desinscrit correctament.');
     }
 
     public function programa()

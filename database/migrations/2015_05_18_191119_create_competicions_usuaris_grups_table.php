@@ -17,7 +17,7 @@ class CreateCompeticionsUsuarisGrupsTable extends Migration {
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('competicio_id');
-            $table->integer('grupform_id');
+            $table->integer('grup_id');
             $table->timestamps();
         });
 	}

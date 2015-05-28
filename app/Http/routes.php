@@ -55,7 +55,11 @@ Route::get('competicions', 'PublicController@competicions');
 
 Route::get('competicio/{id}', 'PublicController@competicio');
 
-Route::post('competicio/multiple/afegir/{id}', 'PublicController@competicioMultipleAfegir');
+Route::post('competicio/afegir/{id}', 'PublicController@competicioAfegir');
+
+Route::post('competicio/borrar/{id}', 'PublicController@competicioBorrar');
+
+Route::post('competicio/api/change/{id}', 'ValidatorGeneralController@competicioChange');
 
 Route::get('cartell', 'PublicController@cartell');
 

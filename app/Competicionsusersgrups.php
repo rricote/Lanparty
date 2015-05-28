@@ -16,11 +16,11 @@ class Competicionsusersgrups extends Model {
      *
      * @var array
      */
-    protected $fillable = ['position', 'grup_id'];
+    protected $fillable = ['competicio_id', 'grup_id', 'user_id'];
 
-    public function grupform()
+    public function grup()
     {
-        return $this->belongsTo('App\Grupform');
+        return $this->belongsTo('App\Grup');
     }
     public function user()
     {

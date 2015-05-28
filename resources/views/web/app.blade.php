@@ -46,7 +46,7 @@
     <link href="{{ asset('/css/magnific-popup.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('/css/custom.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
-
+    <link href="{{ asset('css/jquery.gritter.css')}}" rel="stylesheet" type="text/css">
     <!-- ==========================
         Fonts
     =========================== -->
@@ -168,6 +168,7 @@
     <script src="{{ asset('/js/jquery.countdown.min.js') }}"></script>
     <script src="{{ asset('/js/custom.js') }}"></script>
     <script src="{{ asset('js/spin.js') }}"></script>
+    <script src="{{ asset('js/jquery.gritter.min.js') }}"></script>
 
     <!-- Dynamic charge -->
     @if (isset($js))

@@ -93,3 +93,7 @@
 .gritter-light .gritter-title {
     text-shadow: none;
 }
+.gritter-item-wrapper.gritter-light {
+    background: rgba(245, 245, 245, 0.95);
+    border: 1px solid #BBB;
+}

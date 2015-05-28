@@ -16,10 +16,20 @@ class Grup extends Model {
      *
      * @var array
      */
-    protected $fillable = ['name', 'edicio_id'];
+    protected $fillable = ['name', 'edicio_id', 'competicio_id'];
 
-    public function grupform()
+    public function competicionsusersgrups()
     {
-        return $this->hasMany('App\Grupform');
+        return $this->hasMany('App\Competicionsusersgrups');
+    }
+
+    public function competicio()
+    {
+        return $this->belongsTo('App\Competicio');
+    }
+
+    public function edicio()
+    {
+        return $this->belongsTo('App\Edicio');
     }
 }

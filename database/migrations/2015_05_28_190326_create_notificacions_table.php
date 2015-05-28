@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGrupsformTable extends Migration {
+class CreateNotificacionsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,11 +12,13 @@ class CreateGrupsformTable extends Migration {
 	 */
 	public function up()
 	{
-        Schema::create('grupsform', function(Blueprint $table)
+        Schema::create('notificacions', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->integer('position');
-            $table->integer('grup_id');
+            $table->integer('tipus');
+            $table->integer('rao');
+            $table->integer('destinatari');
+            $table->integer('estat');
             $table->timestamps();
         });
 	}
@@ -28,7 +30,7 @@ class CreateGrupsformTable extends Migration {
 	 */
 	public function down()
 	{
-        Schema::drop('grupsform');
+        Schema::drop('notificacions');
 	}
 
 }
