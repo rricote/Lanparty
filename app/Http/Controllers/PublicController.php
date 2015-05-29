@@ -2,6 +2,7 @@
 
 use App\Config;
 use App\Grup;
+use App\User;
 use Auth;
 use App\Patrocinador;
 use App\Competicio;
@@ -88,17 +89,29 @@ class PublicController extends Controller {
     public function competicio($id)
     {
         $data = array();
+
         $config = Config::find(1);
+
         $data['competicio'] = Competicio::find($id);
+
+        if(empty($data['competicio']))
+            return Redirect::to('competicions');
+
         $data['competicionsgrups'] = Competicionsusersgrups::where('user_id', '=', Auth::user()->id)->where('competicio_id', '=', $id)->first();
+
         $n = $data['competicio']->number;
+
         $data['equips'] = array();
+
         foreach($data['competicio']->grup as $c){
             if(Competicionsusersgrups::where('grup_id', '=', $c->id)->where('competicio_id', '=', $id)->count() < $n)
                 $data['equips'][$c->id] = $c->name;
         }
+
         $data['patrocinadors'] = Patrocinador::where('tipus', '=', '3')->where('edicio_id', '=', $config->edicio_id)->get();
+
         $data['js'] = array('competicio');
+
         return view('web.competicio', $data);
     }
 
@@ -151,8 +164,6 @@ class PublicController extends Controller {
     public function competicioBorrar($id)
     {
 
-        $config = Config::find(1);
-
         $competicio = Competicio::find($id);
 
         if($competicio->data_inici <= date('Y-m-d H:i:s'))
@@ -199,10 +210,75 @@ class PublicController extends Controller {
         return view('web.cartell', $data);
     }
 
-    public function perfil()
+    public function perfil($id = null)
     {
         $data = array();
+
+        $config = Config::find(1);
+
+        $data['patrocinadors'] = Patrocinador::where('edicio_id', '=', $config->edicio_id)->where('tipus', '=', '3')->get();
+
+        if($id == null) {
+            $data['user'] = Auth::user();
+            $data['public'] = 0;
+        } else {
+            $data['user'] = User::find($id);
+            $data['public'] = 1;
+        }
+
+        list($date, $time) = explode(' ', $data['user']->created_at);
+        list($any, $mes, $dia) = explode('-', $date);
+
+        $data['inici'] = $dia . '-' . $mes . '-' . $any;
+
+        $data['competicionsgrups'] = Competicionsusersgrups::where('user_id', '=', $data['user']->id)->with('grup', 'competicio')->whereHas('competicio', function($q)
+        {
+            $config = Config::find(1);
+            $q->where('edicio_id', '=', $config->edicio_id);
+
+        })->get();
+
         return view('web.perfil', $data);
+
+    }
+
+    public function grup($id = null)
+    {
+        $data = array();
+        $config = Config::find(1);
+
+        if($id != null){
+
+            $data['grup'] = Grup::with('competicio', 'competicionsusersgrups')->find($id);
+
+            if(empty($data['grup']))
+                return Redirect::to('grup');
+
+            if(!Auth::guest()){
+
+            }
+        } else {
+            $grup = Grup::where('edicio_id', '=', $config->edicio_id)->whereHas('competicio', function($q)
+            {
+                $q->where('number', '>', 1);
+
+            })->get();
+
+            $i = 0;
+
+            foreach($grup as $g){
+                $data['grup'][$i]['id'] = $g->id;
+                $data['grup'][$i]['name'] = $g->name;
+                $data['grup'][$i++]['count'] = Competicionsusersgrups::where('grup_id', '=', $g->id)->count();
+            }
+        }
+
+        $data['id'] = $id;
+
+        $data['patrocinadors'] = Patrocinador::where('edicio_id', '=', $config->edicio_id)->where('tipus', '=', '3')->get();
+
+        return view('web.grup', $data);
+
     }
 
     public function contacta()

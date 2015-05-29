@@ -67,7 +67,11 @@ Route::get('programa', 'PublicController@programa');
 
 Route::get('contacta', 'PublicController@contacta');
 
-Route::get('perfil', 'PublicController@perfil');
+Route::get('perfil/{id}', 'PublicController@perfil');
+
+Route::get('grup/{id}', 'PublicController@grup');
+
+Route::get('grup', 'PublicController@grup');
 
 /*
  * User

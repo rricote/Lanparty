@@ -32,4 +32,32 @@ class Competicio extends Model {
     {
         return $this->belongsTo('App\Edicio');
     }
+
+    /*
+     *
+     * // Module model
+        public function sectionsCountRelation()
+        {
+            return $this->hasOne('Section')->selectRaw('module_id, count(*) as count')->groupBy('module_id');
+            // replace module_id with appropriate foreign key if needed
+        }
+
+
+        // then you can access it like this:
+
+        $modules = Module::with('sectionsCountRelation')->get();
+        $modules->first()->sectionsCountRelation->count;
+
+        // but there is a bit sugar to make it easier (and that s why I renamed it to sectionsCountRelation)
+
+        public function getSectionsCountAttribute()
+        {
+            return $this->sectionsCountRelation->count;
+        }
+
+        // now you can simply do this on every module:
+        $modules->first()->sectionsCount;
+     *
+     *
+     */
 }

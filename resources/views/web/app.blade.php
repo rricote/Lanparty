@@ -87,17 +87,33 @@
                         </ul>
                     </li>
                     <li><a href="{{ url('contacta') }}">Contacta</a></li>
+                    @if (Auth::guest())
+                        <li><a href="{{ url('/auth/register') }}" class="visible-xs">Registar-se</a></li>
+                        <li><a href="{{ url('/auth/login') }}" class="visible-xs">Entrar</a></li>
+                    @else
+                        <li class="dropdown visible-xs">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
+                            <ul class="dropdown-menu">
+                                @if (Auth::user()->rol_id == 1)
+                                    <li><a href="{{ url('/admin') }}"><i class="fa fa-plus"></i>Gestor del administrador</a></li>
+                                @endif
+                                <li><a href="{{ url('/perfil') }}"><i class="fa fa-plus"></i>Perfil</a></li>
+                                <li><a href="{{ url('/auth/logout') }}"><i class="fa fa-plus"></i>Logout</a></li>
+                            </ul>
+                        </li>
+                    @endif
                 </ul>
                 <div class="pull-right navbar-buttons">
                 @if (Auth::guest())
-                    <a style="margin:10px" href="{{ url('/auth/register') }}" class="btn btn-primary">Registar-se</a>
-                    <a style="margin:10px" href="{{ url('/auth/login') }}" class="btn btn-inverse">Entrar</a>
+                    <a style="margin:10px" href="{{ url('/auth/register') }}" class="btn btn-primary hidden-xs">Registar-se</a>
+                    <a style="margin:10px" href="{{ url('/auth/login') }}" class="btn btn-inverse hidden-xs">Entrar</a>
                 @else
-                    <a style="margin:10px" href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
+                    <a style="margin:10px;" href="#" class="btn btn-primary dropdown-toggle hidden-xs" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                     <ul class="dropdown-menu">
                         @if (Auth::user()->rol_id == 1)
                             <li><a href="{{ url('/admin') }}">Gestor del administrador</a></li>
                         @endif
+                        <li><a href="{{ url('/perfil') }}">Perfil</a></li>
                         <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
                     </ul>
                 @endif
@@ -125,7 +141,7 @@
     	TITLE - END
     =========================== -->
 
-	@yield('content')
+    @yield('content')
 
     <!-- ==========================
          FOOTER - START
