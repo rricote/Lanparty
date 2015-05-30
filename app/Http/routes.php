@@ -55,6 +55,9 @@ Route::get('competicions', 'PublicController@competicions');
 
 Route::get('competicio/{id}', 'PublicController@competicio');
 
+Route::get('competicio', function(){
+    return Redirect::to('competicions');
+});
 Route::post('competicio/afegir/{id}', 'PublicController@competicioAfegir');
 
 Route::post('competicio/borrar/{id}', 'PublicController@competicioBorrar');
@@ -98,39 +101,71 @@ Route::group(['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\AdminMid
 
     Route::get('/competicions', 'AdminController@competicions');
 
+    Route::get('/competicions/{id}', 'AdminController@competicions');
+
     Route::post('/competicions/afegir', 'AdminController@competicionsAfegir');
+
+    Route::post('/competicions/editar/{id}', 'AdminController@competicionsEditar');
 
     Route::get('/edicions', 'AdminController@edicions');
 
+    Route::get('/edicions/{id}', 'AdminController@edicions');
+
     Route::post('/edicions/afegir', 'AdminController@edicionsAfegir');
+
+    Route::post('/edicions/editar/{id}', 'AdminController@edicionsEditar');
 
     Route::get('/estats', 'AdminController@estats');
 
+    Route::get('/estats/{id}', 'AdminController@estats');
+
     Route::post('/estats/afegir', 'AdminController@estatsAfegir');
+
+    Route::post('/estats/editar/{id}', 'AdminController@estatsEditar');
 
     Route::get('/grups', 'AdminController@grups');
 
+    Route::get('/grups/{id}', 'AdminController@grups');
+
     Route::post('/grups/afegir', 'AdminController@grupsAfegir');
+
+    Route::post('/grups/editar/{id}', 'AdminController@grupsEditar');
 
     Route::get('/motius', 'AdminController@motius');
 
+    Route::get('/motius/{id}', 'AdminController@motius');
+
     Route::post('/motius/afegir', 'AdminController@motiusAfegir');
+
+    Route::post('/motius/editar/{id}', 'AdminController@motiusEditar');
 
     Route::get('/patrocinadors', 'AdminController@patrocinadors');
 
+    Route::get('/patrocinadors/{id}', 'AdminController@patrocinadors');
+
     Route::post('/patrocinadors/afegir', 'AdminController@patrocinadorsAfegir');
+
+    Route::post('/patrocinadors/editar/{id}', 'AdminController@patrocinadorsEditar');
 
     Route::get('/premis', 'AdminController@premis');
 
+    Route::get('/premis/{id}', 'AdminController@premis');
+
     Route::post('/premis/afegir', 'AdminController@premisAfegir');
+
+    Route::post('/premis/editar/{id}', 'AdminController@premisEditar');
 
     Route::get('/rols', 'AdminController@rols');
 
+    Route::get('/rols/{id}', 'AdminController@rols');
+
     Route::post('/rols/afegir', 'AdminController@rolsAfegir');
+
+    Route::post('/rols/editar/{id}', 'AdminController@rolsEditar');
 
     Route::get('/config', 'AdminController@config');
 
-    Route::post('/config/editar', 'AdminController@configeditar');
+    Route::post('/config/editar', 'AdminController@configEditar');
 
     Route::get('/assistencies', 'AdminController@assistencies');
 

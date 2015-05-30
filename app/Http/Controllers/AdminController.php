@@ -51,19 +51,26 @@ class AdminController extends Controller {
         return view('admin.home', $data);
     }
 
-    public function usuaris()
+    public function usuaris($id = null)
     {
         $data = array();
-        $data['usuaris'] = User::all();
         $data['menu'] = 'usuaris';
-        $data['js'] = array(
-            'jquery.dataTables.min',
-            'jquery.dataTables.bootstrap',
-            'jquery.maskedinput.min',
-            'dataTables.colVis.min',
-            'dataTables.colReorder.min',
-            'usuaris'
-        );
+        $data['id'] = $id;
+
+        if(isset($id)){
+            $data['usuaris'] = User::find($id);
+            $data['js'] = array(
+                'edicions'
+            );
+        }else {
+            $data['usuaris'] = User::all();
+            $data['js'] = array(
+                'jquery.dataTables.min',
+                'jquery.dataTables.bootstrap',
+                'edicions'
+            );
+        }
+
         return view('admin.usuaris', $data);
     }
 
@@ -92,7 +99,7 @@ class AdminController extends Controller {
         return view('admin.competicions', $data);
     }
 
-    public function competicionsUpdate($id)
+    public function competicionsEditar($id = null)
     {
         $rules = array(
             'name'    => 'required',
@@ -145,7 +152,7 @@ class AdminController extends Controller {
                         'edicio_id' => $config->edicio_id
                     ]);
                     return Redirect::to('admin/competicions')
-                        ->withFlashMessage('Competició creada correctament');
+                        ->withFlashMessage('Competició actualitzada correctament');
 
                 } else {
 
@@ -226,16 +233,26 @@ class AdminController extends Controller {
         }
     }
 
-    public function edicions()
+    public function edicions($id = null)
     {
         $data = array();
         $data['menu'] = 'edicions';
-        $data['edicions'] = Edicio::all();
-        $data['js'] = array(
-            'jquery.dataTables.min',
-            'jquery.dataTables.bootstrap',
-            'edicions'
-        );
+        $data['id'] = $id;
+
+        if(isset($id)){
+            $data['edicions'] = Edicio::find($id);
+            $data['js'] = array(
+                'edicions'
+            );
+        }else {
+            $data['edicions'] = Edicio::all();
+            $data['js'] = array(
+                'jquery.dataTables.min',
+                'jquery.dataTables.bootstrap',
+                'edicions'
+            );
+        }
+
         return view('admin.edicions', $data);
     }
 
@@ -284,16 +301,71 @@ class AdminController extends Controller {
         }
     }
 
-    public function estats()
+    public function edicionsEditar($id = null)
+    {
+        $rules = array(
+            'name'    => 'required'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('admin/edicions')
+                ->withErrors($validator);
+        } else {
+            if(Input::hasFile('image')) {
+                if (Input::file('image')->isValid()) {
+
+                    $destinationPath = 'images/cartell';
+
+                    $extension = Input::file('image')->getClientOriginalExtension();
+
+                    $fileName = rand(11111, 99999) . '.' . $extension;
+
+                    Input::file('image')->move($destinationPath, $fileName);
+
+                    Edicio::find($id)->update([
+                        'name' => Input::get('name'),
+                        'cartell' => $fileName
+                    ]);
+
+                    return Redirect::to('admin/edicions')
+                        ->withFlashMessage('Edició actualitzat correctament');
+
+                } else {
+
+                    return Redirect::to('admin/edicions')
+                        ->withInput()
+                        ->withFlashMessage('Error al pujar l\'arxiu');
+                }
+            } else {
+                return Redirect::to('admin/edicions')
+                    ->withInput()
+                    ->withFlashMessage('No has sel·leccionat cap arxiu');
+            }
+        }
+    }
+
+    public function estats($id = null)
     {
         $data = array();
         $data['menu'] = 'estats';
-        $data['estats'] = Estat::all();
-        $data['js'] = array(
-            'jquery.dataTables.min',
-            'jquery.dataTables.bootstrap',
-            'estats'
-        );
+        $data['id'] = $id;
+
+        if(isset($id)){
+            $data['estats'] = Estat::find($id);
+            $data['js'] = array(
+                'estats'
+            );
+        }else {
+            $data['estats'] = Estat::all();
+            $data['js'] = array(
+                'jquery.dataTables.min',
+                'jquery.dataTables.bootstrap',
+                'estats'
+            );
+        }
+
         return view('admin.estats', $data);
     }
 
@@ -319,16 +391,48 @@ class AdminController extends Controller {
         }
     }
 
-    public function grups()
+    public function estatsEditar($id = null)
+    {
+        $rules = array(
+            'name'    => 'required'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('admin/estats')
+                ->withErrors($validator);
+        } else {
+
+            Estat::find($id)->update([
+                'name' => Input::get('name')
+            ]);
+
+            return Redirect::to('admin/estats')
+                ->withFlashMessage('Estat actualitzat correctament');
+        }
+    }
+
+    public function grups($id = null)
     {
         $data = array();
         $data['menu'] = 'grups';
-        $data['grups'] = Grup::all();
-        $data['js'] = array(
-            'jquery.dataTables.min',
-            'jquery.dataTables.bootstrap',
-            'grups'
-        );
+        $data['id'] = $id;
+
+        if(isset($id)){
+            $data['grups'] = Grup::find($id);
+            $data['js'] = array(
+                'grups'
+            );
+        }else {
+            $data['grups'] = Grup::all();
+            $data['js'] = array(
+                'jquery.dataTables.min',
+                'jquery.dataTables.bootstrap',
+                'grups'
+            );
+        }
+
         return view('admin.grups', $data);
     }
 
@@ -353,20 +457,55 @@ class AdminController extends Controller {
             ]);
 
             return Redirect::to('admin/grups')
-                ->withFlashMessage('Competició creada correctament');
+                ->withFlashMessage('Grup crea correctament');
         }
     }
 
-    public function motius()
+    public function grupsEditar($id = null)
+    {
+        $rules = array(
+            'name'    => 'required'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('admin/grups')
+                ->withErrors($validator);
+        } else {
+
+            $config = Config::find(1);
+
+            Grup::find($id)->update([
+                'name' => Input::get('name'),
+                'edicio_id' => $config->edicio_id
+            ]);
+
+            return Redirect::to('admin/grups')
+                ->withFlashMessage('Grup actualitzat correctament');
+        }
+    }
+
+    public function motius($id = null)
     {
         $data = array();
         $data['menu'] = 'motius';
-        $data['motius'] = Motiu::all();
-        $data['js'] = array(
-            'jquery.dataTables.min',
-            'jquery.dataTables.bootstrap',
-            'motius'
-        );
+        $data['id'] = $id;
+
+        if(isset($id)){
+            $data['motius'] = Motiu::find($id);
+            $data['js'] = array(
+                'motius'
+            );
+        }else {
+            $data['motius'] = Motiu::all();
+            $data['js'] = array(
+                'jquery.dataTables.min',
+                'jquery.dataTables.bootstrap',
+                'motius'
+            );
+        }
+
         return view('admin.motius', $data);
     }
 
@@ -390,20 +529,54 @@ class AdminController extends Controller {
             ]);
 
             return Redirect::to('admin/motius')
-                ->withFlashMessage('Competició creada correctament');
+                ->withFlashMessage('Motiu creat correctament');
         }
     }
 
-    public function patrocinadors()
+    public function motiusEditar($id = null)
+    {
+        $rules = array(
+            'name'    => 'required'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('admin/motius')
+                ->withErrors($validator);
+        } else {
+            $config = Config::find(1);
+
+            Motiu::find($id)->update([
+                'name' => Input::get('name'),
+                'edicio_id' => $config->edicio_id
+            ]);
+
+            return Redirect::to('admin/motius')
+                ->withFlashMessage('Motiu actualitzat correctament');
+        }
+    }
+
+    public function patrocinadors($id = null)
     {
         $data = array();
         $data['menu'] = 'patrocinadors';
-        $data['patrocinadors'] = Patrocinador::all();
-        $data['js'] = array(
-            'jquery.dataTables.min',
-            'jquery.dataTables.bootstrap',
-            'patrocinadors'
-        );
+        $data['id'] = $id;
+
+        if(isset($id)){
+            $data['patrocinadors'] = Patrocinador::find($id);
+            $data['js'] = array(
+                'patrocinadors'
+            );
+        }else {
+            $data['patrocinadors'] = Patrocinador::all();
+            $data['js'] = array(
+                'jquery.dataTables.min',
+                'jquery.dataTables.bootstrap',
+                'patrocinadors'
+            );
+        }
+
         return view('admin.patrocinadors', $data);
     }
 
@@ -441,7 +614,7 @@ class AdminController extends Controller {
                     ]);
 
                     return Redirect::to('admin/patrocinadors')
-                        ->withFlashMessage('Competició creada correctament');
+                        ->withFlashMessage('Patrocinador actualitzat correctament');
 
                 } else {
 
@@ -457,21 +630,83 @@ class AdminController extends Controller {
         }
     }
 
-    public function premis()
+    public function patrocinadorsEditar($id = null)
+    {
+        $rules = array(
+            'name'    => 'required',
+            'tipus'    => 'required'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('admin/patrocinadors')
+                ->withErrors($validator);
+        } else {
+            if(Input::hasFile('image')) {
+                if (Input::file('image')->isValid()) {
+
+                    $destinationPath = 'images/patrocinadors';
+
+                    $extension = Input::file('image')->getClientOriginalExtension();
+
+                    $fileName = rand(11111, 99999) . '.' . $extension;
+
+                    Input::file('image')->move($destinationPath, $fileName);
+
+                    $config = Config::find(1);
+
+                    Patrocinador::find($id)->update([
+                        'name' => Input::get('name'),
+                        'logo' => $fileName,
+                        'tipus' => Input::get('tipus'),
+                        'edicio_id' => $config->edicio_id
+                    ]);
+
+                    return Redirect::to('admin/patrocinadors')
+                        ->withFlashMessage('Patrocinador actualitzat correctament');
+
+                } else {
+
+                    return Redirect::to('admin/patrocinadors')
+                        ->withInput()
+                        ->withFlashMessage('Error al pujar l\'arxiu');
+                }
+            } else {
+                return Redirect::to('admin/patrocinadors')
+                    ->withInput()
+                    ->withFlashMessage('No has sel·leccionat cap arxiu');
+            }
+        }
+    }
+
+    public function premis($id = null)
     {
         $data = array();
         $data['menu'] = 'premis';
-        $data['premis'] = Premi::all();
+        $data['id'] = $id;
+        if(isset($id)){
+            $data['premis'] = Premi::find($id);
+            $data['js'] = array(
+                'premis'
+            );
+        }else {
+            $data['premis'] = Premi::all();
+            $data['js'] = array(
+                'jquery.dataTables.min',
+                'jquery.dataTables.bootstrap',
+                'premis'
+            );
+        }
         $patrocinadors = array();
+
         $patro = Patrocinador::all();
+
         foreach($patro as $p)
             $patrocinadors[$p->id] = $p->name;
+
         $data['patrocinadors'] = $patrocinadors;
-        $data['js'] = array(
-            'jquery.dataTables.min',
-            'jquery.dataTables.bootstrap',
-            'premis'
-        );
+
         return view('admin.premis', $data);
     }
 
@@ -497,21 +732,56 @@ class AdminController extends Controller {
             ]);
 
             return Redirect::to('admin/premis')
-                ->withFlashMessage('Competició creada correctament');
+                ->withFlashMessage('Premi creat correctament');
 
         }
     }
 
-    public function rols()
+    public function premisEditar($id = null)
+    {
+        $rules = array(
+            'name'    => 'required',
+            'patrocinador'    => 'required'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('admin/premis')
+                ->withErrors($validator);
+        } else {
+            $config = Config::find(1);
+
+            Premi::find($id)->update([
+                'name' => Input::get('name'),
+                'patrocinador_id' => Input::get('patrocinador'),
+                'edicio_id' => $config->edicio_id
+            ]);
+
+            return Redirect::to('admin/premis')
+                ->withFlashMessage('Premi actualitzat correctament');
+
+        }
+    }
+
+    public function rols($id = null)
     {
         $data = array();
         $data['menu'] = 'rols';
-        $data['rols'] = Rol::all();
-        $data['js'] = array(
-            'jquery.dataTables.min',
-            'jquery.dataTables.bootstrap',
-            'rols'
-        );
+        $data['id'] = $id;
+        if(isset($id)){
+            $data['rols'] = Rol::find($id);
+            $data['js'] = array(
+                'rols'
+            );
+        }else {
+            $data['rols'] = Rol::all();
+            $data['js'] = array(
+                'jquery.dataTables.min',
+                'jquery.dataTables.bootstrap',
+                'rols'
+            );
+        }
         return view('admin.rols', $data);
     }
 
@@ -533,7 +803,32 @@ class AdminController extends Controller {
             ]);
 
             return Redirect::to('admin/rols')
-                ->withFlashMessage('Competició creada correctament');
+                ->withFlashMessage('Rol creat correctament');
+        }
+    }
+
+    public function rolsEditar($id = null)
+    {
+        if($id == null)
+            return Redirect::to('admin/rols');
+
+        $rules = array(
+            'name'    => 'required'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('admin/rols')
+                ->withErrors($validator);
+        } else {
+
+            Rol::find($id)->update([
+                'name' => Input::get('name')
+            ]);
+
+            return Redirect::to('admin/rols')
+                ->withFlashMessage('Rol actualitzat correctament');
         }
     }
 
@@ -598,7 +893,7 @@ class AdminController extends Controller {
                 'edicio_id' => Input::get('patrocinador')
             ]);
             return Redirect::to('admin/config')
-                ->withFlashMessage('Competició creada correctament');
+                ->withFlashMessage('Configuració actualitzada correctament');
 
         }
     }

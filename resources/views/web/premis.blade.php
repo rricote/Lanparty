@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <div class="box">
+    <div class="box col-xs-12">
         <h2 style="font-size: 24px;" class="gold-l">Patrocinadors Gold</h2>
         @foreach ($patrocinadorsgold as $p)
             @if($p->premi != '[]')

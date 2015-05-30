@@ -34,16 +34,30 @@
         </div>
 
         <div class="page-content">
-            <div class="page-header">
-                <h1>
-                    Usuaris
-                </h1>
-            </div>
-            <!-- /.page-header -->
+            @if(!isset($id))
+                <div class="page-header">
+                    <h1>
+                        Usuaris
+                    </h1>
+                </div>
+                <!-- /.page-header -->
+            @endif
             <div class="row">
                 <div class="col-xs-iv">
                     <!-- PAGE CONTENT BEGINS -->
-                    <div class="col-xs-12 col-lg-offset-2 col-lg-8">
+
+                    @if (Session::has('flash_message'))
+                        <div class="col-xs-12">
+                            <div class="alert alert-info">
+                                {!! Session::get('flash_message') !!}
+                            </div>
+                        </div>
+                    @endif
+
+                    @if(isset($id))
+
+                    @else
+                        <div class="col-xs-12 col-lg-offset-2 col-lg-8">
                         <div class="tabbable">
                             <ul class="nav nav-tabs">
                                 <li class="active">
@@ -273,6 +287,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                 </div>
                 <!-- /.col -->
             </div>

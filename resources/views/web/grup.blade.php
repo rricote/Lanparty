@@ -35,7 +35,7 @@
                                         <?php $i2++; ?>
                                         <li><p>{{ $c->user->name }} <b>{{ $c->user->username }}</b> {{ $c->user->cognom1 }}</p></li>
                                     @endforeach
-                                    @for($i = 0; $i < $i2; $i++)
+                                    @for($i = 0; $i < $grup->competicio->number - $i2; $i++)
                                             <li><p>Lloc disponible</p></li>
                                     @endfor
                                 </ul>

@@ -34,16 +34,121 @@
         </div>
 
         <div class="page-content">
-            <div class="page-header">
-                <h1>
-                    Competicions
-                </h1>
-            </div>
-            <!-- /.page-header -->
+            @if(!isset($id))
+                <div class="page-header">
+                    <h1>
+                        Competicions
+                    </h1>
+                </div>
+                <!-- /.page-header -->
+            @endif
 
             <div class="row">
                 <div class="col-xs-12">
                     <!-- PAGE CONTENT BEGINS -->
+                    @if (Session::has('flash_message'))
+                        <div class="col-xs-12">
+                            <div class="alert alert-info">
+                                {!! Session::get('flash_message') !!}
+                            </div>
+                        </div>
+                    @endif
+
+                    @if(isset($id))
+                        <div class="col-xs-12">
+                            <h2 class="header blue">
+                                Editar Competició
+                            </h2>
+                            @if (count($errors) > 0)
+                                <div class="col-xs-12">
+                                    <div class="alert alert-danger">
+                                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            @endif
+
+                            {!! Form::open(array('url' => 'admin/competicions/editar/' . $id, 'files'=>true)) !!}
+
+                            <div class="col-xs-12">
+
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                    <div class="form-group">
+                                        {!! Form::label('competicio', 'Nom de la competició:', null, array('class' => 'control-label')) !!}
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="icon-edit"></i></span>
+                                            {!! Form::text('name', $competicions->name, array('required', 'class' => 'form-control', 'placeholder' => 'Nom')) !!}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                    <div class="form-group">
+                                        {!! Form::label('link', 'Link de la competició: (opcional)', null, array('class' => 'control-label')) !!}
+                                        {!! Form::text('link', $competicions->link, array( 'class' => 'form-control', 'placeholder' => 'http://www.exemple.com')) !!}
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                    <div class="form-group">
+                                        {!! Form::label('data', 'Data d\'inici de la competició', null, array('class' => 'control-label')) !!}
+                                        <div class="input-group">
+                                            {!! Form::text('datepicker', null, array('id' => 'datepicker', 'type' => 'text', 'required', 'data-date-format' => 'dd-mm-yyyy', 'class' => 'form-control date-picker')) !!}
+                                            <span class="input-group-addon">
+                                                <i class="icon-calendar bigger-110"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                    <div class="form-group">
+                                        {!! Form::label('hora', 'Hora d\'inici de la competició', null, array('class' => 'control-label')) !!}
+                                        <div class="input-group bootstrap-timepicker">
+                                            {!! Form::text('timepicker', null, array('id' => 'timepicker', 'type' => 'text', 'required',  'class' => 'form-control')) !!}
+                                            <span class="input-group-addon">
+                                                <i class="icon-time bigger-110"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                    <div class="form-group">
+                                        {!! Form::label('competicio', 'Integrants per grup: (En cas de ser individual deixar a 1)', null, array('class' => 'control-label')) !!}
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="icon-ellipsis-vertical"></i></span>
+                                            {!! Form::number('number', $competicions->number, array('class' => 'form-control', 'min' => '1', 'max' => '10', 'step' => '1')) !!}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                    <div class="form-group">
+                                        {!! Form::label('arxiu', 'Logo de la competició:', null, array('class' => 'control-label')) !!}
+                                        {!! Form::file('image', array('id' => 'input-image')) !!}
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                    <div class="form-group">
+                                        {!! Form::label('imatge', 'Logo gran de la competició:', null, array('class' => 'control-label')) !!}
+                                        {!! Form::file('imatge', array('id' => 'input-imatge')) !!}
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div>
+                                {!! Form::submit('Afegir', array( 'class' => 'btn btn-info')) !!}
+                            </div>
+
+                            {!! Form::close() !!}
+                        </div>
+                    @else
                     <div class="col-xs-12">
                         <div class="table-header">
                             Llistat de totes les competicions
@@ -104,7 +209,7 @@
                                                     <i class="icon-zoom-in bigger-130"></i>
                                                 </a>
 
-                                                <a class="green" href="#editar" data-toggle="modal">
+                                                <a class="green" href="{{ url('admin/competicions/' . $c->id) }}" data-toggle="modal">
                                                     <i class="icon-pencil bigger-130"></i>
                                                 </a>
 
@@ -129,7 +234,7 @@
                                                         </li>
 
                                                         <li>
-                                                            <a href="#editar" class="tooltip-success" data-rel="tooltip" title="Edit" data-toggle="modal">
+                                                            <a href="{{ url('admin/competicions/' . $c->id) }}" class="tooltip-success" data-rel="tooltip" title="Edit" data-toggle="modal">
                                                                 <span class="green">
                                                                     <i class="icon-edit bigger-120"></i>
                                                                 </span>
@@ -287,14 +392,6 @@
                             </div>
                         @endif
 
-                        @if (Session::has('flash_message'))
-                            <div class="col-xs-12">
-                                <div class="alert alert-info">
-                                    {!! Session::get('flash_message') !!}
-                                </div>
-                            </div>
-                        @endif
-
                         {!! Form::open(array('url' => 'admin/competicions/afegir', 'files'=>true)) !!}
 
                             <div class="col-xs-12">
@@ -371,6 +468,7 @@
 
                         {!! Form::close() !!}
                     </div>
+                    @endif
                 </div>
                 <!-- /.col -->
             </div>
