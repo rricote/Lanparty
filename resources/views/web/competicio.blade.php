@@ -58,7 +58,7 @@
                                                             @foreach($equips as $key => $value)
                                                                 <div class="form-group" style="max-width: 500px">
                                                                     <label style="margin: 30px;" for="nom">{{ $value }}</label>
-                                                                    <input id="{{ $key }}" class="ace ace-switch ace-switch-6 entrar" type="checkbox" @if(!empty($competicionsgrups)) checked @endif />
+                                                                    <input style="margin-top: 32px; margin-left: -11px;" id="{{ $key }}" class="ace ace-switch ace-switch-6 entrar" type="checkbox" @if(!empty($competicionsgrups)) checked @endif />
                                                                     <span style="margin: -8px;" class="lbl"></span>
                                                                 </div>
                                                             @endforeach
@@ -76,13 +76,15 @@
                             @else
                                 <a style="padding: 1px 15px;" class="btn btn-inverse btn-lg">
                                     <p style="margin: 0;">Inscripció</p>
-                                    <input id="{{ $competicio->id }}" class="ace ace-switch ace-switch-6 canvi" type="checkbox" @if(!empty($competicionsgrups)) checked @endif />
+                                    <input style="margin-left:-28px; margin-top:-1px;" id="{{ $competicio->id }}" class="ace ace-switch ace-switch-6 canvi" type="checkbox" @if(!empty($competicionsgrups)) checked @endif />
                                     <span class="lbl"></span>
                                 </a>
                             @endif
                         @endif
                     @endif
-                    <a target="_blank" href="{{ $competicio->link }}" class="btn btn-inverse btn-lg">Lloc oficial</a>
+                    @if (!empty($competicio->link))
+                        <a target="_blank" href="{{ $competicio->link }}" class="btn btn-inverse btn-lg">Lloc oficial</a>
+                    @endif
                 </div>
 
                 <div class="col-xs-3">

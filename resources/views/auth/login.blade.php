@@ -52,7 +52,7 @@
 						<div class="form-group">
 							<div class="col-md-6 col-md-offset-4">
 								<button type="submit" class="btn btn-primary">Login</button>
-                                <!--<a href="{{ url('/password/email') }}" id="reset-password-toggle" class="">Has oblidat la contrasenya?</a>-->
+                                <a href="{{ url('/password/email') }}" id="reset-password-toggle" class="">Has oblidat la contrasenya?</a>
 							</div>
 						</div>
 					</form>

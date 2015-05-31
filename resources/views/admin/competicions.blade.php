@@ -97,7 +97,7 @@
                                     <div class="form-group">
                                         {!! Form::label('data', 'Data d\'inici de la competició', null, array('class' => 'control-label')) !!}
                                         <div class="input-group">
-                                            {!! Form::text('datepicker', null, array('id' => 'datepicker', 'type' => 'text', 'required', 'data-date-format' => 'dd-mm-yyyy', 'class' => 'form-control date-picker')) !!}
+                                            {!! Form::text('datepicker', $date, array('id' => 'datepicker', 'type' => 'text', 'required', 'data-date-format' => 'dd-mm-yyyy', 'class' => 'form-control date-picker')) !!}
                                             <span class="input-group-addon">
                                                 <i class="icon-calendar bigger-110"></i>
                                             </span>
@@ -109,7 +109,7 @@
                                     <div class="form-group">
                                         {!! Form::label('hora', 'Hora d\'inici de la competició', null, array('class' => 'control-label')) !!}
                                         <div class="input-group bootstrap-timepicker">
-                                            {!! Form::text('timepicker', null, array('id' => 'timepicker', 'type' => 'text', 'required',  'class' => 'form-control')) !!}
+                                            {!! Form::text('timepicker', $time, array('id' => 'timepicker', 'type' => 'text', 'required',  'class' => 'form-control')) !!}
                                             <span class="input-group-addon">
                                                 <i class="icon-time bigger-110"></i>
                                             </span>
@@ -126,10 +126,13 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
+                            <div class="row">
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         {!! Form::label('arxiu', 'Logo de la competició:', null, array('class' => 'control-label')) !!}
+                                        <img style="max-width: 250px; margin-bottom: 10px;" alt="logo" src="{{ url('icons/competicions/' . $competicions->logo) }}" />
                                         {!! Form::file('image', array('id' => 'input-image')) !!}
                                     </div>
                                 </div>
@@ -137,13 +140,14 @@
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         {!! Form::label('imatge', 'Logo gran de la competició:', null, array('class' => 'control-label')) !!}
+                                        <img style="max-width: 250px; margin-bottom: 10px;" alt="imatge" src="{{ url('images/competicions/' . $competicions->imatge) }}" />
                                         {!! Form::file('imatge', array('id' => 'input-imatge')) !!}
                                     </div>
                                 </div>
-
                             </div>
+
                             <div>
-                                {!! Form::submit('Afegir', array( 'class' => 'btn btn-info')) !!}
+                                {!! Form::submit('Editar', array( 'class' => 'btn btn-info')) !!}
                             </div>
 
                             {!! Form::close() !!}
@@ -446,7 +450,9 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
+                            <div class="row">
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         {!! Form::label('arxiu', 'Logo de la competició:', null, array('class' => 'control-label')) !!}

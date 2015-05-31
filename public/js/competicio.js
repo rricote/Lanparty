@@ -54,6 +54,11 @@ $( ".canvi" ).change(function () {
                     class_name: 'gritter-light'
                 });
             }
+
+            setTimeout(function(){
+                location.reload();
+            }, 2000);
+
         },
         error: function(){
             var unique_id = $.gritter.add({

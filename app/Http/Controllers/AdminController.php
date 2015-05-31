@@ -11,6 +11,7 @@ use App\Rol;
 use App\User;
 use App\Competicio;
 use App\Config;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -80,7 +81,14 @@ class AdminController extends Controller {
         $data['id'] = $id;
         $data['menu'] = 'competicions';
         if(isset($id)){
-            $data['competicio'] = Competicio::find($id);
+            $data['competicions'] = Competicio::find($id);
+
+            list($date, $time) = explode(' ',$data['competicions']->data_inici);
+            list($any, $mes, $dia) = explode('-', $date);
+
+            $data['date'] = $dia . '-' . $mes . '-' . $any;
+            $data['time'] = $time;
+
             $data['js'] = array(
                 'bootstrap-datepicker.min',
                 'bootstrap-timepicker.min',
@@ -112,13 +120,13 @@ class AdminController extends Controller {
             return Redirect::to('admin/competicions')
                 ->withErrors($validator);
         } else {
-            if(Input::hasFile('image') && Input::hasFile('imatge')) {
-                if (Input::file('image')->isValid() && Input::file('imatge')->isValid()) {
-                    /*
+            if(Input::hasFile('image')) {
+                if (Input::file('image')->isValid()) {
+
                     $competicio = Competicio::find($id);
 
                     File::delete('icons/competicions/' . $competicio->logo);
-                    */
+
                     $destinationPath = 'icons/competicions';
 
                     $extension = Input::file('image')->getClientOriginalExtension();
@@ -126,6 +134,25 @@ class AdminController extends Controller {
                     $fileName = rand(11111, 99999) . '.' . $extension;
 
                     Input::file('image')->move($destinationPath, $fileName);
+
+                    $competicio->update([
+                        'logo' => $fileName
+                    ]);
+
+                } else {
+
+                    return Redirect::to('admin/competicions')
+                        ->withInput()
+                        ->withFlashMessage('Error al pujar l\'arxiu');
+                }
+            }
+
+            if(Input::hasFile('imatge')) {
+                if (Input::file('imatge')->isValid()) {
+
+                    $competicio = Competicio::find($id);
+
+                    File::delete('images/competicions/' . $competicio->imatge);
 
                     $destinationPath = 'images/competicions';
 
@@ -135,24 +162,9 @@ class AdminController extends Controller {
 
                     Input::file('imatge')->move($destinationPath, $fileName2);
 
-                    $config = Config::find(1);
-                    $number = Input::get('number');
-                    if($number > 10)
-                        $number = 10;
-
-                    list($dia,$mes,$any) = explode('-',Input::get('datepicker'));
-
-                    Competicio::find($id)->update([
-                        'name' => Input::get('name'),
-                        'logo' => $fileName,
-                        'imatge' => $fileName2,
-                        'number' => $number,
-                        'link' => Input::get('link'),
-                        'data_inici' => $any . '-' . $mes . '-' . $dia . ' ' . Input::get('timepicker'),
-                        'edicio_id' => $config->edicio_id
+                    $competicio->update([
+                        'imatge' => $fileName2
                     ]);
-                    return Redirect::to('admin/competicions')
-                        ->withFlashMessage('Competició actualitzada correctament');
 
                 } else {
 
@@ -160,11 +172,25 @@ class AdminController extends Controller {
                         ->withInput()
                         ->withFlashMessage('Error al pujar l\'arxiu');
                 }
-            } else {
-                return Redirect::to('admin/competicions')
-                    ->withInput()
-                    ->withFlashMessage('No has sel·leccionat cap arxiu');
             }
+
+            $config = Config::find(1);
+            $number = Input::get('number');
+            if($number > 10)
+                $number = 10;
+
+            list($dia,$mes,$any) = explode('-',Input::get('datepicker'));
+
+            Competicio::find($id)->update([
+                'name' => Input::get('name'),
+                'number' => $number,
+                'link' => Input::get('link'),
+                'data_inici' => $any . '-' . $mes . '-' . $dia . ' ' . Input::get('timepicker'),
+                'edicio_id' => $config->edicio_id
+            ]);
+            return Redirect::to('admin/competicions')
+                ->withFlashMessage('Competició actualitzada correctament');
+
         }
     }
 
@@ -324,13 +350,13 @@ class AdminController extends Controller {
 
                     Input::file('image')->move($destinationPath, $fileName);
 
-                    Edicio::find($id)->update([
-                        'name' => Input::get('name'),
+                    $edicio = Edicio::find($id);
+
+                    File::delete('images/cartell/' . $edicio->cartell);
+
+                    $edicio->update([
                         'cartell' => $fileName
                     ]);
-
-                    return Redirect::to('admin/edicions')
-                        ->withFlashMessage('Edició actualitzat correctament');
 
                 } else {
 
@@ -338,11 +364,15 @@ class AdminController extends Controller {
                         ->withInput()
                         ->withFlashMessage('Error al pujar l\'arxiu');
                 }
-            } else {
-                return Redirect::to('admin/edicions')
-                    ->withInput()
-                    ->withFlashMessage('No has sel·leccionat cap arxiu');
             }
+
+            Edicio::find($id)->update([
+                'name' => Input::get('name')
+            ]);
+
+            return Redirect::to('admin/edicions')
+                ->withFlashMessage('Edició actualitzada correctament');
+
         }
     }
 
@@ -654,29 +684,34 @@ class AdminController extends Controller {
 
                     Input::file('image')->move($destinationPath, $fileName);
 
-                    $config = Config::find(1);
+                    $patrocinador = Patrocinador::find($id);
 
-                    Patrocinador::find($id)->update([
-                        'name' => Input::get('name'),
+                    File::delete('images/patrocinadors/' . $patrocinador->logo);
+
+                    $patrocinador->update([
                         'logo' => $fileName,
-                        'tipus' => Input::get('tipus'),
-                        'edicio_id' => $config->edicio_id
                     ]);
-
-                    return Redirect::to('admin/patrocinadors')
-                        ->withFlashMessage('Patrocinador actualitzat correctament');
 
                 } else {
 
-                    return Redirect::to('admin/patrocinadors')
+                    return Redirect::to('admin/patrocinadors/' . $id)
                         ->withInput()
                         ->withFlashMessage('Error al pujar l\'arxiu');
                 }
-            } else {
-                return Redirect::to('admin/patrocinadors')
-                    ->withInput()
-                    ->withFlashMessage('No has sel·leccionat cap arxiu');
+
             }
+
+            $config = Config::find(1);
+
+            Patrocinador::find($id)->update([
+                'name' => Input::get('name'),
+                'tipus' => Input::get('tipus'),
+                'edicio_id' => $config->edicio_id
+            ]);
+
+            return Redirect::to('admin/patrocinadors')
+                ->withFlashMessage('Patrocinador actualitzat correctament');
+
         }
     }
 
