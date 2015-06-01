@@ -17,6 +17,7 @@ class CreateNotificacionsTable extends Migration {
             $table->increments('id');
             $table->integer('tipus');
             $table->integer('rao');
+            $table->integer('interesat');
             $table->integer('destinatari');
             $table->integer('estat');
             $table->timestamps();

@@ -40,6 +40,7 @@
                                                                 <div class="form-group" style="max-width: 200px">
                                                                     <label style="margin-left: 25px;" for="nom">Nom del grup</label>
                                                                     <input style="margin-left: 50px;" type="text" class="form-control" id="nomgrup" name="nomgrup" required>
+                                                                    <input name="lloc" type="hidden" value="0">
                                                                 </div>
                                                                 {!! Form::submit('Apuntar-se', array( 'class' => 'btn btn-primary')) !!}
                                                             {!! Form::close() !!}
@@ -48,6 +49,7 @@
                                                             <div class="form-group" style="max-width: 500px">
                                                                 <label style="margin: 30px;" for="nom">Estas inscrit al grup: {{ $competicionsgrups->grup->name }}</label>
                                                             </div>
+                                                            <input name="lloc" type="hidden" value="0">
                                                             {!! Form::submit('Borrar-se', array( 'class' => 'btn btn-primary')) !!}
                                                             {!! Form::close() !!}
                                                         @endif
@@ -169,5 +171,6 @@
 =========================== -->
 <script>
     var countdowntimetorneig = '{{ str_replace("-", "/", $competicio->data_inici) }}';
+    var rec = true;
 </script>
 @endsection

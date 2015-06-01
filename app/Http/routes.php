@@ -62,8 +62,6 @@ Route::post('competicio/afegir/{id}', 'PublicController@competicioAfegir');
 
 Route::post('competicio/borrar/{id}', 'PublicController@competicioBorrar');
 
-Route::post('competicio/api/change/{id}', 'ValidatorGeneralController@competicioChange');
-
 Route::get('cartell', 'PublicController@cartell');
 
 Route::get('programa', 'PublicController@programa');
@@ -219,5 +217,9 @@ Route::group(['prefix' => 'api'], function(){
     Route::post('admin/users/validacio/email', 'ValidatorGeneralController@email');
 
     Route::post('admin/users/token', 'ValidatorGeneralController@token');
+
+    Route::post('competicio/change/{id}', 'ValidatorGeneralController@competicioChange');
+
+    Route::post('notificacio/change/{id}', 'ValidatorGeneralController@notificacioChange');
 });
 

@@ -7,6 +7,7 @@ use App\Grup;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Notificacio;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Request;
@@ -43,42 +44,108 @@ class ValidatorGeneralController extends Controller {
         $competicio = Competicio::find($id);
 
         $msg = '';
+        $estat = Request::input('estat');
 
         if($competicio->data_inici > date('Y-m-d H:i:s')){
 
             if(!(Competicionsusersgrups::where('user_id', '=', Auth::user()->id)->where('competicio_id', '=', $id)->count())){
 
-                $grup = Grup::create([
-                    'name' => Auth::user()->username,
-                    'edicio_id' => $config->edicio_id,
-                    'competicio_id' => $id
-                ]);
+                if($estat==1) {
+                    $grup = Grup::create([
+                        'name' => Auth::user()->username,
+                        'edicio_id' => $config->edicio_id,
+                        'competicio_id' => $id
+                    ]);
 
-                Competicionsusersgrups::create([
-                    'user_id' => Auth::user()->id,
-                    'grup_id' => $grup->id,
-                    'competicio_id' => $id
-                ]);
+                    Competicionsusersgrups::create([
+                        'user_id' => Auth::user()->id,
+                        'grup_id' => $grup->id,
+                        'competicio_id' => $id
+                    ]);
 
-                $msg = 1;
+                    $msg = 1;
+                } else {
+                    $msg = 'Ja estas desinscrit';
+                }
             } else {
+                if($estat==1) {
+                    $msg = 'Ja estas inscrit';
+                } else {
+                    $competi = Competicionsusersgrups::where('user_id', '=', Auth::user()->id)->where('competicio_id', '=', $id)->first();
 
-                $competi = Competicionsusersgrups::where('user_id', '=', Auth::user()->id)->where('competicio_id', '=', $id)->first();
+                    $grupId = $competi->grup_id;
 
-                $grupId = $competi->grup_id;
+                    $competi->delete();
 
-                $competi->delete();
+                    if (!Competicionsusersgrups::where('competicio_id', '=', $id)->where('grup_id', '=', $grupId)->count())
+                        Grup::destroy($grupId);
 
-                if(!Competicionsusersgrups::where('competicio_id', '=', $id)->count())
-                    Grup::destroy($grupId);
-
-                $msg = 0;
+                    $msg = 0;
+                }
             }
         }else{
             $msg = 'Inscripció tancada.';
         }
+        /*/
+                $msg = $estat;
 
+                //*/
         return $msg;
     }
+
+
+    public function notificacioChange($id)
+{
+    $grup = Grup::find($id);
+
+    $msg = '';
+
+    $estat = Request::input('estat');
+
+    if(!(Notificacio::where('interesat', '=', Auth::user()->id)->where('destinatari', '=', $id)->where('tipus', '=', 0)->where('rao', '=', 0)->where(function($query){
+        $query->where('estat', '=', 0);
+        $query->where('estat', '=', 1, 'OR');
+    })->count())){
+
+        if($estat==1) {
+
+            Notificacio::create([
+                'interesat' => Auth::user()->id,
+                'destinatari' => $id,
+                'tipus' => 0,
+                'rao' => 0,
+                'estat' => 0
+            ]);
+
+            $msg = 1;
+        } else {
+            $msg = 'La petició ja ha estat cancel·lada';
+        }
+
+    } else {
+
+        if($estat==1) {
+
+            $msg = 'La petició ja esta enviada';
+        } else {
+
+            if(Notificacio::where('interesat', '=', Auth::user()->id)->where('destinatari', '=', $id)->where('tipus', '=', 0)->where('rao', '=', 0)->where('estat', '=', 0)->count()) {
+                Notificacio::where('interesat', '=', Auth::user()->id)->where('destinatari', '=', $id)->where('tipus', '=', 0)->where('rao', '=', 0)->where('estat', '=', 0)->first()->delete();
+
+                $msg = 0;
+            } else {
+
+                $msg = 'Tens la sol·licitud aceptada';
+            }
+
+        }
+    }
+
+    /*/
+    $msg = $estat;
+
+    //*/
+    return $msg;
+}
 
 }
