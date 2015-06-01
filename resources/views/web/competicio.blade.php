@@ -59,8 +59,8 @@
                                                             <h4>Demanar poder entrar:</h4>
                                                             @foreach($equips as $key => $value)
                                                                 <div class="form-group" style="max-width: 500px">
-                                                                    <label style="margin: 30px;" for="nom">{{ $value }}</label>
-                                                                    <input style="margin-top: 32px; margin-left: -11px;" id="{{ $key }}" class="ace ace-switch ace-switch-6 entrar" type="checkbox" @if(!empty($competicionsgrups)) checked @endif />
+                                                                    <label style="margin: 30px;" for="nom">{{ $value['name'] }}</label>
+                                                                    <input style="margin-top: 32px; margin-left: -11px;" id="{{ $key }}" class="ace ace-switch ace-switch-6 entrar" type="checkbox" @if($value['selected']) checked @endif />
                                                                     <span style="margin: -8px;" class="lbl"></span>
                                                                 </div>
                                                             @endforeach

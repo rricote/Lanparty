@@ -50,10 +50,14 @@ class PublicController extends Controller {
 
             }])->get();
             $data['equips'] = array();
-            foreach( $data['competicions'] as $c ){
-                foreach($c->grup as $g)
-                    $data['equips'][$g->id]['selected'] = Notificacio::where('interesat', '=', Auth::user()->id)->where('destinatari', '=', $g->id)->where('tipus', '=', 0)->where('rao', '=', 0)->where('estat', '=', 0)->count();
 
+            foreach( $data['competicions'] as $c ){
+                $n = $c->number;
+                $id = $c->id;
+                foreach($c->grup as $g){
+                    if(Competicionsusersgrups::where('grup_id', '=', $g->id)->where('competicio_id', '=', $id)->count() < $n)
+                        $data['equips'][$g->id]['selected'] = Notificacio::where('interesat', '=', Auth::user()->id)->where('destinatari', '=', $g->id)->where('tipus', '=', 0)->where('rao', '=', 0)->where('estat', '=', 0)->count();
+                }
             }
         }
         $data['js'] = array('competicio');
@@ -95,7 +99,7 @@ class PublicController extends Controller {
 
         $config = Config::find(1);
 
-        $data['competicio'] = Competicio::find($id);
+        $data['competicio'] = Competicio::with('grup')->find($id);
 
         if(empty($data['competicio']))
             return Redirect::to('competicions');
@@ -108,8 +112,10 @@ class PublicController extends Controller {
         $data['equips'] = array();
 
         foreach($data['competicio']->grup as $c){
-            if(Competicionsusersgrups::where('grup_id', '=', $c->id)->where('competicio_id', '=', $id)->count() < $n)
-                $data['equips'][$c->id] = $c->name;
+            if(Competicionsusersgrups::where('grup_id', '=', $c->id)->where('competicio_id', '=', $id)->count() < $n) {
+                $data['equips'][$c->id]['name'] = $c->name;
+                $data['equips'][$c->id]['selected'] = Notificacio::where('interesat', '=', Auth::user()->id)->where('destinatari', '=', $c->id)->where('tipus', '=', 0)->where('rao', '=', 0)->where('estat', '=', 0)->count();
+            }
         }
 
         $data['patrocinadors'] = Patrocinador::where('tipus', '=', '3')->where('edicio_id', '=', $config->edicio_id)->get();
