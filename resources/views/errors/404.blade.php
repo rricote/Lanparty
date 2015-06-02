@@ -9,7 +9,7 @@
                 <div class="error">
                     <h2>Error 404 - Page not found</h2>
 
-                    <a href="{{ url() }}" class="btn btn-primary btn-lg">Back to Homepage</a>
+                    <a href="{{ url() }}" class="btn btn-primary btn-lg">Tornar a la pagina principal</a>
                 </div>
                 <!-- ERROR - END -->
 

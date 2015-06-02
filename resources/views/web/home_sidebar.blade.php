@@ -33,7 +33,7 @@
 
                                     @foreach($competicions as $c)
                                     <tr>
-                                        <td><img src="{{asset('/icons/competicions/' . $c->logo)}}" alt=""></td>
+                                        <td><img src="{{asset('/icons/competicions/' . $c->logo)}}" alt="competicio{{$c->id}}"></td>
                                         <td>{{$c->name}}</td>
                                     </tr>
                                     @endforeach
@@ -97,11 +97,13 @@
                                                                             @if($c->competicionsusersgrups == '[]')
                                                                                 <div role="tabpanel" class="tab-pane fade" id="invitacion{{ $c->id }}" aria-labelledby="profile-tab">
                                                                                     <h4>Demanar poder entrar:</h4>
-                                                                                    <div class="form-group" style="max-width: 500px">
-                                                                                        <label style="margin: 30px;" for="nom">{{ $c->grup[0]->name }}</label>
-                                                                                        <input style="margin-top: 32px; margin-left: -11px;" id="{{ $c->grup[0]->id }}" class="ace ace-switch ace-switch-6 entrar" type="checkbox" @if($equips[$c->grup[0]->id]['selected']) checked @endif />
-                                                                                        <span style="margin: -8px;" class="lbl"></span>
-                                                                                    </div>
+                                                                                    @foreach($c->grup as $g)
+                                                                                        <div class="form-group" style="max-width: 500px">
+                                                                                            <label style="margin: 30px;" for="nom">{{ $g->name }}</label>
+                                                                                            <input style="margin-top: 32px; margin-left: -11px;" id="{{ $g->id }}" class="ace ace-switch ace-switch-6 entrar" type="checkbox" @if($equips[$g->id]['selected']) checked @endif />
+                                                                                            <span style="margin: -8px;" class="lbl"></span>
+                                                                                        </div>
+                                                                                    @endforeach
                                                                                 </div>
                                                                             @endif
                                                                         </div>
@@ -124,69 +126,69 @@
                 </div>
             </div>
 
-            <div id="jumbotron-slider">
+            {{--<div id="jumbotron-slider">--}}
 
-                <!-- JUMBOTRON ITEM - START -->
-                <div class="item">
-                    <a href="single.html">
-                        <div class="overlay-wrapper">
-                            <img src="{{ asset('/images/image_001.jpg')}}" class="img-responsive" alt="">
-                            <span class="overlay"></span>
-                            <h2>Lorem Ipsum dolor<span>27 March 2014</span></h2>
-                        </div>
-                    </a>
-                </div>
-                <!-- JUMBOTRON ITEM - END -->
+                {{--<!-- JUMBOTRON ITEM - START -->--}}
+                {{--<div class="item">--}}
+                    {{--<a href="single.html">--}}
+                        {{--<div class="overlay-wrapper">--}}
+                            {{--<img src="{{ asset('/images/image_001.jpg')}}" class="img-responsive" alt="">--}}
+                            {{--<span class="overlay"></span>--}}
+                            {{--<h2>Lorem Ipsum dolor<span>27 March 2014</span></h2>--}}
+                        {{--</div>--}}
+                    {{--</a>--}}
+                {{--</div>--}}
+                {{--<!-- JUMBOTRON ITEM - END -->--}}
 
-                <!-- JUMBOTRON ITEM - START -->
-                <div class="item">
-                    <a href="single.html">
-                        <div class="overlay-wrapper">
-                            <img src="{{ asset('/images/image_002.jpg')}}" class="img-responsive" alt="">
-                            <span class="overlay"></span>
-                            <h2>Lorem Ipsum dolor<span>27 March 2014</span></h2>
-                        </div>
-                    </a>
-                </div>
-                <!-- JUMBOTRON ITEM - END -->
+                {{--<!-- JUMBOTRON ITEM - START -->--}}
+                {{--<div class="item">--}}
+                    {{--<a href="single.html">--}}
+                        {{--<div class="overlay-wrapper">--}}
+                            {{--<img src="{{ asset('/images/image_002.jpg')}}" class="img-responsive" alt="">--}}
+                            {{--<span class="overlay"></span>--}}
+                            {{--<h2>Lorem Ipsum dolor<span>27 March 2014</span></h2>--}}
+                        {{--</div>--}}
+                    {{--</a>--}}
+                {{--</div>--}}
+                {{--<!-- JUMBOTRON ITEM - END -->--}}
 
-                <!-- JUMBOTRON ITEM - START -->
-                <div class="item">
-                    <a href="single.html">
-                        <div class="overlay-wrapper">
-                            <img src="{{ asset('/images/image_003.jpg')}}" class="img-responsive" alt="">
-                            <span class="overlay"></span>
-                            <h2>Lorem Ipsum dolor<span>27 March 2014</span></h2>
-                        </div>
-                    </a>
-                </div>
-                <!-- JUMBOTRON ITEM - END -->
+                {{--<!-- JUMBOTRON ITEM - START -->--}}
+                {{--<div class="item">--}}
+                    {{--<a href="single.html">--}}
+                        {{--<div class="overlay-wrapper">--}}
+                            {{--<img src="{{ asset('/images/image_003.jpg')}}" class="img-responsive" alt="">--}}
+                            {{--<span class="overlay"></span>--}}
+                            {{--<h2>Lorem Ipsum dolor<span>27 March 2014</span></h2>--}}
+                        {{--</div>--}}
+                    {{--</a>--}}
+                {{--</div>--}}
+                {{--<!-- JUMBOTRON ITEM - END -->--}}
 
-                <!-- JUMBOTRON ITEM - START -->
-                <div class="item">
-                    <a href="single.html">
-                        <div class="overlay-wrapper">
-                            <img src="{{ asset('/images/image_004.jpg')}}" class="img-responsive" alt="">
-                            <span class="overlay"></span>
-                            <h2>Lorem Ipsum dolor<span>27 March 2014</span></h2>
-                        </div>
-                    </a>
-                </div>
-                <!-- JUMBOTRON ITEM - END -->
+                {{--<!-- JUMBOTRON ITEM - START -->--}}
+                {{--<div class="item">--}}
+                    {{--<a href="single.html">--}}
+                        {{--<div class="overlay-wrapper">--}}
+                            {{--<img src="{{ asset('/images/image_004.jpg')}}" class="img-responsive" alt="">--}}
+                            {{--<span class="overlay"></span>--}}
+                            {{--<h2>Lorem Ipsum dolor<span>27 March 2014</span></h2>--}}
+                        {{--</div>--}}
+                    {{--</a>--}}
+                {{--</div>--}}
+                {{--<!-- JUMBOTRON ITEM - END -->--}}
 
-                <!-- JUMBOTRON ITEM - START -->
-                <div class="item">
-                    <a href="single.html">
-                        <div class="overlay-wrapper">
-                            <img src="{{ asset('/images/image_005.jpg')}}" class="img-responsive" alt="">
-                            <span class="overlay"></span>
-                            <h2>Lorem Ipsum dolor<span>27 March 2014</span></h2>
-                        </div>
-                    </a>
-                </div>
-                <!-- JUMBOTRON ITEM - END -->
+                {{--<!-- JUMBOTRON ITEM - START -->--}}
+                {{--<div class="item">--}}
+                    {{--<a href="single.html">--}}
+                        {{--<div class="overlay-wrapper">--}}
+                            {{--<img src="{{ asset('/images/image_005.jpg')}}" class="img-responsive" alt="">--}}
+                            {{--<span class="overlay"></span>--}}
+                            {{--<h2>Lorem Ipsum dolor<span>27 March 2014</span></h2>--}}
+                        {{--</div>--}}
+                    {{--</a>--}}
+                {{--</div>--}}
+                {{--<!-- JUMBOTRON ITEM - END -->--}}
 
-            </div>
+            {{--</div>--}}
         </div>
     </div>
     <!-- ==========================

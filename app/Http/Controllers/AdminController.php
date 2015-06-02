@@ -61,14 +61,14 @@ class AdminController extends Controller {
         if(isset($id)){
             $data['usuaris'] = User::find($id);
             $data['js'] = array(
-                'edicions'
+                'usuaris'
             );
         }else {
             $data['usuaris'] = User::all();
             $data['js'] = array(
                 'jquery.dataTables.min',
                 'jquery.dataTables.bootstrap',
-                'edicions'
+                'usuaris'
             );
         }
 

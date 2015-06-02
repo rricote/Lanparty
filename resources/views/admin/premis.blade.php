@@ -138,7 +138,6 @@
                                             {{ $p->name }}
                                         </td>
 
-
                                         <td>
                                             {{ $p->patrocinador->name }}
                                         </td>
@@ -228,7 +227,7 @@
 
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                 <div class="form-group">
-                                    {!! Form::label('premis', 'Nom de la competició:', null, array('class' => 'control-label')) !!}
+                                    {!! Form::label('premis', 'Nom del premi:', null, array('class' => 'control-label')) !!}
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="icon-edit"></i></span>
                                         {!! Form::text('name', null, array('required', 'class' => 'form-control', 'placeholder' => 'Nom')) !!}

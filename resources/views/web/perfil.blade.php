@@ -65,6 +65,7 @@
 
         <div class="row">
             @foreach($competicionsgrups as $c)
+                @if(!empty($c->grup))
                 <div class="col-md-6">
                     <div class="box sidebar-box widget-wrapper">
                         <h3><a href="{{ url('competicio/' . $c->competicio->id) }}"> {{ $c->competicio->name }} </a></h3>
@@ -73,6 +74,7 @@
                         </ul>
                     </div>
                 </div>
+                @endif
             @endforeach
         </div>
 

@@ -74,6 +74,12 @@ Route::get('grup/{id}', 'PublicController@grup');
 
 Route::get('grup', 'PublicController@grup');
 
+Route::group(['prefix' => 'notificacio/equip'], function(){
+    Route::post('acceptar/{id}', 'PublicController@notificacioEquipAcceptar');
+    Route::post('cancelar/{id}', 'PublicController@notificacioEquipCancelar');
+    Route::post('llegida/{id}', 'PublicController@notificacioEquipLlegida');
+});
+
 /*
  * User
  */

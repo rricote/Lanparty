@@ -132,8 +132,13 @@
         <div class="header-title">
             <div class="pull-left">
                 <h2><a href="#"><span class="text-primary">LAN</span> Party</a></h2>
-                <p class="countdown-info">Institut de l'ebre 15-16 de maig de 2015, queda:</p>
-                <div class="countdown countdowninici"></div>
+                @if($config->data_inici > date('Y-m-d H:i:s'))
+                    <p class="countdown-info">Institut de l'ebre 15-16 de maig de 2015, queda:</p>
+                    <div class="countdown countdowninici"></div>
+                @else
+                    <p style="margin-bottom: 20px" class="countdown-info">Institut de l'ebre 15-16 de maig de 2015</p>
+                    <h2 style="margin-left: 30px; color: #bbbbbb;">Benvinguts</h2>
+                @endif
             </div>
         </div>
     </div>

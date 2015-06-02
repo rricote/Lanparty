@@ -105,6 +105,7 @@ class ValidatorGeneralController extends Controller {
     if(!(Notificacio::where('interesat', '=', Auth::user()->id)->where('destinatari', '=', $id)->where('tipus', '=', 0)->where('rao', '=', 0)->where(function($query){
         $query->where('estat', '=', 0);
         $query->where('estat', '=', 1, 'OR');
+        $query->where('estat', '=', 2, 'OR');
     })->count())){
 
         if($estat==1) {

@@ -409,3 +409,7 @@ input[type=checkbox].ace.ace-switch.ace-switch-7:checked + .lbl::after {
     background-color: #468fcc;
     color: #FFF
 }
+
+.btn-success{
+    border: 1px solid #449d44;
+}
