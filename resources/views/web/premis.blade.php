@@ -2,7 +2,7 @@
 
 @section('side')
 <!-- CONTENT BODY - START -->
-<div class="col-sm-8">
+<div class="col-xs-12 col-sm-8">
 
     <div class="box colored tournament-partner">
         <div class="row">

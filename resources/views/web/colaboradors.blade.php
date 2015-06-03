@@ -2,7 +2,7 @@
 
 @section('side')
     <!-- CONTENT BODY - START -->
-    <div class="col-sm-8">
+    <div class="col-xs-12 col-sm-8">
         <div class="box">
             <div class="row">
                 <h2 style="padding: 0 15px;">Col·laboradors GOLD</h2>

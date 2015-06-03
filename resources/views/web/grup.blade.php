@@ -2,7 +2,7 @@
 
 @section('side')
     <!-- CONTENT BODY - START -->
-    <div class="col-sm-8">
+    <div class="col-xs-12 col-sm-8">
 
         @if($id == null)
             <div class="box sidebar-box widget-wrapper">

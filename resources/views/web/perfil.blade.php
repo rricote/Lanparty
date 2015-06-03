@@ -41,27 +41,27 @@
             </div>
         </div>
 
-        <div class="box hardware">
-            <h2>Hardware</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="team-member">
-                        <ul class="list-unstyled">
-                            <li><strong>CPU</strong> </li>
-                            <li><strong>GPU:</strong> </li>
-                            <li><strong>RAM:</strong> </li>
-                            <li><strong>Screen:</strong> </li>
-                            <li><strong>Headset</strong> </li>
-                            <li><strong>Keyboard:</strong> </li>
-                            <li><strong>Mouse:</strong> </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <img src="{{ url('images/pc.jpg') }}" class="img-responsive center-block" alt="">
-                </div>
-            </div>
-        </div>
+        {{--<div class="box hardware">--}}
+            {{--<h2>Hardware</h2>--}}
+            {{--<div class="row">--}}
+                {{--<div class="col-md-6">--}}
+                    {{--<div class="team-member">--}}
+                        {{--<ul class="list-unstyled">--}}
+                            {{--<li><strong>CPU</strong> </li>--}}
+                            {{--<li><strong>GPU:</strong> </li>--}}
+                            {{--<li><strong>RAM:</strong> </li>--}}
+                            {{--<li><strong>Screen:</strong> </li>--}}
+                            {{--<li><strong>Headset</strong> </li>--}}
+                            {{--<li><strong>Keyboard:</strong> </li>--}}
+                            {{--<li><strong>Mouse:</strong> </li>--}}
+                        {{--</ul>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="col-md-6">--}}
+                    {{--<img src="{{ url('images/pc.jpg') }}" class="img-responsive center-block" alt="">--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
 
         <div class="row">
             @foreach($competicionsgrups as $c)

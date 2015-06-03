@@ -262,8 +262,7 @@ class PublicController extends Controller
     public function notificacioEquipAcceptar($id = null)
     {
         $notificacio = Notificacio::find($id);
-
-        $lloc = 'grup/' . $notificacio->destinatari;
+        $lloc = (Input::get('url'))? Input::get('url') : 'grup/' . $notificacio->destinatari;
 
         $grup = Grup::with('competicio')->find($notificacio->destinatari);
 
@@ -285,7 +284,7 @@ class PublicController extends Controller
     {
         $notificacio = Notificacio::find($id);
 
-        $lloc = 'grup/' . $notificacio->destinatari;
+        $lloc = (Input::get('url'))? Input::get('url') : 'grup/' . $notificacio->destinatari;
 
         if($notificacio->estat == 3)
             $notificacio->update([
@@ -304,7 +303,8 @@ class PublicController extends Controller
     {
         $notificacio = Notificacio::find($id);
 
-        $lloc = 'grup/' . $notificacio->destinatari;
+        $lloc = (Input::get('url'))? Input::get('url') : 'grup/' . $notificacio->destinatari;
+
         if($notificacio->estat == 2)
             $notificacio->update([
                 'estat' => 0
@@ -316,6 +316,36 @@ class PublicController extends Controller
 
         return Redirect::to($lloc)
             ->withFlashMessage('Inscrit correctament.');
+    }
+
+    public function notificacions(){
+        $grup = Grup::with('competicio')->whereHas('competicionsusersgrups', function ($q) {
+
+            $q->where('user_id', '=', Auth::user()->id);
+
+        })->whereHas('competicio', function ($q) {
+
+            $q->where('number', '!=', 1);
+
+        })->get();
+
+        $data['notificacions'] = array();
+        $i = 0;
+        foreach($grup as $g) {
+            if (Competicionsusersgrups::where('competicio_id', $g->competicio->id)->where('grup_id', $g->id)->count() < $g->competicio->number) {
+                $notificacions = Notificacio::where('destinatari', '=', $g->id)->where('tipus', '=', 0)->where('rao', '=', 0)->get();
+
+                foreach ($notificacions as $n) {
+                    $user = User::find($n->interesat);
+                    if ($user) {
+                        $data['notificacions'][$i]['user'] = $user;
+                        $data['notificacions'][$i]['notificacio'] = $n;
+                        $data['notificacions'][$i++]['grup'] = $g;
+                    }
+                }
+            }
+        }
+        return view('web.notificacions', $data);
     }
 
     public function grup($id = null)
@@ -341,7 +371,7 @@ class PublicController extends Controller
                             $user = User::find($n->interesat);
                             if($user) {
                                 $data['notificacions'][$i]['user'] = $user;
-                                $data['notificacions'][$i]['notificacio'] = $n;
+                                $data['notificacions'][$i++]['notificacio'] = $n;
                             }
                         }
                     }

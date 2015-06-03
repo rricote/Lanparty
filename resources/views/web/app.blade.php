@@ -114,6 +114,7 @@
                             <li><a href="{{ url('/admin') }}">Gestor del administrador</a></li>
                         @endif
                         <li><a href="{{ url('/perfil') }}">Perfil</a></li>
+                        <li><a href="{{ url('/notificacions') }}">Notificacions</a></li>
                         <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
                     </ul>
                 @endif

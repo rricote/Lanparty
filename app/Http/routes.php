@@ -17,6 +17,9 @@
 use App\Competicio;
 use App\Competicionsusersgrups;
 use App\Config;
+use App\Grup;
+use App\Notificacio;
+use App\User;
 
 View::composer(array('web.app', 'admin.app'), function($view)
 {
@@ -36,6 +39,35 @@ View::composer(array('web.sidebar'), function($view)
         $competicions[$i]['logo'] = $c->logo;
         $competicions[$i++]['count'] = Competicionsusersgrups::where('competicio_id', '=', $c->id)->count();
     }
+    if (!Auth::guest()) {
+        $grup = Grup::with('competicio')->whereHas('competicionsusersgrups', function ($q) {
+
+            $q->where('user_id', '=', Auth::user()->id);
+
+        })->whereHas('competicio', function ($q) {
+
+            $q->where('number', '!=', 1);
+
+        })->get();
+
+        $noti = array();
+        $i = 0;
+        foreach($grup as $g) {
+            if (Competicionsusersgrups::where('competicio_id', $g->competicio->id)->where('grup_id', $g->id)->count() < $g->competicio->number) {
+                $notificacions = Notificacio::where('destinatari', '=', $g->id)->where('tipus', '=', 0)->where('rao', '=', 0)->where('estat', '=', 0)->get();
+                foreach ($notificacions as $n) {
+                    $user = User::find($n->interesat);
+                    if ($user) {
+                        $noti[$i]['user'] = $user;
+                        $noti[$i]['notificacio'] = $n;
+                        $noti[$i++]['grup'] = $g;
+                    }
+                }
+            }
+        }
+    }
+    if($noti)
+        $view->with('not', $noti);
     $view->with('competicions', $competicions);
     $view->with('competicio', Competicio::where('edicio_id', '=', $config->edicio_id)->where('data_inici', '>', date('Y-m-d H:i:s'))->orderby('data_inici', 'asc')->first());
 
@@ -87,6 +119,8 @@ Route::group(['prefix' => 'notificacio/equip'], function(){
 Route::group(['middleware' => 'App\Http\Middleware\Authenticate'], function(){
 
     Route::get('perfil', 'PublicController@perfil');
+
+    Route::get('notificacions', 'PublicController@notificacions');
 
 });
 /*
