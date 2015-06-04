@@ -15,12 +15,6 @@ use Validator;
 class PublicController extends Controller
 {
 
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
 
@@ -347,6 +341,7 @@ class PublicController extends Controller
     }
 
     public function notificacions(){
+        $data = array();
         $grup = Grup::with('competicio')->whereHas('competicionsusersgrups', function ($q) {
 
             $q->where('user_id', '=', Auth::user()->id);
