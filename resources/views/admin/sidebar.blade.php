@@ -88,7 +88,13 @@
                 <b class="arrow icon-angle-down"></b>
             </a>
 
-            <ul class="submenu" @if ($menu == 'tokens' || $menu == 'config')style="display: block;"@endif>
+            <ul class="submenu" @if ($menu == 'tokens' || $menu == 'config' || $menu == 'assistencies')style="display: block;"@endif>
+                <li @if ($menu == 'assistencies')class="active"@endif>
+                    <a href="{{ url('/admin/assistencies') }}">
+                        <i class="icon-double-angle-right"></i>
+                        Calculador de numeros
+                    </a>
+                </li>
                 <li @if ($menu == 'config')class="active"@endif>
                     <a href="{{ url('/admin/config') }}">
                         <i class="icon-double-angle-right"></i>

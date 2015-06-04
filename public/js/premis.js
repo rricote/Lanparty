@@ -13,7 +13,10 @@ jQuery(function($) {
         //
     });
     $('.borrar').click(function(){
-        var tr = $(this).parent().parent().parent();
+        if($(this).attr('title'))
+            var tr = $(this).parent().parent().parent().parent().parent().parent();
+        else
+            var tr = $(this).parent().parent().parent();
         var link = url;
         spinner.spin(spin);
         $.ajax({

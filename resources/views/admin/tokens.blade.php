@@ -17,7 +17,7 @@
                     <a href="{{ url('/admin') }}">Home</a>
                 </li>
                 <li>Configuració</li>
-                <li class="active">Inicialitzar tokens</li>
+                <li class="active">Reiniciar tokens</li>
             </ul>
             <!-- .breadcrumb -->
         </div>
@@ -25,11 +25,12 @@
         <div class="page-content">
             <div class="page-header">
                 <h1>
-                    Inicialitzador de tokens
+                    Reinicialitzador de tokens
                 </h1>
             </div>
+
             <!-- /.page-header -->
-            <button id="inicialitzartots" class="btn btn-info">Inicialitzar tots</button>
+            <button id="inicialitzartots" class="btn btn-info">Reiniciar tots</button>
             <div class="row">
                 <div class="col-xs-12">
                     <!-- PAGE CONTENT BEGINS -->
@@ -51,21 +52,21 @@
                             <tbody id="tots">
                             @foreach($usuaris as $u)
                                 <tr>
-                                    <td id="id">{{$u->usu_id}}</td>
-                                    <td>{{$u->usu_nom}}</td>
-                                    <td>{{ $u->usu_cognom1 }} {{ $u->usu_cognom2 }}</td>
+                                    <td id="id">{{$u->id}}</td>
+                                    <td>{{$u->name}}</td>
+                                    <td>{{ $u->cognom1 }} {{ $u->cognom2 }}</td>
                                     <td class="hidden-480">
-                                        @if($u->est_id == 1)
+                                        @if($u->estat_id == 1)
                                             <span class="label label-sm label-warning">No validat/pagat</span>
                                         @else
                                             <span class="label label-sm label-success">Validat/pagat</span>
                                         @endif
                                     </td>
                                     <td>
-                                        {{ $u->usu_nick }}
+                                        {{ $u->username }}
                                     </td>
                                     <td class="hidden-480">
-                                        {{ $u->usu_correu }}
+                                        {{ $u->email }}
                                     </td>
 
                                     <td>

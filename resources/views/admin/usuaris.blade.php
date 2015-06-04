@@ -139,15 +139,12 @@
 
                                                             <td>
                                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                                    <a class="blue" href="#">
-                                                                        <i class="icon-zoom-in bigger-130"></i>
-                                                                    </a>
 
                                                                     <a class="green" href="#">
                                                                         <i class="icon-pencil bigger-130"></i>
                                                                     </a>
 
-                                                                    <a class="red" href="#">
+                                                                    <a id="{{ $u->id }}" class="red" href="#">
                                                                         <i class="icon-trash bigger-130"></i>
                                                                     </a>
                                                                 </div>
@@ -159,13 +156,6 @@
                                                                         </button>
 
                                                                         <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                                            <li>
-                                                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                                                    <span class="blue">
-                                                                                        <i class="icon-zoom-in bigger-120"></i>
-                                                                                    </span>
-                                                                                </a>
-                                                                            </li>
 
                                                                             <li>
                                                                                 <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
@@ -176,7 +166,7 @@
                                                                             </li>
 
                                                                             <li>
-                                                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                                <a id="{{ $u->id }}" href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
                                                                                     <span class="red">
                                                                                         <i class="icon-trash bigger-120"></i>
                                                                                     </span>

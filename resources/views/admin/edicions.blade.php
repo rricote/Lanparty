@@ -91,6 +91,7 @@
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         {!! Form::label('arxiu', 'Cartell de la edició:', null, array('class' => 'control-label')) !!}
+                                        <img style="max-width: 250px; margin-bottom: 10px;" alt="logo" src="{{ url('images/cartell/' . $edicions->cartell) }}" />
                                         {!! Form::file('image', array('id' => 'input-image')) !!}
                                     </div>
                                 </div>
@@ -142,9 +143,6 @@
 
                                         <td>
                                             <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                <a class="blue" href="#veure" data-toggle="modal">
-                                                    <i class="icon-zoom-in bigger-130"></i>
-                                                </a>
 
                                                 <a class="green" href="{{ url('admin/edicions/' . $e->id) }}" data-toggle="modal">
                                                     <i class="icon-pencil bigger-130"></i>
@@ -162,13 +160,6 @@
                                                     </button>
 
                                                     <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                        <li>
-                                                            <a href="#veure" class="tooltip-info" data-rel="tooltip" title="View" data-toggle="modal">
-                                                                <span class="blue">
-                                                                    <i class="icon-zoom-in bigger-120"></i>
-                                                                </span>
-                                                            </a>
-                                                        </li>
 
                                                         <li>
                                                             <a href="{{ url('admin/edicions/' . $e->id) }}" class="tooltip-success" data-rel="tooltip" title="Edit" data-toggle="modal">
@@ -188,7 +179,6 @@
                                                     </ul>
                                                 </div>
                                             </div>
-
                                         </td>
                                     </tr>
                                 @endforeach

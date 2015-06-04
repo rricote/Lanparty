@@ -43,6 +43,8 @@
     <link rel="stylesheet" href="{{ asset('css/ace-fonts.css')}}" />
     <!-- ace styles -->
     <link rel="stylesheet" href="{{ asset('css/ace.min.css')}}" />
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui-1.10.3.full.min.css')}}" />
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui-1.10.3.custom.min.css')}}" />
     <link rel="stylesheet" href="{{ asset('css/ace-rtl.min.css')}}" />
     <link rel="stylesheet" href="{{ asset('css/ace-skins.min.css')}}" />
     <link rel="stylesheet" href="{{ asset('css/jquery.gritter.css')}}" />

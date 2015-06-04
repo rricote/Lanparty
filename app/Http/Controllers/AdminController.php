@@ -68,6 +68,7 @@ class AdminController extends Controller {
             $data['js'] = array(
                 'jquery.dataTables.min',
                 'jquery.dataTables.bootstrap',
+                'jquery.maskedinput.min',
                 'usuaris'
             );
         }
@@ -871,12 +872,80 @@ class AdminController extends Controller {
     {
         $data = array();
         $data['menu'] = 'assistencies';
+
+        $config = Config::find(1);
+
+        $data['motius'] = array();
+
+        $motius = Motiu::where('edicio_id', $config->edicio_id)->get();
+
+        foreach($motius as $m)
+            $data['motius'][$m->id] = $m->name;
+
         $data['js'] = array(
             'jquery.dataTables.min',
             'jquery.dataTables.bootstrap',
+            'bootstrap-timepicker.min',
+            'bootstrap-datepicker.min',
             'assistencies'
         );
         return view('admin.assistencies', $data);
+    }
+
+    public function assistenciesCalcul()
+    {
+
+        $rules = array(
+            'datepicker'    => 'required',
+            'timepicker'    => 'required',
+            'motiu'    => 'required',
+            'inici'    => 'required',
+            'final'    => 'required'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('admin/assistencies')
+                ->withErrors($validator);
+        } else {
+            $seconds = $minutes = $hours = 0;
+
+            $final = Input::get('final');
+
+            $inici = Input::get('inici');
+
+            $str_time = Input::get('timepicker');
+
+            sscanf($str_time, "%d:%d:%d", $hours, $minutes, $seconds);
+
+            $time_seconds = $hours * 3600 + $minutes * 60 + $seconds;
+
+            echo $time_seconds;
+
+            $user = User::all();
+
+            $datainici = Input::get('timepicker');
+
+            if($inici < 10)
+                $datainici .= ' 0' . $inici . ':00:00';
+            else
+                $datainici .= ' ' . $inici . ':00:00';
+
+            $datafinal = Input::get('timepicker') . ' ';
+
+            if($final < 10)
+                $datafinal .= ' 0' . $final . ':00:00';
+            else
+                $datafinal .= ' ' . $final . ':00:00';
+
+            foreach($user as $u){
+
+            }
+
+            /*return Redirect::to('admin/assistencies')
+                ->withFlashMessage('Calculat correctament');*/
+        }
     }
 
     public function config()
@@ -937,7 +1006,7 @@ class AdminController extends Controller {
     {
         $data = array();
         $data['menu'] = 'tokens';
-        $data['usuaris'] = User::where('ultratoken', '=', '')->get();
+        $data['usuaris'] = User::all();
 
         $data['js'] = array(
             'tokens'

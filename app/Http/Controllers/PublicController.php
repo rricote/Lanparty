@@ -61,6 +61,34 @@ class PublicController extends Controller
                         $data['equips'][$g->id]['selected'] = Notificacio::where('interesat', '=', Auth::user()->id)->where('destinatari', '=', $g->id)->where('tipus', '=', 0)->where('rao', '=', 0)->where('estat', '=', 0)->count();
                 }
             }
+
+            $grup = Grup::with('competicio')->whereHas('competicionsusersgrups', function ($q) {
+
+                $q->where('user_id', '=', Auth::user()->id);
+
+            })->whereHas('competicio', function ($q) {
+
+                $q->where('number', '!=', 1);
+
+            })->get();
+
+            $noti = array();
+            $i = 0;
+            foreach($grup as $g) {
+                if (Competicionsusersgrups::where('competicio_id', $g->competicio->id)->where('grup_id', $g->id)->count() < $g->competicio->number) {
+                    $notificacions = Notificacio::where('destinatari', '=', $g->id)->where('tipus', '=', 0)->where('rao', '=', 0)->where('estat', '=', 0)->get();
+                    foreach ($notificacions as $n) {
+                        $user = User::find($n->interesat);
+                        if ($user) {
+                            $noti[$i]['user'] = $user;
+                            $noti[$i]['notificacio'] = $n;
+                            $noti[$i++]['grup'] = $g;
+                        }
+                    }
+                }
+            }
+            if($noti)
+                $data['not'] = $noti;
         }
 
         $data['patrocinadors'] = Patrocinador::where('edicio_id', '=', $config->edicio_id)->where('tipus', '=', '3')->get();

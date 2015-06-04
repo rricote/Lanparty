@@ -1,5 +1,8 @@
 jQuery(function($) {
-    $('#taula-patrocinadors').dataTable();
+
+    if ($('#taula-patrocinadors').length > 0) {
+        $('#taula-patrocinadors').dataTable();
+    }
     $('#input-image').ace_file_input({
         no_file: 'Cap arxiu ...',
         btn_choose: 'Elegeix',
@@ -13,7 +16,10 @@ jQuery(function($) {
         //
     });
     $('.borrar').click(function(){
-        var tr = $(this).parent().parent().parent();
+        if($(this).attr('title'))
+            var tr = $(this).parent().parent().parent().parent().parent().parent();
+        else
+            var tr = $(this).parent().parent().parent();
         var link = url;
         spinner.spin(spin);
         $.ajax({

@@ -1,5 +1,6 @@
 jQuery(function($) {
-    $('#taula-edicions').dataTable();
+    if ($('#taula-edicions').length > 0)
+        $('#taula-edicions').dataTable();
     $('#input-image').ace_file_input({
         no_file: 'Cap arxiu ...',
         btn_choose: 'Elegeix',
@@ -13,8 +14,11 @@ jQuery(function($) {
         //
     });
     $('.borrar').click(function(){
-        var tr = $(this).parent().parent().parent();
         var link = url;
+        if($(this).attr('title'))
+            var tr = $(this).parent().parent().parent().parent().parent().parent();
+        else
+            var tr = $(this).parent().parent().parent();
         spinner.spin(spin);
         $.ajax({
             type: "delete",
@@ -66,5 +70,6 @@ jQuery(function($) {
                 spinner.stop();
             }
         });
+
     });
 });

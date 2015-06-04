@@ -207,6 +207,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\AdminMid
 
     Route::get('/assistencies', 'AdminController@assistencies');
 
+    Route::post('/assistecies/calcul', 'AdminController@assistenciesCalcul');
+
     Route::get('/tokens', 'AdminController@tokens');
 
     Route::get('/app/assistencies/entrada', function(){
