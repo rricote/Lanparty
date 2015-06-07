@@ -66,8 +66,9 @@ View::composer(array('web.sidebar'), function($view)
             }
         }
     }
-    if($noti)
-        $view->with('not', $noti);
+    if(isset($noti))
+        if($noti)
+            $view->with('not', $noti);
     $view->with('competicions', $competicions);
     $view->with('competicio', Competicio::where('edicio_id', '=', $config->edicio_id)->where('data_inici', '>', date('Y-m-d H:i:s'))->orderby('data_inici', 'asc')->first());
 

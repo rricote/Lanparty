@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Assignacio;
 use App\Assistencia;
 use App\Edicio;
 use App\Estat;
@@ -916,30 +917,76 @@ class AdminController extends Controller {
 
             $time_seconds = $hours * 3600 + $minutes * 60 + $seconds;
 
-            echo $time_seconds;
-
             $user = User::all();
 
-            $datainici = Input::get('timepicker');
+            list($dia,$mes,$any) = explode('-', Input::get('datepicker'));
 
             if($inici < 10)
-                $datainici .= ' 0' . $inici . ':00:00';
+                $datainici = $any . '-' . $mes . '-' . $dia . ' 0' . $inici . ':00:00';
             else
-                $datainici .= ' ' . $inici . ':00:00';
-
-            $datafinal = Input::get('timepicker') . ' ';
+                $datainici = $any . '-' . $mes . '-' . $dia . ' ' . $inici . ':00:00';
 
             if($final < 10)
-                $datafinal .= ' 0' . $final . ':00:00';
+                $datafinal = $any . '-' . $mes . '-' . $dia . ' 0' . $final . ':00:00';
             else
-                $datafinal .= ' ' . $final . ':00:00';
+                $datafinal = $any . '-' . $mes . '-' . $dia . ' ' . $final . ':00:00';
+
+            $msg = '';
 
             foreach($user as $u){
+                $assistencies = Assistencia::where('user_id', '=', $u->id)->where('created_at', '>=', $datainici)->where('created_at', '<=', $datafinal)->get();
 
+                $inicial = '';
+                $temp = 0;
+                $total = 0;
+
+                foreach($assistencies as $a){
+
+                    if($temp == 0 && $a->accio == 'SORTIDA'){
+                        $inicial = $datainici;
+                        $temp = 1;
+                    }
+
+                    if($a->accio == 'ENTRADA'){
+                        $inicial = $a->created_at;
+                        $temp = 1;
+                    }
+
+                    if($a->accio == 'SORTIDA'){
+                        $total += (strtotime($a->created_at) - strtotime($inicial));
+                        $temp = 0;
+                    }
+                }
+                if($temp) {
+                    $total += (strtotime($datafinal) - strtotime($inicial));
+                }
+
+                if(Assignacio::where('user_id', '=', $u->id)->where('motiu_id', '=', Input::get('motiu'))->count()) {
+
+                    if ($total < $time_seconds) {
+                        Assignacio::where('user_id', '=', $u->id)->where('motiu_id', '=', Input::get('motiu'))->delete();
+                        $msg .= 'A l\'usuari ' . $u->username . ' se li borra la seva assignació per incumplir la nova condició.<br>';
+                    } else {
+                        $msg .= 'A l\'usuari ' . $u->username . ' se li deixa com esta la seva assignació per cumplir la nova condició.<br>';
+                    }
+
+                } else {
+
+                    if ($total >= $time_seconds) {
+                        Assignacio::create([
+                            'user_id' => $u->id,
+                            'motiu_id' => Input::get('motiu')
+                        ]);
+                        $msg .= 'A l\'usuari ' . $u->username . ' se li crea l\'assignació per cumplir la condició.<br>';
+                    } else {
+                        $msg .= 'A l\'usuari ' . $u->username . ' no se li crea l\'assignació per incumplir la condició.<br>';
+                    }
+
+                }
             }
 
-            /*return Redirect::to('admin/assistencies')
-                ->withFlashMessage('Calculat correctament');*/
+            return Redirect::to('admin/assistencies')
+                ->withFlashMessage($msg);
         }
     }
 

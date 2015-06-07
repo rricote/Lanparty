@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Config;
 use App\Http\Controllers\Controller;
 use App\Assistencia;
 use App\User;
@@ -28,10 +29,6 @@ class AssistenciesController extends Controller {
 		//
 	}
 
-    private function isInteger($input){
-        return(ctype_digit(strval($input)));
-    }
-
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -39,6 +36,8 @@ class AssistenciesController extends Controller {
 	 */
 	public function store()
 	{
+        $config = Config::find(1);
+
         $id = Request::input('array');
 
         if($usuari = User::where('ultratoken', '=', $id)->count()){
@@ -52,8 +51,10 @@ class AssistenciesController extends Controller {
                     $assistencia = new Assistencia;
                     $assistencia->accio = 'ENTRADA';
                     $assistencia->user_id = $id;
+                    $assistencia->edicio_id = $config->edicio_id;
                     $assistencia->save();
 
+                    $final = 'ENTRADA';
                 }else{
 
                     $assistencia = Assistencia::orderby('created_at', 'desc')->first();
@@ -62,21 +63,23 @@ class AssistenciesController extends Controller {
                         $assistencia = new Assistencia;
                         $assistencia->accio = 'SORTIDA';
                         $assistencia->user_id = $id;
+                        $assistencia->edicio_id = $config->edicio_id;
                         $assistencia->save();
                     }else{
                         $assistencia = new Assistencia;
                         $assistencia->accio = 'ENTRADA';
                         $assistencia->user_id = $id;
+                        $assistencia->edicio_id = $config->edicio_id;
                         $assistencia->save();
                     }
                     $final = $assistencia->accio;
                 }
 
             }else
-                $final = 'ERROR:2';
+                $final = 'El compte no esta validat, passa per la taula';
 
         }else
-            $final = 'ERROR:1';
+            $final = 'Error al processar el token';
 
         return $final;
 	}

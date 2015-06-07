@@ -22,4 +22,9 @@ class Assistencia extends Model {
         return $this->belongsTo('App\Edicio');
     }
 
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
 }

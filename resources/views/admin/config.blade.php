@@ -16,7 +16,7 @@
                     <i class="icon-home home-icon"></i>
                     <a href="{{ url('/admin') }}">Home</a>
                 </li>
-                <li class="active">Competicions</li>
+                <li class="active">Configuració del sistema</li>
             </ul>
             <!-- .breadcrumb -->
             <!--

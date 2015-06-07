@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Config;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -24,11 +25,13 @@ class ValidacioController extends Controller {
         } catch (Exception $e) {
             return 'no';
         }
+        $config = Config::find(1);
         if(Request::input('estat') == 2){
             if(!Assistencia::where('user_id', '=', $id)->count()){
                 $assistencies = new Assistencia;
                 $assistencies->accio = 'ENTRADA';
                 $assistencies->user_id = $id;
+                $assistencies->edicio_id = $config->edicio_id;
                 $assistencies->save();
             }else{
                 $assistencies = Assistencia::orderby('created_at', 'desc')->first();
@@ -36,6 +39,7 @@ class ValidacioController extends Controller {
                     $assistencies = new Assistencia;
                     $assistencies->accio = 'ENTRADA';
                     $assistencies->user_id = $id;
+                    $assistencies->edicio_id = $config->edicio_id;
                     $assistencies->save();
                 }
             }
@@ -46,6 +50,7 @@ class ValidacioController extends Controller {
                     $assistencies = new Assistencia;
                     $assistencies->accio = 'SORTIDA';
                     $assistencies->user_id = $id;
+                    $assistencies->edicio_id = $config->edicio_id;
                     $assistencies->save();
                 }
             }

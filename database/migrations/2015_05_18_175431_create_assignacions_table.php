@@ -18,6 +18,7 @@ class CreateAssignacionsTable extends Migration {
             $table->integer('user_id');
             $table->integer('motiu_id');
             $table->integer('premi_id');
+            $table->integer('edicio_id');
             $table->timestamps();
         });
 	}

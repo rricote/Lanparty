@@ -140,7 +140,7 @@
                                                             <td>
                                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 
-                                                                    <a class="green" href="#">
+                                                                    <a class="green" href="{{ url('admin/usuaris/' . $u->id) }}">
                                                                         <i class="icon-pencil bigger-130"></i>
                                                                     </a>
 
@@ -158,7 +158,7 @@
                                                                         <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
 
                                                                             <li>
-                                                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                                <a href="{{ url('admin/usuaris/' . $u->id) }}" class="tooltip-success" data-rel="tooltip" title="Edit">
                                                                                     <span class="green">
                                                                                         <i class="icon-edit bigger-120"></i>
                                                                                     </span>
@@ -166,7 +166,7 @@
                                                                             </li>
 
                                                                             <li>
-                                                                                <a id="{{ $u->id }}" href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                                <a id="{{ $u->id }}" class="tooltip-error" data-rel="tooltip" title="Delete">
                                                                                     <span class="red">
                                                                                         <i class="icon-trash bigger-120"></i>
                                                                                     </span>
