@@ -215,9 +215,13 @@ class PublicController extends Controller
             return Redirect::to($lloc)
                 ->withFlashMessage('Ja estas desinscrit.');
 
+
         $competi = Competicionsusersgrups::where('user_id', '=', Auth::user()->id)->where('competicio_id', '=', $id)->first();
 
         $grupId = $competi->grup_id;
+
+        if (Notificacio::where('tipus', '=', 0)->where('destinatari', '=', $grupId)->where('interesat', '=', Auth::user()->id)->count())
+            Notificacio::where('tipus', '=', 0)->where('destinatari', '=', $grupId)->where('interesat', '=', Auth::user()->id)->delete();
 
         $competi->delete();
 

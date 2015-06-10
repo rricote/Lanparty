@@ -72,6 +72,41 @@ class AdminController extends Controller {
         return view('admin.usuaris', $data);
     }
 
+    public function usuarisEditar($id = null)
+    {
+        $rules = array(
+            'editardni'    => 'required',
+            'editarnom'    => 'required',
+            'editarcognom1'    => 'required',
+            'editarcognom2'    => 'required',
+            'editarusername'    => 'required',
+            'email'    => 'required|email',
+            'editarpassword'    => 'required|confirmed'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('admin/usuaris/' . $id)
+                ->withErrors($validator);
+        } else {
+
+            User::find($id)->update([
+                'dni' => Input::get('editardni'),
+                'name' => Input::get('editarnom'),
+                'cognom1' => Input::get('editarcognom1'),
+                'cognom2' => Input::get('editarcognom2'),
+                'username' => Input::get('editarusername'),
+                'email' => Input::get('email'),
+                'password' => Input::get('editarpassword')
+            ]);
+
+            return Redirect::to('admin/usuaris')
+                ->withFlashMessage('Usuari actualitzat correctament');
+
+        }
+    }
+
     public function competicions($id = null)
     {
         $data = array();
@@ -1040,6 +1075,57 @@ class AdminController extends Controller {
             ]);
             return Redirect::to('admin/config')
                 ->withFlashMessage('Configuració actualitzada correctament');
+
+        }
+    }
+
+    public function assignacions()
+    {
+        $data = array();
+        $data['menu'] = 'assignacions';
+
+        $config = Config::find(1);
+
+        $data['motius'] = array();
+
+        $motius = Motiu::where('edicio_id', $config->edicio_id)->get();
+
+        foreach($motius as $m)
+            $data['motius'][$m->id] = $m->name;
+
+        $usuaris = User::all();
+
+        foreach($usuaris as $u)
+            $data['usuaris'][$u->id] = $u->name;
+
+        return view('admin.assignacions', $data);
+    }
+
+    public function assignacionsCrear()
+    {
+        $rules = array(
+            'usuaris'    => 'required',
+            'motius'    => 'required'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('admin/assignacions')
+                ->withErrors($validator);
+        } else {
+            $msg = '';
+            if(!Assignacio::where('user_id', Input::get('usuaris'))->where('motiu_id', Input::get('motius'))->count()) {
+                Assignacio::create([
+                    'user_id' => Input::get('usuaris'),
+                    'motiu_id' => Input::get('motius')
+                ]);
+                $msg = 'Assignació creada correctament';
+            }else{
+                $msg = 'Assignació ja existent';
+            }
+            return Redirect::to('admin/assignacions')
+                ->withFlashMessage($msg);
 
         }
     }

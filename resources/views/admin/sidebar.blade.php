@@ -80,6 +80,13 @@
             </a>
         </li>
 
+        <li @if ($menu == 'assignacions')class="active"@endif>
+            <a href="{{ url('/admin/assignacions') }}">
+                <i class="icon-group"></i>
+                <span class="menu-text"> Assignacions </span>
+            </a>
+        </li>
+
         <li>
             <a href="#" class="dropdown-toggle">
                 <i class="icon-cog"></i>
@@ -104,7 +111,7 @@
                 <li @if ($menu == 'tokens')class="active"@endif>
                     <a href="{{ url('/admin/tokens') }}">
                         <i class="icon-double-angle-right"></i>
-                        Inicialitzar tokens
+                        Reinicialitzador de tokens
                     </a>
                 </li>
             </ul>
@@ -125,12 +132,12 @@
                         Control entrada
                     </a>
                 </li>
-                <li @if ($menu == 'sorteig')class="active"@endif>
-                    <a href="{{ url('/admin/app/sorteig') }}">
-                        <i class="icon-double-angle-right"></i>
-                        Sortejador
-                    </a>
-                </li>
+                {{--<li @if ($menu == 'sorteig')class="active"@endif>--}}
+                    {{--<a href="{{ url('/admin/app/sorteig') }}">--}}
+                        {{--<i class="icon-double-angle-right"></i>--}}
+                        {{--Sortejador--}}
+                    {{--</a>--}}
+                {{--</li>--}}
             </ul>
         </li>
     </ul><!-- /.nav-list -->

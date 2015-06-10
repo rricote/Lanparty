@@ -138,6 +138,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\AdminMid
 
     Route::get('/usuaris', 'AdminController@usuaris');
 
+    Route::get('/usuaris/{id}', 'AdminController@usuaris');
+
+    Route::post('/usuaris/editar/{id}', 'AdminController@usuarisEditar');
+
     Route::get('/competicions', 'AdminController@competicions');
 
     Route::get('/competicions/{id}', 'AdminController@competicions');
@@ -205,6 +209,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\AdminMid
     Route::get('/config', 'AdminController@config');
 
     Route::post('/config/editar', 'AdminController@configEditar');
+
+    Route::get('/assignacions', 'AdminController@assignacions');
+
+    Route::post('/assignacions/crear', 'AdminController@assignacionsCrear');
 
     Route::get('/assistencies', 'AdminController@assistencies');
 

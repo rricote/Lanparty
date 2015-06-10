@@ -10,11 +10,11 @@
 <body id="bodycolor" style="background-color: #add8e6">
 <div id="result" name="dynamicContent" >
 
-    <div style="width: 35%;
+    <div style="width: 60%;
                 height: 10%;
                 margin: auto;
                 position: absolute;
-                top: 0; left: -200px; bottom: 0; right: 0;
+                top: 0; left: 0px; bottom: 0; right: 0;
                 font-size: 700%;
                 ;
                 "
@@ -36,7 +36,7 @@
             success: function (data) {
                 if (data == 'ENTRADA') {
                     console.log(data);
-                    var text = '<div style="width: 30%; height: 10%; margin: auto; position: absolute; top: 0; left: -200px; bottom: 0; right: 0; font-size: 700%;" id="result">';
+                    var text = '<div style="width: 40%; height: 10%; margin: auto; position: absolute; top: 0; left: -200px; bottom: 0; right: 0; font-size: 700%;" id="result">';
                     text = text + data;
                     text = text + '</div>';
                     $("#result").html(text);
@@ -44,14 +44,14 @@
                 } else {
                     if (data == 'SORTIDA') {
                         console.log(data);
-                        var text = '<div style="width: 30%; height: 10%; margin: auto; position: absolute; top: 0; left: -200px; bottom: 0; right: 0; font-size: 700%;" id="result">';
+                        var text = '<div style="width: 40%; height: 10%; margin: auto; position: absolute; top: 0; left: -200px; bottom: 0; right: 0; font-size: 700%;" id="result">';
                         text = text + data;
                         text = text + '</div>';
                         $("#result").html(text);
                         $("#bodycolor").css('background-color', '#98FB98');
                     } else {
                         console.log(data);
-                        var text = '<div style="width: 40%; height: 10%; margin: auto; position: absolute; top: 0; left: -200px; bottom: 0; right: 0; font-size: 700%;" id="result">';
+                        var text = '<div style="width: 60%; height: 10%; margin: auto; position: absolute; top: 0; left: 0px; bottom: 0; right: 0; font-size: 700%;" id="result">';
                         text = text + data;
                         text = text + '</div>';
                         $("#result").html(text);
@@ -60,7 +60,7 @@
                 }
                 setTimeout(function(){
                     $("#bodycolor").css('background-color', '#add8e6');
-                    text = '<div style="width: 35%; height: 10%; margin: auto; position: absolute; top: 0; left: -200px; bottom: 0; right: 0; font-size: 700%;" id="result">Esperant qr...</div>';
+                    text = '<div style="width: 60%; height: 10%; margin: auto; position: absolute; top: 0; left: 0px; bottom: 0; right: 0; font-size: 700%;" id="result">Esperant qr...</div>';
                     $("#result").html(text);
                 }, 1500);
             }

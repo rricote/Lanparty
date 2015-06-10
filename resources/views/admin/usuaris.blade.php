@@ -55,6 +55,112 @@
                     @endif
 
                     @if(isset($id))
+                        <h2 class="header blue">
+                            Editar Usuari
+                        </h2>
+                        @if (count($errors) > 0)
+                            <div class="col-xs-12">
+                                <div class="alert alert-danger">
+                                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        @endif
+
+                        {!! Form::open(array('url' => 'admin/usuaris/editar/' . $id)) !!}
+
+                        <div class="col-xs-12">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label" for="dni">DNI:</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="icon-edit"></i></span>
+                                        <input type="text" class="form-control input-mask-dni" id="editardni" name="editardni" value="{{ $usuaris->dni }}" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label" for="nom">Nom:</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="icon-user"></i></span>
+                                        <input type="text" class="form-control" id="editarnom" name="editarnom" value="{{ $usuaris->name }}" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label" for="cognom1">Primer cognom:</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="icon-user"></i></span>
+                                        <input type="text" class="form-control" id="editarcognom1" name="editarcognom1" value="{{ $usuaris->cognom1 }}" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label" for="cognom2">Segon cognom:</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="icon-user"></i></span>
+                                        <input type="text" class="form-control" id="editarcognom2" name="editarcognom2" value="{{ $usuaris->cognom2 }}" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label" for="username">Nickname:</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="icon-desktop"></i></span>
+                                        <input type="text" class="form-control" id="editarusername" name="editarusername" value="{{ $usuaris->username }}" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label" for="email">Email:</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">@</span>
+                                        <input type="email" class="form-control" id="editaremail" name="email" value="{{ $usuaris->email }}" />
+                                        <span id="icono" class="input-group-addon"><i class="icon-unchecked"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label" for="password">Contrasenya:</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="icon-edit"></i></span>
+                                        <input type="password" class="form-control" id="editarpassword" name="editarpassword" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label" for="password">Repeteix la contrasenya:</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="icon-edit"></i></span>
+                                        <input type="password" class="form-control" id="editarpassword_confirmation" name="editarpassword_confirmation">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            {!! Form::submit('Editar', array( 'class' => 'btn btn-info')) !!}
+                        </div>
+
+                        {!! Form::close() !!}
+                    </div>
 
                     @else
                         <div class="col-xs-12 col-lg-offset-2 col-lg-8">
