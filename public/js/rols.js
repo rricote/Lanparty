@@ -39,7 +39,7 @@ jQuery(function($) {
                         class_name: 'gritter-light'
                     });
                 }
-                spinner.close();
+                spinner.stop();
             },
             error: function(){
                 var unique_id = $.gritter.add({
@@ -54,7 +54,7 @@ jQuery(function($) {
                     // (string | optional) the class name you want to apply to that specific message
                     class_name: 'gritter-light'
                 });
-                spinner.close();
+                spinner.stop();
             }
         });
     });

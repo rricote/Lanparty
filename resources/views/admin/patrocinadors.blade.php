@@ -241,7 +241,7 @@
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                 <div class="form-group">
                                     {!! Form::label('tipus', 'Tipus de patrocinador:', null, array('class' => 'control-label')) !!}
-                                    {!! Form::select('tipus', array('1' => 'Bronze', '2' => 'Silver', '3' => 'Bronze'), '1',array('class' => 'form-control')) !!}
+                                    {!! Form::select('tipus', array('1' => 'Bronze', '2' => 'Silver', '3' => 'Gold'), '1',array('class' => 'form-control')) !!}
                                 </div>
                             </div>
 

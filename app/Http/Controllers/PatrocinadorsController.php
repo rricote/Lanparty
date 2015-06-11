@@ -5,7 +5,7 @@ use App\Patrocinador;
 use Illuminate\Support\Facades\File;
 use Request;
 
-class CompeticionsController extends Controller {
+class PatrocinadorsController extends Controller {
 
     /**
      * Display a listing of the resource.

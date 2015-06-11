@@ -245,7 +245,7 @@ Route::group(['prefix' => 'api'], function(){
 
     Route::resource('/admin/users','UsersController');
 
-    Route::resource('/admin/competicions','CompeticionsController');
+    Route::resource('/admin/competicions','CompeticioController');
 
     Route::resource('/admin/edicions','EdicionsController');
 

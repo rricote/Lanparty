@@ -5,7 +5,7 @@ use App\Competicio;
 use Illuminate\Support\Facades\File;
 use Request;
 
-class CompeticionsController extends Controller {
+class CompeticioController extends Controller {
 
     /**
      * Display a listing of the resource.

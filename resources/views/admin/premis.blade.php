@@ -139,7 +139,9 @@
                                         </td>
 
                                         <td>
-                                            {{ $p->patrocinador->name }}
+                                            @if($p->patrocinador)
+                                                {{ $p->patrocinador->name }}
+                                            @endif
                                         </td>
 
                                         <td class="hidden-480">

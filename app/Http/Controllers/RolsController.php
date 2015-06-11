@@ -4,7 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Rol;
 use Request;
 
-class MotiusController extends Controller {
+class RolsController extends Controller {
 
     /**
      * Display a listing of the resource.

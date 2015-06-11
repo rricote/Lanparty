@@ -61,10 +61,10 @@
                     <div class="box sidebar-box widget-wrapper">
                         <h2>Enllaços d'interes</h2>
                         <div style="text-align: center;">
-                            <a style="margin:10px; min-width: 120px;" href="http://lanparty.dev/competicions" class="btn btn-primary">Competicions</a>
-                            <a style="margin:10px; min-width: 120px;" href="http://lanparty.dev/colaboradors" class="btn btn-primary">Col·laboradors</a>
-                            <a style="margin:10px; min-width: 120px;" href="http://lanparty.dev/premis" class="btn btn-primary">Premis</a>
-                            <a style="margin:10px; min-width: 120px;" href="http://lanparty.dev/cartell" class="btn btn-primary">Cartell</a>
+                            <a style="margin:10px; min-width: 120px;" href="{{url('competicions')}}" class="btn btn-primary">Competicions</a>
+                            <a style="margin:10px; min-width: 120px;" href="{{url('colaboradors')}}" class="btn btn-primary">Col·laboradors</a>
+                            <a style="margin:10px; min-width: 120px;" href="{{url('premis')}}" class="btn btn-primary">Premis</a>
+                            <a style="margin:10px; min-width: 120px;" href="{{url('cartell')}}" class="btn btn-primary">Cartell</a>
                         </div>
                     </div>
                 </div>
