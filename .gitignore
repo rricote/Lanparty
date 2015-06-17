@@ -5,6 +5,7 @@
 .env.php
 .env
 .idea
+.idea/
 .idea/*
 .idea/LanpartyAPI.iml
 .idea/workspace.xml
