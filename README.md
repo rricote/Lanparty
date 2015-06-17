@@ -4,4 +4,4 @@
 [![Build Status](https://scrutinizer-ci.com/g/rricote/Lanparty/badges/build.png?b=master)](https://scrutinizer-ci.com/g/rricote/Lanparty/build-status/master)
 
 # License
-Copyright [year] [fullname]
+Copyright 2015 Rafael Ricote lajusticia
