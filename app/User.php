@@ -41,13 +41,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsTo('App\Rol');
     }
 
-    public function competitionsusersgrups()
+    public function competitionsusersgroups()
     {
-        return $this->hasMany('App\Competitionsusersgrups');
+        return $this->hasMany('App\Competitionsusersgroups');
     }
 
-    public function assistencies()
+    public function assistances()
     {
-        return $this->hasMany('App\Assistencia');
+        return $this->hasMany('App\Assistance');
     }
 }

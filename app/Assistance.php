@@ -2,24 +2,24 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Assistencia extends Model {
+class Assistance extends Model {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'assistencies';
+    protected $table = 'assistances';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['accio', 'user_id', 'edicio_id'];
+    protected $fillable = ['accio', 'user_id', 'edition_id'];
 
-    public function edicio()
+    public function edition()
     {
-        return $this->belongsTo('App\Edicio');
+        return $this->belongsTo('App\Edition');
     }
 
     public function user()

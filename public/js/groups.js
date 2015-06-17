@@ -1,35 +1,22 @@
 jQuery(function($) {
-    if ($('#taula-edicions').length > 0)
-        $('#taula-edicions').dataTable();
-    $('#input-image').ace_file_input({
-        no_file: 'Cap arxiu ...',
-        btn_choose: 'Elegeix',
-        btn_change: 'Canvia',
-        droppable: false,
-        onchange: null,
-        thumbnail: false //| true | large
-        //whitelist:'gif|png|jpg|jpeg'
-        //blacklist:'exe|php'
-        //onchange:''
-        //
-    });
+    $('#taula-groups').dataTable();
     $('.borrar').click(function(){
-        var link = url;
         if($(this).attr('title'))
             var tr = $(this).parent().parent().parent().parent().parent().parent();
         else
             var tr = $(this).parent().parent().parent();
+        var link = url;
         spinner.spin(spin);
         $.ajax({
             type: "delete",
-            url: link + 'api/admin/edicions/' + $(this).attr('id'),
+            url: link + 'api/admin/groups/' + $(this).attr('id'),
             success: function(data) {
                 if(data == 'CORRECTE'){
                     var unique_id = $.gritter.add({
                         // (string | mandatory) the heading of the notification
                         title: 'Correcte',
                         // (string | mandatory) the text inside the notification
-                        text: 'La edició s\'ha borrat correctament',
+                        text: 'El grup s\'ha borrat correctament',
                         // (bool | optional) if you want it to fade out on its own or just sit there
                         sticky: false,
                         // (int | optional) the time you want it to be alive for before fading out
@@ -43,7 +30,7 @@ jQuery(function($) {
                         // (string | mandatory) the heading of the notification
                         title: 'Error',
                         // (string | mandatory) the text inside the notification
-                        text: 'Ha hagut algun problema al borrar la edició',
+                        text: 'Ha hagut algun problema al borrar el grup',
                         // (bool | optional) if you want it to fade out on its own or just sit there
                         sticky: false,
                         // (int | optional) the time you want it to be alive for before fading out
@@ -59,7 +46,7 @@ jQuery(function($) {
                     // (string | mandatory) the heading of the notification
                     title: 'Error',
                     // (string | mandatory) the text inside the notification
-                    text: 'Ha hagut algun problema al borrar la edició',
+                    text: 'Ha hagut algun problema al borrar el grup',
                     // (bool | optional) if you want it to fade out on its own or just sit there
                     sticky: false,
                     // (int | optional) the time you want it to be alive for before fading out
@@ -70,6 +57,5 @@ jQuery(function($) {
                 spinner.stop();
             }
         });
-
     });
 });

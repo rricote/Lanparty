@@ -7,30 +7,30 @@
             <h4>Tens aquestes notificacions:<a class="anchorjs-link"><span class="anchorjs-icon"></span></a></h4>
 
             <ul class="list-unstyled" style="margin-bottom: 20px;">
-                @foreach($notificacions as $n)
+                @foreach($notifications as $n)
                         <li>
-                            @if($n['notificacio']->state == 0 || $n['notificacio']->state == 2)
+                            @if($n['notification']->state == 0 || $n['notification']->state == 2)
                             <div style="border-top: 1px solid #EFEFEF; padding: 10px 0px; height: 66px;">
                                 <a style="margin-left: 2px;" target="_blank" href="{{url('perfil/' . $n['user']->id)}}">{{ $n['user']->username }}</a>
                                 &nbsp;vol entrar a&nbsp;
-                                <a style="margin: 0px;" target="_blank" href="{{url('grup/' . $n['grup']->id)}}">{{ $n['grup']->name }}</a>
+                                <a style="margin: 0px;" target="_blank" href="{{url('group/' . $n['group']->id)}}">{{ $n['group']->name }}</a>
                                 &nbsp;de&nbsp;
-                                <a style="margin: 0px;" target="_blank" href="{{url('competicio/' . $n['grup']->competicio->id)}}">{{ $n['grup']->competicio->name }}</a>
+                                <a style="margin: 0px;" target="_blank" href="{{url('competicio/' . $n['group']->competicio->id)}}">{{ $n['group']->competicio->name }}</a>
                                 <span style="float: right;">
-                                    @if($n['notificacio']->state == 2 || $n['notificacio']->state == 0)
-                                        {!! Form::open(array('url' => 'notificacio/equip/acceptar/' . $n['notificacio']->id, 'style'=>'display: inline;')) !!}
+                                    @if($n['notification']->state == 2 || $n['notification']->state == 0)
+                                        {!! Form::open(array('url' => 'notification/equip/acceptar/' . $n['notification']->id, 'style'=>'display: inline;')) !!}
                                         <input type="hidden" name="url" value="{{ Request::url() }}">
                                         <button style="margin: 0px 2px;" type="submit" class="btn btn-success">Acceptar</button>
                                         {!! Form::close() !!}
                                     @endif
-                                    {!! Form::open(array('url' => 'notificacio/equip/cancelar/' . $n['notificacio']->id, 'style' => 'display: inline;')) !!}
+                                    {!! Form::open(array('url' => 'notification/equip/cancelar/' . $n['notification']->id, 'style' => 'display: inline;')) !!}
                                     <input type="hidden" name="url" value="{{ Request::url() }}">
-                                    <button style="margin: 0px 2px;" type="submit" class="btn btn-danger">@if($n['notificacio']->state == 3) Descancel·lar @else Cancel·lar @endif</button>
+                                    <button style="margin: 0px 2px;" type="submit" class="btn btn-danger">@if($n['notification']->state == 3) Descancel·lar @else Cancel·lar @endif</button>
                                     {!! Form::close() !!}
-                                    @if($n['notificacio']->state == 2 || $n['notificacio']->state == 0)
-                                        {!! Form::open(array('url' => 'notificacio/equip/llegida/' . $n['notificacio']->id, 'style' => 'display: inline;')) !!}
+                                    @if($n['notification']->state == 2 || $n['notification']->state == 0)
+                                        {!! Form::open(array('url' => 'notification/equip/llegida/' . $n['notification']->id, 'style' => 'display: inline;')) !!}
                                         <input type="hidden" name="url" value="{{ Request::url() }}">
-                                        <button style="margin: 0px 2px;" type="submit" class="btn btn-info">@if($n['notificacio']->state == 2) Desmarcar llegida @else Marcar llegida @endif</button>
+                                        <button style="margin: 0px 2px;" type="submit" class="btn btn-info">@if($n['notification']->state == 2) Desmarcar llegida @else Marcar llegida @endif</button>
                                         {!! Form::close() !!}
                                     @endif
                                 </span>

@@ -77,7 +77,7 @@
                     <li><a href="http://www.iesebre.com/" target="_blank">Institut de l'ebre</a></li>
                     <li><a href="#">Streaming de la LAN Party</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $config->edicio->name }}</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $config->edition->name }}</a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ url('programa') }}"><i class="fa fa-plus"></i>Programa</a></li>
                             <li><a href="{{ url('competicions') }}"><i class="fa fa-plus"></i>Competicions</a></li>
@@ -114,7 +114,7 @@
                             <li><a href="{{ url('/admin') }}">Gestor del administrador</a></li>
                         @endif
                         <li><a href="{{ url('/perfil') }}">Perfil</a></li>
-                        <li><a href="{{ url('/notificacions') }}">Notificacions</a></li>
+                        <li><a href="{{ url('/notifications') }}">Notificacions</a></li>
                         <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
                     </ul>
                 @endif

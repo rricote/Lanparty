@@ -64,13 +64,13 @@
         {{--</div>--}}
 
         <div class="row">
-            @foreach($competicionsgrups as $c)
-                @if(!empty($c->grup))
+            @foreach($competicionsgroups as $c)
+                @if(!empty($c->group))
                 <div class="col-md-6">
                     <div class="box sidebar-box widget-wrapper">
                         <h3><a href="{{ url('competicio/' . $c->competicio->id) }}"> {{ $c->competicio->name }} </a></h3>
                         <ul class="nav nav-sidebar">
-                            <li><a @if($c->competicio->number != 1) href="{{ url('grup/' . $c->grup->id) }}" @endif>{{ $c->grup->name }}</a></li>
+                            <li><a @if($c->competicio->number != 1) href="{{ url('group/' . $c->group->id) }}" @endif>{{ $c->group->name }}</a></li>
                         </ul>
                     </div>
                 </div>

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEdicionsTable extends Migration {
+class CreateAssistancesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,13 @@ class CreateEdicionsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('edicions', function(Blueprint $table)
+		Schema::create('assistances', function(Blueprint $table)
 		{
             $table->increments('id');
-            $table->string('name');
-            $table->string('cartell');
-			$table->timestamps();
+            $table->string('accio');
+            $table->integer('user_id');
+            $table->integer('edition_id');
+            $table->timestamps();
 		});
 	}
 
@@ -28,7 +29,7 @@ class CreateEdicionsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('edicions');
+        Schema::drop('assistances');
 	}
 
 }

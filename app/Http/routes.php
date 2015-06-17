@@ -15,10 +15,10 @@
  * Public
  */
 use App\Competition;
-use App\Competitionsusersgrups;
+use App\Competitionsusersgroups;
 use App\Config;
-use App\Grup;
-use App\Notificacio;
+use App\Group;
+use App\Notification;
 use App\User;
 
 View::composer(array('web.app', 'admin.app'), function($view)
@@ -30,17 +30,17 @@ View::composer(array('web.app', 'admin.app'), function($view)
 View::composer(array('web.sidebar'), function($view)
 {
     $config = Config::find(1);
-    $compi = Competition::where('edicio_id', '=', $config->edicio_id)->get();
+    $compi = Competition::where('edition_id', '=', $config->edition_id)->get();
     $i = 0;
     $competitions = array();
     foreach($compi as $c){
         $competitions[$i]['id'] = $c->id;
         $competitions[$i]['name'] = $c->name;
         $competitions[$i]['logo'] = $c->logo;
-        $competitions[$i++]['count'] = Competitionsusersgrups::where('competition_id', '=', $c->id)->count();
+        $competitions[$i++]['count'] = Competitionsusersgroups::where('competition_id', '=', $c->id)->count();
     }
     if (!Auth::guest()) {
-        $grup = Grup::with('competition')->whereHas('competitionsusersgrups', function ($q) {
+        $group = Group::with('competition')->whereHas('competitionsusersgroups', function ($q) {
 
             $q->where('user_id', '=', Auth::user()->id);
 
@@ -52,15 +52,15 @@ View::composer(array('web.sidebar'), function($view)
 
         $noti = array();
         $i = 0;
-        foreach($grup as $g) {
-            if (Competitionsusersgrups::where('competition_id', $g->competition->id)->where('grup_id', $g->id)->count() < $g->competition->number) {
-                $notificacions = Notificacio::where('destinatari', '=', $g->id)->where('tipus', '=', 0)->where('rao', '=', 0)->where('state', '=', 0)->get();
-                foreach ($notificacions as $n) {
+        foreach($group as $g) {
+            if (Competitionsusersgroups::where('competition_id', $g->competition->id)->where('group_id', $g->id)->count() < $g->competition->number) {
+                $notifications = Notification::where('destinatari', '=', $g->id)->where('tipus', '=', 0)->where('rao', '=', 0)->where('state', '=', 0)->get();
+                foreach ($notifications as $n) {
                     $user = User::find($n->interesat);
                     if ($user) {
                         $noti[$i]['user'] = $user;
-                        $noti[$i]['notificacio'] = $n;
-                        $noti[$i++]['grup'] = $g;
+                        $noti[$i]['notification'] = $n;
+                        $noti[$i++]['group'] = $g;
                     }
                 }
             }
@@ -70,7 +70,7 @@ View::composer(array('web.sidebar'), function($view)
         if($noti)
             $view->with('not', $noti);
     $view->with('competitions', $competitions);
-    $view->with('competition', Competition::where('edicio_id', '=', $config->edicio_id)->where('data_inici', '>', date('Y-m-d H:i:s'))->orderby('data_inici', 'asc')->first());
+    $view->with('competition', Competition::where('edition_id', '=', $config->edition_id)->where('data_inici', '>', date('Y-m-d H:i:s'))->orderby('data_inici', 'asc')->first());
 
 });
 
@@ -103,14 +103,14 @@ Route::get('contacta', 'PublicController@contacta');
 
 Route::get('perfil/{id}', 'PublicController@perfil');
 
-Route::get('grup/{id}', 'PublicController@grup');
+Route::get('group/{id}', 'PublicController@group');
 
-Route::get('grup', 'PublicController@grup');
+Route::get('group', 'PublicController@group');
 
-Route::group(['prefix' => 'notificacio/equip'], function(){
-    Route::post('acceptar/{id}', 'PublicController@notificacioEquipAcceptar');
-    Route::post('cancelar/{id}', 'PublicController@notificacioEquipCancelar');
-    Route::post('llegida/{id}', 'PublicController@notificacioEquipLlegida');
+Route::group(['prefix' => 'notification/equip'], function(){
+    Route::post('acceptar/{id}', 'PublicController@notificationEquipAcceptar');
+    Route::post('cancelar/{id}', 'PublicController@notificationEquipCancelar');
+    Route::post('llegida/{id}', 'PublicController@notificationEquipLlegida');
 });
 
 /*
@@ -121,7 +121,7 @@ Route::group(['middleware' => 'App\Http\Middleware\Authenticate'], function(){
 
     Route::get('perfil', 'PublicController@perfil');
 
-    Route::get('notificacions', 'PublicController@notificacions');
+    Route::get('notifications', 'PublicController@notifications');
 
 });
 /*
@@ -150,13 +150,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\AdminMid
 
     Route::post('/competitions/editar/{id}', 'AdminController@competitionsEditar');
 
-    Route::get('/edicions', 'AdminController@edicions');
+    Route::get('/editions', 'AdminController@editions');
 
-    Route::get('/edicions/{id}', 'AdminController@edicions');
+    Route::get('/editions/{id}', 'AdminController@editions');
 
-    Route::post('/edicions/afegir', 'AdminController@edicionsAfegir');
+    Route::post('/editions/afegir', 'AdminController@editionsAfegir');
 
-    Route::post('/edicions/editar/{id}', 'AdminController@edicionsEditar');
+    Route::post('/editions/editar/{id}', 'AdminController@editionsEditar');
 
     Route::get('/states', 'AdminController@states');
 
@@ -166,13 +166,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\AdminMid
 
     Route::post('/states/editar/{id}', 'AdminController@statesEditar');
 
-    Route::get('/grups', 'AdminController@grups');
+    Route::get('/groups', 'AdminController@groups');
 
-    Route::get('/grups/{id}', 'AdminController@grups');
+    Route::get('/groups/{id}', 'AdminController@groups');
 
-    Route::post('/grups/afegir', 'AdminController@grupsAfegir');
+    Route::post('/groups/afegir', 'AdminController@groupsAfegir');
 
-    Route::post('/grups/editar/{id}', 'AdminController@grupsEditar');
+    Route::post('/groups/editar/{id}', 'AdminController@groupsEditar');
 
     Route::get('/motives', 'AdminController@motives');
 
@@ -210,18 +210,18 @@ Route::group(['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\AdminMid
 
     Route::post('/config/editar', 'AdminController@configEditar');
 
-    Route::get('/assignacions', 'AdminController@assignacions');
+    Route::get('/assignments', 'AdminController@assignments');
 
-    Route::post('/assignacions/crear', 'AdminController@assignacionsCrear');
+    Route::post('/assignments/crear', 'AdminController@assignmentsCrear');
 
-    Route::get('/assistencies', 'AdminController@assistencies');
+    Route::get('/assistances', 'AdminController@assistances');
 
-    Route::post('/assistecies/calcul', 'AdminController@assistenciesCalcul');
+    Route::post('/assistances/calcul', 'AdminController@assistancesCalcul');
 
     Route::get('/tokens', 'AdminController@tokens');
 
-    Route::get('/app/assistencies/entrada', function(){
-        return view('control.assistencies.entrada');
+    Route::get('/app/assistances/entrada', function(){
+        return view('control.assistances.entrada');
     });
 
     Route::get('/app/sorteig', function(){
@@ -241,17 +241,17 @@ Route::controllers([
 
 Route::group(['prefix' => 'api'], function(){
 
-    Route::resource('/control/assistencies','AssistenciesController');
+    Route::resource('/control/assistances','AssistancesController');
 
     Route::resource('/admin/users','UsersController');
 
     Route::resource('/admin/competitions','CompetitionController');
 
-    Route::resource('/admin/edicions','EdicionsController');
+    Route::resource('/admin/editions','EditionsController');
 
     Route::resource('/admin/states','StatesController');
 
-    Route::resource('/admin/grups','GrupsController');
+    Route::resource('/admin/groups','GroupsController');
 
     Route::resource('/admin/motives','MotivesController');
 
@@ -271,6 +271,6 @@ Route::group(['prefix' => 'api'], function(){
 
     Route::post('competition/change/{id}', 'ValidatorGeneralController@competitionChange');
 
-    Route::post('notificacio/change/{id}', 'ValidatorGeneralController@notificacioChange');
+    Route::post('notification/change/{id}', 'ValidatorGeneralController@notificationChange');
 });
 

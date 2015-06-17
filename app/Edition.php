@@ -2,14 +2,14 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Edicio extends Model {
+class Edition extends Model {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'edicions';
+    protected $table = 'editions';
 
     /**
      * The attributes that are mass assignable.
@@ -23,14 +23,14 @@ class Edicio extends Model {
         return $this->hasOne('App\Config');
     }
 
-    public function assignacio()
+    public function assignment()
     {
-        return $this->hasOne('App\Assignacio');
+        return $this->hasOne('App\Assignment');
     }
 
-    public function assistencia()
+    public function assistance()
     {
-        return $this->hasOne('App\Assistencia');
+        return $this->hasOne('App\Assistance');
     }
 
     public function competition()

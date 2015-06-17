@@ -1,11 +1,11 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Edicio;
+use App\Edition;
 use Illuminate\Support\Facades\File;
 use Request;
 
-class EdicionsController extends Controller {
+class EditionsController extends Controller {
 
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class EdicionsController extends Controller {
      */
     public function index()
     {
-        $edicions = Edicio::all();
-        return $edicions;
+        $editions = Edition::all();
+        return $editions;
     }
 
     /**
@@ -79,11 +79,11 @@ class EdicionsController extends Controller {
      */
     public function destroy($id)
     {
-        $edicio = Edicio::find($id);
+        $edition = Edition::find($id);
 
-        File::delete('images/cartell/' . $edicio->cartell);
+        File::delete('images/cartell/' . $edition->cartell);
 
-        Edicio::destroy($id);
+        Edition::destroy($id);
 
         return "CORRECTE";
     }

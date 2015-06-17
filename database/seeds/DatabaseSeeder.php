@@ -2,7 +2,7 @@
 
 use App\Competicio;
 use App\Config;
-use App\Edicio;
+use App\Edition;
 use App\State;
 use App\Sponsor;
 use App\Rol;
@@ -37,9 +37,9 @@ class DatabaseSeeder extends Seeder {
 
         $this->command->info('User table seeded!');
 
-        $this->call('EdicioTableSeeder');
+        $this->call('EditionTableSeeder');
 
-        $this->command->info('Edicio table seeded!');
+        $this->command->info('Edition table seeded!');
 
         $this->call('ConfigTableSeeder');
 
@@ -109,18 +109,18 @@ class ConfigTableSeeder extends Seeder {
             'email' => 'lanparty@iesebre.com',
             'descripcio' => 'Organització de jocs tal cual',
             'direccio' => 'avinguda tal',
-            'edicio_id' => 1
+            'edition_id' => 1
         ]);
     }
 
 }
 
-class EdicioTableSeeder extends Seeder {
+class EditionTableSeeder extends Seeder {
 
     public function run()
     {
 
-        Edicio::create([
+        Edition::create([
             'name' => 'Edició exemple',
             'cartell' => 'cartell.png'
         ]);
@@ -139,7 +139,7 @@ class CompeticioTableSeeder extends Seeder {
             'number' => 5,
             'link' => '',
             'data_inici' => date('Y-m-d H:i:s'),
-            'edicio_id' => 1
+            'edition_id' => 1
         ]);
 
         Competicio::create([
@@ -149,7 +149,7 @@ class CompeticioTableSeeder extends Seeder {
             'number' => 1,
             'link' => '',
             'data_inici' => date('Y-m-d H:i:s'),
-            'edicio_id' => 1
+            'edition_id' => 1
         ]);
 
         Competicio::create([
@@ -159,7 +159,7 @@ class CompeticioTableSeeder extends Seeder {
             'number' => 1,
             'link' => '',
             'data_inici' => date('Y-m-d H:i:s'),
-            'edicio_id' => 1
+            'edition_id' => 1
         ]);
 
         Competicio::create([
@@ -169,7 +169,7 @@ class CompeticioTableSeeder extends Seeder {
             'number' => 1,
             'link' => '',
             'data_inici' => date('Y-m-d H:i:s'),
-            'edicio_id' => 1
+            'edition_id' => 1
         ]);
 
         Competicio::create([
@@ -179,7 +179,7 @@ class CompeticioTableSeeder extends Seeder {
             'number' => 2,
             'link' => '',
             'data_inici' => date('Y-m-d H:i:s'),
-            'edicio_id' => 1
+            'edition_id' => 1
         ]);
 
         Competicio::create([
@@ -189,7 +189,7 @@ class CompeticioTableSeeder extends Seeder {
             'number' => 2,
             'link' => '',
             'data_inici' => date('Y-m-d H:i:s'),
-            'edicio_id' => 1
+            'edition_id' => 1
         ]);
     }
 
@@ -203,21 +203,21 @@ class SponsorsTableSeeder extends Seeder {
             'name' => 'Intel',
             'tipus' => 3,
             'logo' => 'prova1.png',
-            'edicio_id' => 1
+            'edition_id' => 1
         ]);
 
         Sponsor::create([
             'name' => 'Twitch',
             'tipus' => 1,
             'logo' => 'prova2.png',
-            'edicio_id' => 1
+            'edition_id' => 1
         ]);
 
         Sponsor::create([
             'name' => 'Benq',
             'tipus' => 2,
             'logo' => 'prova3.png',
-            'edicio_id' => 1
+            'edition_id' => 1
         ]);
     }
 

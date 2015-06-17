@@ -130,7 +130,7 @@
                                             </td>
 
                                             <td>
-                                                {{ $m->edicio->name }}
+                                                {{ $m->edition->name }}
                                             </td>
 
                                             <td>

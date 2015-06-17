@@ -16,10 +16,10 @@ class Motive extends Model {
      *
      * @var array
      */
-    protected $fillable = ['name','edicio_id'];
+    protected $fillable = ['name','edition_id'];
 
-    public function edicio()
+    public function edition()
     {
-        return $this->belongsTo('App\Edicio');
+        return $this->belongsTo('App\Edition');
     }
 }

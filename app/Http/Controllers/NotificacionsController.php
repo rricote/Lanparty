@@ -1,10 +1,10 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Notificacio;
+use App\Notification;
 use Request;
 
-class NotificacionsController extends Controller {
+class NotificationsController extends Controller {
 
     /**
      * Display a listing of the resource.
@@ -13,8 +13,8 @@ class NotificacionsController extends Controller {
      */
     public function index()
     {
-        $notificacions = Notificacio::all();
-        return $notificacions;
+        $notifications = Notification::all();
+        return $notifications;
     }
 
     /**
@@ -79,7 +79,7 @@ class NotificacionsController extends Controller {
     public function destroy($id)
     {
 
-        Notificacio::destroy($id);
+        Notification::destroy($id);
 
         return "CORRECTE";
     }

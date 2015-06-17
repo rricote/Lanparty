@@ -16,7 +16,7 @@
                     <i class="icon-home home-icon"></i>
                     <a href="{{ url('/admin') }}">Home</a>
                 </li>
-                <li class="active">Edicions</li>
+                <li class="active">Grups</li>
             </ul>
             <!-- .breadcrumb -->
             <!--
@@ -37,7 +37,7 @@
             @if(!isset($id))
             <div class="page-header">
                 <h1>
-                    Edicions
+                    Grups
                 </h1>
             </div>
             <!-- /.page-header -->
@@ -59,7 +59,7 @@
 
                         <div class="col-xs-12">
                             <h2 class="header blue">
-                                Editar Edició
+                                Editar Grup
                             </h2>
                             @if (count($errors) > 0)
                                 <div class="col-xs-12">
@@ -74,25 +74,17 @@
                                 </div>
                             @endif
 
-                            {!! Form::open(array('url' => 'admin/edicions/editar/' . $id, 'files'=>true)) !!}
+                            {!! Form::open(array('url' => 'admin/groups/editar/' . $id)) !!}
 
                             <div class="col-xs-12">
 
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                     <div class="form-group">
-                                        {!! Form::label('edicio', 'Nom de la edició:', null, array('class' => 'control-label')) !!}
+                                        {!! Form::label('group', 'Nom del grup:', null, array('class' => 'control-label')) !!}
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="icon-edit"></i></span>
-                                            {!! Form::text('name', $edicions->name, array('required', 'class' => 'form-control', 'placeholder' => 'Nom')) !!}
+                                            {!! Form::text('name', $groups->name, array('required', 'class' => 'form-control', 'placeholder' => 'Nom')) !!}
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                                    <div class="form-group">
-                                        {!! Form::label('arxiu', 'Cartell de la edició:', null, array('class' => 'control-label')) !!}
-                                        <img style="max-width: 250px; margin-bottom: 10px;" alt="logo" src="{{ url('images/cartell/' . $edicions->cartell) }}" />
-                                        {!! Form::file('image', array('id' => 'input-image')) !!}
                                     </div>
                                 </div>
                             </div>
@@ -105,11 +97,11 @@
                     @else
                     <div class="col-xs-12">
                         <div class="table-header">
-                            Llistat de totes les edicions
+                            Llistat de totes els grups
                         </div>
 
                         <div class="table-responsive">
-                            <table id="taula-edicions" class="table table-striped table-bordered table-hover">
+                            <table id="taula-groups" class="table table-striped table-bordered table-hover">
                                 <thead>
                                 <tr>
                                     <th class="center">
@@ -119,12 +111,12 @@
                                         </label>
                                     </th>
                                     <th>Nom</th>
-                                    <th>Cartell</th>
+                                    <th>Edició</th>
                                     <th>Accions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($edicions as $e)
+                                @foreach ($groups as $g)
                                     <tr>
                                         <td class="center">
                                             <label>
@@ -134,21 +126,21 @@
                                         </td>
 
                                         <td>
-                                            {{ $e->name }}
+                                            {{ $g->name }}
                                         </td>
 
                                         <td>
-                                            <img style="max-width: 40px;" src="{{ url('images/cartell/' . $e->cartell) }}" alt="cartell{{ $e->name }}">
+                                            {{ $g->edition->name }}
                                         </td>
 
                                         <td>
                                             <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 
-                                                <a class="green" href="{{ url('admin/edicions/' . $e->id) }}" data-toggle="modal">
+                                                <a class="green" href="{{ url('admin/groups/' . $g->id) }}" data-toggle="modal">
                                                     <i class="icon-pencil bigger-130"></i>
                                                 </a>
 
-                                                <a id="{{ $e->id }}" class="red borrar">
+                                                <a id="{{ $g->id }}" class="red borrar">
                                                     <i class="icon-trash bigger-130"></i>
                                                 </a>
                                             </div>
@@ -162,7 +154,7 @@
                                                     <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
 
                                                         <li>
-                                                            <a href="{{ url('admin/edicions/' . $e->id) }}" class="tooltip-success" data-rel="tooltip" title="Edit" data-toggle="modal">
+                                                            <a href="{{ url('admin/groups/' . $g->id) }}" class="tooltip-success" data-rel="tooltip" title="Edit" data-toggle="modal">
                                                                 <span class="green">
                                                                     <i class="icon-edit bigger-120"></i>
                                                                 </span>
@@ -170,7 +162,7 @@
                                                         </li>
 
                                                         <li>
-                                                            <a id="{{ $e->id }}" class="tooltip-error borrar" data-rel="tooltip" title="Delete">
+                                                            <a id="{{ $g->id }}" class="tooltip-error borrar" data-rel="tooltip" title="Delete">
                                                                 <span class="red">
                                                                     <i class="icon-trash bigger-120"></i>
                                                                 </span>
@@ -179,6 +171,7 @@
                                                     </ul>
                                                 </div>
                                             </div>
+
                                         </td>
                                     </tr>
                                 @endforeach
@@ -190,7 +183,7 @@
 
                     <div class="col-xs-12">
                         <h2 class="header blue">
-                            Afegir Edició
+                            Afegir Grup
                         </h2>
                         @if (count($errors) > 0)
                             <div class="col-xs-12">
@@ -205,24 +198,17 @@
                             </div>
                         @endif
 
-                        {!! Form::open(array('url' => 'admin/edicions/afegir', 'files'=>true)) !!}
+                        {!! Form::open(array('url' => 'admin/groups/afegir')) !!}
 
                         <div class="col-xs-12">
 
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                 <div class="form-group">
-                                    {!! Form::label('edicio', 'Nom de la edició:', null, array('class' => 'control-label')) !!}
+                                    {!! Form::label('group', 'Nom del grup:', null, array('class' => 'control-label')) !!}
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="icon-edit"></i></span>
                                         {!! Form::text('name', null, array('required', 'class' => 'form-control', 'placeholder' => 'Nom')) !!}
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                                <div class="form-group">
-                                    {!! Form::label('arxiu', 'Cartell de la edició:', null, array('class' => 'control-label')) !!}
-                                    {!! Form::file('image', array('id' => 'input-image')) !!}
                                 </div>
                             </div>
                         </div>
@@ -233,6 +219,7 @@
                         {!! Form::close() !!}
                     </div>
                     @endif
+
                 </div>
                 <!-- /.col -->
             </div>

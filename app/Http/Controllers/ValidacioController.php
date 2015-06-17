@@ -5,7 +5,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\User;
-use App\Assistencia;
+use App\Assistance;
 use Request;
 
 class ValidacioController extends Controller {
@@ -27,31 +27,31 @@ class ValidacioController extends Controller {
         }
         $config = Config::find(1);
         if(Request::input('state') == 2){
-            if(!Assistencia::where('user_id', '=', $id)->count()){
-                $assistencies = new Assistencia;
-                $assistencies->accio = 'ENTRADA';
-                $assistencies->user_id = $id;
-                $assistencies->edicio_id = $config->edicio_id;
-                $assistencies->save();
+            if(!Assistance::where('user_id', '=', $id)->count()){
+                $assistances = new Assistance;
+                $assistances->accio = 'ENTRADA';
+                $assistances->user_id = $id;
+                $assistances->edition_id = $config->edition_id;
+                $assistances->save();
             }else{
-                $assistencies = Assistencia::orderby('created_at', 'desc')->first();
-                if($assistencies->accio == 'SORTIDA'){
-                    $assistencies = new Assistencia;
-                    $assistencies->accio = 'ENTRADA';
-                    $assistencies->user_id = $id;
-                    $assistencies->edicio_id = $config->edicio_id;
-                    $assistencies->save();
+                $assistances = Assistance::orderby('created_at', 'desc')->first();
+                if($assistances->accio == 'SORTIDA'){
+                    $assistances = new Assistance;
+                    $assistances->accio = 'ENTRADA';
+                    $assistances->user_id = $id;
+                    $assistances->edition_id = $config->edition_id;
+                    $assistances->save();
                 }
             }
         } else {
-            if(Assistencia::where('user_id', '=', $id)->count()){
-                $assistencies = Assistencia::orderby('created_at', 'desc')->first();
-                if($assistencies->accio == 'ENTRADA'){
-                    $assistencies = new Assistencia;
-                    $assistencies->accio = 'SORTIDA';
-                    $assistencies->user_id = $id;
-                    $assistencies->edicio_id = $config->edicio_id;
-                    $assistencies->save();
+            if(Assistance::where('user_id', '=', $id)->count()){
+                $assistances = Assistance::orderby('created_at', 'desc')->first();
+                if($assistances->accio == 'ENTRADA'){
+                    $assistances = new Assistance;
+                    $assistances->accio = 'SORTIDA';
+                    $assistances->user_id = $id;
+                    $assistances->edition_id = $config->edition_id;
+                    $assistances->save();
                 }
             }
         }

@@ -16,7 +16,7 @@ class Competition extends Model {
      *
      * @var array
      */
-    protected $fillable = ['name', 'logo', 'imatge', 'number', 'state', 'link', 'data_inici', 'edicio_id'];
+    protected $fillable = ['name', 'logo', 'imatge', 'number', 'state', 'link', 'data_inici', 'edition_id'];
 
     public function competitionsusersgroups()
     {
@@ -28,9 +28,9 @@ class Competition extends Model {
         return $this->hasMany('App\Group');
     }
 
-    public function edicio()
+    public function edition()
     {
-        return $this->belongsTo('App\Edicio');
+        return $this->belongsTo('App\Edition');
     }
 
     /*

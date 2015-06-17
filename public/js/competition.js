@@ -78,7 +78,7 @@ $( ".entrar" ).change(function () {
     var check = ($(this).prop('checked'))? 1: 2;
     $.ajax({
         type: "post",
-        url: link + 'api/notificacio/change/' + id,
+        url: link + 'api/notification/change/' + id,
         data: { state: check },
         success: function(data) {
             if(data == 1){

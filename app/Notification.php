@@ -2,14 +2,14 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Notificacio extends Model {
+class Notification extends Model {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'notificacions';
+    protected $table = 'notifications';
 
     /**
      * The attributes that are mass assignable.

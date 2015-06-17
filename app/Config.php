@@ -16,11 +16,11 @@ class Config extends Model {
      *
      * @var array
      */
-    protected $fillable = ['data_inici','email','descripcio','direccio','edicio_id'];
+    protected $fillable = ['data_inici','email','descripcio','direccio','edition_id'];
 
-    public function edicio()
+    public function edition()
     {
-        return $this->belongsTo('App\Edicio');
+        return $this->belongsTo('App\Edition');
     }
 
 }

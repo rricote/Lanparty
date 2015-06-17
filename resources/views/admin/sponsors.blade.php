@@ -157,7 +157,7 @@
                                         </td>
 
                                         <td class="hidden-480">
-                                            {{ $p->edicio->name }}
+                                            {{ $p->edition->name }}
                                         </td>
 
                                         <td>

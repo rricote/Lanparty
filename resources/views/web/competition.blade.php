@@ -28,18 +28,18 @@
                                         <div class="modal-body">
                                             <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
                                                 <ul id="myTab" class="nav nav-tabs" role="tablist">
-                                                    <li role="presentation" class="active"><a href="#grup" id="home-tab" role="tab" data-toggle="tab" aria-controls="grup" aria-expanded="true">Crear un grup</a></li>
-                                                    @if(empty($competicionsgrups))
+                                                    <li role="presentation" class="active"><a href="#group" id="home-tab" role="tab" data-toggle="tab" aria-controls="group" aria-expanded="true">Crear un grup</a></li>
+                                                    @if(empty($competicionsgroups))
                                                         <li role="presentation" class=""><a href="#invitacion" role="tab" id="profile-tab" data-toggle="tab" aria-controls="invitacion" aria-expanded="true">Apuntar-se a un existent</a></li>
                                                     @endif
                                                 </ul>
                                                 <div id="myTabContent" class="tab-content">
-                                                    <div role="tabpanel" class="tab-pane fade active in" id="grup" aria-labelledby="home-tab">
-                                                        @if(empty($competicionsgrups))
+                                                    <div role="tabpanel" class="tab-pane fade active in" id="group" aria-labelledby="home-tab">
+                                                        @if(empty($competicionsgroups))
                                                             {!! Form::open(array('url' => 'competicio/afegir/' . $competicio->id)) !!}
                                                                 <div class="form-group" style="max-width: 200px">
-                                                                    <label style="margin-left: 25px;" for="nom">Nom del grup</label>
-                                                                    <input style="margin-left: 50px;" type="text" class="form-control" id="nomgrup" name="nomgrup" required>
+                                                                    <label style="margin-left: 25px;" for="nom">Nom del group</label>
+                                                                    <input style="margin-left: 50px;" type="text" class="form-control" id="nomgroup" name="nomgroup" required>
                                                                     <input name="lloc" type="hidden" value="0">
                                                                 </div>
                                                                 {!! Form::submit('Apuntar-se', array( 'class' => 'btn btn-primary')) !!}
@@ -47,14 +47,14 @@
                                                         @else
                                                             {!! Form::open(array('url' => 'competicio/borrar/' . $competicio->id)) !!}
                                                             <div class="form-group" style="max-width: 500px">
-                                                                <label style="margin: 30px;" for="nom">Estas inscrit al grup: {{ $competicionsgrups->grup->name }}</label>
+                                                                <label style="margin: 30px;" for="nom">Estas inscrit al grup: {{ $competicionsgroups->group->name }}</label>
                                                             </div>
                                                             <input name="lloc" type="hidden" value="0">
                                                             {!! Form::submit('Borrar-se', array( 'class' => 'btn btn-primary')) !!}
                                                             {!! Form::close() !!}
                                                         @endif
                                                     </div>
-                                                    @if(empty($competicionsgrups))
+                                                    @if(empty($competicionsgroups))
                                                         <div role="tabpanel" class="tab-pane fade" id="invitacion" aria-labelledby="profile-tab">
                                                             <h4>Demanar poder entrar:</h4>
                                                             @foreach($equips as $key => $value)
@@ -78,7 +78,7 @@
                             @else
                                 <a style="padding: 1px 15px;" class="btn btn-inverse btn-lg">
                                     <p style="margin: 0;">Inscripció</p>
-                                    <input style="margin-left:-28px; margin-top:-1px;" id="{{ $competicio->id }}" class="ace ace-switch ace-switch-6 canvi" type="checkbox" @if(!empty($competicionsgrups)) checked @endif />
+                                    <input style="margin-left:-28px; margin-top:-1px;" id="{{ $competicio->id }}" class="ace ace-switch ace-switch-6 canvi" type="checkbox" @if(!empty($competicionsgroups)) checked @endif />
                                     <span class="lbl"></span>
                                 </a>
                             @endif
@@ -121,7 +121,7 @@
             <div class="tournament-groups">
                 <div class="row">
                     @if($competicio->number > 1)
-                        @foreach($competicio->grup as $c)
+                        @foreach($competicio->group as $c)
                         <!-- GROUP - START -->
                         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
                             <h3>{{ $c->name }}</h3>
@@ -133,7 +133,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($c->competicionsusersgrups as $competi)
+                                    @foreach($c->competicionsusersgroups as $competi)
                                         <tr>
                                             <td>{{ $competi->user->username }}</td>
                                         </tr>
@@ -150,7 +150,7 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered">
                                     <tbody>
-                                    @foreach($competicio->grup as $c)
+                                    @foreach($competicio->group as $c)
                                         <tr>
                                             <td>{{ $c->name }}</td>
                                         </tr>

@@ -22,7 +22,7 @@ class CreateCompetitionsTable extends Migration {
             $table->integer('estat');
             $table->string('link');
             $table->timestamp('data_inici');
-            $table->integer('edicio_id');
+            $table->integer('edition_id');
             $table->timestamps();
         });
 	}

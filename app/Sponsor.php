@@ -16,15 +16,15 @@ class Sponsor extends Model {
      *
      * @var array
      */
-    protected $fillable = ['name', 'tipus', 'logo','edicio_id'];
+    protected $fillable = ['name', 'tipus', 'logo','edition_id'];
 
     public function present()
     {
         return $this->hasMany('App\Present');
     }
 
-    public function edicio()
+    public function edition()
     {
-        return $this->belongsTo('App\Edicio');
+        return $this->belongsTo('App\Edition');
     }
 }

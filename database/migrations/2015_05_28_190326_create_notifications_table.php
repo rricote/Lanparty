@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSponsorsTable extends Migration {
+class CreateNotificationsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,13 +12,14 @@ class CreateSponsorsTable extends Migration {
 	 */
 	public function up()
 	{
-        Schema::create('sponsors', function(Blueprint $table)
+        Schema::create('notifications', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->string('name');
             $table->integer('tipus');
-            $table->string('logo');
-            $table->integer('edition_id');
+            $table->integer('rao');
+            $table->integer('interesat');
+            $table->integer('destinatari');
+            $table->integer('estat');
             $table->timestamps();
         });
 	}
@@ -30,7 +31,7 @@ class CreateSponsorsTable extends Migration {
 	 */
 	public function down()
 	{
-        Schema::drop('sponsors');
+        Schema::drop('notifications');
 	}
 
 }

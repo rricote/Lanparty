@@ -16,15 +16,15 @@ class Present extends Model {
      *
      * @var array
      */
-    protected $fillable = ['name','sponsor_id','edicio_id'];
+    protected $fillable = ['name','sponsor_id','edition_id'];
 
     public function sponsor()
     {
         return $this->belongsTo('App\Sponsor');
     }
 
-    public function edicio()
+    public function edition()
     {
-        return $this->belongsTo('App\Edicio');
+        return $this->belongsTo('App\Edition');
     }
 }

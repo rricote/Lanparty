@@ -16,7 +16,7 @@ class Group extends Model {
      *
      * @var array
      */
-    protected $fillable = ['name', 'edicio_id', 'competition_id'];
+    protected $fillable = ['name', 'edition_id', 'competition_id'];
 
     public function competitionsusersgroups()
     {
@@ -28,8 +28,8 @@ class Group extends Model {
         return $this->belongsTo('App\Competition');
     }
 
-    public function edicio()
+    public function edition()
     {
-        return $this->belongsTo('App\Edicio');
+        return $this->belongsTo('App\Edition');
     }
 }

@@ -2,7 +2,7 @@
 
 use App\Config;
 use App\Group;
-use App\Notificacio;
+use App\Notification;
 use App\User;
 use Auth;
 use App\Sponsor;
@@ -31,9 +31,9 @@ class PublicController extends Controller
         $config = Config::find(1);
 
         if (Auth::guest())
-            $data['competitions'] = Competition::where('edicio_id', '=', $config->edicio_id)->get();
+            $data['competitions'] = Competition::where('edition_id', '=', $config->edition_id)->get();
         else {
-            $data['competitions'] = Competition::where('edicio_id', '=', $config->edicio_id)->with(['group' => function ($q) {
+            $data['competitions'] = Competition::where('edition_id', '=', $config->edition_id)->with(['group' => function ($q) {
 
                 $q->whereHas('competition', function ($q) {
                     $q->where('number', '>', 1);
@@ -52,11 +52,11 @@ class PublicController extends Controller
                 $id = $c->id;
                 foreach ($c->group as $g) {
                     if (Competitionsusersgroups::where('group_id', '=', $g->id)->where('competition_id', '=', $id)->count() < $n)
-                        $data['equips'][$g->id]['selected'] = Notificacio::where('interesat', '=', Auth::user()->id)->where('destinatari', '=', $g->id)->where('tipus', '=', 0)->where('rao', '=', 0)->where('state', '=', 0)->count();
+                        $data['equips'][$g->id]['selected'] = Notification::where('interesat', '=', Auth::user()->id)->where('destinatari', '=', $g->id)->where('tipus', '=', 0)->where('rao', '=', 0)->where('state', '=', 0)->count();
                 }
             }
 
-            $group = Grup::with('competition')->whereHas('competitionsusersgrups', function ($q) {
+            $group = Group::with('competition')->whereHas('competitionsusersgroups', function ($q) {
 
                 $q->where('user_id', '=', Auth::user()->id);
 
@@ -68,15 +68,15 @@ class PublicController extends Controller
 
             $noti = array();
             $i = 0;
-            foreach($grup as $g) {
-                if (Competitionsusersgrups::where('competition_id', $g->competition->id)->where('grup_id', $g->id)->count() < $g->competition->number) {
-                    $notificacions = Notificacio::where('destinatari', '=', $g->id)->where('tipus', '=', 0)->where('rao', '=', 0)->where('state', '=', 0)->get();
-                    foreach ($notificacions as $n) {
+            foreach($group as $g) {
+                if (Competitionsusersgroups::where('competition_id', $g->competition->id)->where('group_id', $g->id)->count() < $g->competition->number) {
+                    $notifications = Notification::where('destinatari', '=', $g->id)->where('tipus', '=', 0)->where('rao', '=', 0)->where('state', '=', 0)->get();
+                    foreach ($notifications as $n) {
                         $user = User::find($n->interesat);
                         if ($user) {
                             $noti[$i]['user'] = $user;
-                            $noti[$i]['notificacio'] = $n;
-                            $noti[$i++]['grup'] = $g;
+                            $noti[$i]['notification'] = $n;
+                            $noti[$i++]['group'] = $g;
                         }
                     }
                 }
@@ -85,7 +85,7 @@ class PublicController extends Controller
                 $data['not'] = $noti;
         }
 
-        $data['sponsors'] = Sponsor::where('edicio_id', '=', $config->edicio_id)->where('tipus', '=', '3')->get();
+        $data['sponsors'] = Sponsor::where('edition_id', '=', $config->edition_id)->where('tipus', '=', '3')->get();
 
         $data['js'] = array('competition');
 
@@ -96,9 +96,9 @@ class PublicController extends Controller
     {
         $data = array();
         $config = Config::find(1);
-        $data['sponsorsgold'] = Sponsor::where('edicio_id', '=', $config->edicio_id)->where('tipus', '=', '3')->get();
-        $data['sponsorssilver'] = Sponsor::where('edicio_id', '=', $config->edicio_id)->where('tipus', '=', '2')->get();
-        $data['sponsorsbronze'] = Sponsor::where('edicio_id', '=', $config->edicio_id)->where('tipus', '=', '1')->get();
+        $data['sponsorsgold'] = Sponsor::where('edition_id', '=', $config->edition_id)->where('tipus', '=', '3')->get();
+        $data['sponsorssilver'] = Sponsor::where('edition_id', '=', $config->edition_id)->where('tipus', '=', '2')->get();
+        $data['sponsorsbronze'] = Sponsor::where('edition_id', '=', $config->edition_id)->where('tipus', '=', '1')->get();
         return view('web.presents', $data);
     }
 
@@ -106,13 +106,13 @@ class PublicController extends Controller
     {
         $data = $competitions = array();
         $config = Config::find(1);
-        $compi = Competition::where('edicio_id', '=', $config->edicio_id)->get();
+        $compi = Competition::where('edition_id', '=', $config->edition_id)->get();
         $i = 0;
         foreach ($compi as $c) {
             $competitions[$i]['id'] = $c->id;
             $competitions[$i]['name'] = $c->name;
             $competitions[$i]['logo'] = $c->logo;
-            $competitions[$i++]['count'] = Competitionsusersgrups::where('competition_id', '=', $c->id)->count();
+            $competitions[$i++]['count'] = Competitionsusersgroups::where('competition_id', '=', $c->id)->count();
         }
 
         $data['competitions'] = $competitions;
@@ -126,26 +126,26 @@ class PublicController extends Controller
 
         $config = Config::find(1);
 
-        $data['competition'] = Competition::with('grup')->find($id);
+        $data['competition'] = Competition::with('group')->find($id);
 
         if (empty($data['competition']))
             return Redirect::to('competitions');
 
         if (!Auth::guest()) {
-            $data['competitionsgrups'] = Competitionsusersgrups::where('user_id', '=', Auth::user()->id)->where('competition_id', '=', $id)->first();
+            $data['competitionsgroups'] = Competitionsusersgroups::where('user_id', '=', Auth::user()->id)->where('competition_id', '=', $id)->first();
 
             $n = $data['competition']->number;
 
             $data['equips'] = array();
 
-            foreach ($data['competition']->grup as $c) {
-                if (Competitionsusersgrups::where('grup_id', '=', $c->id)->where('competition_id', '=', $id)->count() < $n) {
+            foreach ($data['competition']->group as $c) {
+                if (Competitionsusersgroups::where('group_id', '=', $c->id)->where('competition_id', '=', $id)->count() < $n) {
                     $data['equips'][$c->id]['name'] = $c->name;
-                    $data['equips'][$c->id]['selected'] = Notificacio::where('interesat', '=', Auth::user()->id)->where('destinatari', '=', $c->id)->where('tipus', '=', 0)->where('rao', '=', 0)->where('state', '=', 0)->count();
+                    $data['equips'][$c->id]['selected'] = Notification::where('interesat', '=', Auth::user()->id)->where('destinatari', '=', $c->id)->where('tipus', '=', 0)->where('rao', '=', 0)->where('state', '=', 0)->count();
                 }
             }
         }
-        $data['sponsors'] = Sponsor::where('tipus', '=', '3')->where('edicio_id', '=', $config->edicio_id)->get();
+        $data['sponsors'] = Sponsor::where('tipus', '=', '3')->where('edition_id', '=', $config->edition_id)->get();
 
         $data['js'] = array('competition');
 
@@ -155,7 +155,7 @@ class PublicController extends Controller
     public function competitionAfegir($id)
     {
         $rules = array(
-            'nomgrup' => 'required'
+            'nomgroup' => 'required'
         );
 
         $lloc = (Input::get('lloc')) ? '/' : 'competition/' . $id;
@@ -175,23 +175,23 @@ class PublicController extends Controller
                 return Redirect::to($lloc)
                     ->withFlashMessage('Inscripció tancada.');
 
-            if (Grup::where('name', '=', Input::get('nomgrup'))->where('edicio_id', '=', $config->edicio_id)->count())
+            if (Group::where('name', '=', Input::get('nomgroup'))->where('edition_id', '=', $config->edition_id)->count())
                 return Redirect::to($lloc)
                     ->withFlashMessage('Grup ja existent.');
 
-            if (Competitionsusersgrups::where('user_id', '=', Auth::user()->id)->where('competition_id', '=', $id)->count())
+            if (Competitionsusersgroups::where('user_id', '=', Auth::user()->id)->where('competition_id', '=', $id)->count())
                 return Redirect::to($lloc)
                     ->withFlashMessage('Ja estas inscrit.');
 
-            $grup = Grup::create([
-                'name' => Input::get('nomgrup'),
-                'edicio_id' => $config->edicio_id,
+            $group = Group::create([
+                'name' => Input::get('nomgroup'),
+                'edition_id' => $config->edition_id,
                 'competition_id' => $id
             ]);
 
-            Competitionsusersgrups::create([
+            Competitionsusersgroups::create([
                 'user_id' => Auth::user()->id,
-                'grup_id' => $grup->id,
+                'group_id' => $group->id,
                 'competition_id' => $id
             ]);
 
@@ -211,22 +211,22 @@ class PublicController extends Controller
             return Redirect::to($lloc)
                 ->withFlashMessage('La competició ha començat o acabat.');
 
-        if (!Competitionsusersgrups::where('user_id', '=', Auth::user()->id)->where('competition_id', '=', $id)->count())
+        if (!Competitionsusersgroups::where('user_id', '=', Auth::user()->id)->where('competition_id', '=', $id)->count())
             return Redirect::to($lloc)
                 ->withFlashMessage('Ja estas desinscrit.');
 
 
-        $competi = Competitionsusersgrups::where('user_id', '=', Auth::user()->id)->where('competition_id', '=', $id)->first();
+        $competi = Competitionsusersgroups::where('user_id', '=', Auth::user()->id)->where('competition_id', '=', $id)->first();
 
-        $grupId = $competi->grup_id;
+        $groupId = $competi->group_id;
 
-        if (Notificacio::where('tipus', '=', 0)->where('destinatari', '=', $grupId)->where('interesat', '=', Auth::user()->id)->count())
-            Notificacio::where('tipus', '=', 0)->where('destinatari', '=', $grupId)->where('interesat', '=', Auth::user()->id)->delete();
+        if (Notification::where('tipus', '=', 0)->where('destinatari', '=', $groupId)->where('interesat', '=', Auth::user()->id)->count())
+            Notification::where('tipus', '=', 0)->where('destinatari', '=', $groupId)->where('interesat', '=', Auth::user()->id)->delete();
 
         $competi->delete();
 
-        if (!Competitionsusersgrups::where('competition_id', '=', $id)->where('grup_id', '=', $grupId)->count())
-            Grup::destroy($grupId);
+        if (!Competitionsusersgroups::where('competition_id', '=', $id)->where('group_id', '=', $groupId)->count())
+            Group::destroy($groupId);
 
         return Redirect::to($lloc)
             ->withFlashMessage('Desinscrit correctament.');
@@ -242,16 +242,16 @@ class PublicController extends Controller
     {
         $data = array();
         $config = Config::find(1);
-        $data['sponsorsgold'] = Sponsor::where('edicio_id', '=', $config->edicio_id)->where('tipus', '=', '3')->get();
-        $data['sponsorssilver'] = Sponsor::where('edicio_id', '=', $config->edicio_id)->where('tipus', '=', '2')->get();
-        $data['sponsorsbronze'] = Sponsor::where('edicio_id', '=', $config->edicio_id)->where('tipus', '=', '1')->get();
+        $data['sponsorsgold'] = Sponsor::where('edition_id', '=', $config->edition_id)->where('tipus', '=', '3')->get();
+        $data['sponsorssilver'] = Sponsor::where('edition_id', '=', $config->edition_id)->where('tipus', '=', '2')->get();
+        $data['sponsorsbronze'] = Sponsor::where('edition_id', '=', $config->edition_id)->where('tipus', '=', '1')->get();
         return view('web.colaboradors', $data);
     }
 
     public function cartell()
     {
         $data = array();
-        $data['cartell'] = Config::find(1)->edicio->cartell;
+        $data['cartell'] = Config::find(1)->edition->cartell;
         return view('web.cartell', $data);
     }
 
@@ -261,7 +261,7 @@ class PublicController extends Controller
 
         $config = Config::find(1);
 
-        $data['sponsors'] = Sponsor::where('edicio_id', '=', $config->edicio_id)->where('tipus', '=', '3')->get();
+        $data['sponsors'] = Sponsor::where('edition_id', '=', $config->edition_id)->where('tipus', '=', '3')->get();
 
         if ($id == null) {
             $data['user'] = Auth::user();
@@ -276,8 +276,8 @@ class PublicController extends Controller
 
         $data['inici'] = $dia . '-' . $mes . '-' . $any;
 
-        $data['competitionsgrups'] = Competitionsusersgrups::where('user_id', '=', $data['user']->id)->with('grup', 'competition')->whereHas('competition', function ($q) use ($config) {
-            $q->where('edicio_id', '=', $config->edicio_id);
+        $data['competitionsgroups'] = Competitionsusersgroups::where('user_id', '=', $data['user']->id)->with('group', 'competition')->whereHas('competition', function ($q) use ($config) {
+            $q->where('edition_id', '=', $config->edition_id);
 
         })->get();
 
@@ -285,20 +285,20 @@ class PublicController extends Controller
 
     }
 
-    public function notificacioEquipAcceptar($id = null)
+    public function notificationEquipAcceptar($id = null)
     {
-        $notificacio = Notificacio::find($id);
-        $lloc = (Input::get('url'))? Input::get('url') : 'grup/' . $notificacio->destinatari;
+        $notification = Notification::find($id);
+        $lloc = (Input::get('url'))? Input::get('url') : 'group/' . $notification->destinatari;
 
-        $grup = Grup::with('competition')->find($notificacio->destinatari);
+        $group = Group::with('competition')->find($notification->destinatari);
 
-        Competitionsusersgrups::create([
-            'user_id' => $notificacio->interesat,
-            'grup_id' => $notificacio->destinatari,
-            'competition_id' => $grup->competition->id
+        Competitionsusersgroups::create([
+            'user_id' => $notification->interesat,
+            'group_id' => $notification->destinatari,
+            'competition_id' => $group->competition->id
         ]);
 
-        $notificacio->update([
+        $notification->update([
             'state' => 1
         ]);
 
@@ -306,18 +306,18 @@ class PublicController extends Controller
             ->withFlashMessage('Inscrit correctament.');
     }
 
-    public function notificacioEquipCancelar($id = null)
+    public function notificationEquipCancelar($id = null)
     {
-        $notificacio = Notificacio::find($id);
+        $notification = Notification::find($id);
 
-        $lloc = (Input::get('url'))? Input::get('url') : 'grup/' . $notificacio->destinatari;
+        $lloc = (Input::get('url'))? Input::get('url') : 'group/' . $notification->destinatari;
 
-        if($notificacio->state == 3)
-            $notificacio->update([
+        if($notification->state == 3)
+            $notification->update([
                 'state' => 2
             ]);
         else
-            $notificacio->update([
+            $notification->update([
                 'state' => 3
             ]);
 
@@ -325,18 +325,18 @@ class PublicController extends Controller
             ->withFlashMessage('Inscrit correctament.');
     }
 
-    public function notificacioEquipLlegida($id = null)
+    public function notificationEquipLlegida($id = null)
     {
-        $notificacio = Notificacio::find($id);
+        $notification = Notification::find($id);
 
-        $lloc = (Input::get('url'))? Input::get('url') : 'grup/' . $notificacio->destinatari;
+        $lloc = (Input::get('url'))? Input::get('url') : 'group/' . $notification->destinatari;
 
-        if($notificacio->state == 2)
-            $notificacio->update([
+        if($notification->state == 2)
+            $notification->update([
                 'state' => 0
             ]);
-        else if($notificacio->state == 0)
-            $notificacio->update([
+        else if($notification->state == 0)
+            $notification->update([
                 'state' => 2
             ]);
 
@@ -344,9 +344,9 @@ class PublicController extends Controller
             ->withFlashMessage('Inscrit correctament.');
     }
 
-    public function notificacions(){
+    public function notifications(){
         $data = array();
-        $grup = Grup::with('competition')->whereHas('competitionsusersgrups', function ($q) {
+        $group = Group::with('competition')->whereHas('competitionsusersgroups', function ($q) {
 
             $q->where('user_id', '=', Auth::user()->id);
 
@@ -356,73 +356,73 @@ class PublicController extends Controller
 
         })->get();
 
-        $data['notificacions'] = array();
+        $data['notifications'] = array();
         $i = 0;
-        foreach($grup as $g) {
-            if (Competitionsusersgrups::where('competition_id', $g->competition->id)->where('grup_id', $g->id)->count() < $g->competition->number) {
-                $notificacions = Notificacio::where('destinatari', '=', $g->id)->where('tipus', '=', 0)->where('rao', '=', 0)->get();
+        foreach($group as $g) {
+            if (Competitionsusersgroups::where('competition_id', $g->competition->id)->where('group_id', $g->id)->count() < $g->competition->number) {
+                $notifications = Notification::where('destinatari', '=', $g->id)->where('tipus', '=', 0)->where('rao', '=', 0)->get();
 
-                foreach ($notificacions as $n) {
+                foreach ($notifications as $n) {
                     $user = User::find($n->interesat);
                     if ($user) {
-                        $data['notificacions'][$i]['user'] = $user;
-                        $data['notificacions'][$i]['notificacio'] = $n;
-                        $data['notificacions'][$i++]['grup'] = $g;
+                        $data['notifications'][$i]['user'] = $user;
+                        $data['notifications'][$i]['notification'] = $n;
+                        $data['notifications'][$i++]['group'] = $g;
                     }
                 }
             }
         }
-        return view('web.notificacions', $data);
+        return view('web.notifications', $data);
     }
 
-    public function grup($id = null)
+    public function group($id = null)
     {
         $data = array();
         $config = Config::find(1);
 
         if ($id != null) {
 
-            $data['grup'] = Grup::with('competition', 'competitionsusersgrups')->find($id);
+            $data['group'] = Group::with('competition', 'competitionsusersgroups')->find($id);
 
-            if (empty($data['grup']))
-                return Redirect::to('grup');
+            if (empty($data['group']))
+                return Redirect::to('group');
 
             if (!Auth::guest()) {
 
-                if (Competitionsusersgrups::where('competition_id', $data['grup']->competition->id)->where('user_id', Auth::user()->id)->where('grup_id', $id)->count())
-                    if (Competitionsusersgrups::where('competition_id', $data['grup']->competition->id)->where('grup_id', $id)->count() < $data['grup']->competition->number) {
-                        $notificacions = Notificacio::where('destinatari', '=', $id)->where('tipus', '=', 0)->where('rao', '=', 0)->get();
-                        $data['notificacions'] = array();
+                if (Competitionsusersgroups::where('competition_id', $data['group']->competition->id)->where('user_id', Auth::user()->id)->where('group_id', $id)->count())
+                    if (Competitionsusersgroups::where('competition_id', $data['group']->competition->id)->where('group_id', $id)->count() < $data['group']->competition->number) {
+                        $notifications = Notification::where('destinatari', '=', $id)->where('tipus', '=', 0)->where('rao', '=', 0)->get();
+                        $data['notifications'] = array();
                         $i = 0;
-                        foreach($notificacions as $n){
+                        foreach($notifications as $n){
                             $user = User::find($n->interesat);
                             if($user) {
-                                $data['notificacions'][$i]['user'] = $user;
-                                $data['notificacions'][$i++]['notificacio'] = $n;
+                                $data['notifications'][$i]['user'] = $user;
+                                $data['notifications'][$i++]['notification'] = $n;
                             }
                         }
                     }
             }
         } else {
-            $grup = Grup::where('edicio_id', '=', $config->edicio_id)->whereHas('competition', function ($q) {
+            $group = Group::where('edition_id', '=', $config->edition_id)->whereHas('competition', function ($q) {
                 $q->where('number', '>', 1);
 
             })->get();
 
             $i = 0;
 
-            foreach ($grup as $g) {
-                $data['grup'][$i]['id'] = $g->id;
-                $data['grup'][$i]['name'] = $g->name;
-                $data['grup'][$i++]['count'] = Competitionsusersgrups::where('grup_id', '=', $g->id)->count();
+            foreach ($group as $g) {
+                $data['group'][$i]['id'] = $g->id;
+                $data['group'][$i]['name'] = $g->name;
+                $data['group'][$i++]['count'] = Competitionsusersgroups::where('group_id', '=', $g->id)->count();
             }
         }
 
         $data['id'] = $id;
 
-        $data['sponsors'] = Sponsor::where('edicio_id', '=', $config->edicio_id)->where('tipus', '=', '3')->get();
+        $data['sponsors'] = Sponsor::where('edition_id', '=', $config->edition_id)->where('tipus', '=', '3')->get();
 
-        return view('web.grup', $data);
+        return view('web.group', $data);
 
     }
 

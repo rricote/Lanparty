@@ -28,11 +28,11 @@
 <script type="text/javascript">
     var array;
     function enviar(array) {
-        var postassistencia = array;
+        var postassistance = array;
         $.ajax({
             type: "POST",
-            url: '<?=url('api/control/assistencies');?>',
-            data: {array: postassistencia},
+            url: '<?=url('api/control/assistances');?>',
+            data: {array: postassistance},
             success: function (data) {
                 if (data == 'ENTRADA') {
                     console.log(data);

@@ -17,7 +17,7 @@ class CreatePresentsTable extends Migration {
             $table->increments('id');
             $table->string('name');
             $table->integer('sponsor_id');
-            $table->integer('edicio_id');
+            $table->integer('edition_id');
             $table->timestamps();
         });
 	}

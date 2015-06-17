@@ -31,8 +31,8 @@
             </a>
         </li>
 
-        <li @if ($menu == 'edicions')class="active"@endif>
-            <a href="{{ url('/admin/edicions') }}">
+        <li @if ($menu == 'editions')class="active"@endif>
+            <a href="{{ url('/admin/editions') }}">
                 <i class="icon-group"></i>
                 <span class="menu-text"> Edicions </span>
             </a>
@@ -41,12 +41,12 @@
         <li @if ($menu == 'estats')class="active"@endif>
             <a href="{{ url('/admin/estats') }}">
                 <i class="icon-group"></i>
-                <span class="menu-text"> States </span>
+                <span class="menu-text"> Estats </span>
             </a>
         </li>
 
-        <li @if ($menu == 'grups')class="active"@endif>
-            <a href="{{ url('/admin/grups') }}">
+        <li @if ($menu == 'groups')class="active"@endif>
+            <a href="{{ url('/admin/groups') }}">
                 <i class="icon-group"></i>
                 <span class="menu-text"> Grups </span>
             </a>
@@ -80,8 +80,8 @@
             </a>
         </li>
 
-        <li @if ($menu == 'assignacions')class="active"@endif>
-            <a href="{{ url('/admin/assignacions') }}">
+        <li @if ($menu == 'assignments')class="active"@endif>
+            <a href="{{ url('/admin/assignments') }}">
                 <i class="icon-group"></i>
                 <span class="menu-text"> Assignacions </span>
             </a>
@@ -95,9 +95,9 @@
                 <b class="arrow icon-angle-down"></b>
             </a>
 
-            <ul class="submenu" @if ($menu == 'tokens' || $menu == 'config' || $menu == 'assistencies')style="display: block;"@endif>
-                <li @if ($menu == 'assistencies')class="active"@endif>
-                    <a href="{{ url('/admin/assistencies') }}">
+            <ul class="submenu" @if ($menu == 'tokens' || $menu == 'config' || $menu == 'assistances')style="display: block;"@endif>
+                <li @if ($menu == 'assistances')class="active"@endif>
+                    <a href="{{ url('/admin/assistances') }}">
                         <i class="icon-double-angle-right"></i>
                         Calculador de numeros
                     </a>
@@ -127,7 +127,7 @@
 
             <ul class="submenu" @if ($menu == 'sorteig')style="display: block;"@endif>
                 <li @if ($menu == 'entrada')class="active"@endif>
-                    <a href="{{ url('/admin/app/assistencies/entrada') }}">
+                    <a href="{{ url('/admin/app/assistances/entrada') }}">
                         <i class="icon-double-angle-right"></i>
                         Control entrada
                     </a>

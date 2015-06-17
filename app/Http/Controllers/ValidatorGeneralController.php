@@ -1,13 +1,13 @@
 <?php namespace App\Http\Controllers;
 
 use App\Competition;
-use App\Competitionsusersgrups;
+use App\Competitionsusersgroups;
 use App\Config;
-use App\Grup;
+use App\Group;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Notificacio;
+use App\Notification;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Request;
@@ -48,18 +48,18 @@ class ValidatorGeneralController extends Controller {
 
         if($competition->data_inici > date('Y-m-d H:i:s')){
 
-            if(!(Competitionsusersgrups::where('user_id', '=', Auth::user()->id)->where('competition_id', '=', $id)->count())){
+            if(!(Competitionsusersgroups::where('user_id', '=', Auth::user()->id)->where('competition_id', '=', $id)->count())){
 
                 if($state==1) {
-                    $grup = Grup::create([
+                    $group = Group::create([
                         'name' => Auth::user()->username,
-                        'edicio_id' => $config->edicio_id,
+                        'edition_id' => $config->edition_id,
                         'competition_id' => $id
                     ]);
 
-                    Competitionsusersgrups::create([
+                    Competitionsusersgroups::create([
                         'user_id' => Auth::user()->id,
-                        'grup_id' => $grup->id,
+                        'group_id' => $group->id,
                         'competition_id' => $id
                     ]);
 
@@ -71,14 +71,14 @@ class ValidatorGeneralController extends Controller {
                 if($state==1) {
                     $msg = 'Ja estas inscrit';
                 } else {
-                    $competi = Competitionsusersgrups::where('user_id', '=', Auth::user()->id)->where('competition_id', '=', $id)->first();
+                    $competi = Competitionsusersgroups::where('user_id', '=', Auth::user()->id)->where('competition_id', '=', $id)->first();
 
-                    $grupId = $competi->grup_id;
+                    $groupId = $competi->group_id;
 
                     $competi->delete();
 
-                    if (!Competitionsusersgrups::where('competition_id', '=', $id)->where('grup_id', '=', $grupId)->count())
-                        Grup::destroy($grupId);
+                    if (!Competitionsusersgroups::where('competition_id', '=', $id)->where('group_id', '=', $groupId)->count())
+                        Group::destroy($groupId);
 
                     $msg = 0;
                 }
@@ -94,15 +94,15 @@ class ValidatorGeneralController extends Controller {
     }
 
 
-    public function notificacioChange($id)
+    public function notificationChange($id)
 {
-    $grup = Grup::find($id);
+    $group = Group::find($id);
 
     $msg = '';
 
     $state = Request::input('state');
 
-    if(!(Notificacio::where('interesat', '=', Auth::user()->id)->where('destinatari', '=', $id)->where('tipus', '=', 0)->where('rao', '=', 0)->where(function($query){
+    if(!(Notification::where('interesat', '=', Auth::user()->id)->where('destinatari', '=', $id)->where('tipus', '=', 0)->where('rao', '=', 0)->where(function($query){
         $query->where('state', '=', 0);
         $query->where('state', '=', 1, 'OR');
         $query->where('state', '=', 2, 'OR');
@@ -110,7 +110,7 @@ class ValidatorGeneralController extends Controller {
 
         if($state==1) {
 
-            Notificacio::create([
+            Notification::create([
                 'interesat' => Auth::user()->id,
                 'destinatari' => $id,
                 'tipus' => 0,
@@ -130,8 +130,8 @@ class ValidatorGeneralController extends Controller {
             $msg = 'La petició ja esta enviada';
         } else {
 
-            if(Notificacio::where('interesat', '=', Auth::user()->id)->where('destinatari', '=', $id)->where('tipus', '=', 0)->where('rao', '=', 0)->where('state', '=', 0)->count()) {
-                Notificacio::where('interesat', '=', Auth::user()->id)->where('destinatari', '=', $id)->where('tipus', '=', 0)->where('rao', '=', 0)->where('state', '=', 0)->first()->delete();
+            if(Notification::where('interesat', '=', Auth::user()->id)->where('destinatari', '=', $id)->where('tipus', '=', 0)->where('rao', '=', 0)->where('state', '=', 0)->count()) {
+                Notification::where('interesat', '=', Auth::user()->id)->where('destinatari', '=', $id)->where('tipus', '=', 0)->where('rao', '=', 0)->where('state', '=', 0)->first()->delete();
 
                 $msg = 0;
             } else {

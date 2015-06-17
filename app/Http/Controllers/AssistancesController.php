@@ -2,11 +2,11 @@
 
 use App\Config;
 use App\Http\Controllers\Controller;
-use App\Assistencia;
+use App\Assistance;
 use App\User;
 use Request;
 
-class AssistenciesController extends Controller {
+class AssistancesController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -15,8 +15,8 @@ class AssistenciesController extends Controller {
 	 */
 	public function index()
 	{
-        $assistencies = Assistencia::all();
-        return $assistencies;
+        $assistances = Assistance::all();
+        return $assistances;
 	}
 
 	/**
@@ -46,33 +46,33 @@ class AssistenciesController extends Controller {
 
             if($usuari->state_id == 2){
 
-                if(!Assistencia::where('usuaris_id', '=', $id)->count()){
+                if(!Assistance::where('usuaris_id', '=', $id)->count()){
 
-                    $assistencia = new Assistencia;
-                    $assistencia->accio = 'ENTRADA';
-                    $assistencia->user_id = $id;
-                    $assistencia->edicio_id = $config->edicio_id;
-                    $assistencia->save();
+                    $assistance = new Assistance;
+                    $assistance->accio = 'ENTRADA';
+                    $assistance->user_id = $id;
+                    $assistance->edition_id = $config->edition_id;
+                    $assistance->save();
 
                     $final = 'ENTRADA';
                 }else{
 
-                    $assistencia = Assistencia::orderby('created_at', 'desc')->first();
+                    $assistance = Assistance::orderby('created_at', 'desc')->first();
 
-                    if($assistencia->accio == 'ENTRADA'){
-                        $assistencia = new Assistencia;
-                        $assistencia->accio = 'SORTIDA';
-                        $assistencia->user_id = $id;
-                        $assistencia->edicio_id = $config->edicio_id;
-                        $assistencia->save();
+                    if($assistance->accio == 'ENTRADA'){
+                        $assistance = new Assistance;
+                        $assistance->accio = 'SORTIDA';
+                        $assistance->user_id = $id;
+                        $assistance->edition_id = $config->edition_id;
+                        $assistance->save();
                     }else{
-                        $assistencia = new Assistencia;
-                        $assistencia->accio = 'ENTRADA';
-                        $assistencia->user_id = $id;
-                        $assistencia->edicio_id = $config->edicio_id;
-                        $assistencia->save();
+                        $assistance = new Assistance;
+                        $assistance->accio = 'ENTRADA';
+                        $assistance->user_id = $id;
+                        $assistance->edition_id = $config->edition_id;
+                        $assistance->save();
                     }
-                    $final = $assistencia->accio;
+                    $final = $assistance->accio;
                 }
 
             }else
