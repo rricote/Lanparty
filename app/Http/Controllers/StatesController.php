@@ -1,10 +1,10 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Motiu;
+use App\State;
 use Request;
 
-class MotiusController extends Controller {
+class StatesController extends Controller {
 
     /**
      * Display a listing of the resource.
@@ -13,8 +13,8 @@ class MotiusController extends Controller {
      */
     public function index()
     {
-        $motius = Motiu::all();
-        return $motius;
+        $states = State::all();
+        return $states;
     }
 
     /**
@@ -79,7 +79,7 @@ class MotiusController extends Controller {
     public function destroy($id)
     {
 
-        Motiu::destroy($id);
+        State::destroy($id);
 
         return "CORRECTE";
     }

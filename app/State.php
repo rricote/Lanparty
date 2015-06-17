@@ -2,14 +2,14 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Estat extends Model {
+class State extends Model {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'estats';
+    protected $table = 'states';
 
     /**
      * The attributes that are mass assignable.

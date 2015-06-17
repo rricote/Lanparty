@@ -18,8 +18,8 @@ class Registrar implements RegistrarContract {
 		return Validator::make($data, [
             'dni' => 'max:10',
             'nom' => 'required|max:30',
-            'cognom1' => 'required|max:30',
-            'cognom2' => 'required|max:30',
+            'surname1' => 'required|max:30',
+            'surname2' => 'required|max:30',
             'username' => 'required|max:30',
 			'email' => 'required|email|max:40|unique:users',
             'password' => 'required|confirmed|min:6',
@@ -37,13 +37,13 @@ class Registrar implements RegistrarContract {
 		return User::create([
 			'dni' => $data['dni'],
             'name' => $data['nom'],
-            'cognom1' => $data['cognom1'],
-            'cognom2' => $data['cognom2'],
+            'surname1' => $data['surname1'],
+            'surname2' => $data['surname2'],
             'username' => $data['username'],
             'email' => $data['email'],
             'ultratoken' => md5(uniqid(rand(), true)),
 			'password' => bcrypt($data['password']),
-            'estat_id' => 1,
+            'state_id' => 1,
             'rol_id' => 2,
 		]);
 	}

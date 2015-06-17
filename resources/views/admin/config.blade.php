@@ -71,8 +71,8 @@
 
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                 <div class="form-group">
-                                    {!! Form::label('patrocinador', 'Patrocinador:', null, array('class' => 'control-label')) !!}
-                                    {!! Form::select('patrocinador', $edicions, $config['edicio'], array('class' => 'form-control')) !!}
+                                    {!! Form::label('sponsor', 'Patrocinador:', null, array('class' => 'control-label')) !!}
+                                    {!! Form::select('sponsor', $edicions, $config['edicio'], array('class' => 'form-control')) !!}
                                 </div>
                             </div>
 

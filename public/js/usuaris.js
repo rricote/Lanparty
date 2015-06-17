@@ -55,7 +55,7 @@ $( ".canvi" ).change(function () {
     $.ajax({
         type: "put",
         url: link + 'api/admin/validacio/' + id,
-        data: { estat:value },
+        data: { state:value },
         success: function(data) {
             if(data == "guay"){
                 var unique_id = $.gritter.add({
@@ -209,9 +209,9 @@ $("#afegirusuari").click(function (){
         pas = false;
     if(!$("#afegirnom").val())
         pas = false;
-    if(!$("#afegircognom1").val())
+    if(!$("#afegirsurname1").val())
         pas = false;
-    if(!$("#afegircognom2").val())
+    if(!$("#afegirsurname2").val())
         pas = false;
     if(!$("#afegirusername").val())
         pas = false;
@@ -324,8 +324,8 @@ function introduirdadesafegir(){
     var afegiremail = $("#afegiremail").val();
     var afegirpassword = $("#afegirpassword").val();
     var afegirnom = $("#afegirnom").val();
-    var afegircognom1 = $("#afegircognom1").val();
-    var afegircognom2 = $("#afegircognom2").val();
+    var afegirsurname1 = $("#afegirsurname1").val();
+    var afegirsurname2 = $("#afegirsurname2").val();
     var afegirusername = $("#afegirusername").val();
     if($("#afegirdni").val() == "")
         var afegirdni = (new Date).getTime().toString().substring(5, 13);
@@ -334,7 +334,7 @@ function introduirdadesafegir(){
     $.ajax({
         type: "post",
         url: link + 'api/admin/users',
-        data: { email:afegiremail, dni:afegirdni, username:afegirusername, nom:afegirnom, cognom1:afegircognom1, cognom2:afegircognom2, password:afegirpassword },
+        data: { email:afegiremail, dni:afegirdni, username:afegirusername, nom:afegirnom, surname1:afegirsurname1, surname2:afegirsurname2, password:afegirpassword },
         success: function(data) {
             if(data == 'CORRECTE'){
                 var unique_id = $.gritter.add({
@@ -353,8 +353,8 @@ function introduirdadesafegir(){
                 $("#afegirpassword").val("");
                 $("#afegirpassword2").val("");
                 $("#afegirnom").val("");
-                $("#afegircognom1").val("");
-                $("#afegircognom2").val("");
+                $("#afegirsurname1").val("");
+                $("#afegirsurname2").val("");
                 $("#afegirusername").val("");
                 $("#afegirdni").val("");
             } else {

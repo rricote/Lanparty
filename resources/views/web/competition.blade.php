@@ -13,7 +13,7 @@
                 <div class="col-xs-9">
                     <h2>{{ $competicio->name }}</h2>
                     <p class="date">March 12-15, 2015. Tortosa, Ebreland.</p>
-                    @if(!Auth::guest() && $competicio->estat != 1)
+                    @if(!Auth::guest() && $competicio->state != 1)
                         @if($competicio->data_inici > date('Y-m-d H:i:s'))
                             @if($competicio->number > 1)
                             <a class="btn btn-primary btn-lg" data-toggle="modal" data-target="#inscriures" style="margin-right: 5px;">Inscriure's</a>
@@ -97,7 +97,7 @@
                 <p class="countdown-info">El torneig comença en:</p>
                 <div class="countdown countdowntorneig"></div>
             @else
-                @if($competicio->estat)
+                @if($competicio->state)
                     <hr>
                     <h2 style="text-align: center;">Torneig finalitzat</h2>
                 @else
@@ -110,8 +110,8 @@
 
         <div class="box colored tournament-partner">
             <div class="row">
-                @foreach ($patrocinadors as $p)
-                    <div class="col-xs-4"><a style="width: 200px;" href=""><img src="{{ asset('images/patrocinadors/' . $p->logo)}}" class="img-responsive center-block" alt=""></a></div>
+                @foreach ($sponsors as $p)
+                    <div class="col-xs-4"><a style="width: 200px;" href=""><img src="{{ asset('images/sponsors/' . $p->logo)}}" class="img-responsive center-block" alt=""></a></div>
                 @endforeach
             </div>
         </div>

@@ -42,14 +42,14 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label">Primer cognom</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="cognom1" value="{{ old('cognom1') }}">
+                                <input type="text" class="form-control" name="surname1" value="{{ old('surname1') }}">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-md-4 control-label">Segon cognom</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="cognom2" value="{{ old('cognom2') }}">
+                                <input type="text" class="form-control" name="surname2" value="{{ old('surname2') }}">
                             </div>
                         </div>
 

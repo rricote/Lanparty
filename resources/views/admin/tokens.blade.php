@@ -54,9 +54,9 @@
                                 <tr>
                                     <td id="id">{{$u->id}}</td>
                                     <td>{{$u->name}}</td>
-                                    <td>{{ $u->cognom1 }} {{ $u->cognom2 }}</td>
+                                    <td>{{ $u->surname1 }} {{ $u->surname2 }}</td>
                                     <td class="hidden-480">
-                                        @if($u->estat_id == 1)
+                                        @if($u->state_id == 1)
                                             <span class="label label-sm label-warning">No validat/pagat</span>
                                         @else
                                             <span class="label label-sm label-success">Validat/pagat</span>

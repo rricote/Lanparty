@@ -23,8 +23,8 @@
                             @if(!$public)
                                 <li><strong>Perfil public:</strong><a href="{{ url('perfil/' . $user->id) }}">{{ $user->username }}</a></li>
                                 <li><strong>Nom:</strong>{{ $user->name }}</li>
-                                <li><strong>Cognoms:</strong>{{ $user->cognom1 . ' ' .$user->cognom2 }}</li>
-                                <li><strong>Activació:</strong>{{ $user->estat->name }}</li>
+                                <li><strong>Cognoms:</strong>{{ $user->surname1 . ' ' .$user->surname2 }}</li>
+                                <li><strong>Activació:</strong>{{ $user->state->name }}</li>
                                 <li><strong>E-mail:</strong>{{ $user->email }}</li>
                             @endif
                         </ul>
@@ -35,8 +35,8 @@
         </div>
         <div class="box colored tournament-partner">
             <div class="row">
-                @foreach ($patrocinadors as $p)
-                    <div class="col-xs-4"><a style="width: 200px;" href=""><img src="{{ asset('images/patrocinadors/' . $p->logo)}}" class="img-responsive center-block" alt=""></a></div>
+                @foreach ($sponsors as $p)
+                    <div class="col-xs-4"><a style="width: 200px;" href=""><img src="{{ asset('images/sponsors/' . $p->logo)}}" class="img-responsive center-block" alt=""></a></div>
                 @endforeach
             </div>
         </div>

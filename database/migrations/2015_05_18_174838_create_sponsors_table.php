@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePremisTable extends Migration {
+class CreateSponsorsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,11 +12,12 @@ class CreatePremisTable extends Migration {
 	 */
 	public function up()
 	{
-        Schema::create('premis', function(Blueprint $table)
+        Schema::create('sponsors', function(Blueprint $table)
         {
             $table->increments('id');
             $table->string('name');
-            $table->integer('patrocinador_id');
+            $table->integer('tipus');
+            $table->string('logo');
             $table->integer('edicio_id');
             $table->timestamps();
         });
@@ -29,7 +30,7 @@ class CreatePremisTable extends Migration {
 	 */
 	public function down()
 	{
-        Schema::drop('premis');
+        Schema::drop('sponsors');
 	}
 
 }

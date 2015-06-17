@@ -16,5 +16,5 @@ class Notificacio extends Model {
      *
      * @var array
      */
-    protected $fillable = ['tipus','rao','interesat','destinatari','estat'];
+    protected $fillable = ['tipus','rao','interesat','destinatari','state'];
 }

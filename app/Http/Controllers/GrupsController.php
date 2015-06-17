@@ -1,10 +1,10 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Grup;
+use App\Group;
 use Request;
 
-class GrupsController extends Controller {
+class GroupsController extends Controller {
 
     /**
      * Display a listing of the resource.
@@ -13,8 +13,8 @@ class GrupsController extends Controller {
      */
     public function index()
     {
-        $grups = Grup::all();
-        return $grups;
+        $groups = Group::all();
+        return $groups;
     }
 
     /**
@@ -51,9 +51,9 @@ class GrupsController extends Controller {
     /**
      * Show the form for editing the specified resource.
      *
-        $competicio = Competicio::find($id);
+        $competition = Competition::find($id);
 
-        File::delete('icons/competicions/' . $competicio->logo);
+        File::delete('icons/competitions/' . $competition->logo);
      * @param  int  $id
      * @return Response
      */
@@ -82,7 +82,7 @@ class GrupsController extends Controller {
     public function destroy($id)
     {
 
-        Grup::destroy($id);
+        Group::destroy($id);
 
         return "CORRECTE";
     }

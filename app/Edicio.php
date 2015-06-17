@@ -33,28 +33,28 @@ class Edicio extends Model {
         return $this->hasOne('App\Assistencia');
     }
 
-    public function competicio()
+    public function competition()
     {
-        return $this->hasOne('App\Competicio');
+        return $this->hasOne('App\Competition');
     }
 
-    public function grup()
+    public function group()
     {
-        return $this->hasOne('App\Grup');
+        return $this->hasOne('App\Group');
     }
 
-    public function motiu()
+    public function motive()
     {
-        return $this->hasOne('App\Motiu');
+        return $this->hasOne('App\Motive');
     }
 
-    public function patrocinador()
+    public function sponsor()
     {
-        return $this->hasOne('App\Patrocinador');
+        return $this->hasOne('App\Sponsor');
     }
 
-    public function premi()
+    public function present()
     {
-        return $this->hasOne('App\Premi');
+        return $this->hasOne('App\Present');
     }
 }

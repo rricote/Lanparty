@@ -96,20 +96,20 @@
 
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                 <div class="form-group">
-                                    <label class="control-label" for="cognom1">Primer cognom:</label>
+                                    <label class="control-label" for="surname1">Primer cognom:</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="icon-user"></i></span>
-                                        <input type="text" class="form-control" id="editarcognom1" name="editarcognom1" value="{{ $usuaris->cognom1 }}" />
+                                        <input type="text" class="form-control" id="editarsurname1" name="editarsurname1" value="{{ $usuaris->surname1 }}" />
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                 <div class="form-group">
-                                    <label class="control-label" for="cognom2">Segon cognom:</label>
+                                    <label class="control-label" for="surname2">Segon cognom:</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="icon-user"></i></span>
-                                        <input type="text" class="form-control" id="editarcognom2" name="editarcognom2" value="{{ $usuaris->cognom2 }}" />
+                                        <input type="text" class="form-control" id="editarsurname2" name="editarsurname2" value="{{ $usuaris->surname2 }}" />
                                     </div>
                                 </div>
                             </div>
@@ -217,18 +217,18 @@
                                                             <td>
                                                                 {{ $u->name }}
                                                             </td>
-                                                            <td>{{ $u->cognom1 }} {{ $u->cognom2 }}</td>
+                                                            <td>{{ $u->surname1 }} {{ $u->surname2 }}</td>
                                                             <td>
                                                                 <span class="span5">
                                                                     <label class="pull-right inline">
-                                                                        @if($u->estat_id == 1)
+                                                                        @if($u->state_id == 1)
                                                                         <input id="{{ $u->id }}" type="checkbox" class="ace ace-switch ace-switch-5 canvi" />
                                                                         <span class="lbl"></span>
-                                                                        <div id="elec" style="display: none">{{ $u->estat_id }}</div>
+                                                                        <div id="elec" style="display: none">{{ $u->state_id }}</div>
                                                                         @else
                                                                         <input id="{{ $u->id }}" checked="" type="checkbox" class="ace ace-switch ace-switch-5 canvi" />
                                                                         <span class="lbl"></span>
-                                                                        <div id="elec" style="display: none">{{  $u->estat_id }}</div>
+                                                                        <div id="elec" style="display: none">{{  $u->state_id }}</div>
                                                                         @endif
                                                                     </label>
                                                                 </span><!-- /span -->
@@ -317,20 +317,20 @@
 
                                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                             <div class="form-group">
-                                                <label class="control-label" for="cognom1">Primer cognom:</label>
+                                                <label class="control-label" for="surname1">Primer cognom:</label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="icon-user"></i></span>
-                                                    <input type="text" class="form-control" id="afegircognom1" name="afegircognom1">
+                                                    <input type="text" class="form-control" id="afegirsurname1" name="afegirsurname1">
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                             <div class="form-group">
-                                                <label class="control-label" for="cognom2">Segon cognom:</label>
+                                                <label class="control-label" for="surname2">Segon cognom:</label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="icon-user"></i></span>
-                                                    <input type="text" class="form-control" id="afegircognom2" name="afegircognom2">
+                                                    <input type="text" class="form-control" id="afegirsurname2" name="afegirsurname2">
                                                 </div>
                                             </div>
                                         </div>

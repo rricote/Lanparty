@@ -5,7 +5,7 @@ $( ".canvi" ).change(function () {
     $.ajax({
         type: "post",
         url: link + 'api/competicio/change/' + id,
-        data: { estat: check },
+        data: { state: check },
         success: function(data) {
             if(data == 1){
                 var unique_id = $.gritter.add({
@@ -79,7 +79,7 @@ $( ".entrar" ).change(function () {
     $.ajax({
         type: "post",
         url: link + 'api/notificacio/change/' + id,
-        data: { estat: check },
+        data: { state: check },
         success: function(data) {
             if(data == 1){
                 var unique_id = $.gritter.add({

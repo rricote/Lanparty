@@ -1,11 +1,11 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Patrocinador;
+use App\Competition;
 use Illuminate\Support\Facades\File;
 use Request;
 
-class PatrocinadorsController extends Controller {
+class CompetitionController extends Controller {
 
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class PatrocinadorsController extends Controller {
      */
     public function index()
     {
-        $patrocinadors = Patrocinador::all();
-        return $patrocinadors;
+        $competitions = Competition::all();
+        return $competitions;
     }
 
     /**
@@ -79,11 +79,12 @@ class PatrocinadorsController extends Controller {
      */
     public function destroy($id)
     {
-        $patrocinador = Patrocinador::find($id);
+        $competition = Competition::find($id);
 
-        File::delete('images/patrocinadors/' . $patrocinador->logo);
+        File::delete('icons/competitions/' . $competition->logo);
+        File::delete('images/competitions/' . $competition->imatge);
 
-        Patrocinador::destroy($id);
+        Competition::destroy($id);
 
         return "CORRECTE";
     }

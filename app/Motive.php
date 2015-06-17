@@ -2,26 +2,21 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Premi extends Model {
+class Motive extends Model {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'premis';
+    protected $table = 'motives';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name','patrocinador_id','edicio_id'];
-
-    public function patrocinador()
-    {
-        return $this->belongsTo('App\Patrocinador');
-    }
+    protected $fillable = ['name','edicio_id'];
 
     public function edicio()
     {

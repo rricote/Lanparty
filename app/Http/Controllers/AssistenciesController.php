@@ -44,7 +44,7 @@ class AssistenciesController extends Controller {
 
             $usuari = User::find($id);
 
-            if($usuari->estat_id == 2){
+            if($usuari->state_id == 2){
 
                 if(!Assistencia::where('usuaris_id', '=', $id)->count()){
 

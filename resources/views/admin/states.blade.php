@@ -16,7 +16,7 @@
                     <i class="icon-home home-icon"></i>
                     <a href="{{ url('/admin') }}">Home</a>
                 </li>
-                <li class="active">Patrocinadors</li>
+                <li class="active">States</li>
             </ul>
             <!-- .breadcrumb -->
             <!--
@@ -37,7 +37,7 @@
             @if(!isset($id))
             <div class="page-header">
                 <h1>
-                    Patrocinadors
+                    States
                 </h1>
             </div>
             <!-- /.page-header -->
@@ -59,7 +59,7 @@
 
                         <div class="col-xs-12">
                             <h2 class="header blue">
-                                Editar Patrocinador
+                                Editar State
                             </h2>
                             @if (count($errors) > 0)
                                 <div class="col-xs-12">
@@ -74,35 +74,19 @@
                                 </div>
                             @endif
 
-                            {!! Form::open(array('url' => 'admin/patrocinadors/editar/' . $id, 'files'=>true)) !!}
+                            {!! Form::open(array('url' => 'admin/states/editar/' . $id)) !!}
 
                             <div class="col-xs-12">
 
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                     <div class="form-group">
-                                        {!! Form::label('patrocinadors', 'Nom del patrocinador:', null, array('class' => 'control-label')) !!}
+                                        {!! Form::label('state', 'Nom de l\'state:', null, array('class' => 'control-label')) !!}
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="icon-edit"></i></span>
-                                            {!! Form::text('name', $patrocinadors->name, array('required', 'class' => 'form-control', 'placeholder' => 'Nom')) !!}
+                                            {!! Form::text('name', $states->name, array('required', 'class' => 'form-control', 'placeholder' => 'Nom')) !!}
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                                    <div class="form-group">
-                                        {!! Form::label('tipus', 'Tipus de patrocinador:', null, array('class' => 'control-label')) !!}
-                                        {!! Form::select('tipus', array('1' => 'Bronze', '2' => 'Silver', '3' => 'Bronze'), $patrocinadors->tipus,array('class' => 'form-control')) !!}
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                                    <div class="form-group">
-                                        {!! Form::label('arxiu', 'Logo del patrocinador:', null, array('class' => 'control-label')) !!}
-                                        <img style="max-width: 250px; margin-bottom: 10px;" alt="logo" src="{{ url('images/patrocinadors/' . $patrocinadors->logo) }}" />
-                                        {!! Form::file('image', array('id' => 'input-image')) !!}
-                                    </div>
-                                </div>
-
                             </div>
                             <div>
                                 {!! Form::submit('Editar', array( 'class' => 'btn btn-info')) !!}
@@ -113,11 +97,11 @@
                     @else
                     <div class="col-xs-12">
                         <div class="table-header">
-                            Llistat de totes les patrocinadors
+                            Llistat de totes els states
                         </div>
 
                         <div class="table-responsive">
-                            <table id="taula-patrocinadors" class="table table-striped table-bordered table-hover">
+                            <table id="taula-estats" class="table table-striped table-bordered table-hover">
                                 <thead>
                                 <tr>
                                     <th class="center">
@@ -127,14 +111,11 @@
                                         </label>
                                     </th>
                                     <th>Nom</th>
-                                    <th>Tipus</th>
-                                    <th>Logo</th>
-                                    <th class="hidden-480">Edició</th>
                                     <th>Accions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($patrocinadors as $p)
+                                @foreach ($states as $e)
                                     <tr>
                                         <td class="center">
                                             <label>
@@ -144,30 +125,17 @@
                                         </td>
 
                                         <td>
-                                            {{ $p->name }}
-                                        </td>
-
-
-                                        <td>
-                                            {{ $p->tipus }}
-                                        </td>
-
-                                        <td>
-                                            <img style="max-width: 40px;" src="{{ url('images/patrocinadors/' . $p->logo) }}" alt="logo{{ $p->name }}">
-                                        </td>
-
-                                        <td class="hidden-480">
-                                            {{ $p->edicio->name }}
+                                            {{ $e->name }}
                                         </td>
 
                                         <td>
                                             <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 
-                                                <a class="green" href="{{ url('admin/patrocinadors/' . $p->id) }}" data-toggle="modal">
+                                                <a class="green" href="{{ url('admin/estats/' . $e->id) }}" data-toggle="modal">
                                                     <i class="icon-pencil bigger-130"></i>
                                                 </a>
 
-                                                <a id="{{ $p->id }}" class="red borrar">
+                                                <a id="{{ $e->id }}" class="red borrar">
                                                     <i class="icon-trash bigger-130"></i>
                                                 </a>
                                             </div>
@@ -181,7 +149,7 @@
                                                     <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
 
                                                         <li>
-                                                            <a href="{{ url('admin/rols/' . $p->id) }}" class="tooltip-success" data-rel="tooltip" title="Edit" data-toggle="modal">
+                                                            <a href="{{ url('admin/estats/' . $e->id) }}" class="tooltip-success" data-rel="tooltip" title="Edit" data-toggle="modal">
                                                                 <span class="green">
                                                                     <i class="icon-edit bigger-120"></i>
                                                                 </span>
@@ -189,7 +157,7 @@
                                                         </li>
 
                                                         <li>
-                                                            <a id="{{ $p->id }}" class="tooltip-error borrar" data-rel="tooltip" title="Delete">
+                                                            <a id="{{ $e->id }}" class="tooltip-error borrar" data-rel="tooltip" title="Delete">
                                                                 <span class="red">
                                                                     <i class="icon-trash bigger-120"></i>
                                                                 </span>
@@ -198,6 +166,7 @@
                                                     </ul>
                                                 </div>
                                             </div>
+
                                         </td>
                                     </tr>
                                 @endforeach
@@ -209,7 +178,7 @@
 
                     <div class="col-xs-12">
                         <h2 class="header blue">
-                            Afegir Patrocinador
+                            Afegir State
                         </h2>
                         @if (count($errors) > 0)
                             <div class="col-xs-12">
@@ -224,34 +193,19 @@
                             </div>
                         @endif
 
-                        {!! Form::open(array('url' => 'admin/patrocinadors/afegir', 'files'=>true)) !!}
+                        {!! Form::open(array('url' => 'admin/states/afegir')) !!}
 
                         <div class="col-xs-12">
 
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                 <div class="form-group">
-                                    {!! Form::label('patrocinadors', 'Nom del patrocinador:', null, array('class' => 'control-label')) !!}
+                                    {!! Form::label('state', 'Nom de l\'state:', null, array('class' => 'control-label')) !!}
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="icon-edit"></i></span>
                                         {!! Form::text('name', null, array('required', 'class' => 'form-control', 'placeholder' => 'Nom')) !!}
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                                <div class="form-group">
-                                    {!! Form::label('tipus', 'Tipus de patrocinador:', null, array('class' => 'control-label')) !!}
-                                    {!! Form::select('tipus', array('1' => 'Bronze', '2' => 'Silver', '3' => 'Gold'), '1',array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                                <div class="form-group">
-                                    {!! Form::label('arxiu', 'Logo del patrocinador:', null, array('class' => 'control-label')) !!}
-                                    {!! Form::file('image', array('id' => 'input-image')) !!}
-                                </div>
-                            </div>
-
                         </div>
                         <div>
                             {!! Form::submit('Afegir', array( 'class' => 'btn btn-info')) !!}

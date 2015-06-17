@@ -1,10 +1,11 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Estat;
+use App\Sponsor;
+use Illuminate\Support\Facades\File;
 use Request;
 
-class EstatsController extends Controller {
+class SponsorsController extends Controller {
 
     /**
      * Display a listing of the resource.
@@ -13,8 +14,8 @@ class EstatsController extends Controller {
      */
     public function index()
     {
-        $estats = Estat::all();
-        return $estats;
+        $sponsors = Sponsor::all();
+        return $sponsors;
     }
 
     /**
@@ -78,8 +79,11 @@ class EstatsController extends Controller {
      */
     public function destroy($id)
     {
+        $sponsor = Sponsor::find($id);
 
-        Estat::destroy($id);
+        File::delete('images/sponsors/' . $sponsor->logo);
+
+        Sponsor::destroy($id);
 
         return "CORRECTE";
     }

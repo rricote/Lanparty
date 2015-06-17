@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePatrocinadorsTable extends Migration {
+class CreateMotivesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,10 @@ class CreatePatrocinadorsTable extends Migration {
 	 */
 	public function up()
 	{
-        Schema::create('patrocinadors', function(Blueprint $table)
+        Schema::create('motives', function(Blueprint $table)
         {
             $table->increments('id');
             $table->string('name');
-            $table->integer('tipus');
-            $table->string('logo');
             $table->integer('edicio_id');
             $table->timestamps();
         });
@@ -30,7 +28,7 @@ class CreatePatrocinadorsTable extends Migration {
 	 */
 	public function down()
 	{
-        Schema::drop('patrocinadors');
+        Schema::drop('motives');
 	}
 
 }

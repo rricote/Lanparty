@@ -6,21 +6,21 @@
 
     <div class="box colored tournament-partner">
         <div class="row">
-            @foreach ($patrocinadorsgold as $p)
-                <div class="col-xs-4"><a style="width: 200px;" href="{{ $p->link }}"><img src="{{ asset('images/patrocinadors/' . $p->logo)}}" class="img-responsive center-block" alt=""/></a></div>
+            @foreach ($sponsorsgold as $p)
+                <div class="col-xs-4"><a style="width: 200px;" href="{{ $p->link }}"><img src="{{ asset('images/sponsors/' . $p->logo)}}" class="img-responsive center-block" alt=""/></a></div>
             @endforeach
         </div>
     </div>
 
     <div class="box col-xs-12">
-        <h2 style="font-size: 24px;" class="gold-l">Patrocinadors Gold</h2>
-        @foreach ($patrocinadorsgold as $p)
+        <h2 style="font-size: 24px;" class="gold-l">Sponsors Gold</h2>
+        @foreach ($sponsorsgold as $p)
             @if($p->premi != '[]')
                 <!-- POST - START -->
                 <article class="col-xs-12 post">
                     <div class="col-xs-12 col-sm-4 post-date-wrapper">
                         <div class="post-date premis-gold">
-                            <img src="{{ asset('images/patrocinadors/' . $p->logo)}}" class="img-responsive center-block" alt=""/>
+                            <img src="{{ asset('images/sponsors/' . $p->logo)}}" class="img-responsive center-block" alt=""/>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-8 post-body">
@@ -36,13 +36,13 @@
         @endforeach
 
         <h2 style="font-size: 24px;" class="silver-l">Patrocinadors Silver</h2>
-        @foreach ($patrocinadorssilver as $p)
+        @foreach ($sponsorssilver as $p)
             @if($p->premi != '[]')
                 <!-- POST - START -->
                 <article class="col-xs-12 post">
                     <div class="col-xs-12 col-sm-4 post-date-wrapper">
                         <div class="post-date premis-silver">
-                            <img src="{{ asset('images/patrocinadors/' . $p->logo)}}" class="img-responsive center-block" alt=""/>
+                            <img src="{{ asset('images/sponsors/' . $p->logo)}}" class="img-responsive center-block" alt=""/>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-8 post-body">
@@ -57,12 +57,12 @@
             @endif
         @endforeach
         <h2 style="font-size: 24px;" class="bronze-l">Patrocinadors Bronze</h2>
-        @foreach ($patrocinadorsbronze as $p)
+        @foreach ($sponsorsbronze as $p)
             <!-- POST - START -->
             <article class="col-xs-12 post">
                 <div class="col-xs-12 col-sm-4 post-date-wrapper">
                     <div class="post-date premis-bronze">
-                        <img src="{{ asset('images/patrocinadors/' . $p->logo)}}" class="img-responsive center-block" alt=""/>
+                        <img src="{{ asset('images/sponsors/' . $p->logo)}}" class="img-responsive center-block" alt=""/>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-8 post-body">

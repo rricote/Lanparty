@@ -14,8 +14,8 @@
 /*
  * Public
  */
-use App\Competicio;
-use App\Competicionsusersgrups;
+use App\Competition;
+use App\Competitionsusersgrups;
 use App\Config;
 use App\Grup;
 use App\Notificacio;
@@ -30,21 +30,21 @@ View::composer(array('web.app', 'admin.app'), function($view)
 View::composer(array('web.sidebar'), function($view)
 {
     $config = Config::find(1);
-    $compi = Competicio::where('edicio_id', '=', $config->edicio_id)->get();
+    $compi = Competition::where('edicio_id', '=', $config->edicio_id)->get();
     $i = 0;
-    $competicions = array();
+    $competitions = array();
     foreach($compi as $c){
-        $competicions[$i]['id'] = $c->id;
-        $competicions[$i]['name'] = $c->name;
-        $competicions[$i]['logo'] = $c->logo;
-        $competicions[$i++]['count'] = Competicionsusersgrups::where('competicio_id', '=', $c->id)->count();
+        $competitions[$i]['id'] = $c->id;
+        $competitions[$i]['name'] = $c->name;
+        $competitions[$i]['logo'] = $c->logo;
+        $competitions[$i++]['count'] = Competitionsusersgrups::where('competition_id', '=', $c->id)->count();
     }
     if (!Auth::guest()) {
-        $grup = Grup::with('competicio')->whereHas('competicionsusersgrups', function ($q) {
+        $grup = Grup::with('competition')->whereHas('competitionsusersgrups', function ($q) {
 
             $q->where('user_id', '=', Auth::user()->id);
 
-        })->whereHas('competicio', function ($q) {
+        })->whereHas('competition', function ($q) {
 
             $q->where('number', '!=', 1);
 
@@ -53,8 +53,8 @@ View::composer(array('web.sidebar'), function($view)
         $noti = array();
         $i = 0;
         foreach($grup as $g) {
-            if (Competicionsusersgrups::where('competicio_id', $g->competicio->id)->where('grup_id', $g->id)->count() < $g->competicio->number) {
-                $notificacions = Notificacio::where('destinatari', '=', $g->id)->where('tipus', '=', 0)->where('rao', '=', 0)->where('estat', '=', 0)->get();
+            if (Competitionsusersgrups::where('competition_id', $g->competition->id)->where('grup_id', $g->id)->count() < $g->competition->number) {
+                $notificacions = Notificacio::where('destinatari', '=', $g->id)->where('tipus', '=', 0)->where('rao', '=', 0)->where('state', '=', 0)->get();
                 foreach ($notificacions as $n) {
                     $user = User::find($n->interesat);
                     if ($user) {
@@ -69,8 +69,8 @@ View::composer(array('web.sidebar'), function($view)
     if(isset($noti))
         if($noti)
             $view->with('not', $noti);
-    $view->with('competicions', $competicions);
-    $view->with('competicio', Competicio::where('edicio_id', '=', $config->edicio_id)->where('data_inici', '>', date('Y-m-d H:i:s'))->orderby('data_inici', 'asc')->first());
+    $view->with('competitions', $competitions);
+    $view->with('competition', Competition::where('edicio_id', '=', $config->edicio_id)->where('data_inici', '>', date('Y-m-d H:i:s'))->orderby('data_inici', 'asc')->first());
 
 });
 
@@ -80,20 +80,20 @@ Route::get('home', function(){
     return Redirect::to('/');
 });
 
-Route::get('premis', 'PublicController@premis');
+Route::get('presents', 'PublicController@presents');
 
 Route::get('colaboradors', 'PublicController@colaboradors');
 
-Route::get('competicions', 'PublicController@competicions');
+Route::get('competitions', 'PublicController@competitions');
 
-Route::get('competicio/{id}', 'PublicController@competicio');
+Route::get('competition/{id}', 'PublicController@competition');
 
-Route::get('competicio', function(){
-    return Redirect::to('competicions');
+Route::get('competition', function(){
+    return Redirect::to('competitions');
 });
-Route::post('competicio/afegir/{id}', 'PublicController@competicioAfegir');
+Route::post('competition/afegir/{id}', 'PublicController@competitionAfegir');
 
-Route::post('competicio/borrar/{id}', 'PublicController@competicioBorrar');
+Route::post('competition/borrar/{id}', 'PublicController@competitionBorrar');
 
 Route::get('cartell', 'PublicController@cartell');
 
@@ -142,13 +142,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\AdminMid
 
     Route::post('/usuaris/editar/{id}', 'AdminController@usuarisEditar');
 
-    Route::get('/competicions', 'AdminController@competicions');
+    Route::get('/competitions', 'AdminController@competitions');
 
-    Route::get('/competicions/{id}', 'AdminController@competicions');
+    Route::get('/competitions/{id}', 'AdminController@competitions');
 
-    Route::post('/competicions/afegir', 'AdminController@competicionsAfegir');
+    Route::post('/competitions/afegir', 'AdminController@competitionsAfegir');
 
-    Route::post('/competicions/editar/{id}', 'AdminController@competicionsEditar');
+    Route::post('/competitions/editar/{id}', 'AdminController@competitionsEditar');
 
     Route::get('/edicions', 'AdminController@edicions');
 
@@ -158,13 +158,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\AdminMid
 
     Route::post('/edicions/editar/{id}', 'AdminController@edicionsEditar');
 
-    Route::get('/estats', 'AdminController@estats');
+    Route::get('/states', 'AdminController@states');
 
-    Route::get('/estats/{id}', 'AdminController@estats');
+    Route::get('/states/{id}', 'AdminController@states');
 
-    Route::post('/estats/afegir', 'AdminController@estatsAfegir');
+    Route::post('/states/afegir', 'AdminController@statesAfegir');
 
-    Route::post('/estats/editar/{id}', 'AdminController@estatsEditar');
+    Route::post('/states/editar/{id}', 'AdminController@statesEditar');
 
     Route::get('/grups', 'AdminController@grups');
 
@@ -174,29 +174,29 @@ Route::group(['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\AdminMid
 
     Route::post('/grups/editar/{id}', 'AdminController@grupsEditar');
 
-    Route::get('/motius', 'AdminController@motius');
+    Route::get('/motives', 'AdminController@motives');
 
-    Route::get('/motius/{id}', 'AdminController@motius');
+    Route::get('/motives/{id}', 'AdminController@motives');
 
-    Route::post('/motius/afegir', 'AdminController@motiusAfegir');
+    Route::post('/motives/afegir', 'AdminController@motivesAfegir');
 
-    Route::post('/motius/editar/{id}', 'AdminController@motiusEditar');
+    Route::post('/motives/editar/{id}', 'AdminController@motivesEditar');
 
-    Route::get('/patrocinadors', 'AdminController@patrocinadors');
+    Route::get('/sponsors', 'AdminController@sponsors');
 
-    Route::get('/patrocinadors/{id}', 'AdminController@patrocinadors');
+    Route::get('/sponsors/{id}', 'AdminController@sponsors');
 
-    Route::post('/patrocinadors/afegir', 'AdminController@patrocinadorsAfegir');
+    Route::post('/sponsors/afegir', 'AdminController@sponsorsAfegir');
 
-    Route::post('/patrocinadors/editar/{id}', 'AdminController@patrocinadorsEditar');
+    Route::post('/sponsors/editar/{id}', 'AdminController@sponsorsEditar');
 
-    Route::get('/premis', 'AdminController@premis');
+    Route::get('/presents', 'AdminController@presents');
 
-    Route::get('/premis/{id}', 'AdminController@premis');
+    Route::get('/presents/{id}', 'AdminController@presents');
 
-    Route::post('/premis/afegir', 'AdminController@premisAfegir');
+    Route::post('/presents/afegir', 'AdminController@presentsAfegir');
 
-    Route::post('/premis/editar/{id}', 'AdminController@premisEditar');
+    Route::post('/presents/editar/{id}', 'AdminController@presentsEditar');
 
     Route::get('/rols', 'AdminController@rols');
 
@@ -245,19 +245,19 @@ Route::group(['prefix' => 'api'], function(){
 
     Route::resource('/admin/users','UsersController');
 
-    Route::resource('/admin/competicions','CompeticioController');
+    Route::resource('/admin/competitions','CompetitionController');
 
     Route::resource('/admin/edicions','EdicionsController');
 
-    Route::resource('/admin/estats','EstatsController');
+    Route::resource('/admin/states','StatesController');
 
     Route::resource('/admin/grups','GrupsController');
 
-    Route::resource('/admin/motius','MotiusController');
+    Route::resource('/admin/motives','MotivesController');
 
-    Route::resource('/admin/patrocinadors','PatrocinadorsController');
+    Route::resource('/admin/sponsors','SponsorsController');
 
-    Route::resource('/admin/premis','PremisController');
+    Route::resource('/admin/presents','PresentsController');
 
     Route::resource('/admin/rols','RolsController');
 
@@ -269,7 +269,7 @@ Route::group(['prefix' => 'api'], function(){
 
     Route::post('admin/users/token', 'ValidatorGeneralController@token');
 
-    Route::post('competicio/change/{id}', 'ValidatorGeneralController@competicioChange');
+    Route::post('competition/change/{id}', 'ValidatorGeneralController@competitionChange');
 
     Route::post('notificacio/change/{id}', 'ValidatorGeneralController@notificacioChange');
 });

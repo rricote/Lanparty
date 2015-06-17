@@ -41,13 +41,13 @@ class UsersController extends Controller {
         User::create([
             'dni' => Request::input('dni'),
             'name' => Request::input('nom'),
-            'cognom1' => Request::input('cognom1'),
-            'cognom2' => Request::input('cognom2'),
+            'surname1' => Request::input('surname1'),
+            'surname2' => Request::input('surname2'),
             'username' => Request::input('username'),
             'email' => Request::input('email'),
             'ultratoken' => $token,
             'password' => bcrypt(Request::input('password')),
-            'estat_id' => 1,
+            'state_id' => 1,
             'rol_id' => 2,
         ]);
 
@@ -88,12 +88,12 @@ class UsersController extends Controller {
         $usuaris = User::find($id);
         $usuaris->dni = Request::input('dni');
         $usuaris->name = Request::input('name');
-        $usuaris->cognom1 = Request::input('cognom1');
-        $usuaris->cognom2 = Request::input('cognom2');
+        $usuaris->surname1 = Request::input('surname1');
+        $usuaris->surname2 = Request::input('surname2');
         $usuaris->username = Request::input('username');
         $usuaris->email = Request::input('email');
         $usuaris->password = bcrypt(Request::input('password'));
-        $usuaris->estat_id = 1;
+        $usuaris->state_id = 1;
         $usuaris->rol_id = 2;
         $usuaris->save();
 

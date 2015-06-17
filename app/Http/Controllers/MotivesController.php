@@ -1,10 +1,10 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Premi;
+use App\Motive;
 use Request;
 
-class PremisController extends Controller {
+class MotivesController extends Controller {
 
     /**
      * Display a listing of the resource.
@@ -13,8 +13,8 @@ class PremisController extends Controller {
      */
     public function index()
     {
-        $motius = Premi::all();
-        return $motius;
+        $motives = Motive::all();
+        return $motives;
     }
 
     /**
@@ -79,7 +79,7 @@ class PremisController extends Controller {
     public function destroy($id)
     {
 
-        Premi::destroy($id);
+        Motive::destroy($id);
 
         return "CORRECTE";
     }

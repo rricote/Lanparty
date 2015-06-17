@@ -3,14 +3,14 @@
 use App\Assignacio;
 use App\Assistencia;
 use App\Edicio;
-use App\Estat;
-use App\Grup;
-use App\Motiu;
-use App\Patrocinador;
-use App\Premi;
+use App\State;
+use App\Group;
+use App\Motive;
+use App\Sponsor;
+use App\Present;
 use App\Rol;
 use App\User;
-use App\Competicio;
+use App\Competition;
 use App\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
@@ -77,8 +77,8 @@ class AdminController extends Controller {
         $rules = array(
             'editardni'    => 'required',
             'editarnom'    => 'required',
-            'editarcognom1'    => 'required',
-            'editarcognom2'    => 'required',
+            'editarsurname1'    => 'required',
+            'editarsurname2'    => 'required',
             'editarusername'    => 'required',
             'email'    => 'required|email',
             'editarpassword'    => 'required|confirmed'
@@ -94,8 +94,8 @@ class AdminController extends Controller {
             User::find($id)->update([
                 'dni' => Input::get('editardni'),
                 'name' => Input::get('editarnom'),
-                'cognom1' => Input::get('editarcognom1'),
-                'cognom2' => Input::get('editarcognom2'),
+                'surname1' => Input::get('editarsurname1'),
+                'surname2' => Input::get('editarsurname2'),
                 'username' => Input::get('editarusername'),
                 'email' => Input::get('email'),
                 'password' => Input::get('editarpassword')
@@ -107,15 +107,15 @@ class AdminController extends Controller {
         }
     }
 
-    public function competicions($id = null)
+    public function competitions($id = null)
     {
         $data = array();
         $data['id'] = $id;
-        $data['menu'] = 'competicions';
+        $data['menu'] = 'competitions';
         if(isset($id)){
-            $data['competicions'] = Competicio::find($id);
+            $data['competitions'] = Competition::find($id);
 
-            list($date, $time) = explode(' ',$data['competicions']->data_inici);
+            list($date, $time) = explode(' ',$data['competitions']->data_inici);
             list($any, $mes, $dia) = explode('-', $date);
 
             $data['date'] = $dia . '-' . $mes . '-' . $any;
@@ -124,22 +124,22 @@ class AdminController extends Controller {
             $data['js'] = array(
                 'bootstrap-datepicker.min',
                 'bootstrap-timepicker.min',
-                'competicions'
+                'competitions'
             );
         }else {
-            $data['competicions'] = Competicio::all();
+            $data['competitions'] = Competition::all();
             $data['js'] = array(
                 'jquery.dataTables.min',
                 'jquery.dataTables.bootstrap',
                 'bootstrap-datepicker.min',
                 'bootstrap-timepicker.min',
-                'competicions'
+                'competitions'
             );
         }
-        return view('admin.competicions', $data);
+        return view('admin.competitions', $data);
     }
 
-    public function competicionsEditar($id = null)
+    public function competitionsEditar($id = null)
     {
         $rules = array(
             'name'    => 'required',
@@ -149,17 +149,17 @@ class AdminController extends Controller {
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->fails()) {
-            return Redirect::to('admin/competicions')
+            return Redirect::to('admin/competitions')
                 ->withErrors($validator);
         } else {
             if(Input::hasFile('image')) {
                 if (Input::file('image')->isValid()) {
 
-                    $competicio = Competicio::find($id);
+                    $competition = Competition::find($id);
 
-                    File::delete('icons/competicions/' . $competicio->logo);
+                    File::delete('icons/competitions/' . $competition->logo);
 
-                    $destinationPath = 'icons/competicions';
+                    $destinationPath = 'icons/competitions';
 
                     $extension = Input::file('image')->getClientOriginalExtension();
 
@@ -167,13 +167,13 @@ class AdminController extends Controller {
 
                     Input::file('image')->move($destinationPath, $fileName);
 
-                    $competicio->update([
+                    $competition->update([
                         'logo' => $fileName
                     ]);
 
                 } else {
 
-                    return Redirect::to('admin/competicions')
+                    return Redirect::to('admin/competitions')
                         ->withInput()
                         ->withFlashMessage('Error al pujar l\'arxiu');
                 }
@@ -182,11 +182,11 @@ class AdminController extends Controller {
             if(Input::hasFile('imatge')) {
                 if (Input::file('imatge')->isValid()) {
 
-                    $competicio = Competicio::find($id);
+                    $competition = Competition::find($id);
 
-                    File::delete('images/competicions/' . $competicio->imatge);
+                    File::delete('images/competitions/' . $competition->imatge);
 
-                    $destinationPath = 'images/competicions';
+                    $destinationPath = 'images/competitions';
 
                     $extension = Input::file('imatge')->getClientOriginalExtension();
 
@@ -194,13 +194,13 @@ class AdminController extends Controller {
 
                     Input::file('imatge')->move($destinationPath, $fileName2);
 
-                    $competicio->update([
+                    $competition->update([
                         'imatge' => $fileName2
                     ]);
 
                 } else {
 
-                    return Redirect::to('admin/competicions')
+                    return Redirect::to('admin/competitions')
                         ->withInput()
                         ->withFlashMessage('Error al pujar l\'arxiu');
                 }
@@ -213,20 +213,20 @@ class AdminController extends Controller {
 
             list($dia,$mes,$any) = explode('-',Input::get('datepicker'));
 
-            Competicio::find($id)->update([
+            Competition::find($id)->update([
                 'name' => Input::get('name'),
                 'number' => $number,
                 'link' => Input::get('link'),
                 'data_inici' => $any . '-' . $mes . '-' . $dia . ' ' . Input::get('timepicker'),
                 'edicio_id' => $config->edicio_id
             ]);
-            return Redirect::to('admin/competicions')
+            return Redirect::to('admin/competitions')
                 ->withFlashMessage('Competició actualitzada correctament');
 
         }
     }
 
-    public function competicionsAfegir()
+    public function competitionsAfegir()
     {
         $rules = array(
             'name'    => 'required',
@@ -236,13 +236,13 @@ class AdminController extends Controller {
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->fails()) {
-            return Redirect::to('admin/competicions')
+            return Redirect::to('admin/competitions')
                 ->withErrors($validator);
         } else {
             if(Input::hasFile('image') && Input::hasFile('imatge')) {
                 if (Input::file('image')->isValid() && Input::file('imatge')->isValid()) {
 
-                    $destinationPath = 'icons/competicions';
+                    $destinationPath = 'icons/competitions';
 
                     $extension = Input::file('image')->getClientOriginalExtension();
 
@@ -250,7 +250,7 @@ class AdminController extends Controller {
 
                     Input::file('image')->move($destinationPath, $fileName);
 
-                    $destinationPath = 'images/competicions';
+                    $destinationPath = 'images/competitions';
 
                     $extension = Input::file('imatge')->getClientOriginalExtension();
 
@@ -265,7 +265,7 @@ class AdminController extends Controller {
 
                     list($dia,$mes,$any) = explode('-',Input::get('datepicker'));
 
-                    Competicio::create([
+                    Competition::create([
                         'name' => Input::get('name'),
                         'logo' => $fileName,
                         'imatge' => $fileName2,
@@ -274,17 +274,17 @@ class AdminController extends Controller {
                         'data_inici' => $any . '-' . $mes . '-' . $dia . ' ' . Input::get('timepicker'),
                         'edicio_id' => $config->edicio_id
                     ]);
-                    return Redirect::to('admin/competicions')
+                    return Redirect::to('admin/competitions')
                         ->withFlashMessage('Competició creada correctament');
 
                 } else {
 
-                    return Redirect::to('admin/competicions')
+                    return Redirect::to('admin/competitions')
                         ->withInput()
                         ->withFlashMessage('Error al pujar l\'arxiu');
                 }
             } else {
-                return Redirect::to('admin/competicions')
+                return Redirect::to('admin/competitions')
                     ->withInput()
                     ->withFlashMessage('No has sel·leccionat cap arxiu');
             }
@@ -408,30 +408,30 @@ class AdminController extends Controller {
         }
     }
 
-    public function estats($id = null)
+    public function states($id = null)
     {
         $data = array();
-        $data['menu'] = 'estats';
+        $data['menu'] = 'states';
         $data['id'] = $id;
 
         if(isset($id)){
-            $data['estats'] = Estat::find($id);
+            $data['states'] = State::find($id);
             $data['js'] = array(
-                'estats'
+                'states'
             );
         }else {
-            $data['estats'] = Estat::all();
+            $data['states'] = State::all();
             $data['js'] = array(
                 'jquery.dataTables.min',
                 'jquery.dataTables.bootstrap',
-                'estats'
+                'states'
             );
         }
 
-        return view('admin.estats', $data);
+        return view('admin.states', $data);
     }
 
-    public function estatsAfegir()
+    public function statesAfegir()
     {
         $rules = array(
             'name'    => 'required'
@@ -440,20 +440,20 @@ class AdminController extends Controller {
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->fails()) {
-            return Redirect::to('admin/estats')
+            return Redirect::to('admin/states')
                 ->withErrors($validator);
         } else {
 
-            Estat::create([
+            State::create([
                 'name' => Input::get('name')
             ]);
 
-            return Redirect::to('admin/estats')
-                ->withFlashMessage('Estat creat correctament');
+            return Redirect::to('admin/states')
+                ->withFlashMessage('State creat correctament');
         }
     }
 
-    public function estatsEditar($id = null)
+    public function statesEditar($id = null)
     {
         $rules = array(
             'name'    => 'required'
@@ -462,43 +462,43 @@ class AdminController extends Controller {
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->fails()) {
-            return Redirect::to('admin/estats')
+            return Redirect::to('admin/states')
                 ->withErrors($validator);
         } else {
 
-            Estat::find($id)->update([
+            State::find($id)->update([
                 'name' => Input::get('name')
             ]);
 
-            return Redirect::to('admin/estats')
-                ->withFlashMessage('Estat actualitzat correctament');
+            return Redirect::to('admin/states')
+                ->withFlashMessage('State actualitzat correctament');
         }
     }
 
-    public function grups($id = null)
+    public function groups($id = null)
     {
         $data = array();
-        $data['menu'] = 'grups';
+        $data['menu'] = 'groups';
         $data['id'] = $id;
 
         if(isset($id)){
-            $data['grups'] = Grup::find($id);
+            $data['groups'] = Group::find($id);
             $data['js'] = array(
-                'grups'
+                'groups'
             );
         }else {
-            $data['grups'] = Grup::all();
+            $data['groups'] = Group::all();
             $data['js'] = array(
                 'jquery.dataTables.min',
                 'jquery.dataTables.bootstrap',
-                'grups'
+                'groups'
             );
         }
 
-        return view('admin.grups', $data);
+        return view('admin.groups', $data);
     }
 
-    public function grupsAfegir()
+    public function groupsAfegir()
     {
         $rules = array(
             'name'    => 'required'
@@ -507,23 +507,23 @@ class AdminController extends Controller {
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->fails()) {
-            return Redirect::to('admin/grups')
+            return Redirect::to('admin/groups')
                 ->withErrors($validator);
         } else {
 
             $config = Config::find(1);
 
-            Grup::create([
+            Group::create([
                 'name' => Input::get('name'),
                 'edicio_id' => $config->edicio_id
             ]);
 
-            return Redirect::to('admin/grups')
-                ->withFlashMessage('Grup crea correctament');
+            return Redirect::to('admin/groups')
+                ->withFlashMessage('Group crea correctament');
         }
     }
 
-    public function grupsEditar($id = null)
+    public function groupsEditar($id = null)
     {
         $rules = array(
             'name'    => 'required'
@@ -532,46 +532,46 @@ class AdminController extends Controller {
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->fails()) {
-            return Redirect::to('admin/grups')
+            return Redirect::to('admin/groups')
                 ->withErrors($validator);
         } else {
 
             $config = Config::find(1);
 
-            Grup::find($id)->update([
+            Group::find($id)->update([
                 'name' => Input::get('name'),
                 'edicio_id' => $config->edicio_id
             ]);
 
-            return Redirect::to('admin/grups')
+            return Redirect::to('admin/groups')
                 ->withFlashMessage('Grup actualitzat correctament');
         }
     }
 
-    public function motius($id = null)
+    public function motives($id = null)
     {
         $data = array();
-        $data['menu'] = 'motius';
+        $data['menu'] = 'motives';
         $data['id'] = $id;
 
         if(isset($id)){
-            $data['motius'] = Motiu::find($id);
+            $data['motives'] = Motive::find($id);
             $data['js'] = array(
-                'motius'
+                'motives'
             );
         }else {
-            $data['motius'] = Motiu::all();
+            $data['motives'] = Motive::all();
             $data['js'] = array(
                 'jquery.dataTables.min',
                 'jquery.dataTables.bootstrap',
-                'motius'
+                'motives'
             );
         }
 
-        return view('admin.motius', $data);
+        return view('admin.motives', $data);
     }
 
-    public function motiusAfegir()
+    public function motivesAfegir()
     {
         $rules = array(
             'name'    => 'required'
@@ -580,22 +580,22 @@ class AdminController extends Controller {
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->fails()) {
-            return Redirect::to('admin/motius')
+            return Redirect::to('admin/motives')
                 ->withErrors($validator);
         } else {
             $config = Config::find(1);
 
-            Motiu::create([
+            Motive::create([
                 'name' => Input::get('name'),
                 'edicio_id' => $config->edicio_id
             ]);
 
-            return Redirect::to('admin/motius')
+            return Redirect::to('admin/motives')
                 ->withFlashMessage('Motiu creat correctament');
         }
     }
 
-    public function motiusEditar($id = null)
+    public function motivesEditar($id = null)
     {
         $rules = array(
             'name'    => 'required'
@@ -604,45 +604,45 @@ class AdminController extends Controller {
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->fails()) {
-            return Redirect::to('admin/motius')
+            return Redirect::to('admin/motives')
                 ->withErrors($validator);
         } else {
             $config = Config::find(1);
 
-            Motiu::find($id)->update([
+            Motive::find($id)->update([
                 'name' => Input::get('name'),
                 'edicio_id' => $config->edicio_id
             ]);
 
-            return Redirect::to('admin/motius')
+            return Redirect::to('admin/motives')
                 ->withFlashMessage('Motiu actualitzat correctament');
         }
     }
 
-    public function patrocinadors($id = null)
+    public function sponsors($id = null)
     {
         $data = array();
-        $data['menu'] = 'patrocinadors';
+        $data['menu'] = 'sponsors';
         $data['id'] = $id;
 
         if(isset($id)){
-            $data['patrocinadors'] = Patrocinador::find($id);
+            $data['sponsors'] = Sponsor::find($id);
             $data['js'] = array(
-                'patrocinadors'
+                'sponsors'
             );
         }else {
-            $data['patrocinadors'] = Patrocinador::all();
+            $data['sponsors'] = Sponsor::all();
             $data['js'] = array(
                 'jquery.dataTables.min',
                 'jquery.dataTables.bootstrap',
-                'patrocinadors'
+                'sponsors'
             );
         }
 
-        return view('admin.patrocinadors', $data);
+        return view('admin.sponsors', $data);
     }
 
-    public function patrocinadorsAfegir()
+    public function sponsorsAfegir()
     {
         $rules = array(
             'name'    => 'required',
@@ -652,13 +652,13 @@ class AdminController extends Controller {
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->fails()) {
-            return Redirect::to('admin/patrocinadors')
+            return Redirect::to('admin/sponsors')
                 ->withErrors($validator);
         } else {
             if(Input::hasFile('image')) {
                 if (Input::file('image')->isValid()) {
 
-                    $destinationPath = 'images/patrocinadors';
+                    $destinationPath = 'images/sponsors';
 
                     $extension = Input::file('image')->getClientOriginalExtension();
 
@@ -668,31 +668,31 @@ class AdminController extends Controller {
 
                     $config = Config::find(1);
 
-                    Patrocinador::create([
+                    Sponsor::create([
                         'name' => Input::get('name'),
                         'logo' => $fileName,
                         'tipus' => Input::get('tipus'),
                         'edicio_id' => $config->edicio_id
                     ]);
 
-                    return Redirect::to('admin/patrocinadors')
+                    return Redirect::to('admin/sponsors')
                         ->withFlashMessage('Patrocinador actualitzat correctament');
 
                 } else {
 
-                    return Redirect::to('admin/patrocinadors')
+                    return Redirect::to('admin/sponsors')
                         ->withInput()
                         ->withFlashMessage('Error al pujar l\'arxiu');
                 }
             } else {
-                return Redirect::to('admin/patrocinadors')
+                return Redirect::to('admin/sponsors')
                     ->withInput()
                     ->withFlashMessage('No has sel·leccionat cap arxiu');
             }
         }
     }
 
-    public function patrocinadorsEditar($id = null)
+    public function sponsorsEditar($id = null)
     {
         $rules = array(
             'name'    => 'required',
@@ -702,13 +702,13 @@ class AdminController extends Controller {
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->fails()) {
-            return Redirect::to('admin/patrocinadors')
+            return Redirect::to('admin/sponsors')
                 ->withErrors($validator);
         } else {
             if(Input::hasFile('image')) {
                 if (Input::file('image')->isValid()) {
 
-                    $destinationPath = 'images/patrocinadors';
+                    $destinationPath = 'images/sponsors';
 
                     $extension = Input::file('image')->getClientOriginalExtension();
 
@@ -716,17 +716,17 @@ class AdminController extends Controller {
 
                     Input::file('image')->move($destinationPath, $fileName);
 
-                    $patrocinador = Patrocinador::find($id);
+                    $sponsor = Sponsor::find($id);
 
-                    File::delete('images/patrocinadors/' . $patrocinador->logo);
+                    File::delete('images/sponsors/' . $sponsor->logo);
 
-                    $patrocinador->update([
+                    $sponsor->update([
                         'logo' => $fileName,
                     ]);
 
                 } else {
 
-                    return Redirect::to('admin/patrocinadors/' . $id)
+                    return Redirect::to('admin/sponsors/' . $id)
                         ->withInput()
                         ->withFlashMessage('Error al pujar l\'arxiu');
                 }
@@ -735,97 +735,97 @@ class AdminController extends Controller {
 
             $config = Config::find(1);
 
-            Patrocinador::find($id)->update([
+            Sponsor::find($id)->update([
                 'name' => Input::get('name'),
                 'tipus' => Input::get('tipus'),
                 'edicio_id' => $config->edicio_id
             ]);
 
-            return Redirect::to('admin/patrocinadors')
+            return Redirect::to('admin/sponsors')
                 ->withFlashMessage('Patrocinador actualitzat correctament');
 
         }
     }
 
-    public function premis($id = null)
+    public function presents($id = null)
     {
         $data = array();
-        $data['menu'] = 'premis';
+        $data['menu'] = 'presents';
         $data['id'] = $id;
         if(isset($id)){
-            $data['premis'] = Premi::find($id);
+            $data['presents'] = Present::find($id);
             $data['js'] = array(
-                'premis'
+                'presents'
             );
         }else {
-            $data['premis'] = Premi::all();
+            $data['presents'] = Present::all();
             $data['js'] = array(
                 'jquery.dataTables.min',
                 'jquery.dataTables.bootstrap',
-                'premis'
+                'presents'
             );
         }
-        $patrocinadors = array();
+        $sponsors = array();
 
-        $patro = Patrocinador::all();
+        $patro = Sponsor::all();
 
         foreach($patro as $p)
-            $patrocinadors[$p->id] = $p->name;
+            $sponsors[$p->id] = $p->name;
 
-        $data['patrocinadors'] = $patrocinadors;
+        $data['sponsors'] = $sponsors;
 
-        return view('admin.premis', $data);
+        return view('admin.presents', $data);
     }
 
-    public function premisAfegir()
+    public function presentsAfegir()
     {
         $rules = array(
             'name'    => 'required',
-            'patrocinador'    => 'required'
+            'sponsor'    => 'required'
         );
 
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->fails()) {
-            return Redirect::to('admin/premis')
+            return Redirect::to('admin/presents')
                 ->withErrors($validator);
         } else {
             $config = Config::find(1);
 
-            Premi::create([
+            Present::create([
                 'name' => Input::get('name'),
-                'patrocinador_id' => Input::get('patrocinador'),
+                'sponsor_id' => Input::get('sponsor'),
                 'edicio_id' => $config->edicio_id
             ]);
 
-            return Redirect::to('admin/premis')
+            return Redirect::to('admin/presents')
                 ->withFlashMessage('Premi creat correctament');
 
         }
     }
 
-    public function premisEditar($id = null)
+    public function presentsEditar($id = null)
     {
         $rules = array(
             'name'    => 'required',
-            'patrocinador'    => 'required'
+            'sponsor'    => 'required'
         );
 
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->fails()) {
-            return Redirect::to('admin/premis')
+            return Redirect::to('admin/presents')
                 ->withErrors($validator);
         } else {
             $config = Config::find(1);
 
-            Premi::find($id)->update([
+            Present::find($id)->update([
                 'name' => Input::get('name'),
-                'patrocinador_id' => Input::get('patrocinador'),
+                'sponsor_id' => Input::get('sponsor'),
                 'edicio_id' => $config->edicio_id
             ]);
 
-            return Redirect::to('admin/premis')
+            return Redirect::to('admin/presents')
                 ->withFlashMessage('Premi actualitzat correctament');
 
         }
@@ -906,12 +906,12 @@ class AdminController extends Controller {
 
         $config = Config::find(1);
 
-        $data['motius'] = array();
+        $data['motives'] = array();
 
-        $motius = Motiu::where('edicio_id', $config->edicio_id)->get();
+        $motives = Motive::where('edicio_id', $config->edicio_id)->get();
 
-        foreach($motius as $m)
-            $data['motius'][$m->id] = $m->name;
+        foreach($motives as $m)
+            $data['motives'][$m->id] = $m->name;
 
         $data['js'] = array(
             'jquery.dataTables.min',
@@ -929,7 +929,7 @@ class AdminController extends Controller {
         $rules = array(
             'datepicker'    => 'required',
             'timepicker'    => 'required',
-            'motiu'    => 'required',
+            'motive'    => 'required',
             'inici'    => 'required',
             'final'    => 'required'
         );
@@ -996,10 +996,10 @@ class AdminController extends Controller {
                     $total += (strtotime($datafinal) - strtotime($inicial));
                 }
 
-                if(Assignacio::where('user_id', '=', $u->id)->where('motiu_id', '=', Input::get('motiu'))->count()) {
+                if(Assignacio::where('user_id', '=', $u->id)->where('motive_id', '=', Input::get('motive'))->count()) {
 
                     if ($total < $time_seconds) {
-                        Assignacio::where('user_id', '=', $u->id)->where('motiu_id', '=', Input::get('motiu'))->delete();
+                        Assignacio::where('user_id', '=', $u->id)->where('motive_id', '=', Input::get('motive'))->delete();
                         $msg .= 'A l\'usuari ' . $u->username . ' se li borra la seva assignació per incumplir la nova condició.<br>';
                     } else {
                         $msg .= 'A l\'usuari ' . $u->username . ' se li deixa com esta la seva assignació per cumplir la nova condició.<br>';
@@ -1010,7 +1010,7 @@ class AdminController extends Controller {
                     if ($total >= $time_seconds) {
                         Assignacio::create([
                             'user_id' => $u->id,
-                            'motiu_id' => Input::get('motiu')
+                            'motive_id' => Input::get('motive')
                         ]);
                         $msg .= 'A l\'usuari ' . $u->username . ' se li crea l\'assignació per cumplir la condició.<br>';
                     } else {
@@ -1056,7 +1056,7 @@ class AdminController extends Controller {
     public function configEditar()
     {
         $rules = array(
-            'patrocinador'    => 'required',
+            'sponsor'    => 'required',
             'email'    => 'required',
             'datepicker'    => 'required',
             'timepicker'    => 'required'
@@ -1071,7 +1071,7 @@ class AdminController extends Controller {
                 'name' => Input::get('name'),
                 'email' => Input::get('email'),
                 'data_inici' => $any . '-' . $mes . '-' . $dia . ' ' . Input::get('timepicker'),
-                'edicio_id' => Input::get('patrocinador')
+                'edicio_id' => Input::get('sponsor')
             ]);
             return Redirect::to('admin/config')
                 ->withFlashMessage('Configuració actualitzada correctament');
@@ -1086,12 +1086,12 @@ class AdminController extends Controller {
 
         $config = Config::find(1);
 
-        $data['motius'] = array();
+        $data['motives'] = array();
 
-        $motius = Motiu::where('edicio_id', $config->edicio_id)->get();
+        $motives = Motive::where('edicio_id', $config->edicio_id)->get();
 
-        foreach($motius as $m)
-            $data['motius'][$m->id] = $m->name;
+        foreach($motives as $m)
+            $data['motives'][$m->id] = $m->name;
 
         $usuaris = User::all();
 
@@ -1105,7 +1105,7 @@ class AdminController extends Controller {
     {
         $rules = array(
             'usuaris'    => 'required',
-            'motius'    => 'required'
+            'motives'    => 'required'
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -1115,10 +1115,10 @@ class AdminController extends Controller {
                 ->withErrors($validator);
         } else {
             $msg = '';
-            if(!Assignacio::where('user_id', Input::get('usuaris'))->where('motiu_id', Input::get('motius'))->count()) {
+            if(!Assignacio::where('user_id', Input::get('usuaris'))->where('motive_id', Input::get('motives'))->count()) {
                 Assignacio::create([
                     'user_id' => Input::get('usuaris'),
-                    'motiu_id' => Input::get('motius')
+                    'motive_id' => Input::get('motives')
                 ]);
                 $msg = 'Assignació creada correctament';
             }else{

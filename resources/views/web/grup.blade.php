@@ -33,7 +33,7 @@
                                 <ul class="list-unstyled">
                                     @foreach($grup->competicionsusersgrups as $c)
                                         <?php $i2++; ?>
-                                        <li><p>{{ $c->user->name }} <b>{{ $c->user->username }}</b> {{ $c->user->cognom1 }}</p></li>
+                                        <li><p>{{ $c->user->name }} <b>{{ $c->user->username }}</b> {{ $c->user->surname1 }}</p></li>
                                     @endforeach
                                     @for($i = 0; $i < $grup->competicio->number - $i2; $i++)
                                         <li><p>Lloc disponible</p></li>
@@ -50,20 +50,20 @@
                         <h2>Peticions d'entrada</h2>
                         <ul class="nav nav-sidebar">
                             @foreach($notificacions as $n)
-                                @if($n['notificacio']->estat != 1)
+                                @if($n['notificacio']->state != 1)
                                 <li>
                                     <div>
                                         <a style="margin-left: 10px;" target="_blank" href="{{url('perfil/' . $n['user']->id)}}">{{ $n['user']->username }}</a>
                                         <span style="float: right;">
-                                            @if($n['notificacio']->estat == 2 || $n['notificacio']->estat == 0)
+                                            @if($n['notificacio']->state == 2 || $n['notificacio']->state == 0)
                                                 {!! Form::open(array('url' => 'notificacio/equip/acceptar/' . $n['notificacio']->id, 'style'=>'display: inline;')) !!}
                                                 <button style="margin: 0px 10px;" type="submit" class="btn btn-success">Acceptar</button>
                                                 {!! Form::close() !!}
                                             @endif
                                             {!! Form::open(array('url' => 'notificacio/equip/cancelar/' . $n['notificacio']->id, 'style' => 'display: inline;')) !!}
-                                            <button style="margin: 0px 10px;" type="submit" class="btn btn-danger">@if($n['notificacio']->estat == 3) Descancel·lar @else Cancel·lar @endif</button>
+                                            <button style="margin: 0px 10px;" type="submit" class="btn btn-danger">@if($n['notificacio']->state == 3) Descancel·lar @else Cancel·lar @endif</button>
                                             {!! Form::close() !!}
-                                            @if($n['notificacio']->estat == 2 || $n['notificacio']->estat == 0)
+                                            @if($n['notificacio']->state == 2 || $n['notificacio']->state == 0)
                                                 {!! Form::open(array('url' => 'notificacio/equip/llegida/' . $n['notificacio']->id, 'style' => 'display: inline;')) !!}
                                                 <button style="margin: 0px 10px;" type="submit" class="btn btn-info">@if($n['notificacio']->estat == 2) Desmarcar llegida @else Marcar llegida @endif</button>
                                                 {!! Form::close() !!}

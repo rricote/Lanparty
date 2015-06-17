@@ -1,11 +1,10 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Competicio;
-use Illuminate\Support\Facades\File;
+use App\Present;
 use Request;
 
-class CompeticioController extends Controller {
+class PresentsController extends Controller {
 
     /**
      * Display a listing of the resource.
@@ -14,8 +13,8 @@ class CompeticioController extends Controller {
      */
     public function index()
     {
-        $competicions = Competicio::all();
-        return $competicions;
+        $motives = Present::all();
+        return $motives;
     }
 
     /**
@@ -79,12 +78,8 @@ class CompeticioController extends Controller {
      */
     public function destroy($id)
     {
-        $competicio = Competicio::find($id);
 
-        File::delete('icons/competicions/' . $competicio->logo);
-        File::delete('images/competicions/' . $competicio->imatge);
-
-        Competicio::destroy($id);
+        Present::destroy($id);
 
         return "CORRECTE";
     }

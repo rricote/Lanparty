@@ -2,30 +2,30 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Grup extends Model {
+class Group extends Model {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'grups';
+    protected $table = 'groups';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name', 'edicio_id', 'competicio_id'];
+    protected $fillable = ['name', 'edicio_id', 'competition_id'];
 
-    public function competicionsusersgrups()
+    public function competitionsusersgroups()
     {
-        return $this->hasMany('App\Competicionsusersgrups');
+        return $this->hasMany('App\Competitionsusersgroups');
     }
 
-    public function competicio()
+    public function competition()
     {
-        return $this->belongsTo('App\Competicio');
+        return $this->belongsTo('App\Competition');
     }
 
     public function edicio()

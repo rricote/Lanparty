@@ -3,8 +3,8 @@
 use App\Competicio;
 use App\Config;
 use App\Edicio;
-use App\Estat;
-use App\Patrocinador;
+use App\State;
+use App\Sponsor;
 use App\Rol;
 use App\User;
 use Illuminate\Database\Seeder;
@@ -84,15 +84,15 @@ class RolTableSeeder extends Seeder {
 
 }
 
-class EstatTableSeeder extends Seeder {
+class StateTableSeeder extends Seeder {
 
     public function run()
     {
-        Estat::create([
+        State::create([
             'name' => 'Pendent'
         ]);
 
-        Estat::create([
+        State::create([
             'name' => 'Validat'
         ]);
     }
@@ -195,25 +195,25 @@ class CompeticioTableSeeder extends Seeder {
 
 }
 
-class PatrocinadorsTableSeeder extends Seeder {
+class SponsorsTableSeeder extends Seeder {
 
     public function run()
     {
-        Patrocinador::create([
+        Sponsor::create([
             'name' => 'Intel',
             'tipus' => 3,
             'logo' => 'prova1.png',
             'edicio_id' => 1
         ]);
 
-        Patrocinador::create([
+        Sponsor::create([
             'name' => 'Twitch',
             'tipus' => 1,
             'logo' => 'prova2.png',
             'edicio_id' => 1
         ]);
 
-        Patrocinador::create([
+        Sponsor::create([
             'name' => 'Benq',
             'tipus' => 2,
             'logo' => 'prova3.png',

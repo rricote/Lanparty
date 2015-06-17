@@ -41,7 +41,7 @@
         <li @if ($menu == 'estats')class="active"@endif>
             <a href="{{ url('/admin/estats') }}">
                 <i class="icon-group"></i>
-                <span class="menu-text"> Estats </span>
+                <span class="menu-text"> States </span>
             </a>
         </li>
 
@@ -59,8 +59,8 @@
             </a>
         </li>
 
-        <li @if ($menu == 'patrocinadors')class="active"@endif>
-            <a href="{{ url('/admin/patrocinadors') }}">
+        <li @if ($menu == 'sponsors')class="active"@endif>
+            <a href="{{ url('/admin/sponsors') }}">
                 <i class="icon-group"></i>
                 <span class="menu-text"> Patrocinadors </span>
             </a>

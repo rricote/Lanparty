@@ -20,13 +20,13 @@ class ValidacioController extends Controller {
 	{
         try {
             $usuaris = User::find($id);
-            $usuaris->estat_id = Request::input('estat');
+            $usuaris->state_id = Request::input('state');
             $usuaris->save();
         } catch (Exception $e) {
             return 'no';
         }
         $config = Config::find(1);
-        if(Request::input('estat') == 2){
+        if(Request::input('state') == 2){
             if(!Assistencia::where('user_id', '=', $id)->count()){
                 $assistencies = new Assistencia;
                 $assistencies->accio = 'ENTRADA';
