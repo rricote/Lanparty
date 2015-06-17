@@ -10,7 +10,7 @@
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
                             <h4>Tens aquestes notificacions:<a class="anchorjs-link"><span class="anchorjs-icon"></span></a></h4>
 
-                            <ul class="list-unstyled" style="margin-bottom: 20px;">
+                            <ul class="list-unstyled" style="margin-bottom: 10px;">
                                 @foreach($not as $n)
                                     @if($n['notification']->state != 1)
                                         <li>
@@ -62,7 +62,7 @@
                         <h2>Enllaços d'interes</h2>
                         <div style="text-align: center;">
                             <a style="margin:10px; min-width: 120px;" href="{{url('competitions')}}" class="btn btn-primary">Competicions</a>
-                            <a style="margin:10px; min-width: 120px;" href="{{url('colaboradors')}}" class="btn btn-primary">Col·laboradors</a>
+                            <a style="margin:10px; min-width: 120px;" href="{{url('colaborators')}}" class="btn btn-primary">Col·laboradors</a>
                             <a style="margin:10px; min-width: 120px;" href="{{url('premis')}}" class="btn btn-primary">Premis</a>
                             <a style="margin:10px; min-width: 120px;" href="{{url('cartell')}}" class="btn btn-primary">Cartell</a>
                         </div>

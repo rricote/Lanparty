@@ -17,7 +17,7 @@
                     @foreach($not as $n)
                         @if($n['notification']->state != 1)
                             <li>
-                                <div style="border-top: 1px solid #bce8f1; padding: 10px 0px;">
+                                <div style="border-top: 1px solid #bce8f1; padding: 20px 0px;">
                                     <a style="margin-left: 2px;" target="_blank" href="{{url('perfil/' . $n['user']->id)}}">{{ $n['user']->username }}</a>
                                     &nbsp;vol entrar a&nbsp;
                                     <a style="margin: 0px;" target="_blank" href="{{url('group/' . $n['group']->id)}}">{{ $n['group']->name }}</a>

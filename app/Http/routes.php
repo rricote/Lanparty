@@ -82,7 +82,7 @@ Route::get('home', function(){
 
 Route::get('presents', 'PublicController@presents');
 
-Route::get('colaboradors', 'PublicController@colaboradors');
+Route::get('colaborators', 'PublicController@colaborators');
 
 Route::get('competitions', 'PublicController@competitions');
 
