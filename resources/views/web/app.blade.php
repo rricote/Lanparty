@@ -82,7 +82,7 @@
                             <li><a href="{{ url('programa') }}"><i class="fa fa-plus"></i>Programa</a></li>
                             <li><a href="{{ url('competitions') }}"><i class="fa fa-plus"></i>Competicions</a></li>
                             <li><a href="{{ url('colaborators') }}"><i class="fa fa-plus"></i>Col·laboradors</a></li>
-                            <li><a href="{{ url('premis') }}"><i class="fa fa-plus"></i>Premis</a></li>
+                            <li><a href="{{ url('presents') }}"><i class="fa fa-plus"></i>Premis</a></li>
                             <li><a href="{{ url('cartell') }}"><i class="fa fa-plus"></i>Cartell</a></li>
                         </ul>
                     </li>

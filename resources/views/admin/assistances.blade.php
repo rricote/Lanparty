@@ -82,7 +82,7 @@
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                 <div class="form-group">
                                     {!! Form::label('motiu', 'Motiu:', null, array('class' => 'control-label')) !!}
-                                    {!! Form::select('motiu', $motius, null, array('class' => 'form-control')) !!}
+                                    {!! Form::select('motiu', $motives, null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
 

@@ -9,7 +9,7 @@ jQuery(function($) {
         spinner.spin(spin);
         $.ajax({
             type: "delete",
-            url: link + 'api/admin/motius/' + $(this).attr('id'),
+            url: link + 'api/admin/motives/' + $(this).attr('id'),
             success: function(data) {
                 if(data == 'CORRECTE'){
                     var unique_id = $.gritter.add({

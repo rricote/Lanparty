@@ -63,7 +63,7 @@
                         <div style="text-align: center;">
                             <a style="margin:10px; min-width: 120px;" href="{{url('competitions')}}" class="btn btn-primary">Competicions</a>
                             <a style="margin:10px; min-width: 120px;" href="{{url('colaborators')}}" class="btn btn-primary">Col·laboradors</a>
-                            <a style="margin:10px; min-width: 120px;" href="{{url('premis')}}" class="btn btn-primary">Premis</a>
+                            <a style="margin:10px; min-width: 120px;" href="{{url('presents')}}" class="btn btn-primary">Premis</a>
                             <a style="margin:10px; min-width: 120px;" href="{{url('cartell')}}" class="btn btn-primary">Cartell</a>
                         </div>
                     </div>

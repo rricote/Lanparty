@@ -16,7 +16,7 @@ class Competition extends Model {
      *
      * @var array
      */
-    protected $fillable = ['name', 'logo', 'image', 'number', 'state', 'link', 'data_inici', 'edition_id'];
+    protected $fillable = ['name', 'logo', 'imatge', 'number', 'state', 'link', 'data_inici', 'edition_id'];
 
     public function competitionsusersgroups()
     {

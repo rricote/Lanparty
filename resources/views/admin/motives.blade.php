@@ -74,7 +74,7 @@
                                 </div>
                             @endif
 
-                            {!! Form::open(array('url' => 'admin/motius/editar/' . $id)) !!}
+                            {!! Form::open(array('url' => 'admin/motives/editar/' . $id)) !!}
 
                             <div class="col-xs-12">
 
@@ -83,7 +83,7 @@
                                         {!! Form::label('motiu', 'Nom del motiu:', null, array('class' => 'control-label')) !!}
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="icon-edit"></i></span>
-                                            {!! Form::text('name', $motius->name, array('required', 'class' => 'form-control', 'placeholder' => 'Nom')) !!}
+                                            {!! Form::text('name', $motives->name, array('required', 'class' => 'form-control', 'placeholder' => 'Nom')) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@
                             </div>
 
                             <div class="table-responsive">
-                                <table id="taula-motius" class="table table-striped table-bordered table-hover">
+                                <table id="taula-motives" class="table table-striped table-bordered table-hover">
                                     <thead>
                                     <tr>
                                         <th class="center">
@@ -116,7 +116,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($motius as $m)
+                                    @foreach ($motives as $m)
                                         <tr>
                                             <td class="center">
                                                 <label>
@@ -136,7 +136,7 @@
                                             <td>
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 
-                                                    <a class="green" href="{{ url('admin/motius/' . $m->id) }}" data-toggle="modal">
+                                                    <a class="green" href="{{ url('admin/motives/' . $m->id) }}" data-toggle="modal">
                                                         <i class="icon-pencil bigger-130"></i>
                                                     </a>
 
@@ -154,7 +154,7 @@
                                                         <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
 
                                                             <li>
-                                                                <a href="{{ url('admin/premis/' . $m->id) }}" class="tooltip-success" data-rel="tooltip" title="Edit" data-toggle="modal">
+                                                                <a href="{{ url('admin/presents/' . $m->id) }}" class="tooltip-success" data-rel="tooltip" title="Edit" data-toggle="modal">
                                                                     <span class="green">
                                                                         <i class="icon-edit bigger-120"></i>
                                                                     </span>
@@ -198,7 +198,7 @@
                                 </div>
                             @endif
 
-                            {!! Form::open(array('url' => 'admin/motius/afegir')) !!}
+                            {!! Form::open(array('url' => 'admin/motives/afegir')) !!}
 
                             <div class="col-xs-12">
 

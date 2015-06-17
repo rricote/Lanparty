@@ -1,5 +1,5 @@
 jQuery(function($) {
-    $('#taula-premis').dataTable();
+    $('#taula-presents').dataTable();
     $('#input-image').ace_file_input({
         no_file: 'Cap arxiu ...',
         btn_choose: 'Elegeix',
@@ -21,7 +21,7 @@ jQuery(function($) {
         spinner.spin(spin);
         $.ajax({
             type: "delete",
-            url: link + 'api/admin/premis/' + $(this).attr('id'),
+            url: link + 'api/admin/presents/' + $(this).attr('id'),
             success: function(data) {
                 if(data == 'CORRECTE'){
                     var unique_id = $.gritter.add({

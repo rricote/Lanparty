@@ -74,16 +74,16 @@
                                 </div>
                             @endif
 
-                            {!! Form::open(array('url' => 'admin/premis/editar/' . $id)) !!}
+                            {!! Form::open(array('url' => 'admin/presents/editar/' . $id)) !!}
 
                             <div class="col-xs-12">
 
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                     <div class="form-group">
-                                        {!! Form::label('premis', 'Nom de la competició:', null, array('class' => 'control-label')) !!}
+                                        {!! Form::label('presents', 'Nom de la competició:', null, array('class' => 'control-label')) !!}
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="icon-edit"></i></span>
-                                            {!! Form::text('name', $premis->name, array('required', 'class' => 'form-control', 'placeholder' => 'Nom')) !!}
+                                            {!! Form::text('name', $presents->name, array('required', 'class' => 'form-control', 'placeholder' => 'Nom')) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +91,7 @@
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         {!! Form::label('sponsor', 'Patrocinador:', null, array('class' => 'control-label')) !!}
-                                        {!! Form::select('sponsor', $sponsors, $premis->sponsor_id,array('class' => 'form-control')) !!}
+                                        {!! Form::select('sponsor', $sponsors, $presents->sponsor_id,array('class' => 'form-control')) !!}
                                     </div>
                                 </div>
 
@@ -109,7 +109,7 @@
                         </div>
 
                         <div class="table-responsive">
-                            <table id="taula-premis" class="table table-striped table-bordered table-hover">
+                            <table id="taula-presents" class="table table-striped table-bordered table-hover">
                                 <thead>
                                 <tr>
                                     <th class="center">
@@ -125,7 +125,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($premis as $p)
+                                @foreach ($presents as $p)
                                     <tr>
                                         <td class="center">
                                             <label>
@@ -151,7 +151,7 @@
                                         <td>
                                             <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 
-                                                <a class="green" href="{{ url('admin/premis/' . $p->id) }}" data-toggle="modal">
+                                                <a class="green" href="{{ url('admin/presents/' . $p->id) }}" data-toggle="modal">
                                                     <i class="icon-pencil bigger-130"></i>
                                                 </a>
 
@@ -169,7 +169,7 @@
                                                     <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
 
                                                         <li>
-                                                            <a href="{{ url('admin/premis/' . $p->id) }}" class="tooltip-success" data-rel="tooltip" title="Edit" data-toggle="modal">
+                                                            <a href="{{ url('admin/presents/' . $p->id) }}" class="tooltip-success" data-rel="tooltip" title="Edit" data-toggle="modal">
                                                                 <span class="green">
                                                                     <i class="icon-edit bigger-120"></i>
                                                                 </span>
@@ -212,13 +212,13 @@
                             </div>
                         @endif
 
-                        {!! Form::open(array('url' => 'admin/premis/afegir')) !!}
+                        {!! Form::open(array('url' => 'admin/presents/afegir')) !!}
 
                         <div class="col-xs-12">
 
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                 <div class="form-group">
-                                    {!! Form::label('premis', 'Nom del premi:', null, array('class' => 'control-label')) !!}
+                                    {!! Form::label('presents', 'Nom del premi:', null, array('class' => 'control-label')) !!}
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="icon-edit"></i></span>
                                         {!! Form::text('name', null, array('required', 'class' => 'form-control', 'placeholder' => 'Nom')) !!}
