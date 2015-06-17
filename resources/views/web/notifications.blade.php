@@ -15,7 +15,7 @@
                                 &nbsp;vol entrar a&nbsp;
                                 <a style="margin: 0px;" target="_blank" href="{{url('group/' . $n['group']->id)}}">{{ $n['group']->name }}</a>
                                 &nbsp;de&nbsp;
-                                <a style="margin: 0px;" target="_blank" href="{{url('competicio/' . $n['group']->competicio->id)}}">{{ $n['group']->competicio->name }}</a>
+                                <a style="margin: 0px;" target="_blank" href="{{url('competition/' . $n['group']->competition->id)}}">{{ $n['group']->competition->name }}</a>
                                 <span style="float: right;">
                                     @if($n['notification']->state == 2 || $n['notification']->state == 0)
                                         {!! Form::open(array('url' => 'notification/equip/acceptar/' . $n['notification']->id, 'style'=>'display: inline;')) !!}

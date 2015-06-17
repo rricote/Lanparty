@@ -16,5 +16,5 @@ class Notification extends Model {
      *
      * @var array
      */
-    protected $fillable = ['tipus','rao','interesat','destinatari','state'];
+    protected $fillable = ['type','reason','interesat','destinatari','state'];
 }

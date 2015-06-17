@@ -101,7 +101,7 @@
                         </div>
 
                         <div class="table-responsive">
-                            <table id="taula-estats" class="table table-striped table-bordered table-hover">
+                            <table id="taula-states" class="table table-striped table-bordered table-hover">
                                 <thead>
                                 <tr>
                                     <th class="center">
@@ -131,7 +131,7 @@
                                         <td>
                                             <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 
-                                                <a class="green" href="{{ url('admin/estats/' . $e->id) }}" data-toggle="modal">
+                                                <a class="green" href="{{ url('admin/states/' . $e->id) }}" data-toggle="modal">
                                                     <i class="icon-pencil bigger-130"></i>
                                                 </a>
 
@@ -149,7 +149,7 @@
                                                     <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
 
                                                         <li>
-                                                            <a href="{{ url('admin/estats/' . $e->id) }}" class="tooltip-success" data-rel="tooltip" title="Edit" data-toggle="modal">
+                                                            <a href="{{ url('admin/states/' . $e->id) }}" class="tooltip-success" data-rel="tooltip" title="Edit" data-toggle="modal">
                                                                 <span class="green">
                                                                     <i class="icon-edit bigger-120"></i>
                                                                 </span>

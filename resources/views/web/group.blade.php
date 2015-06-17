@@ -18,10 +18,10 @@
             <div class="box gaming-team">
                 <div class="row">
                     <div class="col-md-3 col-xs-4">
-                        <img src="{{ url('images/competicions/' . $group->competicio->imatge) }}" alt="competicio{{ $group->id }}" class="img-responsive center-block">
+                        <img src="{{ url('images/competitions/' . $group->competition->imatge) }}" alt="competition{{ $group->id }}" class="img-responsive center-block">
                     </div>
                     <div class="col-md-9 col-xs-8">
-                        <h2>{{ $group->competicio->name }}</h2>
+                        <h2>{{ $group->competition->name }}</h2>
                     </div>
                 </div>
                 <div class="row">
@@ -31,11 +31,11 @@
                                 <h3>{{ $group->name }}</h3>
                                 <?php $i2 = 0; ?>
                                 <ul class="list-unstyled">
-                                    @foreach($group->competicionsusersgroups as $c)
+                                    @foreach($group->competitionsusersgroups as $c)
                                         <?php $i2++; ?>
                                         <li><p>{{ $c->user->name }} <b>{{ $c->user->username }}</b> {{ $c->user->surname1 }}</p></li>
                                     @endforeach
-                                    @for($i = 0; $i < $group->competicio->number - $i2; $i++)
+                                    @for($i = 0; $i < $group->competition->number - $i2; $i++)
                                         <li><p>Lloc disponible</p></li>
                                     @endfor
                                 </ul>
@@ -65,7 +65,7 @@
                                             {!! Form::close() !!}
                                             @if($n['notification']->state == 2 || $n['notification']->state == 0)
                                                 {!! Form::open(array('url' => 'notification/equip/llegida/' . $n['notification']->id, 'style' => 'display: inline;')) !!}
-                                                <button style="margin: 0px 10px;" type="submit" class="btn btn-info">@if($n['notification']->estat == 2) Desmarcar llegida @else Marcar llegida @endif</button>
+                                                <button style="margin: 0px 10px;" type="submit" class="btn btn-info">@if($n['notification']->state == 2) Desmarcar llegida @else Marcar llegida @endif</button>
                                                 {!! Form::close() !!}
                                             @endif
                                         </span>

@@ -19,7 +19,7 @@ class CreateCompetitionsTable extends Migration {
             $table->string('logo');
             $table->string('imatge');
             $table->string('number');
-            $table->integer('estat');
+            $table->integer('state');
             $table->string('link');
             $table->timestamp('data_inici');
             $table->integer('edition_id');

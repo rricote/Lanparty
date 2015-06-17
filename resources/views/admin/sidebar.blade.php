@@ -24,8 +24,8 @@
             </a>
         </li>
 
-        <li @if ($menu == 'competicions')class="active"@endif>
-            <a href="{{ url('/admin/competicions') }}">
+        <li @if ($menu == 'competitions')class="active"@endif>
+            <a href="{{ url('/admin/competitions') }}">
                 <i class="icon-group"></i>
                 <span class="menu-text"> Competicions </span>
             </a>
@@ -38,8 +38,8 @@
             </a>
         </li>
 
-        <li @if ($menu == 'estats')class="active"@endif>
-            <a href="{{ url('/admin/estats') }}">
+        <li @if ($menu == 'states')class="active"@endif>
+            <a href="{{ url('/admin/states') }}">
                 <i class="icon-group"></i>
                 <span class="menu-text"> Estats </span>
             </a>

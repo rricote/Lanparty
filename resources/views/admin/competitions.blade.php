@@ -72,16 +72,16 @@
                                 </div>
                             @endif
 
-                            {!! Form::open(array('url' => 'admin/competicions/editar/' . $id, 'files'=>true)) !!}
+                            {!! Form::open(array('url' => 'admin/competitions/editar/' . $id, 'files'=>true)) !!}
 
                             <div class="col-xs-12">
 
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                     <div class="form-group">
-                                        {!! Form::label('competicio', 'Nom de la competició:', null, array('class' => 'control-label')) !!}
+                                        {!! Form::label('competition', 'Nom de la competició:', null, array('class' => 'control-label')) !!}
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="icon-edit"></i></span>
-                                            {!! Form::text('name', $competicions->name, array('required', 'class' => 'form-control', 'placeholder' => 'Nom')) !!}
+                                            {!! Form::text('name', $competitions->name, array('required', 'class' => 'form-control', 'placeholder' => 'Nom')) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -89,7 +89,7 @@
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         {!! Form::label('link', 'Link de la competició: (opcional)', null, array('class' => 'control-label')) !!}
-                                        {!! Form::text('link', $competicions->link, array( 'class' => 'form-control', 'placeholder' => 'http://www.exemple.com')) !!}
+                                        {!! Form::text('link', $competitions->link, array( 'class' => 'form-control', 'placeholder' => 'http://www.exemple.com')) !!}
                                     </div>
                                 </div>
 
@@ -119,10 +119,10 @@
 
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                     <div class="form-group">
-                                        {!! Form::label('competicio', 'Integrants per grup: (En cas de ser individual deixar a 1)', null, array('class' => 'control-label')) !!}
+                                        {!! Form::label('competition', 'Integrants per grup: (En cas de ser individual deixar a 1)', null, array('class' => 'control-label')) !!}
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="icon-ellipsis-vertical"></i></span>
-                                            {!! Form::number('number', $competicions->number, array('class' => 'form-control', 'min' => '1', 'max' => '10', 'step' => '1')) !!}
+                                            {!! Form::number('number', $competitions->number, array('class' => 'form-control', 'min' => '1', 'max' => '10', 'step' => '1')) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -132,7 +132,7 @@
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         {!! Form::label('arxiu', 'Logo de la competició:', null, array('class' => 'control-label')) !!}
-                                        <img style="max-width: 250px; margin-bottom: 10px;" alt="logo" src="{{ url('icons/competicions/' . $competicions->logo) }}" />
+                                        <img style="max-width: 250px; margin-bottom: 10px;" alt="logo" src="{{ url('icons/competitions/' . $competitions->logo) }}" />
                                         {!! Form::file('image', array('id' => 'input-image')) !!}
                                     </div>
                                 </div>
@@ -140,7 +140,7 @@
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                     <div class="form-group">
                                         {!! Form::label('imatge', 'Logo gran de la competició:', null, array('class' => 'control-label')) !!}
-                                        <img style="max-width: 250px; margin-bottom: 10px;" alt="imatge" src="{{ url('images/competicions/' . $competicions->imatge) }}" />
+                                        <img style="max-width: 250px; margin-bottom: 10px;" alt="imatge" src="{{ url('images/competitions/' . $competitions->imatge) }}" />
                                         {!! Form::file('imatge', array('id' => 'input-imatge')) !!}
                                     </div>
                                 </div>
@@ -159,7 +159,7 @@
                         </div>
 
                         <div class="table-responsive">
-                            <table id="taula-competicions" class="table table-striped table-bordered table-hover">
+                            <table id="taula-competitions" class="table table-striped table-bordered table-hover">
                                 <thead>
                                 <tr>
                                     <th class="center">
@@ -177,7 +177,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($competicions as $c)
+                                @foreach ($competitions as $c)
                                     <tr>
                                         <td class="center">
                                             <label>
@@ -196,11 +196,11 @@
                                         </td>
 
                                         <td>
-                                            <img style="max-width: 40px;" src="{{ url('icons/competicions/' . $c->logo) }}" alt="logo{{ $c->name }}">
+                                            <img style="max-width: 40px;" src="{{ url('icons/competitions/' . $c->logo) }}" alt="logo{{ $c->name }}">
                                         </td>
 
                                         <td>
-                                            <img style="max-width: 100px;" src="{{ url('images/competicions/' . $c->imatge) }}" alt="logo{{ $c->name }}">
+                                            <img style="max-width: 100px;" src="{{ url('images/competitions/' . $c->imatge) }}" alt="logo{{ $c->name }}">
                                         </td>
 
                                         <td class="hidden-480">
@@ -210,7 +210,7 @@
                                         <td>
                                             <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 
-                                                <a class="green" href="{{ url('admin/competicions/' . $c->id) }}" data-toggle="modal">
+                                                <a class="green" href="{{ url('admin/competitions/' . $c->id) }}" data-toggle="modal">
                                                     <i class="icon-pencil bigger-130"></i>
                                                 </a>
 
@@ -228,7 +228,7 @@
                                                     <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
 
                                                         <li>
-                                                            <a href="{{ url('admin/competicions/' . $c->id) }}" class="tooltip-success" data-rel="tooltip" title="Edit" data-toggle="modal">
+                                                            <a href="{{ url('admin/competitions/' . $c->id) }}" class="tooltip-success" data-rel="tooltip" title="Edit" data-toggle="modal">
                                                                 <span class="green">
                                                                     <i class="icon-edit bigger-120"></i>
                                                                 </span>
@@ -386,13 +386,13 @@
                             </div>
                         @endif
 
-                        {!! Form::open(array('url' => 'admin/competicions/afegir', 'files'=>true)) !!}
+                        {!! Form::open(array('url' => 'admin/competitions/afegir', 'files'=>true)) !!}
 
                             <div class="col-xs-12">
 
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                     <div class="form-group">
-                                        {!! Form::label('competicio', 'Nom de la competició:', null, array('class' => 'control-label')) !!}
+                                        {!! Form::label('competition', 'Nom de la competició:', null, array('class' => 'control-label')) !!}
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="icon-edit"></i></span>
                                             {!! Form::text('name', null, array('required', 'class' => 'form-control', 'placeholder' => 'Nom')) !!}
@@ -433,7 +433,7 @@
 
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                     <div class="form-group">
-                                        {!! Form::label('competicio', 'Integrants per grup: (En cas de ser individual deixar a 1)', null, array('class' => 'control-label')) !!}
+                                        {!! Form::label('competition', 'Integrants per grup: (En cas de ser individual deixar a 1)', null, array('class' => 'control-label')) !!}
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="icon-ellipsis-vertical"></i></span>
                                             {!! Form::number('number', '1', array('class' => 'form-control', 'min' => '1', 'max' => '10', 'step' => '1')) !!}

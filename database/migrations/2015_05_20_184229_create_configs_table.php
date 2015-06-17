@@ -18,8 +18,8 @@ class CreateConfigsTable extends Migration {
             $table->integer('edition_id');
             $table->timestamp('data_inici');
             $table->text('email');
-            $table->text('descripcio');
-            $table->string('direccio');
+            $table->text('description');
+            $table->string('direction');
             $table->timestamps();
 		});
 	}

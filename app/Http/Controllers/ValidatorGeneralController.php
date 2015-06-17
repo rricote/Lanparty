@@ -102,7 +102,7 @@ class ValidatorGeneralController extends Controller {
 
     $state = Request::input('state');
 
-    if(!(Notification::where('interesat', '=', Auth::user()->id)->where('destinatari', '=', $id)->where('tipus', '=', 0)->where('rao', '=', 0)->where(function($query){
+    if(!(Notification::where('interesat', '=', Auth::user()->id)->where('destinatari', '=', $id)->where('type', '=', 0)->where('reason', '=', 0)->where(function($query){
         $query->where('state', '=', 0);
         $query->where('state', '=', 1, 'OR');
         $query->where('state', '=', 2, 'OR');
@@ -113,8 +113,8 @@ class ValidatorGeneralController extends Controller {
             Notification::create([
                 'interesat' => Auth::user()->id,
                 'destinatari' => $id,
-                'tipus' => 0,
-                'rao' => 0,
+                'type' => 0,
+                'reason' => 0,
                 'state' => 0
             ]);
 
@@ -130,8 +130,8 @@ class ValidatorGeneralController extends Controller {
             $msg = 'La petició ja esta enviada';
         } else {
 
-            if(Notification::where('interesat', '=', Auth::user()->id)->where('destinatari', '=', $id)->where('tipus', '=', 0)->where('rao', '=', 0)->where('state', '=', 0)->count()) {
-                Notification::where('interesat', '=', Auth::user()->id)->where('destinatari', '=', $id)->where('tipus', '=', 0)->where('rao', '=', 0)->where('state', '=', 0)->first()->delete();
+            if(Notification::where('interesat', '=', Auth::user()->id)->where('destinatari', '=', $id)->where('type', '=', 0)->where('reason', '=', 0)->where('state', '=', 0)->count()) {
+                Notification::where('interesat', '=', Auth::user()->id)->where('destinatari', '=', $id)->where('type', '=', 0)->where('reason', '=', 0)->where('state', '=', 0)->first()->delete();
 
                 $msg = 0;
             } else {

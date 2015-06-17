@@ -15,7 +15,7 @@ class CreateAssistancesTable extends Migration {
 		Schema::create('assistances', function(Blueprint $table)
 		{
             $table->increments('id');
-            $table->string('accio');
+            $table->string('action');
             $table->integer('user_id');
             $table->integer('edition_id');
             $table->timestamps();

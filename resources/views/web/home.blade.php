@@ -19,7 +19,7 @@
                                                 &nbsp;vol entrar a&nbsp;
                                                 <a style="margin: 0px;" target="_blank" href="{{url('group/' . $n['group']->id)}}">{{ $n['group']->name }}</a>
                                                 &nbsp;de&nbsp;
-                                                <a style="margin: 0px;" target="_blank" href="{{url('competicio/' . $n['group']->competicio->id)}}">{{ $n['group']->competicio->name }}</a>
+                                                <a style="margin: 0px;" target="_blank" href="{{url('competition/' . $n['group']->competition->id)}}">{{ $n['group']->competition->name }}</a>
                                     <span style="float: right;">
                                         @if($n['notification']->state == 2 || $n['notification']->state == 0)
                                             {!! Form::open(array('url' => 'notification/equip/acceptar/' . $n['notification']->id, 'style'=>'display: inline;')) !!}
@@ -34,7 +34,7 @@
                                         @if($n['notification']->state == 2 || $n['notification']->state == 0)
                                             {!! Form::open(array('url' => 'notification/equip/llegida/' . $n['notification']->id, 'style' => 'display: inline;')) !!}
                                             <input type="hidden" name="url" value="{{ Request::url() }}">
-                                            <button style="margin: 0px 2px;" type="submit" class="btn btn-info">@if($n['notification']->estat == 2) Desmarcar llegida @else Marcar llegida @endif</button>
+                                            <button style="margin: 0px 2px;" type="submit" class="btn btn-info">@if($n['notification']->state == 2) Desmarcar llegida @else Marcar llegida @endif</button>
                                             {!! Form::close() !!}
                                         @endif
                                     </span>
@@ -61,7 +61,7 @@
                     <div class="box sidebar-box widget-wrapper">
                         <h2>Enllaços d'interes</h2>
                         <div style="text-align: center;">
-                            <a style="margin:10px; min-width: 120px;" href="{{url('competicions')}}" class="btn btn-primary">Competicions</a>
+                            <a style="margin:10px; min-width: 120px;" href="{{url('competitions')}}" class="btn btn-primary">Competicions</a>
                             <a style="margin:10px; min-width: 120px;" href="{{url('colaboradors')}}" class="btn btn-primary">Col·laboradors</a>
                             <a style="margin:10px; min-width: 120px;" href="{{url('premis')}}" class="btn btn-primary">Premis</a>
                             <a style="margin:10px; min-width: 120px;" href="{{url('cartell')}}" class="btn btn-primary">Cartell</a>

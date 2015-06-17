@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration {
             $table->string('ultratoken');
 			$table->string('email')->unique();
             $table->string('password', 60);
-            $table->integer('estat_id');
+            $table->integer('state_id');
             $table->integer('rol_id');
 			$table->rememberToken();
 			$table->timestamps();

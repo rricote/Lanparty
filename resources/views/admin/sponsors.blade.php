@@ -90,8 +90,8 @@
 
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                     <div class="form-group">
-                                        {!! Form::label('tipus', 'Tipus de patrocinador:', null, array('class' => 'control-label')) !!}
-                                        {!! Form::select('tipus', array('1' => 'Bronze', '2' => 'Silver', '3' => 'Bronze'), $sponsors->tipus,array('class' => 'form-control')) !!}
+                                        {!! Form::label('type', 'Tipus de patrocinador:', null, array('class' => 'control-label')) !!}
+                                        {!! Form::select('type', array('1' => 'Bronze', '2' => 'Silver', '3' => 'Bronze'), $sponsors->type,array('class' => 'form-control')) !!}
                                     </div>
                                 </div>
 
@@ -149,7 +149,7 @@
 
 
                                         <td>
-                                            {{ $p->tipus }}
+                                            {{ $p->type }}
                                         </td>
 
                                         <td>
@@ -240,8 +240,8 @@
 
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                 <div class="form-group">
-                                    {!! Form::label('tipus', 'Tipus de patrocinador:', null, array('class' => 'control-label')) !!}
-                                    {!! Form::select('tipus', array('1' => 'Bronze', '2' => 'Silver', '3' => 'Gold'), '1',array('class' => 'form-control')) !!}
+                                    {!! Form::label('type', 'Tipus de patrocinador:', null, array('class' => 'control-label')) !!}
+                                    {!! Form::select('type', array('1' => 'Bronze', '2' => 'Silver', '3' => 'Gold'), '1',array('class' => 'form-control')) !!}
                                 </div>
                             </div>
 

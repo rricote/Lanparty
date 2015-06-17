@@ -11,8 +11,8 @@
                     <div class="box sidebar-box widget-wrapper">
                         <h3>Competicions</h3>
                         <ul class="nav nav-sidebar">
-                            @foreach($competicions as $c)
-                                <li><a href="{{ url('competicio/' . $c['id']) }}"><img style="width: 40px;" src="{{asset('/icons/competicions/' . $c['logo'])}}" alt="competicio{{ $c['id'] }}">    {{ $c['name'] }}<span>{{ $c['count'] }}</span></a></li>
+                            @foreach($competitions as $c)
+                                <li><a href="{{ url('competition/' . $c['id']) }}"><img style="width: 40px;" src="{{asset('/icons/competitions/' . $c['logo'])}}" alt="competition{{ $c['id'] }}">    {{ $c['name'] }}<span>{{ $c['count'] }}</span></a></li>
                             @endforeach
                         </ul>
                     </div>

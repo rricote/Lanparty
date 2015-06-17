@@ -4,7 +4,7 @@ $( ".canvi" ).change(function () {
     var check = ($(this).prop('checked'))? 1: 2;
     $.ajax({
         type: "post",
-        url: link + 'api/competicio/change/' + id,
+        url: link + 'api/competition/change/' + id,
         data: { state: check },
         success: function(data) {
             if(data == 1){

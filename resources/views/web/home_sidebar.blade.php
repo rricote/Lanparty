@@ -31,9 +31,9 @@
                                     </thead>
                                     <tbody>
 
-                                    @foreach($competicions as $c)
+                                    @foreach($competitions as $c)
                                     <tr>
-                                        <td><img src="{{asset('/icons/competicions/' . $c->logo)}}" alt="competicio{{$c->id}}"></td>
+                                        <td><img src="{{asset('/icons/competitions/' . $c->logo)}}" alt="competition{{$c->id}}"></td>
                                         <td>{{$c->name}}</td>
                                     </tr>
                                     @endforeach
@@ -47,13 +47,13 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($competicions as $c)
+                                    @foreach($competitions as $c)
                                         <tr>
-                                            <td><img src="{{asset('/icons/competicions/' . $c->logo)}}" alt="competicio{{$c->id}}"></td>
+                                            <td><img src="{{asset('/icons/competitions/' . $c->logo)}}" alt="competition{{$c->id}}"></td>
                                             <td>{{$c->name}}</td>
                                             <td>
                                                 @if ($c->number == 1)
-                                                    <input style="margin-left:2px; margin-top:-1px;" id="{{ $c->id }}" class="ace ace-switch ace-switch-6 canvi" type="checkbox" @if($c->competicionsusersgroups != '[]') checked @endif />
+                                                    <input style="margin-left:2px; margin-top:-1px;" id="{{ $c->id }}" class="ace ace-switch ace-switch-6 canvi" type="checkbox" @if($c->competitionsusersgroups != '[]') checked @endif />
                                                     <span class="lbl"></span>
                                                 @else
                                                     <a class="btn btn-primary" data-toggle="modal" data-target="#inscriures{{ $c->id }}" style="margin-right: 0px; padding: 2px 10px;">Inscriure's</a>
@@ -69,14 +69,14 @@
                                                                     <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
                                                                         <ul id="myTab" class="nav nav-tabs" role="tablist">
                                                                             <li role="presentation" class="active"><a href="#group{{ $c->id }}" id="home-tab" role="tab" data-toggle="tab" aria-controls="group" aria-expanded="true">Crear un grup</a></li>
-                                                                            @if($c->competicionsusersgroups == '[]')
+                                                                            @if($c->competitionsusersgroups == '[]')
                                                                                 <li role="presentation" class=""><a href="#invitacion{{ $c->id }}" role="tab" id="profile-tab" data-toggle="tab" aria-controls="invitacion" aria-expanded="true">Apuntar-se a un existent</a></li>
                                                                             @endif
                                                                         </ul>
                                                                         <div id="myTabContent" class="tab-content">
                                                                             <div role="tabpanel" class="tab-pane fade active in" id="group{{ $c->id }}" aria-labelledby="home-tab">
-                                                                                @if($c->competicionsusersgroups == '[]')
-                                                                                    {!! Form::open(array('url' => 'competicio/afegir/' . $c->id)) !!}
+                                                                                @if($c->competitionsusersgroups == '[]')
+                                                                                    {!! Form::open(array('url' => 'competition/afegir/' . $c->id)) !!}
                                                                                     <div class="form-group" style="max-width: 200px">
                                                                                         <label style="margin-left: 25px;" for="nom">Nom del grup</label>
                                                                                         <input style="margin-left: 50px;" type="text" class="form-control" id="nomgroup" name="nomgroup" required>
@@ -85,16 +85,16 @@
                                                                                     {!! Form::submit('Apuntar-se', array( 'class' => 'btn btn-primary')) !!}
                                                                                     {!! Form::close() !!}
                                                                                 @else
-                                                                                    {!! Form::open(array('url' => 'competicio/borrar/' . $c->id)) !!}
+                                                                                    {!! Form::open(array('url' => 'competition/borrar/' . $c->id)) !!}
                                                                                     <div class="form-group" style="max-width: 500px">
-                                                                                        <label style="margin: 30px;" for="nom">Estas inscrit al grup: {{ $c->competicionsusersgroups[0]->group->name }}</label>
+                                                                                        <label style="margin: 30px;" for="nom">Estas inscrit al grup: {{ $c->competitionsusersgroups[0]->group->name }}</label>
                                                                                     </div>
                                                                                     <input name="lloc" type="hidden" value="1">
                                                                                     {!! Form::submit('Borrar-se', array( 'class' => 'btn btn-primary')) !!}
                                                                                     {!! Form::close() !!}
                                                                                 @endif
                                                                             </div>
-                                                                            @if($c->competicionsusersgroups == '[]')
+                                                                            @if($c->competitionsusersgroups == '[]')
                                                                                 <div role="tabpanel" class="tab-pane fade" id="invitacion{{ $c->id }}" aria-labelledby="profile-tab">
                                                                                     <h4>Demanar poder entrar:</h4>
                                                                                     @foreach($c->group as $g)

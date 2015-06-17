@@ -15,11 +15,11 @@ class CreateNotificationsTable extends Migration {
         Schema::create('notifications', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->integer('tipus');
-            $table->integer('rao');
+            $table->integer('type');
+            $table->integer('reason');
             $table->integer('interesat');
             $table->integer('destinatari');
-            $table->integer('estat');
+            $table->integer('state');
             $table->timestamps();
         });
 	}

@@ -16,7 +16,7 @@ class CreateSponsorsTable extends Migration {
         {
             $table->increments('id');
             $table->string('name');
-            $table->integer('tipus');
+            $table->integer('type');
             $table->string('logo');
             $table->integer('edition_id');
             $table->timestamps();

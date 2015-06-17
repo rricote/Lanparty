@@ -1,6 +1,6 @@
 <?php
 
-use App\Competicio;
+use App\Competition;
 use App\Config;
 use App\Edition;
 use App\State;
@@ -29,9 +29,9 @@ class DatabaseSeeder extends Seeder {
 
         $this->command->info('Rols table seeded!');
 
-        $this->call('EstatTableSeeder');
+        $this->call('StateTableSeeder');
 
-        $this->command->info('Estat table seeded!');
+        $this->command->info('State table seeded!');
 
         $this->call('UserTableSeeder');
 
@@ -45,9 +45,9 @@ class DatabaseSeeder extends Seeder {
 
         $this->command->info('Config table seeded!');
 
-        $this->call('CompeticioTableSeeder');
+        $this->call('CompetitionTableSeeder');
 
-        $this->command->info('Competicio table seeded!');
+        $this->command->info('Competition table seeded!');
 	}
 
 }
@@ -62,7 +62,7 @@ class UserTableSeeder extends Seeder {
             'email' => 'admin@admin.com',
             'ultratoken' => md5(uniqid(rand(), true)),
             'password' => bcrypt('admin'),
-            'estat_id' => 1,
+            'state_id' => 1,
             'rol_id' => 1,
         ]);
     }
@@ -107,8 +107,8 @@ class ConfigTableSeeder extends Seeder {
         Config::create([
             'data_inici' => date('Y-m-d H:i:s'),
             'email' => 'lanparty@iesebre.com',
-            'descripcio' => 'Organització de jocs tal cual',
-            'direccio' => 'avinguda tal',
+            'description' => 'Organització de jocs tal cual',
+            'direction' => 'avinguda tal',
             'edition_id' => 1
         ]);
     }
@@ -128,11 +128,11 @@ class EditionTableSeeder extends Seeder {
 
 }
 
-class CompeticioTableSeeder extends Seeder {
+class CompetitionTableSeeder extends Seeder {
 
     public function run()
     {
-        Competicio::create([
+        Competition::create([
             'name' => 'League of Legends',
             'logo' => 'lol.png',
             'imatge' => 'lol-grande.png',
@@ -142,7 +142,7 @@ class CompeticioTableSeeder extends Seeder {
             'edition_id' => 1
         ]);
 
-        Competicio::create([
+        Competition::create([
             'name' => 'Hearthstone',
             'logo' => 'hearthstone.ico',
             'imatge' => 'hearthstone-grande.png',
@@ -152,7 +152,7 @@ class CompeticioTableSeeder extends Seeder {
             'edition_id' => 1
         ]);
 
-        Competicio::create([
+        Competition::create([
             'name' => 'Counter Strike - Global Offensive',
             'logo' => 'csgo.jpg',
             'imatge' => 'Counter-Strike_Global_Offensive.jpg',
@@ -162,7 +162,7 @@ class CompeticioTableSeeder extends Seeder {
             'edition_id' => 1
         ]);
 
-        Competicio::create([
+        Competition::create([
             'name' => 'FIFA 15',
             'logo' => 'fifa.ico',
             'imatge' => 'fifa-grande.jpg',
@@ -172,7 +172,7 @@ class CompeticioTableSeeder extends Seeder {
             'edition_id' => 1
         ]);
 
-        Competicio::create([
+        Competition::create([
             'name' => 'Muntatge d\'ordinadors',
             'logo' => 'tools.png',
             'imatge' => 'montaje.png',
@@ -182,7 +182,7 @@ class CompeticioTableSeeder extends Seeder {
             'edition_id' => 1
         ]);
 
-        Competicio::create([
+        Competition::create([
             'name' => 'Programació',
             'logo' => 'java.png',
             'imatge' => 'coder.png',
@@ -201,21 +201,21 @@ class SponsorsTableSeeder extends Seeder {
     {
         Sponsor::create([
             'name' => 'Intel',
-            'tipus' => 3,
+            'type' => 3,
             'logo' => 'prova1.png',
             'edition_id' => 1
         ]);
 
         Sponsor::create([
             'name' => 'Twitch',
-            'tipus' => 1,
+            'type' => 1,
             'logo' => 'prova2.png',
             'edition_id' => 1
         ]);
 
         Sponsor::create([
             'name' => 'Benq',
-            'tipus' => 2,
+            'type' => 2,
             'logo' => 'prova3.png',
             'edition_id' => 1
         ]);

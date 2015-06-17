@@ -54,7 +54,7 @@ View::composer(array('web.sidebar'), function($view)
         $i = 0;
         foreach($group as $g) {
             if (Competitionsusersgroups::where('competition_id', $g->competition->id)->where('group_id', $g->id)->count() < $g->competition->number) {
-                $notifications = Notification::where('destinatari', '=', $g->id)->where('tipus', '=', 0)->where('rao', '=', 0)->where('state', '=', 0)->get();
+                $notifications = Notification::where('destinatari', '=', $g->id)->where('type', '=', 0)->where('reason', '=', 0)->where('state', '=', 0)->get();
                 foreach ($notifications as $n) {
                     $user = User::find($n->interesat);
                     if ($user) {

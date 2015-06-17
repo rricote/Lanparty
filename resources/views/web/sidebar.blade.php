@@ -22,7 +22,7 @@
                                     &nbsp;vol entrar a&nbsp;
                                     <a style="margin: 0px;" target="_blank" href="{{url('group/' . $n['group']->id)}}">{{ $n['group']->name }}</a>
                                     &nbsp;de&nbsp;
-                                    <a style="margin: 0px;" target="_blank" href="{{url('competicio/' . $n['group']->competicio->id)}}">{{ $n['group']->competicio->name }}</a>
+                                    <a style="margin: 0px;" target="_blank" href="{{url('competition/' . $n['group']->competition->id)}}">{{ $n['group']->competition->name }}</a>
                                     <span style="float: right;">
                                         @if($n['notification']->state == 2 || $n['notification']->state == 0)
                                             {!! Form::open(array('url' => 'notification/equip/acceptar/' . $n['notification']->id, 'style'=>'display: inline;')) !!}
@@ -37,7 +37,7 @@
                                         @if($n['notification']->state == 2 || $n['notification']->state == 0)
                                             {!! Form::open(array('url' => 'notification/equip/llegida/' . $n['notification']->id, 'style' => 'display: inline;')) !!}
                                             <input type="hidden" name="url" value="{{ Request::url() }}">
-                                            <button style="margin: 0px 2px;" type="submit" class="btn btn-info">@if($n['notification']->estat == 2) Desmarcar llegida @else Marcar llegida @endif</button>
+                                            <button style="margin: 0px 2px;" type="submit" class="btn btn-info">@if($n['notification']->state == 2) Desmarcar llegida @else Marcar llegida @endif</button>
                                             {!! Form::close() !!}
                                         @endif
                                     </span>
@@ -54,18 +54,18 @@
 
                 <!-- SIDEBAR BOX - START -->
                 <div class="box sidebar-box widget-wrapper">
-                    @if($competicio)
+                    @if($competition)
                     <h3>Proxim torneig</h3>
                     <div class="tournament">
-                        <a href="{{ url('competicio/' . $competicio->id) }}"><img src="{{asset('/images/competicions/' . $competicio->imatge)}}" class="img-responsive" alt=""></a>
-                        <h4>{{ $competicio->name }}</h4>
+                        <a href="{{ url('competition/' . $competition->id) }}"><img src="{{asset('/images/competitions/' . $competition->imatge)}}" class="img-responsive" alt=""></a>
+                        <h4>{{ $competition->name }}</h4>
                         <?php
-                        list($date, $time) = explode(' ',$competicio->data_inici);
+                        list($date, $time) = explode(' ',$competition->data_inici);
                         list($any, $mes, $dia) = explode('-', $date);
                         list($hora, $minuts, $segons) = explode(':', $time);
                         ?>
                         <div class="date">{{ $dia . '-' .  $mes . '-' . $any . ' a les ' . $hora . ':' . $minuts}}</div>
-                        <div class="text-center"><a href="{{ url('competicio/' . $competicio->id) }}" class="btn btn-primary">Més informació</a></div>
+                        <div class="text-center"><a href="{{ url('competition/' . $competition->id) }}" class="btn btn-primary">Més informació</a></div>
                     </div>
                     @else
                         <h3>No queden més competicions</h3>
@@ -82,8 +82,8 @@
                     <h3>Competicions</h3>
 
                     <ul class="nav nav-sidebar">
-                        @foreach($competicions as $c)
-                            <li><a href="{{ url('competicio/' . $c['id']) }}"><img style="width: 35px;" src="{{asset('/icons/competicions/' . $c['logo'])}}" alt="competicio{{ $c['id'] }}">    {{ $c['name'] }}<span>{{ $c['count'] }}</span></a></li>
+                        @foreach($competitions as $c)
+                            <li><a href="{{ url('competition/' . $c['id']) }}"><img style="width: 35px;" src="{{asset('/icons/competitions/' . $c['logo'])}}" alt="competition{{ $c['id'] }}">    {{ $c['name'] }}<span>{{ $c['count'] }}</span></a></li>
                         @endforeach
                     </ul>
                 </div>

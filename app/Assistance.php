@@ -15,7 +15,7 @@ class Assistance extends Model {
      *
      * @var array
      */
-    protected $fillable = ['accio', 'user_id', 'edition_id'];
+    protected $fillable = ['action', 'user_id', 'edition_id'];
 
     public function edition()
     {

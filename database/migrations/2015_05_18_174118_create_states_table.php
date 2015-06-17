@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatstateesTable extends Migration {
+class CreatestatesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class CreatstateesTable extends Migration {
 	 */
 	public function up()
 	{
-        Schema::create('estats', function(Blueprint $table)
+        Schema::create('states', function(Blueprint $table)
         {
             $table->increments('id');
             $table->string('name');
@@ -27,7 +27,7 @@ class CreatstateesTable extends Migration {
 	 */
 	public function down()
 	{
-        Schema::drop('estats');
+        Schema::drop('states');
 	}
 
 }

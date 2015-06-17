@@ -16,7 +16,7 @@ class Sponsor extends Model {
      *
      * @var array
      */
-    protected $fillable = ['name', 'tipus', 'logo','edition_id'];
+    protected $fillable = ['name', 'type', 'logo','edition_id'];
 
     public function present()
     {

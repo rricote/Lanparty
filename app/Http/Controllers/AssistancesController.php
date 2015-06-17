@@ -49,7 +49,7 @@ class AssistancesController extends Controller {
                 if(!Assistance::where('usuaris_id', '=', $id)->count()){
 
                     $assistance = new Assistance;
-                    $assistance->accio = 'ENTRADA';
+                    $assistance->action = 'ENTRADA';
                     $assistance->user_id = $id;
                     $assistance->edition_id = $config->edition_id;
                     $assistance->save();
@@ -59,20 +59,20 @@ class AssistancesController extends Controller {
 
                     $assistance = Assistance::orderby('created_at', 'desc')->first();
 
-                    if($assistance->accio == 'ENTRADA'){
+                    if($assistance->action == 'ENTRADA'){
                         $assistance = new Assistance;
-                        $assistance->accio = 'SORTIDA';
+                        $assistance->action = 'SORTIDA';
                         $assistance->user_id = $id;
                         $assistance->edition_id = $config->edition_id;
                         $assistance->save();
                     }else{
                         $assistance = new Assistance;
-                        $assistance->accio = 'ENTRADA';
+                        $assistance->action = 'ENTRADA';
                         $assistance->user_id = $id;
                         $assistance->edition_id = $config->edition_id;
                         $assistance->save();
                     }
-                    $final = $assistance->accio;
+                    $final = $assistance->action;
                 }
 
             }else

@@ -29,15 +29,15 @@ class ValidacioController extends Controller {
         if(Request::input('state') == 2){
             if(!Assistance::where('user_id', '=', $id)->count()){
                 $assistances = new Assistance;
-                $assistances->accio = 'ENTRADA';
+                $assistances->action = 'ENTRADA';
                 $assistances->user_id = $id;
                 $assistances->edition_id = $config->edition_id;
                 $assistances->save();
             }else{
                 $assistances = Assistance::orderby('created_at', 'desc')->first();
-                if($assistances->accio == 'SORTIDA'){
+                if($assistances->action == 'SORTIDA'){
                     $assistances = new Assistance;
-                    $assistances->accio = 'ENTRADA';
+                    $assistances->action = 'ENTRADA';
                     $assistances->user_id = $id;
                     $assistances->edition_id = $config->edition_id;
                     $assistances->save();
@@ -46,9 +46,9 @@ class ValidacioController extends Controller {
         } else {
             if(Assistance::where('user_id', '=', $id)->count()){
                 $assistances = Assistance::orderby('created_at', 'desc')->first();
-                if($assistances->accio == 'ENTRADA'){
+                if($assistances->action == 'ENTRADA'){
                     $assistances = new Assistance;
-                    $assistances->accio = 'SORTIDA';
+                    $assistances->action = 'SORTIDA';
                     $assistances->user_id = $id;
                     $assistances->edition_id = $config->edition_id;
                     $assistances->save();
