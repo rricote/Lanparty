@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Request;
 
-class ValidacioController extends Controller {
+class ConfigController extends Controller {
 
     /**
      * Update the specified resource in storage.

@@ -15,7 +15,7 @@
     <div class="box col-xs-12">
         <h2 style="font-size: 24px;" class="gold-l">Sponsors Gold</h2>
         @foreach ($sponsorsgold as $p)
-            @if($p->premi != '[]')
+            @if(!empty($p->premi))
                 <!-- POST - START -->
                 <article class="col-xs-12 post">
                     <div class="col-xs-12 col-sm-4 post-date-wrapper">
@@ -37,7 +37,7 @@
 
         <h2 style="font-size: 24px;" class="silver-l">Patrocinadors Silver</h2>
         @foreach ($sponsorssilver as $p)
-            @if($p->premi != '[]')
+            @if(!empty($p->premi))
                 <!-- POST - START -->
                 <article class="col-xs-12 post">
                     <div class="col-xs-12 col-sm-4 post-date-wrapper">
@@ -58,6 +58,7 @@
         @endforeach
         <h2 style="font-size: 24px;" class="bronze-l">Patrocinadors Bronze</h2>
         @foreach ($sponsorsbronze as $p)
+            @if(!empty($p->premi))
             <!-- POST - START -->
             <article class="col-xs-12 post">
                 <div class="col-xs-12 col-sm-4 post-date-wrapper">
@@ -74,6 +75,7 @@
                 </div>
             </article>
             <!-- POST - END -->
+            @endif
         @endforeach
     </div>
 

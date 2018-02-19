@@ -42,15 +42,15 @@ class AssistancesController extends Controller {
 
         if($usuari = User::where('ultratoken', '=', $id)->count()){
 
-            $usuari = User::find($id);
+            $usuari = User::where('ultratoken', '=', $id)->first();
 
             if($usuari->state_id == 2){
 
-                if(!Assistance::where('usuaris_id', '=', $id)->count()){
+                if(!Assistance::where('user_id', '=', $usuari->id)->count()){
 
                     $assistance = new Assistance;
                     $assistance->action = 'ENTRADA';
-                    $assistance->user_id = $id;
+                    $assistance->user_id = $usuari->id;
                     $assistance->edition_id = $config->edition_id;
                     $assistance->save();
 
@@ -62,13 +62,13 @@ class AssistancesController extends Controller {
                     if($assistance->action == 'ENTRADA'){
                         $assistance = new Assistance;
                         $assistance->action = 'SORTIDA';
-                        $assistance->user_id = $id;
+                        $assistance->user_id = $usuari->id;
                         $assistance->edition_id = $config->edition_id;
                         $assistance->save();
                     }else{
                         $assistance = new Assistance;
                         $assistance->action = 'ENTRADA';
-                        $assistance->user_id = $id;
+                        $assistance->user_id = $usuari->id;
                         $assistance->edition_id = $config->edition_id;
                         $assistance->save();
                     }

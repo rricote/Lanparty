@@ -25,29 +25,35 @@ class DatabaseSeeder extends Seeder {
 	{
 		Model::unguard();
 
-        $this->call('RolTableSeeder');
+      $this->call('RolTableSeeder');
 
-        $this->command->info('Rols table seeded!');
+      $this->command->info('Rols table seeded!');
 
-        $this->call('StateTableSeeder');
+      $this->call('StateTableSeeder');
 
-        $this->command->info('State table seeded!');
+      $this->command->info('State table seeded!');
 
-        $this->call('UserTableSeeder');
+      $this->call('UserTableSeeder');
 
-        $this->command->info('User table seeded!');
+      $this->command->info('User table seeded!');
 
-        $this->call('EditionTableSeeder');
+      $this->call('EditionTableSeeder');
 
-        $this->command->info('Edition table seeded!');
+      $this->command->info('Edition table seeded!');
 
-        $this->call('ConfigTableSeeder');
+      $this->call('ConfigTableSeeder');
 
-        $this->command->info('Config table seeded!');
+      $this->command->info('Config table seeded!');
 
-        $this->call('CompetitionTableSeeder');
+      $this->call('CompetitionTableSeeder');
 
-        $this->command->info('Competition table seeded!');
+      $this->command->info('Competition table seeded!');
+
+      $this->call('SponsorsTableSeeder');
+
+      $this->command->info('Sponsors table seeded!');
+
+
 	}
 
 }

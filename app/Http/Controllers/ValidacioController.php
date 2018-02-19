@@ -18,13 +18,9 @@ class ValidacioController extends Controller {
 	 */
     public function update($id)
 	{
-        try {
-            $usuaris = User::find($id);
-            $usuaris->state_id = Request::input('state');
-            $usuaris->save();
-        } catch (Exception $e) {
-            return 'no';
-        }
+        $usuaris = User::find($id);
+        $usuaris->state_id = Request::input('state');
+        $usuaris->save();
         $config = Config::find(1);
         if(Request::input('state') == 2){
             if(!Assistance::where('user_id', '=', $id)->count()){
